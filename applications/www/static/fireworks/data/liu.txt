@@ -1,0 +1,1 @@
+{"return_code":"SUCCESS","return_msg":"帐号余额不足，请到商户平台充值后再重试","result_code":"FAIL","err_code":"NOTENOUGH","err_code_des":"帐号余额不足，请到商户平台充值后再重试","mch_billno":"1239245502201609240926597876","mch_id":"1239245502","wxappid":"wx58c836f6c6913f3c","re_openid":"o-_Sft6WguRzhvFD-Vp-G_TUnp1I","total_amount":"100"}

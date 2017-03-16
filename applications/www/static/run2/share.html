@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="telephone=no" name="format-detection">
+<meta content="email=no" name="format-detection">
+<title>燕集公园</title>
+<link rel="stylesheet" href="css/style.css" />
+<script type="text/javascript" src="js/jquery.js" ></script>
+<style>
+#main{ display:none}
+</style>
+<script>
+	window.onload=function(){
+		$(".loading").hide();
+		$("#main").show();
+	}
+</script>
+
+</head>
+
+<body>
+<div class="loading">
+	<div id="caseGrise">
+  <div id="loadprogress">
+    <div id="charge"></div>
+  </div>
+  <div id="load">
+    <p>游戏加载中···</p>
+  </div>
+</div>
+</div>
+    <div id="wrap">
+		<div id="main" >
+			<div class="toast">提交成功</div>
+			<div class="goback"><img src="img/back.png" /></div>
+			 <div class="wyyqbg"></div>
+			 
+			 <div class="yun"><img src="img/yun.png"></div>
+			 
+			
+			<!--第三页游戏主页-->
+			<div class="bg third"></div>
+			<div class="radio wushi-0">
+				<img src="img/fox.gif" />
+			</div>
+			
+			<div class="zct">
+				<img src="img/zct.png">
+			</div>
+			<div class="wyyq">
+				<img src="img/wyyq.png">
+			</div>
+			
+			
+			<div class="tips tips-0">
+				<p>当前游园进度</p>
+				<p>离成功还差5位好友支持</p>
+				<p>赶快邀请好友来助威</p>
+			</div>
+			
+			<div class="success" style="display: none;">
+				<div class="success-main">
+					<p>恭喜你已经成功畅游燕隼</p>
+					<p>点击立即领奖提交资料方可领奖哦！</p>
+					<div class="lingqu"></div>
+				</div>
+			</div>
+			
+		</div>
+</div>
+<script>
+		$(function(){
+			$(".zct").click(function(){
+				 $.ajax( {
+                    url:'/run/run_zct',
+                    data: {
+                        'user_id': $("#user_id").val()
+                    },
+                    type:'POST',
+                    dataType:'json',
+                    success:function(data) {
+					
+                      $(".toast").fadeIn("slow").html(data.info);
+					  setTimeout(function(){
+						  $(".toast").fadeOut("slow");
+					  },1500)
+                    },
+                    error : function() {
+                    }
+                });
+				
+				
+			});
+			
+			$(".wyyq").click(function(){
+				 $(".wyyqbg,.goback").fadeIn("slow");
+			});
+			$(".goback").click(function(){
+				 $(".wyyqbg,.goback").fadeOut("slow");
+			});
+			
+		});
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

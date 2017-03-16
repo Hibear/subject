@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="telephone=no" name="format-detection">
+<meta content="email=no" name="format-detection">
+<title>逃离寒冬</title>
+<link rel="stylesheet" href="css/index.css" />
+<script type="text/javascript" src="script/jquery.js"></script>
+<style>
+	#wrap{ 
+		background: url(img/bg/02BG.jpg) no-repeat;
+		background-size: cover;
+		background-size: 100% 100%;
+		}
+	.header{ width: 100%; -webkit-box-flex: 1;box-flex: 1;}
+	.txt-input{
+		-webkit-box-flex: 1; 
+		box-flex: 1;
+       	width: 100%;
+       	font-family: "微软雅黑";
+       	font-size: 0.875rem;	
+	}
+	
+	.txt-input input{ width: 60%; height: 40px; margin-bottom: 10px;box-shadow: 1px 1px 10px #888888 ;
+	-webkit-box-shadow: 1px 1px 10px #888888 ; border-radius: 4px; padding-left: 6px;}
+	.tijiao{width: 5.625rem; height: 2.875rem; }
+	.tj-bg{ width: 100%; z-index: -1; display: none; height: 100%; position: absolute; left: 0; top: 0; background: url(img/bg/0.3bg.jpg) no-repeat; background-size: 100% 100%;}		
+    .hide{display: none;}
+</style>
+<script>
+	window.onload=function(){
+		
+	}
+</script>
+
+</head>
+
+<body>
+	
+	
+	
+	<div id="wrap">
+		<div class="dialog">亲，来晚了供暖优惠券已送完了</div>
+		<div class="tj-bg hide" ></div>
+		<div class="header hide"></div>
+		<div class="txt-input hide">
+			<p><input type="text" placeholder="姓名" id="name" value=""></p>
+			<p><input type="text" placeholder="电话" id="tel" value=""></p>
+			<p><img src="img/button/tijiao.png" class="tijiao" /></p><br /><br />
+			<p>此信息为领奖的唯一凭证，请认真填写</p><br /><br />
+			<p>领奖时间：11月16日—11月30日</p>
+			<p>领奖地址：贵阳市云岩区未来方舟销售中心领取</p>
+		</div>
+
+
+
+		<div class="totast" style="height: 160px;">
+			<div class="totast-left"></div>
+			<div class="totast-center" id="totast" style="display: block;">
+				<div class="biao"></div>
+				<div class="first-txt">当前逃离进度</div>
+				<div class="progress">
+					<div class="pbg" style="margin-right:0px;">
+                        <div style="width: 100%; background-color:#75a9dd" class="pbr">100%</div>
+                    </div>
+				</div>
+				<div class="li" style="color: #d77b69;">恭喜你已经完成逃离寒冬挑战</div>
+				<div class="li" style="color: #d77b69;">点击立即领奖提交资料方可领奖哦！</div>
+				<div class="li" id="ljlq" style="padding-top: 5px;"><img src="img/button/ljlq.png"></div>
+			</div>
+			<div class="totast-right"></div>
+		</div>
+  		
+	</div>
+	<script>
+		$(function(){
+			
+			$(".tijiao").click(function(){
+				alert(0);
+			});
+			$("#ljlq").click(function(){
+				$(".totast").fadeOut("slow");
+				$(".hide").fadeIn("slow");
+			});
+		});
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

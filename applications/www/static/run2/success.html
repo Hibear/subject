@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="telephone=no" name="format-detection">
+<meta content="email=no" name="format-detection">
+<title>燕集公园</title>
+<link rel="stylesheet" href="css/style.css" />
+<script type="text/javascript" src="js/jquery.js" ></script>
+<style>
+#main{ display:none}
+.bg{ background: url(img/tijiaobg.jpg);}
+.submit{ width: 30%; left: 35%;  position: absolute;  bottom: 10%;}
+.submit img{ width: 100%;}
+#su{ font-size: 0.4rem; width: 70%; left: 15%; top: 35%; position: absolute; z-index: 9999;}
+#su input{ height: 40px; width: 100%; margin-top: 10px; line-height: 40px; padding-left: 10px; box-sizing: border-box; border-radius: 4px;}
+</style>
+<script>
+	window.onload=function(){
+		$(".loading").hide();
+		$("#main").show();
+	}
+</script>
+
+</head>
+
+<body>
+<div class="loading">
+	<div id="caseGrise">
+  <div id="loadprogress">
+    <div id="charge"></div>
+  </div>
+  <div id="load">
+    <p>游戏加载中···</p>
+  </div>
+</div>
+</div>
+   
+    <div class="toast">提交成功</div>
+    <div id="wrap">
+    	
+		<div id="main" >
+			<div id="su">
+    			<p><input type="text" value="" id="tel" placeholder="姓名:"></p>
+    			<p><input type="text" value="" id="name" placeholder="电话:"></p>
+    			<input type="hidden" value="<?php echo $token;?>" id="token">
+
+    		</div>
+			<div class="bg"></div>
+			<div class="submit"><img src="img/submit.png" /></div>
+		</div>
+	</div>
+<script>
+	$(function(){
+	  $(".submit").click(function(){
+                var tel = $.trim($("#tel").val());
+                var name = $.trim($("#name").val());
+                var token = $.trim($("#token").val());
+				var isMobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/; 
+				if(name == ""){
+					alert("姓名不能为空");
+					return false;
+				}
+				if (!isMobile.exec(tel)) {  
+                    alert("请输入正确电话号码");  
+                    return false;  
+                }  
+                $.ajax( {
+                    url:'/run2/add_user',
+                    data: {
+                        'name': name,
+                        'tel':tel,
+                        'token':token
+                    },
+                    type:'POST',
+                    dataType:'json',
+                    success:function(data) {
+                        alert(data.info);
+                    },
+                    error : function() {
+						alert("网络异常");
+                    }
+                });
+            });
+	 
+	});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

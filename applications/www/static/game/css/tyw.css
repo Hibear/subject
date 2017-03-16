@@ -1,0 +1,408 @@
+/*字体*/
+@font-face {
+	font-family: 'fzlt';
+	src:url('../images/fzlt.TTF') format('truetype');
+	font-style: normal;
+    font-weight: normal;
+}
+@font-face {
+	font-family: 'lcdd';
+	src:url('../images/LcdD.TTF') format('truetype');
+	font-style: normal;
+    font-weight: normal;
+}
+.lcdd{
+	font-family:'lcdd';
+	-webkit-transform:skew(9deg);
+}
+.fzlt{
+	font-family:'fzlt';
+}
+body,.page{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+body,.rulepop,.paihpop{
+	width: 100%;
+	height: 100%;
+	background: url(../images/bg.jpg) no-repeat center center/100% 100%;
+}
+.wrong{
+	width: 5.2rem;
+	height: 5.2rem;
+	background: url(../images/bg.jpg) no-repeat center center/100% 100%;
+}
+.cha{
+	position: absolute;
+	right: .4rem;
+	top: .4rem;
+	width: .34rem;
+	height: .34rem;
+	z-index: 5;
+	background: url(../images/cha.png) no-repeat center center/contain;
+}
+.chongkai{
+	top: 1.05rem;
+}
+.sure,.queren{
+	top: 3.2rem;
+	width: 1.14rem;
+	height: 1.14rem;
+	background: url(../images/sure.png) no-repeat center center/contain;
+}
+.rulepop,.paihpop{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.ft046{
+	font-size: .46rem;
+}
+.ft04{
+	font-size: .4rem;
+}
+.ft036{
+	font-size: .36rem;
+}
+.ft032{
+	font-size: .28rem;
+}
+.ft028{
+	font-size: .28rem;
+}
+.prompt {
+	position: absolute;
+	top: 15%;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	max-width: 90%;
+	margin: 0 auto;
+	background: rgba(0, 0, 0, 0.8);
+	color: #fff;
+	padding: .1rem;
+	border-radius: .08rem;
+	text-align: center;
+	line-height: .32rem;
+	z-index: 99;
+}
+.bgmClass {
+	position: absolute;
+	top: .5rem;
+	left: .5rem;
+	width: .5rem;
+	height: .5rem;
+}
+#loading {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+}
+.mofang{
+	position: absolute;
+	left: 50%;
+	margin-left: -.535rem;
+	top: 3.3rem;
+	width: 1.07rem;
+	height: 1.07rem;
+	-webkit-animation: xuanz linear 1s infinite;
+}
+@-webkit-keyframes xuanz{
+	0%{-webkit-transform: rotate(0deg)}
+	50%{-webkit-transform: rotate(180deg)}
+	100%{-webkit-transform: rotate(360deg)}
+}
+.jindu{
+	top: 5.25rem;
+}
+.title{
+	position: absolute;
+	left: 50%;
+	bottom: 7.3rem;
+	font-size: 2.2rem;
+}
+.box{
+	position: absolute;
+	top: 3.7rem;
+	left: .8rem;
+	width: 4.6rem;
+	height: 4.6rem;
+	/*background: url(../images/Qbg.png) no-repeat center center/contain;*/
+}
+.box p{
+	position: absolute;
+	border: .1rem solid #000;
+	width: 1.4rem;
+	height: 1.4rem;
+	text-align: center;
+	line-height: 1.4rem;
+	background-color: #fff;
+}
+.box p:nth-child(1){
+	top: .1rem;
+	left: .1rem;
+}
+.box p:nth-child(2){
+	top: .1rem;
+	left: 1.6rem;
+}
+.box p:nth-child(3){
+	top: .1rem;
+	left: 3.1rem;
+}
+.box p:nth-child(4){
+	top: 1.6rem;
+	left: .1rem;
+}
+.box p:nth-child(5){
+	top: 1.6rem;
+	left: 1.6rem;
+}
+.box p:nth-child(6){
+	top: 1.6rem;
+	left: 3.1rem;
+}
+.box p:nth-child(7){
+	top: 3.1rem;
+	left: .1rem;
+}
+.box p:nth-child(8){
+	top: 3.1rem;
+	left: 1.6rem;
+}
+.box p:nth-child(9){
+	top: 3.1rem;
+	left: 3.1rem;
+}
+.bomtu{
+	top: 8.7rem;
+}
+/*横着转动画*/
+.heng{
+	position: absolute;
+	top: 3.41rem;
+	left: .48rem;
+	width: 5.46rem;
+	height: 5.38rem;
+	background:no-repeat center center/contain;
+	-webkit-animation: heng step-end 1 1s;
+	background-image: url(../images/heng1.png);
+}
+@-webkit-keyframes heng{
+	0%{background-image: url(../images/heng1.png);}
+	25%{background-image: url(../images/heng2.png);}
+	50%{background-image: url(../images/heng3.png);}
+	75%{background-image: url(../images/heng4.png);}
+	100%{background-image: url(../images/heng5.png);}
+}
+/*竖着转动画*/
+.shu{
+	position: absolute;
+	top: 3.41rem;
+	left: .48rem;
+	width: 5.46rem;
+	height: 5.38rem;
+	background:no-repeat center center/contain;
+	-webkit-animation: shu step-end 1 1s;
+	background-image: url(../images/shu1.png);
+}
+@-webkit-keyframes shu{
+	0%{background-image: url(../images/shu1.png);}
+	25%{background-image: url(../images/shu2.png);}
+	50%{background-image: url(../images/shu3.png);}
+	75%{background-image: url(../images/shu4.png);}
+	100%{background-image: url(../images/shu5.png);}
+}
+/*游戏页面---------------------------*/
+/*时间*/
+.time{
+	position: absolute;
+	left: .9rem;
+	top: 1rem;
+	font-size: 2.2rem;
+}
+.stime{
+	position: absolute;
+    left: 5.3rem;
+    top: 2.35rem;
+    font-size: .6rem;
+}
+/*所有问题的结果*/
+.res{
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	top: 8.9rem;
+	font-size: .4rem;
+}
+/*排行榜*/
+.phtitle{
+	top: .44rem;
+}
+.paihang{
+	top: 1.3rem;
+}
+.phbox{
+	position: relative;
+	width: 5.55rem;
+	height: .66rem;
+}
+.phbox p:nth-child(1){
+	left: .1rem;
+}
+.no1{
+	font-size: .38rem;
+	width: .45rem;
+	height: .45rem;
+	line-height: .45rem;
+	color: #fff;
+	text-align: center;
+	background-color: #ff9c00;
+}
+.name1{
+	position: absolute;
+    left: .7rem;
+    width: 3.2rem;
+    overflow: hidden;
+    line-height: .66rem;
+    font-size: .36rem;
+    color: #ff9c00;
+}
+.tr1{
+	position: absolute;
+	right: .1rem;
+	line-height: .66rem;
+	font-size: .36rem;
+	color: #000;
+}
+
+.num{
+	font-size: .24rem;
+	width: .3rem;
+	height: .3rem;
+	line-height: .3rem;
+	color: #fff;
+	text-align: center;
+	background-color: #000;
+}
+.tr{
+	position: absolute;
+	right: .1rem;
+	line-height: .66rem;
+	font-size: .26rem;
+	color: #000;
+}
+.name{
+	position: absolute;
+    left: .75rem;
+    width: 3.2rem;
+    overflow: hidden;
+    line-height: .66rem;
+    font-size: .26rem;
+    color: #000;
+}
+.no2{
+	background-color: #8d8d8d;
+}
+.name2{
+    color: #8d8d8d;
+}
+.no3{
+	background-color: #a94538
+}
+.name3{
+    color: #a94538;
+}
+.jeiguo{
+	position: absolute;
+	top: 8.2rem;
+	width: 100%;text-align: center;
+}
+.jeiguo span{
+	color: red;
+}
+.phdi{
+	top: 8.8rem;
+}
+/*登记*/
+.dui,.cuo{
+	position: absolute;
+	right: .6rem;
+	width: .3rem;
+	height: .3rem;
+}
+.dui{
+	background: url(../images/dui.png) no-repeat center center/contain;
+}
+.cuo{
+	background: url(../images/cuo.png) no-repeat center center/contain;
+}
+.scheck{
+	top: 3.75rem;
+}
+.xcheck{
+	top: 4.63rem;
+}
+.dengjiBg{
+	top: 1rem;
+	width: 5.23rem;
+	height: 7.26rem;
+	background: url(../images/dengji.jpg) no-repeat center center/contain;
+}
+.txtipt{
+	position: absolute;
+	left: 1.52rem;
+	width: 3.19rem;
+	height: .57rem;
+	background: none;
+	box-sizing: border-box;
+	padding-left: .15rem
+}
+.realname{
+	top: 3.64rem;
+}
+.tel{
+	top: 4.5rem;
+}
+.tijiao{
+	top: 5.59rem;
+	width: 1.14rem;
+	height: 1.14rem;
+}
+.chengji{
+	position: absolute;
+    top: 1rem;
+    width: 100%;
+    text-align: center;
+    line-height: .6rem;
+    font-size: .36rem;
+    font-weight: bold;
+}
+.chengji span{
+	color: red;
+}
+/*第几关*/
+.dijiti{
+	top: .52rem;
+	font-size: .42rem;
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+.logo{
+	top: .45rem;
+}
+.cehua{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: .36rem;
+	color: #878787;
+	text-align: center;
+	line-height: .36rem;
+}

@@ -1,0 +1,617 @@
+/* ============================================================
+   样式重置
+   ============================================================ */
+body,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,legend,input,select,textarea,button,th,td,blockquote,address,pre{margin:0;padding:0;}
+h1,h2,h3,h4,h5,h6,input,textarea,select,button,label{font-size:100%;vertical-align:middle;}
+ul,dl,ol{list-style:none;}
+img,fieldset{border:none;}
+img{display:inline-block;overflow:hidden;vertical-align:top;}
+em,address{font-style:normal;}
+sup,sub{vertical-align:baseline;}
+table{border-collapse:collapse;border-spacing:0;}
+q:before{content:"";}
+q:after{content:"";}
+button{cursor:pointer;}
+textarea{word-wrap:break-word;resize:none;}
+input{ border: 0px;outline:none}
+input[type="button"], input[type="submit"], input[type="reset"], input[type="text"] {
+	-webkit-appearance: none;
+	
+}
+html{font-size:50px;}
+@media screen and (min-width: 320px) { html { font-size: 21.33px; }
+  }
+
+@media screen and (min-width: 360px) { html { font-size: 24px; }
+   }
+
+@media screen and (min-width: 375px) { html { font-size: 25px; }
+   }
+
+@media screen and (min-width: 384px) { html { font-size: 25.6px; }
+ }
+
+@media screen and (min-width: 400px) { html { font-size: 26.67px; }
+ }
+
+@media screen and (min-width: 414px) { html { font-size: 27.6px; }
+ }
+
+@media screen and (min-width: 424px) { html { font-size: 28.27px; }
+  }
+
+@media screen and (min-width: 480px) { html { font-size: 32px; }
+  }
+
+@media screen and (min-width: 540px) { html { font-size: 36px; }
+  }
+
+@media screen and (min-width: 720px) { html { font-size: 48px; }
+   }
+
+@media screen and (min-width: 750px) { html { font-size: 50px; }
+  }
+  
+
+body{margin:0px auto;min-width:320px;max-width:640px;background-color:#fff;min-height:100%; background: #222222;} 
+html,body{height: 100%;overflow: hidden;}                 
+
+
+/* ============================================================
+   加载中
+   ============================================================ */
+.loading{
+	width:100%;
+	height:100%;
+	background-color : #222222;	
+}
+#caseGrise {
+  height : 140px;
+  width : 240px;
+  padding-top : 10px;
+  float : left;
+  left:25%;
+  top:40%;
+  position : relative;
+}
+#loadprogress {
+  height : 10px;
+  width : 200px;
+  position : absolute;
+  top : 60px;
+  left : 10px;
+  box-shadow : 0px 0px 10px #111111 inset;
+}
+#charge {
+  height : 10px;
+  width : 200px;
+  position : absolute;
+  top : 0px;
+  left : 0px;
+  background-color : #C9F76F;
+  margin : 0px;
+  animation : charge 7s infinite;
+  -webkit-animation : charge 7s infinite;
+  box-shadow : 0px 0px 5px #222 inset;
+}
+#caseGrise #load {
+  color : #222;
+  font-family : calibri;
+  text-align : center;
+  position : relative;
+  top : 70px;
+  font-size : 0.875rem;
+  color:white;
+  font-family:微软雅黑;
+}
+@-webkit-keyframes charge {
+  0% {width : 0px;}
+  100% {width : 100%;}
+}
+
+@keyframes charge {
+  0% {width : 0px;}
+  100% {width : 100%;}
+}
+
+/* ============================================================
+   页面
+   ============================================================ */
+
+#wrap{                                             
+	height: 100%;                            
+	display: -webkit-box;  
+	display: box;  	
+	-webkit-box-orient: vertical;     
+	text-align:center; 
+	position:relative;
+	z-index:100;
+	overflow: hidden;	
+				
+}
+#main{
+	-webkit-box-flex: 1;    /*main高度铺满header和footer剩余的高度*/               
+	width:100%; 
+	box-flex: 1;
+	position: relative;
+}
+.bg{
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	background-size: 100% 100% !important;
+	background: url(../img/main.jpg) no-repeat;
+}
+.qipao{ 
+	 position: absolute;
+	 width: 2.6rem; 
+	 color:red;
+	-webkit-animation-name: charector;/* 动画名称 */
+	-webkit-animation-iteration-count: infinite;/* 动画无限播放 */
+	-webkit-animation-timing-function: step-start;/* 马上跳到动画每一结束桢的状态 */
+	-webkit-animation-duration:2s;/* 动画运行的时间 */
+
+}
+.qipao img{ width:100%;}
+@-webkit-keyframes charector2{
+    0%   { opacity: 1; }
+    25%  { opacity: 0.5; }
+    50%  { opacity: 0; }
+    75%  { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.qipao-0{
+	bottom:3.5rem;
+	 left:1rem ;
+}
+
+.qipao-1{
+	bottom: 4rem;
+    left: 3.2rem;
+}
+
+
+.wushi-0{
+	 bottom: 1.5rem;
+	 left:0.2rem ;
+}
+.wushi-1{
+	bottom: 2.0rem;
+    left: 2.1rem;
+}
+
+.wushi-2{
+	bottom: 2.2rem;
+    left: 3rem;
+}
+.qipao-2{
+	bottom: 4.2rem;
+    left: 4.2rem;
+}
+
+
+
+.wushi-3{
+	 bottom: 2.6rem;
+    left: 5rem;
+}
+.qipao-3{
+	bottom: 4.5rem;
+    left: 6rem;
+}
+
+
+
+.wushi-4{
+	 bottom: 3.5rem;
+    left: 6.9rem;
+	 z-index: 999;
+}
+.qipao-4{
+	 bottom: 5.5rem;
+    left: 8rem;
+}
+
+.wushi-5{
+	bottom: 4.5rem;
+    left: 6.6rem;
+}
+.qipao-5{
+	bottom: 6.5rem;
+    left: 7.5rem;
+    z-index: 999;
+}
+
+.wushi-6{
+	bottom: 5.5rem;
+	left:4.6rem ;
+}
+.qipao-6{
+	bottom: 7.5rem;
+    left: 5.5rem;
+    z-index: 999;
+}
+
+.wushi-7{
+	bottom: 6.5rem;
+    left: 2.6rem;
+}
+.qipao-7{
+	bottom: 8.5rem;
+    left: 3.5rem;
+}
+.wushi-8{
+	bottom: 8.3rem;
+    left: 3rem;
+}
+
+.qipao-8{
+	bottom: 10.2rem;
+    left: 3.8rem;
+}
+
+
+.wushi-9{
+	bottom: 9rem;
+    left: 5rem;
+}
+
+.qipao-9{
+	bottom: 11rem;
+    left: 5.8rem;
+}
+
+.wushi-10{
+	bottom: 9.6rem;
+	 left:8rem;
+}
+.qipao-10{
+	bottom: 11.5rem;
+    left: 8.8rem;
+}
+
+
+.wushi-11{
+    bottom: 11.3rem;
+    left: 7rem;
+}
+.qipao-11{
+	bottom: 13.2rem;
+    left: 7.8rem;
+}
+
+.wushi-12{
+	bottom: 11.5rem;
+	left:5rem ;
+}
+.qipao-12{
+	bottom: 13.5rem;
+    left: 6.2rem;
+}
+
+.wushi-13{
+	bottom: 13.5rem;
+    left: 3.7rem;
+
+}
+.qipao-13{
+	bottom: 15.5rem;
+    left: 4.8rem;
+}
+
+
+
+.wushi-14{
+	bottom: 14rem;
+	left:5rem ;
+}
+.qipao-14{
+	bottom: 15.5rem;
+    left: 6.5rem;
+}
+
+
+.wushi-15{
+	bottom: 14.5rem;
+    left: 7rem;
+}
+.qipao-15{
+	bottom: 16.5rem;
+    left: 8.2rem;
+}
+
+
+.wushi-16{
+	bottom: 15rem;
+    left: 9.5rem;
+}
+.qipao-16{
+	bottom: 17rem;
+    left: 10.5rem;
+}
+
+.wushi-17{
+	bottom: 17rem;
+    left: 9.5rem;
+}
+.qipao-17{
+	bottom: 19rem;
+    left: 10.5rem;
+}
+
+.wushi-18{
+	 bottom: 17rem;
+    left: 7.3rem;
+}
+.qipao-18{
+	bottom: 18.8rem;
+    left: 8rem;
+}
+
+
+.wushi-19{
+	bottom: 18rem;
+    left: 5.5rem;
+}
+.qipao-19{
+	bottom: 19.8rem;
+    left: 6.7rem;
+}
+
+.wushi-20{
+	 bottom: 18rem;
+    left: 9rem;
+}
+.qipao-20{
+	bottom: 19.8rem;
+    left: 10rem;
+}
+
+.indexbg,.hdgzbg{
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	background-size: 100% 100% !important;
+	z-index: 100;
+	left: 0;
+	top: 0;
+}
+.indexbg{
+		background: url(../img/indexbg.jpg) no-repeat;
+}
+.hdgzbg{
+	background: url(../img/index2bg.jpg) no-repeat;
+	z-index: 1002;
+	display: none;
+}
+
+.hdgz,.start{
+	 position: absolute;
+	 width: 100px; 
+	 bottom: 20%;
+	 left: 40%; 
+	 z-index: 1001;
+}
+.hdgz img{ width: 100%;}
+.start img{width: 100%;}
+.start{bottom: 12%;}
+
+.yaoqiu{
+	position: absolute;
+	bottom: 10px;
+	left: 25%;
+	right: 25%;
+}
+.yaoqiu img{ width: 100%;}
+.radio{ 
+	 position: absolute;
+	 width: 4.5rem; 
+	 height:2.5rem; 
+	 /*
+	 border-radius: 360px;
+   -webkit-border-radius: 360px;	 
+	 -webkit-animation-name: charector;/* 动画名称 */
+	/*-webkit-animation-iteration-count: infinite;/* 动画无限播放 */
+	/*-webkit-animation-timing-function: step-start;/* 马上跳到动画每一结束桢的状态 */
+	/*-webkit-animation-duration: 1500ms;/* 动画运行的时间 */
+/*	box-shadow: 5px 5px 5px #888888;*/
+   
+}
+.radio img{ width: 100%; height: 100%;}
+
+.tips{
+	position: absolute;
+	bottom: 30%;
+	right: 15%;
+	box-sizing: border-box;
+	padding: 5px 10px;
+	background: rgba(255,255,255,.8);
+	color: rgb(200,53,53);
+	font-family: "微软雅黑";
+    text-shadow: 0 0 5px #fff;
+	font-size: 0.35rem;
+	border-radius: 6px;
+	box-shadow: 3px 2px 7px #111111;
+	
+	-webkit-animation-name: prop-600;
+    animation-name: prop-600;
+    -webkit-animation-duration: 8s;
+    animation-duration: 8s;
+    -webkit-animation-iteration-count: infinite;/* 动画无限播放 */
+	 -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+}
+
+
+@-webkit-keyframes prop-600 {
+    0%   { -webkit-transform: translateX(0px); }
+    50%   { -webkit-transform: translateX(40px); }
+    100% { -webkit-transform: translateX(0px); }
+}
+
+
+.tips p:nth-child(1){
+	font-size: 0.3rem;
+}
+
+
+
+
+		
+#footer{
+	width:100%;
+	height:50px;
+}
+
+.ping{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.5);
+	z-index: 100;
+	display: none;
+	z-index: 9999;
+}
+.share{
+	position: absolute;
+	top: 5px;
+	right: 12px;
+	width: 6rem;
+	height: 6rem;
+	background: url(../img/share.png) no-repeat;
+	background-size: 100% 100% !important;
+	z-index: 99999;
+	display: none;
+
+}
+
+
+.success{ 
+	width: 70%;
+	position: absolute;
+	top: 40%;
+	left: 15%;
+	font-size: 0.44rem;
+	text-align: center;
+	background: rgba(255,255,255,.5);
+	color: red;
+	font-family: "微软雅黑";
+	font-weight: bold;
+	text-shadow: 0 0 6px #FFFFFF;
+	padding: 25px 0px;
+	box-shadow: 6px 6px 50px #000000;
+}
+
+.success-main{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.success-main p{ padding-bottom: 8px;}
+.lingqu{
+	width: 100%;
+	position: absolute;
+	bottom: -1.8rem;
+	height: 2rem;
+	background: url(../img/lingqu.png) no-repeat;
+	background-size: 3rem 1.25rem;
+	background-position: center;
+
+}
+.lingqu img{ width: 100%;}
+.toast{
+	position: absolute;
+	top: 50%;
+	left: 35%;
+	background: rgba(0,0,0,.5);
+	border-radius: 6px;
+	padding: 6px 10px;
+	z-index: 9999;
+	font-size: 0.3rem;
+	text-align: center;
+	color: #fff;
+	display:none;
+}
+.zct,.wyyq{
+	position: absolute;
+	bottom: 10px;
+	width: 3.5rem;
+}
+.zct img{
+	width: 100%;
+}
+.zct{
+	left: 20%;
+}
+.wyyq{
+	right: 20%;
+}
+.wyyq img{
+	width: 100%;
+}
+
+.wyyqbg{ 
+	width:100%; 
+	height:100%; 
+	background: url(../img/wyyqbg.jpg) no-repeat;
+	background-size: 100% 100%;
+	z-index:9999;
+	position: absolute;
+	display: none;
+}
+.goback{
+	position: absolute;
+	top: 0px;
+	width: 20px;
+	z-index: 99999;
+	left: 20px;
+	display: none;
+}
+.goback img{ width: 100%;}
+.yun{
+	width: 2.5rem;
+	position: absolute;
+	z-index: 1000;
+	bottom: 10rem;
+	left: 4rem;
+	
+	-webkit-animation-name: prop-100;
+    animation-name: prop-100;
+    -webkit-animation-duration: 18s;
+    animation-duration: 18s;
+    -webkit-animation-iteration-count: infinite;/* 动画无限播放 */
+	 -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+}
+.yun img{ width: 100%;}
+@-webkit-keyframes prop-100 {
+    0%   { -webkit-transform: translateX(0px); }
+    50%   { -webkit-transform: translateX(-80px); }
+    100% { -webkit-transform: translateX(0px); }
+}
+
+
+.yun2{
+	width: 2.5rem;
+	position: absolute;
+	z-index: 1000;
+	bottom: 19rem;
+	left: 0rem;
+	
+	-webkit-animation-name: prop-102;
+    animation-name: prop-102;
+    -webkit-animation-duration: 60s;
+    animation-duration: 60s;
+    -webkit-animation-iteration-count: infinite;/* 动画无限播放 */
+	 -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+}
+.yun2 img{ width: 100%;}
+@-webkit-keyframes prop-102 {
+    0%   { -webkit-transform: translateX(0px); }
+    50%   { -webkit-transform: translateX(320px); }
+    100% { -webkit-transform: translateX(0px); }
+}

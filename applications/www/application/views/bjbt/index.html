@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>申请半价补贴</title>
+    <meta name="keywords" content="<?php echo $seo['title']?>">
+    <meta name="description" content="">
+
+    <!-- 引入项目css资源文件,并配置构建地址演示 -->
+    <link rel="stylesheet" href="./assets/css/public.css">    
+    <link rel="stylesheet" href="./assets/css/subsidy.css">
+</head>
+
+<body>
+    <!-- 头部 -->
+    <div class="header">
+        <div class="nav">
+            <a href="javascript:;" class="logo"></a>
+            <div class="menu">
+                <ul>
+                    <li><a href="javascript:;" class="width1">首页</a></li>
+                    <li class="active"><a href="javascript:;">惠民 · 购房</a></li>
+                    <li><a href="javascript:;">半价 · 装修</a></li>
+                    <li><a href="javascript:;" class="width2">资讯 · 自媒体</a></li>
+                    <li><a href="javascript:;">安居 · 指南</a></li>
+                </ul>
+                <div class="cls"></div>
+            </div>
+            <div class="other-link">
+                <a href="javascript:;" class="vip">▶会员中心</a>
+                <a href="javascript:;" class="join">▶加盟招募</a>
+            </div>
+            <div class="right-link">
+                <a href="javascript:;" class="login">登录</a>
+                <a href="javascript:;" class="reg">注册</a>
+                <!--<a href="javascript:;" class="user">用户名</a>
+                <a href="javascript:;" class="logout">退出</a>-->
+            </div>
+        </div>
+    </div>
+
+    <!-- main start -->
+    <div class="container">
+        <div class="page-main">
+            <p class="title">半价购房申请</p>
+            <div class="sub-cont">
+                <p class="text">申请流程：</p>
+                <div class="step">
+                    <p class="step1 act"><i></i>第一步：填写申请资料</p>
+                    <p class="step2"><i></i>第二部：审核申请资料</p>
+                    <p class="step3"><i></i>第三步：审核通过</p>
+                    <p class="step4"><i></i>第四步：查看回执单</p>
+                </div>
+            </div>
+            <div class="sub-cont">
+                <p class="text">手机号：</p>
+                <input type="text">
+            </div>
+            <div class="sub-cont">
+                <p class="text">性别：</p>
+                <div class="con">
+                    <label><input type="radio" name="sex" checked="checked">男</label>
+                    <label><input type="radio" name="sex">女</label>
+                </div>
+            </div>
+            <div class="sub-cont">
+                <p class="text">家庭住址：</p>
+                <input type="text">
+            </div>
+            <div class="sub-cont">
+                <p class="text">现居住地址：</p>
+                <input type="text">
+            </div>
+            <div class="sub-cont">
+                <p class="text">邮箱：</p>
+                <input type="text">
+            </div>
+            <div class="sub-cont">
+                <p class="text">教育程度：</p>
+                <select>
+                    <option value="0" selected="selected">请选择</option>
+                </select>
+            </div>
+            <div class="sub-cont">
+                <p class="text">职业：</p>
+                <select>
+                    <option value="0" selected="selected">请选择</option>
+                </select>
+            </div>
+            <div class="sub-cont">
+                <p class="text"><span>*</span>真实姓名：</p>
+                <input type="text" placeholder="&#x8BF7;&#x8F93;&#x5165;&#x60A8;&#x7684;&#x59D3;&#x540D;">
+            </div>
+            <div class="sub-cont">
+                <p class="text"><span>*</span>身份证号码：</p>
+                <input type="text" placeholder="&#x8BF7;&#x8F93;&#x5165;&#x60A8;&#x7684;&#x8EAB;&#x4EFD;&#x8BC1;&#x53F7;&#x7801;">
+            </div>
+            <div class="sub-cont">
+                <p class="text"><span>*</span>手持身份证正面照：</p>
+                <div class="con">
+                    <a href="javascript:;" class="up-img"><span>+</span><br>添加照片</a>
+                    <div class="img-con"><img src="temp/p3.jpg"><a href="javascript:;"></a></div>
+                    <p class="text1">示例：</p>
+                    <img src="./assets/images/subsidy.jpg" data-src="./assets/images/subsidy.jpg">
+                    <p class="con-text">
+                        1、请上车本人<span>手持</span>身份证面头部照片和上半身照片。<br>
+                        2、招聘为免冠，未化妆的数码招聘原始图片，<span>请勿用任何软件编辑修改。</span><br>
+                        3、必须看清证件信息，且证件信息不能被遮挡，持证人五官清晰可见。<br>
+                        4、仅支持jpg、bmp、png、gif格式的图片，<span>建议图片大小不超过3M。</span><br>
+                        5、您提供的照片信息惠民安居将予以保护，不会用于其他用途。
+                    </p>
+                </div>
+            </div>
+            <div class="sub-cont">
+                <p class="text"><span>*</span>身份证反面照：</p>
+                <div class="con">
+                    <a href="javascript:;" class="up-img"><span>+</span><br>添加照片</a>
+                    <div class="img-con"><img src="temp/p3.jpg"><a href="javascript:;"></a></div>
+                    <p class="text1">示例：</p>
+                    <img src="./assets/images/subsidy.jpg" data-src="./assets/images/subsidy.jpg">
+                    <p class="con-text">
+                        1、必须看清证件信息，且证件信息不能被遮挡。<br>
+                        2、仅支持jpg、bmp、png、gif格式的图片，<span>建议图片大小不超过3M。</span><br>
+                        3、您提供的照片信息惠民安居将予以保护，不会用于其他用途。
+                    </p>
+                </div>
+            </div>
+            <div class="sub-cont">
+                <p class="text"><span>*</span>身份证到期时间：</p>
+                <div class="con">
+                    <label><input type="radio" name="time" checked="checked"><div class="time">请选择日期</div></label>
+                    <label><input type="radio" name="time">长期</label>
+                </div>
+            </div>
+            <div class="sub-cont">
+                <p class="text">申请楼盘：</p>
+                <select>
+                    <option value="0" selected="selected">请选择</option>
+                </select>
+            </div>
+            <div class="sub-cont">
+                <p class="text">申请户型：</p>
+                <select>
+                    <option value="0" selected="selected">请选择</option>
+                </select>
+            </div>
+            <a href="javascript:;" class="submit">提交审核</a>
+
+        </div>        
+    </div>
+    
+    <!-- main end -->
+    <div class="page-bg"></div>
+    <div class="message-cont">
+        <div class="close"></div>
+        <img src="./assets/images/subsidy_icon.png" data-src="./assets/images/subsidy_icon.png">
+        <p class="box-title">提交申请资料成功</p>
+        <p class="box-text">我们的工作人员会在1-3个工作日内对您的个人资料进行审核，然后和您联系，请耐心等待！</p>
+    </div>
+    <!-- 底部 -->
+    <div class="footer">
+        <div class="foot-nav">
+            <div class="nav-lists">
+                <ul>
+                    <li><a href="javascript:;">关于惠民安居</a></li>
+                    <li><a href="javascript:;">联系我们</a></li>
+                    <li><a href="javascript:;">加入我们</a></li>
+                    <li><a href="javascript:;">隐私声明</a></li>
+                    <li><a href="javascript:;">网站地图</a></li>
+                    <li><a href="javascript:;">友情链接</a></li>
+                </ul>
+                <p class="blue-text">惠民安居：有承诺，有保障  服务热线：10109666</p>
+            </div>
+            <div class="copy-right">贵州惠民安居网络科技有限公司 | 网络经营许可证  黔ICP备16001466号-1<br>Copyright2015-2020惠民安居huiminanju.com版权所有
+            </div>
+            <div class="hot">热门商圈﹀</div>
+        </div>
+    </div>
+    
+    <!-- 引入项目js资源文件,并配置构建地址演示 -->
+    <script src="./assets/js/jquery.min.js"></script>
+    <script src="./assets/js/public.js"></script>
+    <script type="text/javascript">
+        $('.submit').click(function() {
+            $('.page-bg').show();
+            $('.message-cont').show();
+        });
+    </script>
+</body>
+</html>

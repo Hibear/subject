@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>挠一挠送红包</title>
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+			<meta name="Description" content="">
+			<!-- Mobile Devices Support @begin -->
+			<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+			<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+			<meta content="no-cache" http-equiv="pragma">
+			<meta content="0" http-equiv="expires">
+			<meta content="telephone=no, address=no" name="format-detection">
+			<meta name="apple-mobile-web-app-capable" content="yes"> <!-- apple devices fullscreen -->
+			<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/style.css" />
+		<script type="text/javascript" src="js/jquery.min.js" ></script>
+		<script type="text/javascript" src="js/fastclick.js" ></script>
+		<script>
+		window.addEventListener('load', function() {
+		  FastClick.attach(document.body);
+		}, false);
+		$(function(){
+			$(".game").hide();
+			$(".btn-start").click(function(){
+				$(".home").hide();
+				$(".game").show();
+				$("body").css("background","#fea807");
+			});
+			$(".hdgz").click(function(){
+				$(".tips,.ping").fadeIn("slow");
+			});
+			$(".ping").click(function(){
+				$(".tips,.ping").fadeOut("slow");
+			});
+		})
+		</script>
+		
+	</head>
+	<body>
+		<!--首页-->
+			<div class="tips">
+				<p style="text-align: center;font-size: 16px;">游戏规则</p>
+				<p>1、玩家在规定时间内完成挠吉祥物游戏</p>
+				<p>2、根据提示提交用户信息</p>
+				<p>3、即可领取中央国际红包</p>
+			</div>
+			<div class="zhineng home"><img src="img/zhineng.png" /></div>
+			
+			<div class="btn-start home">开始游戏</div>
+			<div class="qbt home">红包抢不停</div>
+			<div class="hdgz home">游戏规则</div>
+			<div class="fbtime home">
+				<p><i>发布会时间</i>：2016年11月26日</p>
+				<p><i>发布会地点</i>：中央国际广场&nbsp;&nbsp;&nbsp;&nbsp;</p>
+			</div>
+			<div class="home-btm home"><i style=" font-style:normal; opacity:1">腾讯房产贵州站</i></div>
+		
+		<!--首页end-->
+	
+	
+		<div class="con" title=""></div>
+		
+		
+		<div class="success">
+			<div class="success-head"></div>
+			<div class="chengji">您的成绩为：<i id="chengji" class="trcj">0</i>秒</div>
+			<div class="chengji">成功击败全国：<i id="cj">80%</i>的玩家</div>
+			<div class="choujiang"><p id="choujiang">赶紧去领取红包</p></div>
+			<div class="choujiang"><p id="replay">再玩一次</p></div>
+		</div>
+		<div class="fail">
+			<div class="fail-head"></div>
+			<div class="chengji">您的成绩为：<i id="chengji" class="trcj"></i>秒</div>
+			<div class="chengji">成绩必须低于<i style=" font-style:normal" id="lqtime"></i>秒才能领取红包</div>
+			<div class="choujiang"><p id="repfail">再玩一次</p></div>
+		</div>
+		
+		<div class="lqhb">
+			<div><input type="text" id="name" placeholder="请输入姓名"></div>
+			<div style="margin-top: 10px;">
+				<input type="text" id="tel" placeholder="请输入电话">
+			</div>
+			<div><p id="dq">点击领取</p></div>
+		</div>
+		
+		<div class="ping">
+		</div>
+		<div id="time" class="game">0秒</div>
+		<div class="game-head game">
+        	<ul>
+            	<li></li>
+                <li  data=""></li>
+               <li></li>
+            </ul>
+        </div>
+        <div class="game-tu game">
+        	<div class="game-tu-1">
+            	 <img  class="img" src="img/1.png" data="1"/>
+            	<div class="feather"><img src="img/feather.png" /></div>
+            	<div class="progress">
+            		<div class="pro-color"></div>
+            	</div>
+            	<div id="per" class="pp">0%</div>
+            </div>
+           
+        </div>
+        <div class="touchBtn game"><img src="img/touchBtn.png" id="btn" /></div>
+	 <script type="text/javascript" src="js/style.js" ></script>
+	 
+	</body>
+</html>
