@@ -134,17 +134,15 @@ class Game extends MY_Controller{
         }
         //统计玩家数量
         $play_num = $this->cache->file->get('play_num');
-        if(!$play_num){
-            $sql = 'select count(*) as num from t_game_log where is_del = 0 group by openid';
-            $query = $this->db->query($sql);
-            $list = [];
-            foreach ($query->result_array() as $row){
-                $list[] = $row;
-            }
-            $data['game_num'] = count($list);
-            $this->cache->file->save('play_num', count($list), 3*60);
+        
+        $sql = 'select count(*) as num from t_game_log where is_del = 0 group by openid';
+        $query = $this->db->query($sql);
+        $list = [];
+        foreach ($query->result_array() as $row){
+            $list[] = $row;
         }
-        $data['game_num'] = $play_num;
+        $data['game_num'] = count($list);
+            
 
         //分享
         $data['title'] = "2049小游戏";
