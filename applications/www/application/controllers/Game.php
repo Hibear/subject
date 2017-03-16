@@ -290,7 +290,7 @@ class Game extends MY_Controller{
             $res = json_decode($this->httpGet($url));
             if(isset($res->errcode) && $res->errcode == 40001){
                 //access_token过期,再执行一次
-                $this->cache->file->delete('access_token');
+                $this->cache->file->delete('akx_access_token');
                 $access_token = $this->getAccessToken();
                 $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$access_token.'&openid='.$open_id.'&lang=zh_CN';
                 $res = json_decode($this->httpGet($url));
@@ -317,15 +317,15 @@ class Game extends MY_Controller{
     private function getAccessToken() {
         $this->load->driver('cache');
         if(!$this->cache->file->get('access_token')){
-            $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".C('appid_secret.xitai.app_id')."&secret=".C('appid_secret.xitai.app_secret');
+            $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".C('appid_secret.akx.app_id')."&secret=".C('appid_secret.akx.app_secret');
             $res = json_decode($this->httpGet($url));
             $access_token = $res->access_token;
             if ($access_token) {
-                $this->cache->file->save('access_token', $access_token, 7000);
+                $this->cache->file->save('akx_access_token', $access_token, 7000);
                 return $access_token;
             }
         }else{
-            return $this->cache->file->get('access_token');
+            return $this->cache->file->get('akx_access_token');
         }  
     }
 
