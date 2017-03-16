@@ -165,7 +165,7 @@ class Game extends MY_Controller{
     	
         $lists = $this->cache->file->get('lists');
         if(!$lists){
-            $sql = 'SELECT * FROM(select * from (select id,openid,game_time from t_game_log where is_del = 0 order by game_time) a group by a.openid) b ORDER BY b.game_time asc limit 10;';
+            $sql = 'SELECT * FROM(select * from (select id,openid,game_time from t_game_log where is_del = 0 order by game_time) a group by a.openid) b ORDER BY b.game_time asc limit 11;';
             $query = $this->db->query($sql);
             $lists = [];
             foreach ($query->result_array() as $row){
@@ -193,7 +193,7 @@ class Game extends MY_Controller{
         }
 
     	$my_game_info = -1;
-    	//判断当前用户成绩是否在前十
+    	//判断当前用户成绩是否在前十yi 
     	if($this->session->has_userdata('game_user_info')){
     	    $game_user_info = $this->session->userdata('game_user_info');
     		$openid = $game_user_info['openid'];
