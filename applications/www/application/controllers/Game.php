@@ -174,6 +174,7 @@ class Game extends MY_Controller{
             if(!$lists){
                 $this->return_json(['code' => 0, 'info' => 'nodata']);
             }else{
+                $this->cache->file->delete('play_num');
                 $this->cache->file->save('lists', $lists, 3*60);
             }
         }
@@ -232,7 +233,7 @@ class Game extends MY_Controller{
         if(!preg_match('/^1[3|4|5|8|7][0-9]\d{8}$/', $up['tel'])){
             $this->return_json(['code' => 0, 'msg' => '手机号格式不正确！']);
         }
-        $res = $this->Mlottery_users->update_info($up, ['openid' => $openid,'create_time' => date('Y-m-d H:i:s'), 'pid' => $this->pid]);
+        $res = $this->Mlottery_users->update_info($up, ['openid' => $openid, 'pid' => $this->pid]);
         if(!$res){
             $this->return_json(['code' => 0, 'msg' => '请重试！']);
         }
