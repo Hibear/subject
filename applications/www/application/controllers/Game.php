@@ -24,7 +24,7 @@ class Game extends MY_Controller{
     
     public function weixin_login(){
         $data =$this->data;
-        $redirect_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?AppID='.$this->AppID;
+        $redirect_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$this->AppID;
         $redirect_url .= '&redirect_uri='.urlencode($this->data['domain']['www']['url'].'/game/get_access_token');
         $redirect_url .= "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
         header('location:' . $redirect_url);
@@ -75,7 +75,7 @@ class Game extends MY_Controller{
         //将用户信息保存到会话
         $this->session->set_userdata('game_user_info', $user_info);
         $back_url = C('domain.h5.url').'/game/index';
-        redirect($url);
+        redirect($back_url);
         exit;
         
     }
@@ -156,37 +156,36 @@ class Game extends MY_Controller{
      * @author 254274509@qq.com
      */
     public function getrank(){
-    	$list = $this->cache->file->get('list');
-    	if(!$list){
-    	    $sql = 'SELECT * FROM(select * from (select id,openid,game_time from t_game_log where is_del = 0 order by game_time limit 10) a group by a.openid) b ORDER BY b.game_time asc;';
-    	    $query = $this->db->query($sql);
-    	    $this->db->last_query();
-    	    $lists = [];
-    	    foreach ($query->result_array() as $row){
-    	        $lists[] = $row;
-    	    }
-    	    if(!$lists){
-    	        $this->return_json(['code' => 0, 'info' => 'nodata']);
-    	    }
-    	    $this->cache->file->save('list', $list, 3*60);//缓存3分钟
-    	}
-        $user_list = $this->cache->file->get('user_list');
-    	if(!$user_list){
-    	    //获取用户信息
-    	    $openids = array_column($lists, 'openid');
-    	    $user_list = $this->Mlottery_users->get_lists('openid,name', ['in' => ['openid' => $openids]]);
-    	    if($user_list){
-    	        foreach ($lists as $k => $v) {
-    	            foreach ($user_list as $key => $val) {
-    	                if($v['openid'] == $val['openid']){
-    	                    $lists[$k]['name'] = $val['name'];
-    	                }
-    	            }
-    	        }
-    	    }
-    	    $this->cache->file->save('user_list', $user_list, 3*60);//缓存3分钟
-        }
     	
+        $lists = $this->cache->file->get('lists');
+        if(!$lists){
+            $sql = 'SELECT * FROM(select * from (select id,openid,game_time from t_game_log where is_del = 0 order by game_time) a group by a.openid) b ORDER BY b.game_time asc limit 10;';
+            $query = $this->db->query($sql);
+            $lists = [];
+            foreach ($query->result_array() as $row){
+                $lists[] = $row;
+            }
+            if(!$lists){
+                $this->return_json(['code' => 0, 'info' => 'nodata']);
+            }else{
+                $this->cache->file->save('lists', $lists, 3*60);
+            }
+        }
+	    
+	    
+	    //获取用户信息
+	    $openids = array_column($lists, 'openid');
+        $user_list = $this->Mlottery_users->get_lists('openid,name', ['in' => ['openid' => $openids]]);
+        if($user_list){
+            foreach ($lists as $k => $v) {
+                foreach ($user_list as $key => $val) {
+                    if($v['openid'] == $val['openid']){
+                        $lists[$k]['name'] = $val['name'];
+                    }
+                }
+            }
+        }
+
     	$my_game_info = null;
     	//判断当前用户成绩是否在前十
     	if($this->session->has_userdata('game_user_info')){
