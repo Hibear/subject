@@ -74,7 +74,7 @@ class Game extends MY_Controller{
         $user_info = $this->get_weixin_user_info($res);
         //将用户信息保存到会话
         $this->session->set_userdata('game_user_info', $user_info);
-        $back_url = C('domain.h5.url').'/game/index';
+        $back_url = C('domain.h5.url').'/game';
         redirect($back_url);
         exit;
         
@@ -260,11 +260,9 @@ class Game extends MY_Controller{
         
     	$post['game_time'] = trim($this->input->post('game_time'));
     	if(empty($post['game_time'])){
-    	    $this->add_error_num();//增加一次作弊统计
     		$this->return_json(['code' => 0, 'msg' => '请先玩一把游戏再来提交成绩哦！']);
     	}
         if($post['game_time'] < 15){
-            $this->add_error_num();//增加一次作弊统计
             $this->return_json(['code' => 0, 'msg' => '请不要作弊哦！']);
         }
     	$post['openid'] = $openid;
