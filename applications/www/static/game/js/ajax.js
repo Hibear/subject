@@ -3,8 +3,7 @@ var curUrl = window.location.href.toLowerCase();
 
 //游戏结束后记录分数
 function recordScore(Score) {
-	var csrf = $('#loading').attr('data');
-    $.post('/game/game_log',{'game_time':Score, '_csrf':csrf}, function(data){
+    $.post('/game/game_log',{'game_time':Score}, function(data){
         if(data){
             if(data.code == 0){
                 alert(data.msg);

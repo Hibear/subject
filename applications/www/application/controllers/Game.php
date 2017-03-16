@@ -16,13 +16,19 @@ class Game extends MY_Controller{
         ));
         //分享用的
         $this->app = C("appid_secret.dashi");
-        //艾客逊公众号
+        //艾客逊公众号，用户网页授权
         $this->AppID = C('appid_secret.akx.app_id');
         $this->AppSecret = C('appid_secret.akx.app_secret');
         $this->load->driver('cache');
     }
     
     public function weixin_login(){
+        if($this->check_login()){
+            //已经登录后不再拉取网页授权，直接跳转到游戏页面
+            $back_url = C('domain.h5.url').'/game';
+            redirect($back_url);
+            exit;
+        }
         $data =$this->data;
         $redirect_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$this->AppID;
         $redirect_url .= '&redirect_uri='.urlencode($this->data['domain']['www']['url'].'/game/get_access_token');
@@ -172,7 +178,6 @@ class Game extends MY_Controller{
             }
         }
 	    
-	    
 	    //获取用户信息
 	    $openids = array_column($lists, 'openid');
         $user_list = $this->Mlottery_users->get_lists('openid,name', ['in' => ['openid' => $openids]]);
@@ -186,7 +191,7 @@ class Game extends MY_Controller{
             }
         }
 
-    	$my_game_info = null;
+    	$my_game_info = -1;
     	//判断当前用户成绩是否在前十
     	if($this->session->has_userdata('game_user_info')){
     	    $game_user_info = $this->session->userdata('game_user_info');

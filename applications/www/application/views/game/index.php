@@ -17,7 +17,7 @@
 
 </head>
 <body>
-    <div id="loading" data="<?php echo $_csrf?>">
+    <div id="loading">
         <img src="/static/game/images/mofang.png" class="mofang">
         <p class="jindu t_center">0%</p>
     </div>
@@ -124,7 +124,7 @@
         <p id="has_rank" style="display: none;" class="jeiguo">
             [当前总共<?php echo $game_num?>位玩家，您的成绩目前排在第<span id="myrank"></span>位。]</p>
         <p id="no_rank" style="display: none;" class="jeiguo">
-            [当前总共<?php echo $game_num?>位玩家，您的成绩目前排在前十以外。]</p>
+            [当前总共<?php echo $game_num?>位玩家，您目前没有排行成绩。]</p>
         <p class="cha chaph">
         </p>
         <img src="" class="phdi t_center">
