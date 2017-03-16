@@ -5,6 +5,8 @@ class Game extends MY_Controller{
     private $session_name = 'game_openid';
     private $game_nickname = 'game_nickname';
     private $pid = 6;
+    private $AppID; //应用ID
+    private $AppSecret; //应用密匙
     public function __construct(){
         parent::__construct();
         $this->load->model(array(
@@ -12,30 +14,117 @@ class Game extends MY_Controller{
                 'Model_lottery_users' => 'Mlottery_users',
                 'Model_weixin_active' => 'Mweixin_active'
         ));
+        //分享用的
         $this->app = C("appid_secret.dashi");
+        //艾客逊公众号
+        $this->AppID = C('appid_secret.akx.app_id');
+        $this->AppSecret = C('appid_secret.akx.app_secret');
         $this->load->driver('cache');
+    }
+    
+    public function weixin_login(){
+        $data =$this->data;
+        $redirect_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?AppID='.$this->AppID;
+        $redirect_url .= '&redirect_uri='.urlencode($this->data['domain']['www']['url'].'/game/get_access_token');
+        $redirect_url .= "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+        header('location:' . $redirect_url);
+        exit;
+    }
+    
+    /**
+     * 2 setup 非静默授权
+     * 通过code换取网页授权获取access_token、openid
+     */
+    public function get_access_token(){
+        $code = $this->input->get('code');
+        if(empty($code)){
+            $this->return_failed('获取信息失败！');
+        }
+        $openid_url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$this->AppID}&secret={$this->AppSecret}&code={$code}&grant_type=authorization_code";
+        $openid_ch = curl_init();
+        curl_setopt($openid_ch, CURLOPT_URL,$openid_url);
+        curl_setopt($openid_ch, CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($openid_ch, CURLOPT_SSL_VERIFYPEER,0);
+        $openid_data = curl_exec($openid_ch);
+        curl_close($openid_ch);
+        $openid_arr = json_decode($openid_data, true);
+        //如果拉取不到用户openid信息
+        if(!isset($openid_arr['openid'])){
+            $this->return_failed('获取信息失败！');
+        }
+        $openid = $openid_arr['openid'];
+        $access_token = $openid_arr['access_token'];
+        $refresh_token = $openid_arr['refresh_token'];
+        //判断access_token是否过期
+        $check_access_token_url = "https://api.weixin.qq.com/sns/auth?access_token={$access_token}&openid={$openid} ";
+        $check_data = json_decode($this->httpGet($check_access_token_url), true);
+        if(isset($check_data['errcode']) && $check_data['errcode'] == 0){
+            //没有过期
+            $res = array(
+                'openid' => $openid,
+                'access_token' => $access_token
+            );
+        }else{
+            $refresh = $this->refresh_token($refresh_token);
+            $res = array(
+                'openid' => $refresh['openid'],
+                'access_token' => $refresh['access_token']
+            );
+        }
+        $user_info = $this->get_weixin_user_info($res);
+        //将用户信息保存到会话
+        $this->session->set_userdata('game_user_info', $user_info);
+        $back_url = C('domain.h5.url').'/game/index';
+        redirect($url);
+        exit;
+        
+    }
+    
+    /**
+     * 3 setup 非静默授权
+     * 获取用户信息
+     * @param [openid access_token] $res
+     * @return mixed
+     */
+    private function get_weixin_user_info($res){
+        if(!$res){
+            $this->return_failed('获取授权信息失败！');
+        }
+        $url = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$res['access_token'].'&openid='.$res['openid'].'&lang=zh_CN';
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,0);
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return json_decode($data, true);
+    }
+    
+    /**
+     * 刷新access_token
+     * @param unknown $refresh_token
+     */
+    private function refresh_token($refresh_token){
+        $url = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid={$this->AppID}&grant_type=refresh_token&refresh_token={$refresh_token}";
+        $refresh_data = json_decode($this->httpGet($url), true);
+        return $refresh_data;
+    }
+    
+    private function check_login(){
+        $user_info = $this->session->userdata('game_user_info');
+        if($user_info){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
     }
     
     public function index(){
         $data = $this->data;
-        //生成csrf防止篡改成绩
-        if($this->session->has_userdata('csrf')){
-            unset($_SESSION['csrf']);
-        }
-        $token = md5(time());
-        $data['_csrf'] = $token;
-        $this->session->set_userdata('csrf', $token);
-        $openid = trim($this->input->get('openid'));
-        if(!empty($openid)){
-            if($this->check_openid($openid)){
-                $this->session->set_userdata($this->session_name, $openid);
-                $data['status'] = 0;
-            }else{
-                $data['status'] = 1;
-            }
-        }else{
-        	//提醒关注微信
-        	$data['status'] = 1;
+        if(!$this->check_login()){
+            //跳转到微信登录
+            $this->weixin_login();
+            exit();
         }
         //统计玩家数量
         $play_num = $this->cache->file->get('play_num');
@@ -88,7 +177,6 @@ class Game extends MY_Controller{
     	    $user_list = $this->Mlottery_users->get_lists('openid,name', ['in' => ['openid' => $openids]]);
     	    if($user_list){
     	        foreach ($lists as $k => $v) {
-    	            $lists[$k]['name'] = '匿名用户';
     	            foreach ($user_list as $key => $val) {
     	                if($v['openid'] == $val['openid']){
     	                    $lists[$k]['name'] = $val['name'];
@@ -101,8 +189,9 @@ class Game extends MY_Controller{
     	
     	$my_game_info = null;
     	//判断当前用户成绩是否在前十
-    	if($this->session->has_userdata($this->session_name)){
-    		$openid = $this->session->userdata($this->session_name);
+    	if($this->session->has_userdata('game_user_info')){
+    	    $game_user_info = $this->session->userdata('game_user_info');
+    		$openid = $game_user_info['openid'];
     		foreach ($lists as $key => $val) {
     			if($openid == $val['openid']){
     				$my_game_info = $key;
@@ -120,13 +209,16 @@ class Game extends MY_Controller{
      * @return [type] [description]
      */
     public function update_user(){
+    	if(!$this->check_login()){
+    	    //跳转到微信登录
+    	    $this->weixin_login();
+    	    exit();
+    	}
+    	$game_user_info = $this->session->userdata('game_user_info');
+    	$openid = $game_user_info['openid'];
     	$post = $this->input->post();
     	$up['name'] = trim($post['name']);
     	$up['tel'] = trim($post['tel']);
-    	$openid = $this->session->userdata($this->session_name);
-    	if(empty($openid)){
-            $this->return_json(['code' => 0, 'msg' => '请先关注微信公众号！']);
-        }
         if(empty($up['name'])){
             $this->return_json(['code' => 0, 'msg' => '姓名不能为空！']);
         }
@@ -141,72 +233,6 @@ class Game extends MY_Controller{
             $this->return_json(['code' => 0, 'msg' => '请重试！']);
         }
         $this->return_json(['code' => 1, 'msg' => '完成']);
-    }
-    
-    /**
-     * 判断是否来自移动端
-     * @return boolean
-     */
-    private function is_mobile(){
-        // 如果有HTTP_X_WAP_PROFILE则一定是移动设备
-        if (isset ($_SERVER['HTTP_X_WAP_PROFILE']))
-            return true;
-        
-            //此条摘自TPM智能切换模板引擎，适合TPM开发
-            if(isset ($_SERVER['HTTP_CLIENT']) &&'PhoneClient'==$_SERVER['HTTP_CLIENT'])
-                return true;
-                //如果via信息含有wap则一定是移动设备,部分服务商会屏蔽该信息
-                if (isset ($_SERVER['HTTP_VIA']))
-                    //找不到为flase,否则为true
-                    return stristr($_SERVER['HTTP_VIA'], 'wap') ? true : false;
-                    //判断手机发送的客户端标志,兼容性有待提高
-                    if (isset ($_SERVER['HTTP_USER_AGENT'])) {
-                        $clientkeywords = array(
-                            'nokia','sony','ericsson','mot','samsung','htc','sgh','lg','sharp','sie-','philips','panasonic','alcatel','lenovo','iphone','ipod','blackberry','meizu','android','netfront','symbian','ucweb','windowsce','palm','operamini','operamobi','openwave','nexusone','cldc','midp','wap','mobile'
-                        );
-                        //从HTTP_USER_AGENT中查找手机浏览器的关键字
-                        if (preg_match("/(" . implode('|', $clientkeywords) . ")/i", strtolower($_SERVER['HTTP_USER_AGENT']))) {
-                            return true;
-                        }
-                    }
-                    //协议法，因为有可能不准确，放到最后判断
-                    if (isset ($_SERVER['HTTP_ACCEPT'])) {
-                        // 如果只支持wml并且不支持html那一定是移动设备
-                        // 如果支持wml和html但是wml在html之前则是移动设备
-                        if ((strpos($_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml') !== false) && (strpos($_SERVER['HTTP_ACCEPT'], 'text/html') === false || (strpos($_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml') < strpos($_SERVER['HTTP_ACCEPT'], 'text/html')))) {
-                            return true;
-                        }
-                    }
-                    return false;
-    }
-    
-    //封禁用户
-    private function stop_openid(){
-        if($this->cache->file->get($this->session_name)){
-            $num = $this->cache->file->get($this->session_name);
-            if(num >= 3){
-                $num = $this->Mgame_log->count(['is_del' => 0]);
-                if($num > 0){
-                    //取消所有成绩
-                    $this->Mgame_log->update_info(['is_del' => 1, 'update_time' => date('Y-m-d H:i:s')], ['openid' => $this->session_name]);
-                }
-                return true;
-            }else{
-                return false;
-            }
-        }else{
-            return false;
-        }
-        
-    }
-    
-    private function add_error_num(){
-        if($this->cache->file->get($this->session_name)){
-            $num = $this->cache->file->get($this->session_name);
-            $this->cache->file->save($this->session_name, $num+1, 3*24*3600);
-        }else{
-            $this->cache->file->save($this->session_name, 1, 3*24*3600);
-        }
     }
 
 
@@ -225,30 +251,14 @@ class Game extends MY_Controller{
         if($now_time >= $end_time){
             $this->return_json(['code' => 0, 'msg' => '本次活动已经结束，谢谢参与！']);
         }
-        //判断是否存在openid
-        $openid = $this->session->userdata($this->session_name);
-        if(empty($openid)){
-            $this->return_json(['code' => 0, 'msg' => '请先关注微信公众号,回复“2049” 参与游戏！']);
+        if(!$this->check_login()){
+            //跳转到微信登录
+            $this->weixin_login();
+            exit();
         }
-        //判断openid的有效性
-        if(!$this->check_openid($openid)){
-            $this->return_json(['code' => 0, 'msg' => '用户凭证失效，请重试！']);
-        }
-        //判断用户作弊次数如果达到3次，否则不予参与本次活动
-        if($this->stop_openid()){
-            $this->return_json(['code' => 0, 'msg' => '您因作弊，所有成绩无效！']);
-        }
-        //判断请求是否来自移动端
-        if(!$this->is_mobile()){
-            $this->return_json(['code' => 0, 'msg' => '请不要作弊哦！']);
-        }
-        //校验token
-        $_csrf = trim($this->input->post('_csrf'));
-        if(!$_csrf || ($_csrf != $this->session->userdata('csrf'))){
-            $this->add_error_num();//增加一次作弊统计
-            $this->return_json(['code' => 0, 'msg' => '请不要作弊哦！']);
-        }
-        unset($_POST['_csrf']);
+        $game_user_info = $this->session->userdata('game_user_info');
+        $openid = $game_user_info['openid'];
+        
     	$post['game_time'] = trim($this->input->post('game_time'));
     	if(empty($post['game_time'])){
     	    $this->add_error_num();//增加一次作弊统计
@@ -268,50 +278,11 @@ class Game extends MY_Controller{
 		//如果是第一次添加游戏记录
         $status = -1;
 		if($count == 1){
-			$name = '';
-			if($this->session->has_userdata($this->game_nickname)){
-				$name = $this->session->userdata($this->game_nickname);
-			}
+			$name = $game_user_info['nickname'];
 			$this->Mlottery_users->create(['name' => $name,'create_time'=> date('Y-m-d H:i:s'),'openid' => $openid, 'pid' => $this->pid]);
 			$status = 1;
 		}
 		$this->return_json(['code' => 1, 'status' => $status]);
-    }
-
-    /**
-     * 验证用户open_id的有效性
-     */
-    private function check_openid($open_id){
-        if($this->session->has_userdata($open_id)){
-            return true;
-        }else{
-            $access_token = $this->getAccessToken();
-            $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$access_token.'&openid='.$open_id.'&lang=zh_CN';
-            $res = json_decode($this->httpGet($url));
-            if(isset($res->errcode) && $res->errcode == 40001){
-                //access_token过期,再执行一次
-                $this->cache->file->delete('akx_access_token');
-                $access_token = $this->getAccessToken();
-                $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$access_token.'&openid='.$open_id.'&lang=zh_CN';
-                $res = json_decode($this->httpGet($url));
-                if(isset($res->subscribe) && $res->subscribe == 1){
-                    $this->session->set_userdata($this->game_nickname, $res->nickname);
-                    $this->session->set_userdata($open_id, 1);
-                    return true;
-                }else{
-                    return false;
-                }
-            }else{
-                if(isset($res->subscribe) && $res->subscribe == 1){
-                $this->session->set_userdata($this->game_nickname, $res->nickanme);
-                $this->session->set_userdata($open_id, 1);
-                    return true;
-                }else{
-                    return false;
-                }
-            }
-            
-        }
     }
 
     private function getAccessToken() {

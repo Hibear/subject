@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = 'http://www.h5.wesogou.com/';
+$config['base_url'] = 'http://h5.wesogou.com/';
 
 /*
 |--------------------------------------------------------------------------

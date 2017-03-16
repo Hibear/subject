@@ -25,5 +25,9 @@ $config = array(
         'name' => '后台网站域名',
         'url' => 'http://h5.wesogou.com'
     ),
+    'h5' => array(
+        'name' => '网站域名',
+        'url' => 'http://h5.wesogou.com'
+    )
         
 );
