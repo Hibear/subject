@@ -14,6 +14,6 @@ front-end
 .project
 .buildpath
 .settings/*
-applications/app/application/cache/*
+applications/www/application/cache/*
 Uploads/*
 *logs*
