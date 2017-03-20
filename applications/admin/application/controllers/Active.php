@@ -24,7 +24,6 @@ class Active extends MY_Controller{
         $pageconfig = C('page.page_lists');
         $page = $this->input->get_post('per_page') ? : '1';
         $where = [];
-        $where['is_del'] = 0;
         $title = trim($this->input->get('title'));
         if($title){
             $where['like'] = ['title' => $title];
@@ -32,7 +31,11 @@ class Active extends MY_Controller{
         }
         $start_time = trim($this->input->get('start_time'));
         if($start_time){
-            $where['start_time'] = $start_time;
+            $start_time = explode('-', $start_time);
+            $where['year(start_time)'] = $start_time[0];
+            $where['month(start_time)'] = $start_time[1];
+            $where['day(start_time)'] = $start_time[2];
+            $start_time = implode('-', $start_time);
             $data['start_time'] = $start_time;
         }
         $data['list'] = $this->Mactive->get_lists('*', $where, ['start_time' => 'desc'], $pageconfig['per_page'], ($page-1)*$pageconfig['per_page']);
@@ -70,14 +73,20 @@ class Active extends MY_Controller{
      */
     public function edit(){
         $data = $this->data;
-        $up = $this->input->post();
-        $id = (int) $up['id'];
-        unset($up['id']);
-        $res = $this->Mactive->update_info($up, ['id' => $id]);
-        if(!$res) {
-            $this->error('修改失败，请重试！');
+        if(IS_POST){
+            $up = $this->input->post();
+            $id = (int) $up['id'];
+            unset($up['id']);
+            $res = $this->Mactive->update_info($up, ['id' => $id]);
+            if(!$res) {
+                $this->error('修改失败，请重试！');
+            }
+            $this->success('修改成功！', '/active');
         }
-        $this->success('修改成功！', '/active');
+        $id = (int) $this->input->get('id');
+        $info = $this->Mactive->get_one('*', ['id' => $id]);
+        $data['info'] = $info?$info:array();
+        
         $this->load->view('active/edit', $data);
     }
 }
