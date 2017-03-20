@@ -246,7 +246,7 @@ class Game extends MY_Controller{
     public function game_log(){
         //判断活动是否能够进行
         $now_time = strtotime(date('Y-m-d H:i:s'));
-        $end_time = strtotime('2017-03-19 23:59:59');
+        $end_time = strtotime('2017-03-24 23:59:59');
         $start_time = strtotime('2017-03-16 00:00:00');
         if($now_time < $start_time){
             $this->return_json(['code' => 0, 'msg' => '本次活动还未开始，请等待！']);
