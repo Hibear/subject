@@ -81,6 +81,11 @@ $config = array(
 					   'name'=> '烟花',
 					   'active'=> 'yanhua_list'
 					),
+                array(
+                    'url'=>'/active',
+                    'name'=> '活动管理',
+                    'active'=> 'active_list'
+                )
             ),
 		),
 
