@@ -12,7 +12,8 @@ class Game extends MY_Controller{
         $this->load->model(array(
                 'Model_game_log' => 'Mgame_log',
                 'Model_lottery_users' => 'Mlottery_users',
-                'Model_weixin_active' => 'Mweixin_active'
+                'Model_weixin_active' => 'Mweixin_active', 
+                'Model_active' => 'Mactive'
         ));
         //分享用的
         $this->app = C("appid_secret.dashi");
@@ -245,9 +246,18 @@ class Game extends MY_Controller{
      */
     public function game_log(){
         //判断活动是否能够进行
+        //获取活动详情
+        $active = $this->cache->file->get('2049_game');
+        if(!$active){
+            $active = $this->Mactive->get_one('start_time, end_time', ['id' => 4]);
+            $this->cache->file->save('2049_game', $active, 5*60);//缓存5分钟
+        }
+        if(!$active){
+            $this->return_json(['code' => 0, 'msg' => '活动不存在']);
+        }
         $now_time = strtotime(date('Y-m-d H:i:s'));
-        $end_time = strtotime('2017-03-24 23:59:59');
-        $start_time = strtotime('2017-03-16 00:00:00');
+        $end_time = strtotime($active['end_time']);
+        $start_time = strtotime($active['start_time']);
         if($now_time < $start_time){
             $this->return_json(['code' => 0, 'msg' => '本次活动还未开始，请等待！']);
         }
