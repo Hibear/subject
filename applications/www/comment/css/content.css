@@ -1,0 +1,180 @@
+#com_background{
+   margin-top: 15%;
+    margin-bottom: 15%;
+
+    align-items: center;
+
+
+}
+
+#userInfo_back{
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    width: 90%;
+    /*background: lightblue;*/
+    background: white;
+    margin-left: 8px;
+    margin-bottom: 3%;
+    /*margin-bottom: 10px; 调试用的颜色*/
+
+    border: 1px solid #a5a5a5;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 0;
+
+
+}
+
+.infos{
+    /*background: red;调试用的颜色*/
+    width: 100%;
+}
+
+#user_info {
+    height: 50px;
+
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    align-items: center;
+
+    border-bottom: solid 1px grey;
+
+
+}
+
+#user_info #head_pic{
+    display: -webkit-flex;
+    display: flex;
+    height: 98%;
+    width: 50px;
+    background: white;
+}
+
+#user_info #head_pic img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+#user_info #user_nick{
+
+    width: 100px;
+    height: 50%;
+    background: white;
+    margin-left: 2px;
+}
+
+#user_info #user_nick p{
+    margin: 0;
+    line-height: 25px;
+}
+
+
+#user_info #create_time{
+    width: 100px;
+    height: 50%;
+    background: white;
+    float: right;
+    margin-left: 20%;
+}
+
+#user_info #create_time p{
+    float: right;
+    margin: 0;
+    line-height: 25px;
+}
+
+/*====================↑=用户信息=====================*/
+
+#user_star{
+    margin-top: 10px;
+    height: 24px;
+
+}
+
+.demo {
+
+    width:41%;
+    height: 24px;
+
+    background: white;
+}
+
+
+/*=========================星等级======================*/
+
+#user_text{
+    /*height: 10%;*/
+    margin-top: 10px;
+    min-height:20px;
+
+}
+
+#user_text p{
+    margin: 0;
+}
+
+#user_pic{
+    margin-top: 10px;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap ;/*换行方式*/
+    /*height: 15%;*/
+    min-height:80px;/*最小为多少时自动换行*/
+    padding-left: 2px;
+
+}
+
+#user_pic img{
+    width: 78px;
+    height: 78px;
+    border-radius: 3px;
+}
+
+
+/*==========================================*/
+
+
+#com{
+    height: 50px;
+    width: 100%;
+    background: white;
+    font-size: 30px;
+    bottom: 0;
+    text-align: center;
+    position: fixed;
+    color: #26c2ff;
+    margin: 0;
+    border: none;
+}
+
+#head_back{
+    height: 50px;
+    width: 100%;
+    background: white;
+    font-size: 30px;
+    top: 0;
+    text-align: center;
+    position: fixed;
+    color: #26c2ff;
+    margin: 0;
+    border: none;
+}
+
+#head_back img{
+    height: 40px;
+    margin-left: 20px;
+    width: 30px;
+    float: left;
+    line-height: 50px;
+    margin-top: 5px;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+
+}
+
+
