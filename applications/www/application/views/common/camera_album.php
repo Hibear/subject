@@ -15,18 +15,18 @@
     });
 
     wx.ready(function () {
-        wx.onMenuShareTimeline({
-            title: "<?php echo $title;?>",
-            link: "<?php echo $link;?>",
-            imgUrl: "<?php echo $imgUrl;?>",
-            desc: "<?php echo $desc;?>",
-            success: function () {
+//        wx.onMenuShareTimeline({
+  //          title: "<?php echo $title;?>",
+    //        link: "<?php echo $link;?>",
+      //      imgUrl: "<?php echo $imgUrl;?>",
+        //    desc: "<?php echo $desc;?>",
+          //  success: function () {
                 //   alert("分享成功");
-            },
-            cancel: function () {
+      //      },
+      //      cancel: function () {
                 //alert("取消分享");
-            }
-        });
+      //      }
+      //  });
 
         $("#add_pic").click(function () {
             wx.chooseImage({
