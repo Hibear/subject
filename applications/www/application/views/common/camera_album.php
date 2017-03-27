@@ -7,8 +7,8 @@
         nonceStr: "<?php echo $signPackage['nonceStr'];?>",
         signature: "<?php echo $signPackage['signature'];?>",
         jsApiList: [
-            'onMenuShareAppMessage',
-            'onMenuShareTimeline',
+           // 'onMenuShareAppMessage',
+           // 'onMenuShareTimeline',
             'chooseImage',
             'uploadImage'
         ]
