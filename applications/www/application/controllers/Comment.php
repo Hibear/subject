@@ -184,7 +184,9 @@ class Comment extends MY_Controller
 
     public function comit()
     {
-        $this->load->view('comment/commit_f');
+        $data = $this->data;
+        $data['signPackage'] = $this->share($this->app['app_id'],$this->app['app_secret']);
+        $this->load->view('comment/commit_f',$data);
     }
 
     public function contnt()

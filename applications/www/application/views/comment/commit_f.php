@@ -87,9 +87,9 @@
     <div id="cmit">
         <input type="button"  id="btn" value="提交" >
     </div>
-
-
 </div>
+
+<?php $this->load->view('common/camera_album.php')?>
 
 </body>
 </html>
