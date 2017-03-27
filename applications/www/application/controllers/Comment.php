@@ -185,7 +185,6 @@ class Comment extends MY_Controller
 
     public function comit()
     {
-
         $this->load->view('comment/commit_f');
     }
 
