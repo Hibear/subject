@@ -15,6 +15,15 @@ $config = array(
         'url' => 'http://subject.wesogou.com/uploads'
     ),
 	
+    'imgs' => array(
+        'name' => '上传的图片访问域名',
+        'url' => 'http://imgs.wesogou.com/'
+    ),
+    
+    'uploads' => array(
+        'name' => '上传图片访问域名',
+        'url' => 'http://uploads.wesogou.com/'
+    ),
 	
     'www_static' => array(
         'name' => '图片访问域名',
