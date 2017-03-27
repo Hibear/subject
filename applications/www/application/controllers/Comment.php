@@ -178,9 +178,8 @@ class Comment extends MY_Controller
         }
 
 
-        print_r($this->check_login());
-//        print_r($_POST);
-//        $this->return_json(['code' => 1, 'info'=>'恭喜你传送成功']);
+        
+        $this->return_json(['code' => 1, 'info'=>'恭喜你传送成功']);
     }
 
     public function comit()

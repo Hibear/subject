@@ -45,7 +45,9 @@
     </div>
 
     <!--相机层-->
-    <div id="camara_all" class="siicsc"></div>
+    <div id="camara_all" class="siicsc">
+	<input type="button" id="add_pic">
+    </div>
 
     <!--评分层-->
     <div id="score_single" class="siicsc">

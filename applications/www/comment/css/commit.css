@@ -102,6 +102,13 @@ body{
         /*background: pink;*/
         border:1px solid #bdbdbd;
     }
+
+    #add_pic{
+        width:25.3%;
+        height: 98%;
+        background: url("/comment/image/add_pic.png") no-repeat;
+    }
+
     /*=====================================score_single=======================================*/
     #score_single{
         height: 15%;
