@@ -14,19 +14,19 @@
         ]
     });
 
-    wx.ready(function () {
-        wx.onMenuShareTimeline({
-            title: "<?php echo $title;?>",
-            link: "<?php echo $link;?>",
-            imgUrl: "<?php echo $imgUrl;?>",
-            desc: "<?php echo $desc;?>",
-            success: function () {
+   // wx.ready(function () {
+     //   wx.onMenuShareTimeline({
+       //     title: "<?php echo $title;?>",
+         //   link: "<?php echo $link;?>",
+           // imgUrl: "<?php echo $imgUrl;?>",
+            //desc: "<?php echo $desc;?>",
+            //success: function () {
                 //   alert("分享成功");
-            },
-            cancel: function () {
+            //},
+            //cancel: function () {
                 //alert("取消分享");
-            }
-        });
+            //}
+        //});
 
         $("#add_pic").click(function () {
             wx.chooseImage({
@@ -47,24 +47,24 @@
             }
         });
 
-        wx.onMenuShareAppMessage({
-            title: "<?php echo $title;?>",
-            link: "<?php echo $link;?>",
-            imgUrl: "<?php echo $imgUrl;?>",
-            desc: "<?php echo $desc;?>",
-            trigger: function (res) {
-            },
-            success: function (res) {
+        //wx.onMenuShareAppMessage({
+          //  title: "<?php echo $title;?>",
+            //link: "<?php echo $link;?>",
+            //imgUrl: "<?php echo $imgUrl;?>",
+            //desc: "<?php echo $desc;?>",
+            //trigger: function (res) {
+            //},
+            //success: function (res) {
                 // alert("分享成功");
-            },
-            cancel: function (res) {
+            //},
+           // cancel: function (res) {
                 //	alert('已取消');
-            },
-            fail: function (res) {
-                alert(JSON.stringify(res));
-            }
+           // },
+           // fail: function (res) {
+           //     alert(JSON.stringify(res));
+           // }
 
-        });
+//        });
     });
 
     wx.error(function(res){
