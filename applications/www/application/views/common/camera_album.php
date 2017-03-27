@@ -1,7 +1,7 @@
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js?v=20160823054653"></script>
 <script>
     wx.config({
-        debug:false,
+        debug:true,
         appId: "<?php echo $signPackage['appId'];?>",
         timestamp:"<?php echo $signPackage['timestamp'];?>",
         nonceStr: "<?php echo $signPackage['nonceStr'];?>",
