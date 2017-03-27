@@ -51,7 +51,7 @@ class File extends MY_Controller{
             echo json_encode(array('error' => 1, 'message' => '上传错误！'.$error));
         } else {
             $data = $this->upload->data();
-            echo json_encode(array('error' => 0, 'url' => $data['file_name'],'full_url' => $this->data['domain']['img']['url'].'/'.$file_dir.'/'.$data['file_name']));
+            echo json_encode(array('error' => 0, 'url' => $data['file_name'],'full_url' => $this->data['domain']['imgs']['url'].'/'.$file_dir.'/'.$data['file_name']));
         }
         exit();
     }

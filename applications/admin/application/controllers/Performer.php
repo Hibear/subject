@@ -48,35 +48,15 @@ class Performer extends MY_Controller{
             if(empty($add['tel'])){
                 $this->error('请填写手机号！');
             }
-            if(!isset($_FILES)){
-                $this->error('请选择封面图！');
-            }
             if(!preg_match('/^1[3|4|5|8|7][0-9]\d{8}$/', $add['tel'])) {
                 $this->error('手机号格式不正确！');
             }
-            $add['create_time'] = $add['update_time'] = date('Y-m-d H:i:s');
-
-            $config = array(
-                'upload_path'   => '../www/uploads/images',
-                'allowed_types' => 'gif|jpg|png|jpeg',
-                'max_size'     => 1024*5,
-                'max_width'    => 2000,
-                'max_height'   => 2000,
-                'encrypt_name' => TRUE,
-                'remove_spaces'=> TRUE,
-                'use_time_dir'  => TRUE,      //是否按上传时间分目录存放
-                'time_method_by_day'=> TRUE, //分目录存放的方式：按天
-            );
-
-            $this->load->library('upload', $config);
-            if ( ! $this->upload->do_upload('cover_img')){
-                $this->error('上传的图片不符合要求');
-            } else {
-                $data = $this->upload->data();
-                $add['cover_img'] = $data['file_name'];
-                $this->thumb_img($data['file_name']);
-            }
-
+            $add['create_time'] = $add['update_time'] = date('Y-m-d H:i:s'); 
+            if(empty($add['img_url'])){
+                $this->error('请上传封面图！');
+            }      
+            $add['cover_img'] = $add['img_url'];
+            unset($add['img_url']);
             $res = $this->Mperformer->create($add);
             if(!$res) {
                 $this->error('添加失败，请重试！');

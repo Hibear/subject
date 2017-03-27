@@ -1,5 +1,5 @@
 <!-- 加载公用css -->
-<?php $this->load->view('common/header');?>
+<?php $this->load->view('common/header2');?>
 
 <!-- 头部 -->
 <?php $this->load->view('common/top');?>
@@ -58,7 +58,11 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 封面图： </label>
                                 <div class="col-sm-9">
-                                    <input type="file" name="cover_img" class="col-xs-10 col-sm-5">
+                                    <ul id="uploader_img_url">
+    	                               <li class="pic pic-add add-pic" style="float: left;width: 220px;height: 175px;clear:none; list-style-type:none">
+    	                                   <a href="javascript:;" class="up-img"  id="btn_img_url"><span>+</span><br>添加照片</a>
+    	                               </li>
+	                               </ul>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -105,6 +109,21 @@
         d.showModal();
     });
 </script>
+<!-- 上传 -->
+<?php $this->load->view("common/sea_footer");?>
+<script type="text/javascript">
+    var object = [
+          {"obj": "#uploader_img_url", "btn": "#btn_img_url"}
+    ];
+    
+    seajs.use(['admin_uploader','jqueryswf','swfupload'], function(swfupload) {
+    	swfupload.swfupload(object);
+    });
+    
+
+</script>
+<!-- 上传 -->
 
 <!-- 底部 -->
 <?php $this->load->view("common/bottom");?>
+

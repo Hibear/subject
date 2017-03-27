@@ -17,12 +17,17 @@ $config = array(
 	
     'imgs' => array(
         'name' => '上传的图片访问域名',
-        'url' => 'http://imgs.wesogou.com/'
+        'url' => 'http://imgs.wesogou.com'
+    ),
+    
+    'statics' => array(
+        'name' => '上传的图片访问域名',
+        'url' => 'http://static.wesogou.com'
     ),
     
     'uploads' => array(
         'name' => '上传图片访问域名',
-        'url' => 'http://uploads.wesogou.com/'
+        'url' => 'http://uploads.wesogou.com'
     ),
 	
     'www_static' => array(
