@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Title</title>
+    <title>我来点评</title>
     <script type="text/javascript" src="/comment/pingfen/demo/js/jquery.min.js"></script>
     <script type="text/javascript" src="/comment/pingfen/lib/jquery.raty.min.js"></script>
     <script type="text/javascript" src="/comment/js/score.js"></script>
@@ -33,7 +33,7 @@
             <div id="function-hint_all" class="hint"></div>
         </div>
     </div>
-
+    <input type="hidden" id="company_id" value="<?php if(isset($id)){echo $id;}else{echo 0;}?>"/>
     <!--input 1 层-->
     <div id="input_1" class="siicsc">
         <textarea class="ipt_1" placeholder="菜品如何，服务周到吗，环境怎么样，（写够15个字才是好同志哦~）"></textarea>
@@ -49,14 +49,14 @@
     <div id="camara_all" class="siicsc">
         
     </div>
-    <button id="upload" data="0">上传</button>
+    <button id="upload" data="0">拍照（点击一次上传一张）</button>
 
     <!--评分层-->
     <div id="score_single" class="siicsc">
 
         <div class="score_s">
             <div id="score_h_text" class="score_text">环境:</div>
-            <div class="demo">
+            <div class="demo hj">
                 <div id="function-demo_h" class="target-demo"></div>
                 <div id="function-hint_h" class="hint"></div>
             </div>
@@ -66,7 +66,7 @@
 
         <div class="score_s">
             <div id="score_f_text" class="score_text">服务:</div>
-            <div class="demo">
+            <div class="demo fw">
                 <div id="function-demo_f" class="target-demo"></div>
                 <div id="function-hint_f" class="hint"></div>
             </div>
@@ -75,8 +75,8 @@
 
 
         <div class="score_s">
-            <div id="score_k_text" class="score_text">服务:</div>
-            <div class="demo">
+            <div id="score_k_text" class="score_text">口味:</div>
+            <div class="demo kw">
                 <div id="function-demo_k" class="target-demo"></div>
                 <div id="function-hint_k" class="hint"></div>
             </div>

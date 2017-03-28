@@ -12,6 +12,7 @@ class Comment extends MY_Controller
         parent::__construct();
         $this->load->model(array(
             'Model_user_comment' => 'Muser_comment',
+            'Model_company_info' => 'Mcompany_info'
         ));
         //艾客逊公众号，用户网页授权
         $this->AppID = C('appid_secret.akx.app_id');
@@ -86,7 +87,7 @@ class Comment extends MY_Controller
         $user_info = $this->get_weixin_user_info($res);
         //将用户信息保存到会话
         $this->session->set_userdata('comment_user_info', $user_info);
-        $back_url = C('domain.h5.url') . '/comment';
+        $back_url = C('domain.h5.url') . '/comment/index';
         redirect($back_url);
         exit;
 
@@ -137,44 +138,110 @@ class Comment extends MY_Controller
     }
 
     public function add(){
-
-        $user_info = $this->session->userdata('comment_user_info');
-        
-         $posts = $this->input->post();
-         $input_1 = $posts['input_1'];
-         $input_2 = $posts['input_2'];
-         $score_all = $posts['score_all'];
-         $image_num =$posts['image_num'];
-
-
-        
-        $this->return_json(['code' => 1, 'info'=>'恭喜你传送成功']);
+         $user_info = $this->session->userdata('comment_user_info');
+         //判断是否登陆
+         if(!$user_info){
+             $this->return_json(['code' => 0, 'info'=>'请先登陆！']);
+         }
+         $post = $this->input->post();
+         $post['create_time'] = date('Y-m-d H:i:s');
+         if($post['images']){
+             $post['images'] = implode(',', $post['images']);
+         }
+         $post['openid'] = $user_info['openid'];
+         $post['nickname'] = $user_info['nickname'];
+         $post['head_img'] = $user_info['headimgurl'];
+         $post['company_id'] = (int) $post['company_id'];
+         $res = $this->Muser_comment->create($post);
+         if(!$res){
+             $this->return_json(['code' => 0, 'info'=>'操作失败！']);
+         }
+         $this->return_json(['code' => 1, 'info'=>'提交成功']);
     }
 
     public function comit()
     {
-//         $data = $this->data;
-//         $data['signPackage'] = $this->jssdk->getSignPackage();
+        $data = $this->data;
+        if(!$this->check_login()){
+            $this->weixin_login();
+            exit();
+        }
+        $data['id'] =(int) $this->input->get('id');
+        $data['signPackage'] = $this->jssdk->getSignPackage();
 
-        $this->load->view('comment/commit_f');
+        $this->load->view('comment/commit_f',$data);
     }
     
 
     public function contnt()
     {
-
         $data = $this->data;
-        $user_info = $this->session->userdata('comment_user_info');
+        if(!$this->check_login()){
+            $this->weixin_login();
+            exit();
+        }
         
-        print_r($user_info);
+        $company_id = (int) $this->input->get('id');
+        $data['company'] = $this->Mcompany_info->get_one('id, company_name', ['id' => $company_id]);
+        $data['user_info'] = $this->Muser_comment->get_lists('*',['company_id'=>$company_id], ['create_time' => 'desc' ]);
+        //获取当前公司的总体评分
+        $data['total'] = $this->get_total($data['user_info']); 
+        $this->load->view('comment/content_f', $data);
+    }
+    
+    public function get_total($data){
         
-        $this->load->view('comment/content_f');
+        //获取所有评分
+        $i = 0;
+        $res = [
+            'hj_score' => 0,
+            'fw_score' => 0,
+            'kw_score' => 0,
+            'score' => 0
+        ];
+        if(!$data){
+            return $res;
+            exit;
+        }
+        foreach ($data as $k => $v){
+            $i += 1;
+            $res['hj_score'] += $v['hj_score'];
+            $res['fw_score'] += $v['fw_score'];
+            $res['kw_score'] += $v['kw_score'];
+        }
+        
+        //求总体分
+        $res['hj_score'] =  floor($res['hj_score']/$i);
+        $res['fw_score'] =  floor($res['fw_score']/$i);
+        $res['kw_score'] =  floor($res['kw_score']/$i);
+        $total = $res['hj_score'] + $res['fw_score'] + $res['kw_score'];
+        if($total<=5){
+            $res['score'] = 1;
+        }
+        if($total >=6 && $total<=8){
+            $res['score'] = 2;
+        }
+        if($total >=9 && $total<=11){
+            $res['score'] = 3;
+        }
+        if($total >=12  && $total<=14){
+            $res['score'] = 4;
+        }
+        if($total ==15){
+            $res['score'] = 5;
+        }
+              
+        return $res;
     }
 
-    public function index_com()
+    public function index()
     {
-        
-        $this->load->view('comment/index');
+        if(!$this->check_login()){
+            $this->weixin_login();
+            exit();
+        }
+        $data['com_info'] = $this->Mcompany_info->get_lists('id,company_name');
+        $this->load->view('comment/index',$data);
     }
 
 
@@ -366,13 +433,22 @@ class Comment extends MY_Controller
         $url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=".$this->jssdk->getAccessToken()."&media_id={$media_id}";
         //获取微信“获取临时素材”接口返回来的内容（即刚上传的图片）
         $handle = file_get_contents($url);
-        //以读写方式打开一个文件，若没有，则自动创建  
-        $resource = fopen("../../uploads/image/weixin/{$media_id}.jpg" , 'w+');
-        //将图片内容写入上述新建的文件  
-        fwrite($resource, $handle);
-        //关闭资源  
-        fclose($resource);
-        echo 'weixin/'.$media_id.'.jpg';
+        $res = json_decode($handle);
+        //判断access_token是否过期
+        if(isset($res->errcode) && $res->errcode == 40001){
+            $this->cache->file->delete('akx_access_token');
+            $this->download();
+            exit();
+        }else{
+            //以读写方式打开一个文件，若没有，则自动创建
+            $resource = fopen("../../uploads/image/weixin/{$media_id}.jpg" , 'w+');
+            //将图片内容写入上述新建的文件
+            fwrite($resource, $handle);
+            //关闭资源
+            fclose($resource);
+            echo 'weixin/'.$media_id.'.jpg';
+        }
+        
     }
 }
 

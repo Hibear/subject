@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Model_comment_company extends MY_Model {
+class Model_company_info extends MY_Model {
 
     private $_table = 't_company_info';
 

@@ -105,7 +105,6 @@ if (! function_exists('get_full_content_img_url')){
 if(!function_exists('trip_content_domain_text')){
     function strip_content_domain_text($content){
         return str_replace(C('domain.imgs.url').'/image/', '', $content);
-        
     }
 }
  

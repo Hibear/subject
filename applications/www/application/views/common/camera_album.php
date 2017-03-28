@@ -33,10 +33,11 @@
         	                var serverId = res.serverId; // 返回图片的服务器端ID
         	                $.get('/comment/download', {'media_id':serverId}, function(data){
         	                    if(data){
+            	                    var num = len+1;
             	                    var html = '<img style="width:25%;height:100%" src="'+localIds+'">';
-            	                    html +='<input class="img_num" type="hidden" name="imgs[]" value="'+data+'">';
+            	                    html +='<input class="img_num" type="hidden" name="imgs_'+num+'" value="'+data+'">';
             	                    $('#camara_all').append(html);
-            	                    $('#upload').attr('data', len+1);
+            	                    $('#upload').attr('data', num);
             	                }
             	            });
         	            }

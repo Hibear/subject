@@ -120,10 +120,15 @@ $(function() {
         var input_1 = $(".ipt_1").val();
         var input_2 = $(".ipt_2").val();
         
-        var image_num = $(".img_num").val();
+        var images = [];
+        num = parseInt($('#upload').attr('data'));
+        if(num >= 1){
+        	for(i=1; i<= num; i++){
+	        	var j = $('input[name="imgs_'+i+'"]').val()
+	        	images.push(j);
+        	}
+        }
         
-        alert(image_num);
-
         if(input_1 == ""){
             layer.msg("评论不能为空");
             return ;
@@ -144,30 +149,33 @@ $(function() {
             layer.msg("请对口味进行评分");
             return ;
         }
-
+        
         var score_all = star_h+star_f+star_k;
-
+        var hj = star_h;
+        var fw = star_f;
+        var kw = star_k;
+        var company_id = $('#company_id').val();
         $.ajax({
             type:"post",
             url:"/index.php/Comment/add",
             dataType:'json',
-            data:{'input_1':input_1,'input_2':input_2,'score_all':score_all},
-            // beforeSend:function () {
-            //     index = layer.load(1);
-            // },
+            data:{'comment':input_1,'price':input_2,'score':score_all, 'images':images, 'fw_score':fw, 'hj_score':hj, 'kw_score':kw, 'company_id':company_id},
             success:function (data) {
-                alert(data['info']);
+                if(data.code == 1){
+                	layer.msg(data.info);
+                	setTimeout(function () {
+                		//跳转到评论列表
+                		window.open('/comment/contnt?id='+company_id,'_self');
+                	}, 2000)
+                }else{
+                	layer.msg(data.info);
+                }
+            },
+            error:function(){
+            	layer.msg('未知错误！');
             }
-
-
-
         })
-
-
-
     })
-
-
 });
 
 
