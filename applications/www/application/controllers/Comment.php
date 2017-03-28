@@ -154,6 +154,12 @@ class Comment extends MY_Controller
     {
         $data = $this->data;
         $data['signPackage'] = $this->jssdk->getSignPackage();
+      $inputis->input->post('input_1');
+        $this->input->post('input_2');
+        $this->input->post('score_all');
+        $this->input->post('image_num');
+        
+        
         $this->load->view('comment/commit_f', $data);
     }
     
