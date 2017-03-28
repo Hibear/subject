@@ -161,6 +161,11 @@ class Comment extends MY_Controller
     public function contnt()
     {
 
+        $data = $this->data;
+        $user_info = $this->session->userdata('comment_user_info');
+        
+        print_r($user_info);
+        
         $this->load->view('comment/content_f');
     }
 

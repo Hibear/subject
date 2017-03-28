@@ -119,7 +119,10 @@ $(function() {
         var index = 0;
         var input_1 = $(".ipt_1").val();
         var input_2 = $(".ipt_2").val();
-
+        
+        var image_num = $(".img_num").val();
+        
+        alert(image_num);
 
         if(input_1 == ""){
             layer.msg("评论不能为空");
