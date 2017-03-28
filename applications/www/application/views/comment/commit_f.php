@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/comment/pingfen/demo/css/common.css">
     <link rel="stylesheet" href="/comment/css/commit.css">
     <script type="text/javascript" src="/WeixinPublic/plugins/layui/layui.js"></script>
+    </head>
     <script type="text/javascript">
         var layer = '';
         layui.use(['layer'], function(){
@@ -46,8 +47,9 @@
 
     <!--相机层-->
     <div id="camara_all" class="siicsc">
-	<input type="button" id="add_pic">
+        
     </div>
+    <button id="upload" data="0">上传</button>
 
     <!--评分层-->
     <div id="score_single" class="siicsc">
@@ -87,9 +89,8 @@
     <div id="cmit">
         <input type="button"  id="btn" value="提交" >
     </div>
+    
+<?php $this->load->view('common/camera_album');?>  
 </div>
-
-<?php $this->load->view('common/camera_album.php')?>
-
 </body>
 </html>

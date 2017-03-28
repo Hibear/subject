@@ -3,10 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Comment extends MY_Controller
 {
-    public $app;
-//    private $session_name = 'game_openid';
-//    private $game_nickname = 'game_nickname';
-    private $pid = 6;
+    private $pid = 7;
     private $AppID; //应用ID
     private $AppSecret; //应用密匙
 
@@ -16,12 +13,16 @@ class Comment extends MY_Controller
         $this->load->model(array(
             'Model_user_comment' => 'Muser_comment',
         ));
-        //分享用的
-        $this->app = C("appid_secret.dashi");
         //艾客逊公众号，用户网页授权
         $this->AppID = C('appid_secret.akx.app_id');
         $this->AppSecret = C('appid_secret.akx.app_secret');
         $this->load->driver('cache');
+        $param = array(
+            'app_id' => $this->AppID,
+            'app_secret' => $this->AppSecret,
+            'per' => 'akx_'    //缓存前缀
+        );
+        $this->load->library('jssdk', $param);
     }
 
     public function weixin_login()
@@ -135,39 +136,6 @@ class Comment extends MY_Controller
         }
     }
 
-    public function index()
-    {
-        $data = $this->data;
-        if (!$this->check_login()) {
-            //跳转到微信登录
-            $this->weixin_login();
-            exit();
-        }
-
-
-//        //统计玩家数量
-//        $play_num = $this->cache->file->get('play_num');
-//
-//        $sql = 'select count(*) as num from t_game_log where is_del = 0 group by openid';
-//        $query = $this->db->query($sql);
-//        $list = [];
-//        foreach ($query->result_array() as $row) {
-//            $list[] = $row;
-//        }
-//        $data['game_num'] = count($list);
-//
-//
-//        //分享
-//        $data['title'] = "2049小游戏";
-//        $data['link'] = C("domain.www.url") . "/game";
-//        $data['imgUrl'] = C("domain.www.url") . "/static/game/images/mofang.png";
-//        $data['desc'] = "2049小游戏";
-//
-//        $data['signPackage'] = $this->share($this->app['app_id'], $this->app['app_secret']);
-//
-//        $this->load->view('game/index', $data);
-    }
-
     public function add(){
 
         $data = $this->data;
@@ -185,9 +153,10 @@ class Comment extends MY_Controller
     public function comit()
     {
         $data = $this->data;
-        $data['signPackage'] = $this->share($this->app['app_id'],$this->app['app_secret']);
-        $this->load->view('comment/commit_f',$data);
+        $data['signPackage'] = $this->jssdk->getSignPackage();
+        $this->load->view('comment/commit_f', $data);
     }
+    
 
     public function contnt()
     {
@@ -349,20 +318,19 @@ class Comment extends MY_Controller
         $this->return_json(['code' => 1, 'status' => $status]);
     }
 
-    private function getAccessToken()
-    {
+    private function getAccessToken() {
         $this->load->driver('cache');
-        if (!$this->cache->file->get('access_token')) {
-            $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" . C('appid_secret.akx.app_id') . "&secret=" . C('appid_secret.akx.app_secret');
+        if(!$this->cache->file->get('access_token')){
+            $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".C('appid_secret.akx.app_id')."&secret=".C('appid_secret.akx.app_secret');
             $res = json_decode($this->httpGet($url));
             $access_token = $res->access_token;
             if ($access_token) {
                 $this->cache->file->save('akx_access_token', $access_token, 7000);
                 return $access_token;
             }
-        } else {
+        }else{
             return $this->cache->file->get('akx_access_token');
-        }
+        }  
     }
 
     private function httpGet($url)
@@ -380,6 +348,24 @@ class Comment extends MY_Controller
         curl_close($curl);
 
         return $res;
+    }
+    
+    public function download(){
+        $media_id = trim($this->input->get('media_id'));
+        if(empty($media_id)){
+            exit();
+        }
+        
+        $url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=".$this->jssdk->getAccessToken()."&media_id={$media_id}";
+        //获取微信“获取临时素材”接口返回来的内容（即刚上传的图片）
+        $handle = file_get_contents($url);
+        //以读写方式打开一个文件，若没有，则自动创建  
+        $resource = fopen("../../uploads/image/weixin/{$media_id}.jpg" , 'w+');
+        //将图片内容写入上述新建的文件  
+        fwrite($resource, $handle);
+        //关闭资源  
+        fclose($resource);
+        echo 'weixin/'.$media_id.'.jpg';
     }
 }
 
