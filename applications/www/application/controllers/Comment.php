@@ -138,12 +138,13 @@ class Comment extends MY_Controller
 
     public function add(){
 
-        $data = $this->data;
-        if (!$this->check_login()) {
-            //跳转到微信登录
-            $this->weixin_login();
-            exit();
-        }
+        $user_info = $this->session->userdata('comment_user_info');
+        
+         $posts = $this->input->post();
+         $input_1 = $posts['input_1'];
+         $input_2 = $posts['input_2'];
+         $score_all = $posts['score_all'];
+         $image_num =$posts['image_num'];
 
 
         
@@ -152,15 +153,10 @@ class Comment extends MY_Controller
 
     public function comit()
     {
-        $data = $this->data;
-        $data['signPackage'] = $this->jssdk->getSignPackage();
-      $inputis->input->post('input_1');
-        $this->input->post('input_2');
-        $this->input->post('score_all');
-        $this->input->post('image_num');
-        
-        
-        $this->load->view('comment/commit_f', $data);
+//         $data = $this->data;
+//         $data['signPackage'] = $this->jssdk->getSignPackage();
+
+        $this->load->view('comment/commit_f');
     }
     
 
@@ -177,7 +173,7 @@ class Comment extends MY_Controller
 
     public function index_com()
     {
-
+        
         $this->load->view('comment/index');
     }
 
