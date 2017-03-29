@@ -13,6 +13,17 @@
 
 
 </head>
+<style>
+    .act{
+	   position: fixed;
+       top:0;
+	   bottom: 0;
+	   background-color: #333;
+	   height: 100%;
+	   width: 100%;
+	   z-index: 9;
+    }
+</style>
 <body>
 <!--<img src="/comment/image/back.png" alt="">-->
 <div id="head_back">
@@ -123,33 +134,35 @@
             </div>
 
             <!--用户 上传图片展示-->
+            <?php if($v['images'] && !empty($v['images'])):?>
             <div id="user_pic" class="infos">
-                <?php if($v['images']):?>
                 <?php foreach (explode(',', $v['images']) as $key => $val):?>
                 <img src="<?php echo get_img_url($val)?>" alt="" status='0' class='img_s' id="img_s_<?php echo $k+1?>">
                 <?php endforeach; ?>
-                <?php endif;?>
+                
             </div>
+            <?php endif;?>
         </div>
     <?php endforeach; ?>
 </div>
 
 <input id="com" type="button" onclick="wolaidianp()" value="我来点评">
-<div id="big_pic" style="width: 100%;height: 100% ; display: none ; justify-content: center; text-align:center;" >
-    <img id="imgs" callback_id="" src="" style="width: 100%;display: none">
+<div id="bg"></div>
+<div id="big_pic" style="width: 100%;height: 100% ; display: none ; justify-content: center; text-align:center; z-index:999" >
+    <img id="imgs" callback_id="" src="" style="width: 100%;display: none; position: fixed;top: 0px;left: 0px;z-index:999">
     <span>点击图片关闭</span>
 </div>
 
 <script type="text/javascript">
 
         $(".img_s").click(function () {
+            
             _obj = $(this);
             var img = _obj.attr('src');
             var status = _obj.attr('status');
             var callback_id = _obj.attr('status');
             if(status == 0){
-            	$("#head_back").hide();
-                $("#com_background").hide();
+            	$('#bg').addClass('act');
                 $("#com").hide();
                 $("#big_pic").show();
                 $("#imgs").show();
@@ -160,10 +173,9 @@
         });
 
         $('#imgs').on('click', function(){
+        	$('#bg').removeClass('act');
         	_obj = $(this);
         	var callback_id = _obj.attr('callback_id');
-        	$("#head_back").show();
-            $("#com_background").show();
             $("#com").show();
             $("#big_pic").hide();
             $("#imgs").hide();
