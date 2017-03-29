@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/comment/css/content.css">
     <script type="text/javascript" src="/comment/pingfen/demo/js/jquery.min.js"></script>
     <script type="text/javascript" src="/comment/pingfen/lib/jquery.raty.min.js"></script>
-<!--    <script type="text/javascript" src="/comment/js/content.js"></script>-->
     <link rel="stylesheet" href="/comment/pingfen/demo/css/common.css">
     <title><?php echo $company['company_name'] ?></title>
 
@@ -82,7 +81,23 @@
                         $(function() {
                             $.fn.raty.defaults.path = '/comment/pingfen/lib/img';
                             $("<?php echo '#function-demo_'.$v['id']?>").raty({
-                                number: 5,
+                                <?php
+                                    if($v['score']<=5){
+                                        echo "number: 1,";
+                                    }
+                                    if($v['score'] >=6 && $v['score']<=8){
+                                        echo "number: 2,";
+                                    }
+                                    if($v['score'] >=9 && $v['score']<=11){
+                                        echo "number: 3,";
+                                    }
+                                    if($v['score'] >=12  && $v['score']<=14){
+                                        echo "number: 4,";
+                                    }
+                                    if($v['score'] ==15){
+                                        echo "number: 5,";
+                                    }
+                                ?>
                                 targetType: 'hint',
                                 path: '/comment/pingfen/demo/img',
                                 cancelOff: 'cancel-off-big.png',
@@ -111,7 +126,7 @@
             <div id="user_pic" class="infos">
                 <?php if($v['images']):?>
                 <?php foreach (explode(',', $v['images']) as $key => $val):?>
-                <img src="<?php echo get_img_url($val)?>" alt="" id="img_1">
+                <img src="<?php echo get_img_url($val)?>" alt="" status='0' class='img_s' id="img_s_<?php echo $k+1?>">
                 <?php endforeach; ?>
                 <?php endif;?>
             </div>
@@ -120,10 +135,61 @@
 </div>
 
 <input id="com" type="button" onclick="wolaidianp()" value="我来点评">
+<div id="big_pic" style="width: 100%;height: 100% ; display: none ; justify-content: center; text-align:center;" >
+    <img id="imgs" callback_id="" src="" style="width: 100%;display: none">
+    <span>点击图片关闭</span>
+</div>
+
+<script type="text/javascript">
+
+        $(".img_s").click(function () {
+            _obj = $(this);
+            var img = _obj.attr('src');
+            var status = _obj.attr('status');
+            var callback_id = _obj.attr('status');
+            if(status == 0){
+            	$("#head_back").hide();
+                $("#com_background").hide();
+                $("#com").hide();
+                $("#big_pic").show();
+                $("#imgs").show();
+                $("#imgs").attr('src', img);
+                $("#imgs").attr('callback_id', callback_id);
+                _obj.attr('status', 1);
+            }
+        });
+
+        $('#imgs').on('click', function(){
+        	_obj = $(this);
+        	var callback_id = _obj.attr('callback_id');
+        	$("#head_back").show();
+            $("#com_background").show();
+            $("#com").show();
+            $("#big_pic").hide();
+            $("#imgs").hide();
+            $('#'+callback_id).attr('status', 0);
+            
+        })
+</script>
+
+
 <script type="text/javascript">
     function wolaidianp() {
         window.location.href = "/comment/comit?id=<?php echo $company['id'] ?>";
-    }
+    }	    
+  $(".img_s").on("click",function(){
+        var _obj = $(this);
+        if(_obj.attr('status') == 1){
+        	_obj.attr('status', 0);
+        }else{
+        	_obj.attr('status', 1);
+        	var oWidth = _obj.width();
+       	    var oHeight = _obj.height();
+       	    //隐藏同类， 放大当前
+        }
+   	    
+   	    
+  });  
 </script>
 
 </body>
