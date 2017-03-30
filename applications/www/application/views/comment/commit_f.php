@@ -57,7 +57,7 @@
         <div class="score_s">
             <div id="score_h_text" class="score_text">环境:</div>
             <div class="demo">
-                <div id="function-demo_h" class="target-demo"></div>
+                <div id="function-demo_h" class="target-demo" style"width:140px"></div>
                 <div id="function-hint_h" class="hint"></div>
             </div>
 
@@ -76,7 +76,7 @@
 
         <div class="score_s">
             <div id="score_k_text" class="score_text">口味:</div>
-            <div class="demo_kw">
+            <div class="demo">
                 <div id="function-demo_k" class="target-demo"></div>
                 <div id="function-hint_k" class="hint"></div>
             </div>

@@ -98,6 +98,7 @@ $(function() {
 	click: function(score, evt) {
             // alert('ID: ' + $(this).attr('id') + "\nscore: " + score + "\nevent: " + evt.type);
                          star_all = score;
+	}
     });
 
     $("#add_pic").click(function () {
@@ -149,6 +150,10 @@ $(function() {
             layer.msg("请对口味进行评分");
             return ;
         }
+	if(star_all == 0){
+	    layer.msg("请总分进行评分");
+	    return ;
+	}
         
         var score_all = star_all;
         var hj = star_h;

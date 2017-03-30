@@ -22,14 +22,14 @@
 #head_back #nav{ /*background: red;调试颜色*/  border-bottom:1px solid #000;  width: 100%;  }
 #head_back #allnums{  display: -webkit-flex;  display: flex;  -webkit-flex-direction: row;  margin-top: 5px;  width: 50%;  height: 50%; /*background: red;调试颜色*/ /*border-bottom:1px solid #bcbcbc;*/  }
 hr{  width: 90%;  border:1px solid #cacaca;  margin: 0;  margin-top: 5px;  }
-#allnums #score_text{  -webkit-flex:1;  flex: 1;  margin: 0;  font-size: 40px;  }
-#allnums #scoreall_star{  height: 100%;  width: 100%;  display: -webkit-flex;  display: flex;  -webkit-flex-direction: column;  -webkit-flex:3;  flex: 3;  }
+#allnums #score_text{  -webkit-flex:1;  flex: 1;  margin: 0;  font-size: 40px; padding-right:10px; }
+#allnums #scoreall_star{  height: 100%;  width: 100%; padding-left:10px; display: -webkit-flex;  display: flex;  -webkit-flex-direction: column;  -webkit-flex:3;  flex: 3;  }
 #allnums #scoreall_star #zonghe_score{  height:40% ;  margin-top: 0;  width: 70%; /*background: blue;调试颜色*/  font-size: 15px;  }
 #allnums #scoreall_star #zonghe_star{  width: 70%; /*background: green;调试颜色*/  height:60% ;  -webkit-flex:2;  flex: 2;  }
 #head_back #pingfen{  display: -webkit-flex;  display: flex;  -webkit-flex-direction: row;  margin-top: 5px;  width: 80%;  height: 25%;  margin-bottom: 2px; /*background: red;*/  align-items: flex-start;  }
 #pingfen .num_text{  -webkit-flex:3;  flex: 3; /*background: blue;*/  margin: 0;  text-align: center;  height: 100%;  padding-top: 0;  font-size: 20px;  }
 #head_back a{  float: left;  clear: left;  margin-left: 15px;  font-size: 15px;  line-height: 50px;  -webkit-flex: 1;  flex: 1;  }
-#head_back p{  margin-left: 15%;  width: 70%;  font-size: 20px; /*height: 20%;*/  margin-top: 0;  line-height: 50px;  margin-bottom: 0;  text-align: center; /*background: red;*/  -webkit-flex: 1;  flex: 1;  }
+#head_back p{  margin-left: 15%; margin-right:10px; width: 75%;  font-size: 20px; /*height: 20%;*/  margin-top: 0;  line-height: 50px;  margin-bottom: 0;  text-align: center; /*background: red;*/  -webkit-flex: 1;  flex: 1;  }
 body{  margin: 0;  padding: 0;  }
 
 
