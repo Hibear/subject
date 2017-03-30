@@ -38,7 +38,7 @@
                     $(function () {
                         $.fn.raty.defaults.path = '/comment/pingfenb/img';
                         $("#function-demo_all").raty({
-                            number: 5,
+                            number: <?php echo $total['score'] ?>,
                             targetType: 'hint',
                             path: '/comment/pingfen/demo/img',
                             cancelOff: 'cancel-off-big.png',
@@ -92,23 +92,7 @@
                         $(function() {
                             $.fn.raty.defaults.path = '/comment/pingfen/lib/img';
                             $("<?php echo '#function-demo_'.$v['id']?>").raty({
-                                <?php
-                                    if($v['score']<=5){
-                                        echo "number: 1,";
-                                    }
-                                    if($v['score'] >=6 && $v['score']<=8){
-                                        echo "number: 2,";
-                                    }
-                                    if($v['score'] >=9 && $v['score']<=11){
-                                        echo "number: 3,";
-                                    }
-                                    if($v['score'] >=12  && $v['score']<=14){
-                                        echo "number: 4,";
-                                    }
-                                    if($v['score'] ==15){
-                                        echo "number: 5,";
-                                    }
-                                ?>
+                                number:<?php echo $v['score'] ?>,
                                 targetType: 'hint',
                                 path: '/comment/pingfen/demo/img',
                                 cancelOff: 'cancel-off-big.png',

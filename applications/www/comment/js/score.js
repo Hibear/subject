@@ -6,6 +6,7 @@ $(function() {
     var star_h = 0;
     var star_f = 0;
     var star_k = 0;
+    var star_all = 0;
 
     $('#function-demo_h').raty({
         number: 5, //多少个星星设置
@@ -25,7 +26,7 @@ $(function() {
         click: function(score, evt) {
             // alert('ID: ' + $(this).attr('id') + "\nscore______: " + score + "\nevent: " + evt.type);
             star_h = score;
-            star_click(star_h,star_f,star_k);
+            //star_click(star_h,star_f,star_k);
 
         }
     });
@@ -52,7 +53,7 @@ $(function() {
         click: function(score, evt) {
             // alert('ID: ' + $(this).attr('id') + "\nscore: " + score + "\nevent: " + evt.type);
             star_f = score;
-            star_click(star_h,star_f,star_k);
+            //star_click(star_h,star_f,star_k);
 
         }
     });
@@ -77,7 +78,7 @@ $(function() {
         click: function(score, evt) {
             // alert('ID: ' + $(this).attr('id') + "\nscore: " + score + "\nevent: " + evt.type);
             star_k = score;
-            star_click(star_h,star_f,star_k);
+            //star_click(star_h,star_f,star_k);
 
 
         }
@@ -97,7 +98,10 @@ $(function() {
         target: '#function-hint_all',
         cancel: false,
         targetKeep: true,
-        readOnly: true,
+        targetText: '请选择评分',
+	click: function(score, evt) {
+            // alert('ID: ' + $(this).attr('id') + "\nscore: " + score + "\nevent: " + evt.type);
+                         star_all = score;
     });
 
     $("#add_pic").click(function () {
@@ -150,7 +154,7 @@ $(function() {
             return ;
         }
         
-        var score_all = star_h+star_f+star_k;
+        var score_all = star_all;
         var hj = star_h;
         var fw = star_f;
         var kw = star_k;

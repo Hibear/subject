@@ -208,13 +208,15 @@ class Comment extends MY_Controller
             $res['hj_score'] += $v['hj_score'];
             $res['fw_score'] += $v['fw_score'];
             $res['kw_score'] += $v['kw_score'];
+	    $res['score']    += $v['score'];
         }
         
         //求总体分
         $res['hj_score'] =  floor($res['hj_score']/$i);
         $res['fw_score'] =  floor($res['fw_score']/$i);
         $res['kw_score'] =  floor($res['kw_score']/$i);
-        $total = $res['hj_score'] + $res['fw_score'] + $res['kw_score'];
+	$res['score']   =  floor($res['kw_score']/$i);
+    /*    $total = $res['hj_score'] + $res['fw_score'] + $res['kw_score'];
         if($total<=5){
             $res['score'] = 1;
         }
@@ -229,7 +231,7 @@ class Comment extends MY_Controller
         }
         if($total ==15){
             $res['score'] = 5;
-        }
+        }*/
               
         return $res;
     }
@@ -424,10 +426,15 @@ class Comment extends MY_Controller
         return $res;
     }
     
-    public function download(){
+    public function download($media_tmp_id = ''){
+        
         $media_id = trim($this->input->get('media_id'));
         if(empty($media_id)){
-            exit();
+            if($media_tmp_id){
+                $media_id = $media_tmp_id;
+            }else{
+              exit();
+            }
         }
         
         $url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=".$this->jssdk->getAccessToken()."&media_id={$media_id}";
@@ -437,7 +444,7 @@ class Comment extends MY_Controller
         //判断access_token是否过期
         if(isset($res->errcode) && $res->errcode == 40001){
             $this->cache->file->delete('akx_access_token');
-            $this->download();
+            $this->download($media_id);
             exit();
         }else{
             //以读写方式打开一个文件，若没有，则自动创建
