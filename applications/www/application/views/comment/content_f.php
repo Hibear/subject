@@ -38,7 +38,7 @@
                     $(function () {
                         $.fn.raty.defaults.path = '/comment/pingfenb/img';
                         $("#function-demo_all").raty({
-                            number: <?php echo $total['score'] ?>,
+                            number:5,
                             targetType: 'hint',
                             path: '/comment/pingfen/demo/img',
                             cancelOff: 'cancel-off-big.png',
@@ -92,7 +92,7 @@
                         $(function() {
                             $.fn.raty.defaults.path = '/comment/pingfen/lib/img';
                             $("<?php echo '#function-demo_'.$v['id']?>").raty({
-                                number:<?php echo $v['score'] ?>,
+                                number:5,
                                 targetType: 'hint',
                                 path: '/comment/pingfen/demo/img',
                                 cancelOff: 'cancel-off-big.png',

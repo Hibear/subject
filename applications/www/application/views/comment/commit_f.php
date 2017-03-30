@@ -56,7 +56,7 @@
 
         <div class="score_s">
             <div id="score_h_text" class="score_text">环境:</div>
-            <div class="demo hj">
+            <div class="demo">
                 <div id="function-demo_h" class="target-demo"></div>
                 <div id="function-hint_h" class="hint"></div>
             </div>
@@ -66,7 +66,7 @@
 
         <div class="score_s">
             <div id="score_f_text" class="score_text">服务:</div>
-            <div class="demo fw">
+            <div class="demo">
                 <div id="function-demo_f" class="target-demo"></div>
                 <div id="function-hint_f" class="hint"></div>
             </div>
@@ -76,7 +76,7 @@
 
         <div class="score_s">
             <div id="score_k_text" class="score_text">口味:</div>
-            <div class="demo kw">
+            <div class="demo_kw">
                 <div id="function-demo_k" class="target-demo"></div>
                 <div id="function-hint_k" class="hint"></div>
             </div>

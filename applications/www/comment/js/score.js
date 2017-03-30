@@ -31,10 +31,6 @@ $(function() {
         }
     });
 
-    $("#function-demo_h").val();
-
-
-
     $('#function-demo_f').raty({
         number: 5, //多少个星星设置
         targetType: 'hint', //类型选择，number是数字值，hint，是设置的数组值
