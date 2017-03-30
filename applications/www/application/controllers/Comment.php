@@ -197,7 +197,7 @@ class Comment extends MY_Controller
             'hj_score' => 0,
             'fw_score' => 0,
             'kw_score' => 0,
-            'score' => 0
+            'score' => 0,
         ];
         if(!$data){
             return $res;
@@ -215,7 +215,7 @@ class Comment extends MY_Controller
         $res['hj_score'] =  floor($res['hj_score']/$i);
         $res['fw_score'] =  floor($res['fw_score']/$i);
         $res['kw_score'] =  floor($res['kw_score']/$i);
-	$res['score']   =  floor($res['kw_score']/$i);
+	$res['score']   =  floor($res['score']/$i);
     /*    $total = $res['hj_score'] + $res['fw_score'] + $res['kw_score'];
         if($total<=5){
             $res['score'] = 1;
