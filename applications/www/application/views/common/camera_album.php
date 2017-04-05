@@ -34,9 +34,9 @@
         	                $.get('/comment/download', {'media_id':serverId}, function(data){
         	                    if(data){
             	                    var num = len+1;
-            	                    var html = '<img style="width:25%;height:100%" src="'+localIds+'">';
+            	                    var html = '<img style="width:25%;height:5rem ;float:left;" src="'+localIds+'">';
             	                    html +='<input class="img_num" type="hidden" name="imgs_'+num+'" value="'+data+'">';
-            	                    $('#camara_all').append(html);
+            	                    $('#camara_all').prepend(html);
             	                    $('#upload').attr('data', num);
             	                }
             	            });

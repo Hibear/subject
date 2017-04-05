@@ -12,7 +12,7 @@ $(function() {
         number: 5, //多少个星星设置
         targetType: 'hint', //类型选择，number是数字值，hint，是设置的数组值
         path: '/comment/pingfen/demo/img',
-        hints: ['差', '一般', '好', '非常好', '全五星'],
+        hints: ['差', '一般', '好', '很好', '非常好'],
         cancelOff: 'cancel-off-big.png',
         cancelOn: 'cancel-on-big.png',
         size: 24,
@@ -35,7 +35,7 @@ $(function() {
         number: 5, //多少个星星设置
         targetType: 'hint', //类型选择，number是数字值，hint，是设置的数组值
         path: '/comment/pingfen/demo/img',
-        hints: ['差', '一般', '好', '非常好', '全五星'],
+        hints: ['差', '一般', '好', '很好', '非常好'],
         cancelOff: 'cancel-off-big.png',
         cancelOn: 'cancel-on-big.png',
         size: 24,
@@ -60,7 +60,7 @@ $(function() {
         number: 5, //多少个星星设置
         targetType: 'hint', //类型选择，number是数字值，hint，是设置的数组值
         path: '/comment/pingfen/demo/img',
-        hints: ['差', '一般', '好', '非常好', '全五星'],
+        hints: ['差', '一般', '好', '很好', '非常好'],
         cancelOff: 'cancel-off-big.png',
         cancelOn: 'cancel-on-big.png',
         size: 24,
@@ -84,7 +84,7 @@ $(function() {
         number: 5, //多少个星星设置
         targetType: 'hint', //类型选择，number是数字值，hint，是设置的数组值
         path: '/comment/pingfen/demo/img',
-        hints: ['差', '一般', '好', '非常好', '全五星'],
+        hints: ['差', '一般', '好', '很好', '非常好'],
         cancelOff: 'cancel-off-big.png',
         cancelOn: 'cancel-on-big.png',
         size: 24,
@@ -209,7 +209,7 @@ function star_click(star_h,star_f,star_k) {
         number: 5, //多少个星星设置
         targetType: 'hint', //类型选择，number是数字值，hint，是设置的数组值
         path: '/comment/pingfen/demo/img',
-        hints: ['差', '一般', '好', '非常好', '全五星'],
+        hints: ['差', '一般', '好', '很好', '非常好'],
         cancelOff: 'cancel-off-big.png',
         cancelOn: 'cancel-on-big.png',
         size: 24,
@@ -230,21 +230,6 @@ function star_click(star_h,star_f,star_k) {
 }
 
 
-$(function () {
-
-
-
-
-
-
-
-
-
-
-
-
-
-});
 
 
 

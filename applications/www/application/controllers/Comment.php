@@ -30,7 +30,7 @@ class Comment extends MY_Controller
     {
         if ($this->check_login()) {
             //已经登录后不再拉取网页授权，直接跳转到游戏页面
-            $back_url = C('domain.h5.url') . '/comment';
+            $back_url = C('domain.h5.url') . '/comment/index';
             redirect($back_url);
             exit;
         }
@@ -49,6 +49,12 @@ class Comment extends MY_Controller
      */
     public function get_access_token()
     {
+        if ($this->check_login()) {
+            //已经登录后不再拉取网页授权，直接跳转到游戏页面
+            $back_url = C('domain.h5.url') . '/comment/index';
+            redirect($back_url);
+            exit;
+        }
         $code = $this->input->get('code');
         if (empty($code)) {
             $this->return_failed('获取信息失败！');
@@ -87,7 +93,13 @@ class Comment extends MY_Controller
         $user_info = $this->get_weixin_user_info($res);
         //将用户信息保存到会话
         $this->session->set_userdata('comment_user_info', $user_info);
-        $back_url = C('domain.h5.url') . '/comment/index';
+        $ret = $this->session->has_userdata('login_back_url');
+        if($ret){
+            $function = $this->session->userdata('login_back_url');
+            $back_url = C('domain.h5.url') . '/comment/'.$function;
+        }else{
+            $back_url = C('domain.h5.url') . '/comment/index';
+        }
         redirect($back_url);
         exit;
 
@@ -145,7 +157,7 @@ class Comment extends MY_Controller
          }
          $post = $this->input->post();
          $post['create_time'] = date('Y-m-d H:i:s');
-         if($post['images']){
+         if(isset($post['images'])){
              $post['images'] = implode(',', $post['images']);
          }
          $post['openid'] = $user_info['openid'];
@@ -162,35 +174,43 @@ class Comment extends MY_Controller
     public function comit()
     {
         $data = $this->data;
+        $data['id'] =(int) $this->input->get('id');
         if(!$this->check_login()){
             $this->weixin_login();
             exit();
         }
-        $data['id'] =(int) $this->input->get('id');
+        
         $data['signPackage'] = $this->jssdk->getSignPackage();
 
         $this->load->view('comment/commit_f',$data);
     }
     
-
     public function contnt()
     {
         $data = $this->data;
+        $company_id = (int) $this->input->get('id');
         if(!$this->check_login()){
+            $this->session->set_userdata('login_back_url', 'contnt?id='.$company_id);
             $this->weixin_login();
             exit();
         }
         
         $company_id = (int) $this->input->get('id');
+        $data['id'] =$company_id;
         $data['company'] = $this->Mcompany_info->get_one('id, company_name', ['id' => $company_id]);
-        $data['user_info'] = $this->Muser_comment->get_lists('*',['company_id'=>$company_id], ['create_time' => 'desc' ]);
+        $data['user_info'] = $this->Muser_comment->get_lists('*',['company_id'=>$company_id], ['create_time' => 'desc' ], 5);
         //获取当前公司的总体评分
-        $data['total'] = $this->get_total($data['user_info']); 
+        $data['total'] = $this->get_total($company_id); 
         $this->load->view('comment/content_f', $data);
     }
     
-    public function get_total($data){
+    private function get_total($id){
         
+        $cache = $this->cache->file->get('score_'.$id);
+        if($cache){
+            return $cache;
+        }
+        $data = $this->Muser_comment->get_lists('hj_score,fw_score,kw_score,score', ['company_id' => $id]);
         //获取所有评分
         $i = 0;
         $res = [
@@ -208,33 +228,49 @@ class Comment extends MY_Controller
             $res['hj_score'] += $v['hj_score'];
             $res['fw_score'] += $v['fw_score'];
             $res['kw_score'] += $v['kw_score'];
-	    $res['score']    += $v['score'];
+	        $res['score']    += $v['score'];
         }
-        
         //求总体分
         $res['hj_score'] =  floor($res['hj_score']/$i);
         $res['fw_score'] =  floor($res['fw_score']/$i);
         $res['kw_score'] =  floor($res['kw_score']/$i);
-	$res['score']   =  floor($res['score']/$i);
-    /*    $total = $res['hj_score'] + $res['fw_score'] + $res['kw_score'];
-        if($total<=5){
-            $res['score'] = 1;
-        }
-        if($total >=6 && $total<=8){
-            $res['score'] = 2;
-        }
-        if($total >=9 && $total<=11){
-            $res['score'] = 3;
-        }
-        if($total >=12  && $total<=14){
-            $res['score'] = 4;
-        }
-        if($total ==15){
-            $res['score'] = 5;
-        }*/
-              
+	    $res['score']   =  floor($res['score']/$i);
+	    $this->cache->file->save('score_'.$id, $res, 5*60);
         return $res;
     }
+    
+    /**
+     * 获取更多评论
+     * @author 254274509@qq.com
+     *
+     */
+    public function load_more(){
+    
+        $page = (int) $this->input->post('p');
+        $company_id = (int) $this->input->get_post('id');
+        $page = $page+1;
+        $info = $this->Muser_comment->get_lists('*',['company_id'=>$company_id], ['create_time' => 'desc' ], 5, ($page-1)*5);
+        if($info){
+            
+            foreach ($info as $k => $v){
+                $info[$k]['create_time'] = date('Y-m-d', strtotime($v['create_time']));
+            }
+            
+            $list_data = array(
+                'p'=>$page,
+                'list'=>$info,
+                'status'=>0
+            );
+        }else{
+            $list_data = array(
+                'list'=>'',
+                'status'=>-1
+            );
+        }
+    
+        $this->return_json($list_data);
+    }
+    
 
     public function index()
     {

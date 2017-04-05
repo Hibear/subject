@@ -71,7 +71,7 @@
             <?php $com_name =  $v['company_name']?>
 
         <a href=<?php echo '/comment/contnt'.'?id='.$id; ?>>
-            <li><img class="pic lazy" data-original=<?php  echo "/comment/image/".$id.'.jpg' ?>><img class="dianping" src="/comment/image/dianping.png"></li>
+            <li><img style="height: 650px" class="pic lazy" data-original=<?php  echo "/comment/image/".$id.'.jpg' ?>><img class="dianping" src="/comment/image/dianping.png"></li>
         </a>
        <?php endforeach; ?>
     </ul>

@@ -42,15 +42,15 @@
     <!--input 2 层-->
     <div id="input_2" class="siicsc">
         <div id="xiaofei"></div>
-        <textarea class="ipt_2" placeholder="人均消费价格"></textarea>
+        <input type="number" class="ipt_2" placeholder="人均消费价格" />
     </div>
 
     <!--相机层-->
     <div id="camara_all" class="siicsc">
-        
+        <input id="upload" data="0" type="button" >
     </div>
-    <button id="upload" data="0">拍照（点击一次上传一张）</button>
-
+   <!-- <button id="upload" data="0">拍照（点击一次上传一张）</button>-->
+  
     <!--评分层-->
     <div id="score_single" class="siicsc">
 
@@ -87,7 +87,7 @@
 
     <!--提交层-->
     <div id="cmit">
-        <input type="button"  id="btn" value="提交" >
+        <input style="width: 9rem;height: 2rem;font-size: 1.25rem;" type="button"  id="btn" value="提交" >
     </div>
     
 <?php $this->load->view('common/camera_album');?>  
