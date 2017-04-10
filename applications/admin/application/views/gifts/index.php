@@ -86,6 +86,7 @@
                                         <tr>
                                             <th>礼品id</th>
                                             <th>名称</th>
+                                            <th>兑换积分</th>
                                             <th>库存</th>
                                             <th>添加时间</th>
                                             <th>状态</th>
@@ -98,6 +99,7 @@
                                             <tr>
                                                 <td><?php echo $value['id'];?></td>
                                                 <td><?php echo $value['title'];?></td>
+                                                <td><?php echo $value['score'];?></td>
                                                 <td><?php echo $value['num'];?></td>
                                                 <td><?php echo $value['create_time'];?></td>
                                                 <td><?php if($value['is_del'] == 1){echo '删除';}else{echo '正常';}?></td>

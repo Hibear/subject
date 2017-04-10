@@ -13,6 +13,15 @@ class Gifts extends MY_Controller{
 
     public function index(){
         $data = $this->data;
+        $pageconfig = C('page.page_lists');
+        $this->load->library('pagination');
+        $page = $this->input->get_post('per_page') ? : '1';
+        $where =  array();
+        $title = trim($this->input->get('title'));
+        if($title){
+            $where['like'] = ['title' => $title];
+        }
+        $data['list'] = $this->Mgifts->get_lists('*', $where, ['create_time' => 'desc'], $pageconfig['per_page'], ($page-1)*$pageconfig['per_page']);
         $this->load->view('gifts/index', $data);
     }
     
