@@ -160,4 +160,13 @@ class Gifts extends MY_Controller{
         
         $this->load->view('gifts/exchange', $data);
     }
+    
+    public function get(){
+        $id = $this->input->get('id');
+        $res = $this->Mexchange_log->update_info(['status' => 1], ['id' => $id]);
+        if(!$res) {
+            $this->error('操作失败，请重试！');
+        }
+        $this->success('领取成功！','/gifts/exchange');
+    }
 }
