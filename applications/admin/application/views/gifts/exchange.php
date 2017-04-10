@@ -49,9 +49,9 @@
                                     <form class="form-horizontal" role="form">
                                         <div class="form-group">
                                             <div class="col-sm-4">
-                                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 礼品名称 </label>
+                                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 用户： </label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" name="title" value="<?php if(isset($title)){echo $title;}?>"  class="col-xs-10 col-sm-12" />
+                                                    <input type="text" name="realname" value="<?php if(isset($realname)){echo $realname;}?>"  class="col-xs-10 col-sm-12" />
                                                 </div>
                                             </div>
                                         </div>
@@ -65,14 +65,7 @@
                                                     <i class="icon-undo bigger-110"></i>
                                                     重置
                                                 </button>
-                                                <a class="btn btn-info" href="/gifts/add">
-                                                    <i class="icon-plus smaller-75"></i>
-                                                    添加礼品
-                                                </a>
-                                                <a class="btn btn-info" href="/gifts/exchange">
-                                                    <i class="fa fa-search"></i>
-                                                    兑换记录
-                                                </a>
+                                                
                                             </div>
                                         </div>
                                     </form>
@@ -88,13 +81,14 @@
                                     <table id="sample-table-1" class="table table-striped table-bordered table-hover">
                                         <thead>
                                         <tr>
-                                            <th>礼品id</th>
-                                            <th>名称</th>
-                                            <th>兑换积分</th>
-                                            <th>库存</th>
-                                            <th>添加时间</th>
+                                            <th>id</th>
+                                            <th>用户</th>
+                                            <th>电话</th>
+                                            <th>地址</th>
+                                            <th>兑换商品</th>
+                                            <th>数量</th>
+                                            <th>兑换时间</th>
                                             <th>状态</th>
-                                            <th>操作</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -102,16 +96,13 @@
                                         <?php foreach ($list as $key => $value) : ?>
                                             <tr>
                                                 <td><?php echo $value['id'];?></td>
+                                                <td><?php echo $value['user_info']['realname'];?></td>
+                                                <td><?php echo $value['user_info']['tel'];?></td>
+                                                <td><?php echo $value['user_info']['addr'];?></td>
                                                 <td><?php echo $value['title'];?></td>
-                                                <td><?php echo $value['score'];?></td>
                                                 <td><?php echo $value['num'];?></td>
                                                 <td><?php echo $value['create_time'];?></td>
                                                 <td><?php if($value['is_del'] == 1){echo '删除';}else{echo '正常';}?></td>
-                                                <td>
-                                                    <a class="green tooltip-info" href="/gifts/modify?id=<?php echo $value['id'];?>"  data-rel="tooltip" data-placement="top" title="" data-original-title="编辑">
-                                                        <i class="icon-edit bigger-230"></i>
-                                                    </a>
-                                                </td>
                                             </tr>
                                         <?php endforeach; ?>
                                         <?php endif;?>
