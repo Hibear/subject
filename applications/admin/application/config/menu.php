@@ -70,6 +70,11 @@ $config = array(
                    'name'=> '国宾府调查问卷',
                    'active'=> 'questionnaire_list'
                 ),
+                array(
+                    'url'=>'/gifts',
+                    'name'=> '签到积分礼品',
+                    'active'=> 'gifts_list'
+                )
             ),
 		),
 		'微活动' => array(
