@@ -1,0 +1,111 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#background{
+    height: 600px;
+    /*padding-bottom: 176%;*/
+    background: darkgray;
+    display: flex;
+    display: -webkit-flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+
+}
+
+.shop_head{
+    display: flex;
+    display: -webkit-flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    height: 25%;
+    background: greenyellow;
+}
+
+.head_image{
+    width: auto;
+    height: 75%;
+}
+
+.head_jifen{
+    background: greenyellow;
+    text-align: center;
+    height: 100%;
+
+}
+
+.head_jifen p{
+    line-height: 50px;
+}
+
+.shop_body{
+    height: 75%;
+    background:white;
+    margin-top: 1%;
+
+}
+
+.shop_body_ul{
+    background: white;
+    display: flex;
+    display: -webkit-flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    height: 100%;
+    margin-top: 1%;
+
+}
+
+.body_ul_li{
+    width: 48.5%;
+    background: white;
+    height: 55%;
+    list-style: none;
+    border:  1px black;
+    display: flex;
+    display: -webkit-flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    padding-left: 3px;
+    padding-right: 1px;
+
+}
+
+.li_img{
+    width: 99%;
+    height: 75.2%;
+    border: solid 1px black;
+}
+
+.ul_li_name{
+    background: white;
+    height: 10%;
+    margin-top: 2%;
+    color: black;
+}
+
+.ul_li_jifen{
+
+    background: white;
+    height: 10%;
+    margin-top: 1%;
+    color: orange;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
