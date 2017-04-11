@@ -110,7 +110,12 @@
                                                 <td>
                                                     <a class="green tooltip-info" href="/gifts/modify?id=<?php echo $value['id'];?>"  data-rel="tooltip" data-placement="top" title="" data-original-title="编辑">
                                                         <i class="icon-edit bigger-230"></i>
-                                                    </a>
+                                                    </a>&nbsp;&nbsp;&nbsp;
+                                                    <?php if($value['status'] == 0):?>
+                                                        <p status="get" data="<?php echo $value['id']?>" data-type="1"  data-info="<?php echo $value['title'];?>" style="margin-top: -13px;" class="btn btn-minier btn-purple">上架</p>
+                                                    <?php else:?>
+                                                        <p status="get" data="<?php echo $value['id']?>" data-type="0" data-info="<?php echo $value['title'];?>" style="margin-top: -13px;" class="btn btn-minier btn-purple">下架</p>
+                                                    <?php endif;?>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -150,6 +155,26 @@
         d.width(320);
         d.showModal();
     });
+
+
+    $('[status = "get"]').on('click', function(){
+        var _obj = $(this);
+        var id = _obj.attr('data');
+        var status = _obj.attr('data-type');
+        var info = _obj.attr('data-info')+'】'+ _obj.text();
+        var d = dialog({
+            title: "提示",
+            content: '确定要给【'+info+'吗？',
+            okValue: '确定',
+            ok: function () {
+                window.location.href = '/gifts/up_down?id=' + id + '&status='+status;
+            },
+            cancelValue: '取消',
+            cancel: function () {}
+        });
+        d.width(320);
+        d.showModal();
+    })
 </script>
 
 <!-- 底部 -->

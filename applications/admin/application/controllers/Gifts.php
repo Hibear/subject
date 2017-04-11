@@ -169,4 +169,14 @@ class Gifts extends MY_Controller{
         }
         $this->success('领取成功！','/gifts/exchange');
     }
+    
+    public function up_down(){
+        $id = $this->input->get('id');
+        $status = $this->input->get('status');
+        $res = $this->Mgifts->update_info(['status' => $status], ['id' => $id]);
+        if(!$res) {
+            $this->error('操作失败，请重试！');
+        }
+        $this->success('操作成功！','/gifts');
+    }
 }
