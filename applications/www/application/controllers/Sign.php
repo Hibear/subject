@@ -147,6 +147,37 @@ class Sign extends MY_Controller{
     }
     
     /**
+     *兑换
+     */
+    public function exchange(){
+        $openid = $this->openid;
+        //获取当前用户信息
+        $user = $this->Msign_user->get_one('score', ['openid' => $openid]);
+        $id = $this->input->get('id');
+        //查询兑换的礼品信息， 使用悲观锁
+        $this->db->query('lock table t_gifts read');
+        $info = $this->Mgifts->get_one('id, title, cover_img, score, num', ['id' => $id, 'is_del' => 0]);
+        if($info && ($info['num'] >= 1) && ($user['score'] >= $info['score'])){
+            //库存-1
+            $this->db->query('lock table t_gifts write');
+            $res = $this->Mgifts->update_info(['decr' => ['num' => 1 ]], ['id' => $id]);
+            $this->db->query('unlock table');
+            //减去用户积分
+            if($res){
+                $this->Msign_user->update_info(['decr' => ['score' => $info['score']], ['openid' => $openid]]);
+                $add = [
+                    
+                ];
+            }else{
+                $this->return_json(['code' => 0, 'msg' => '请重试！']);
+            }
+        }else{
+            $this->db->query('unlock table');
+            $this->return_json(['code' => 0, 'msg' => '不能兑换！']);
+        }
+    }
+    
+    /**
      * 领取
      */
     public function get(){
