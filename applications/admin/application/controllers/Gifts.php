@@ -176,15 +176,27 @@ class Gifts extends MY_Controller{
     }
     
     /**
-     * 礼品领取
+     * 礼品发放
      */
     public function get(){
         $id = $this->input->get('id');
-        $res = $this->Mexchange_log->update_info(['status' => 1], ['id' => $id]);
+        $res = $this->Mexchange_log->update_info(['status' => 1, 'post_time' => date('Y-m-d H:i:s')], ['id' => $id]);
         if(!$res) {
             $this->error('操作失败，请重试！');
         }
-        $this->success('领取成功！','/gifts/exchange');
+        $this->success('发放成功！','/gifts/exchange');
+    }
+    
+    /**
+     * 强制领取
+     */
+    public function power(){
+        $id = $this->input->get('id');
+        $res = $this->Mexchange_log->update_info(['status' => 2, 'get_time' => date('Y-m-d H:i:s')], ['id' => $id]);
+        if(!$res) {
+            $this->error('操作失败，请重试！');
+        }
+        $this->success('操作成功！','/gifts/exchange');
     }
     
     /**

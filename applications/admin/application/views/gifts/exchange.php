@@ -19,7 +19,7 @@
                     <li>
                         <a href="#">H5后台数据</a>
                     </li>
-                    <li class="active">礼品列表</li>
+                    <li class="active"><a href="/gifts">礼品列表</a></li>
                 </ul>
 
                 <div class="nav-search" id="nav-search">
@@ -88,8 +88,10 @@
                                             <th>兑换商品</th>
                                             <th>数量</th>
                                             <th>兑换时间</th>
+                                            <th>发放时间</th>
                                             <th>领取状态</th>
                                             <th>状态</th>
+                                            <th>领取时间</th>
                                             <th>操作</th>
                                         </tr>
                                         </thead>
@@ -104,12 +106,16 @@
                                                 <td><?php echo $value['title'];?></td>
                                                 <td><?php echo $value['num'];?></td>
                                                 <td><?php echo $value['create_time'];?></td>
-                                                <td><?php if($value['status'] == 1){echo '已领取';}else{echo '未领取';}?>
+                                                <td><?php if($value['post_time'] != '0000-00-00 00:00:00'){echo $value['post_time'];}?></td>
+                                                <td><?php if($value['status'] == 2){echo '已领取';}elseif($value['status'] == 1){echo '已发放';}else{echo '未发放';}?>
                                                 </td>
                                                 <td><?php if($value['is_del'] == 1){echo '删除';}else{echo '正常';}?></td>
+                                                <td><?php if($value['get_time'] != '0000-00-00 00:00:00'){echo $value['get_time'];}?></td>
                                                 <td>
                                                     <?php if($value['status'] == 0):?>
-                                                        <p status="get" data="<?php echo $value['id']?>" data-info=" <?php echo $value['user_info']['realname']?> 用户领取 <?php echo $value['title'];?>" class="btn btn-app btn-green btn-xs btn-info">领取</p>
+                                                        <p status="get" data="<?php echo $value['id']?>" data-info=" <?php echo $value['user_info']['realname']?> 用户发放 <?php echo $value['title'];?>" class="btn btn-app btn-green btn-xs btn-info">发放</p>
+                                                    <?php elseif($value['status'] == 1):?>
+                                                        <p status="power" data="<?php echo $value['id']?>" data-info=" <?php echo $value['user_info']['realname']?> 用户强制领取 <?php echo $value['title'];?>" class="btn btn-app btn-green btn-xs btn-info">强制领取</p>
                                                     <?php endif;?>
                                                 </td>
                                             </tr>
@@ -157,10 +163,28 @@
         var info = _obj.attr('data-info');
         var d = dialog({
             title: "提示",
-            content: '确定要给'+info+'吗？',
+            content: '确定要给'+info+' 吗？',
             okValue: '确定',
             ok: function () {
                 window.location.href = '/gifts/get?id=' + id;
+            },
+            cancelValue: '取消',
+            cancel: function () {}
+        });
+        d.width(320);
+        d.showModal();
+    });
+
+    $('[status = "power"]').on('click', function(){
+        var _obj = $(this);
+        var id = _obj.attr('data');
+        var info = _obj.attr('data-info');
+        var d = dialog({
+            title: "提示",
+            content: '确定要给'+info+' 吗？',
+            okValue: '确定',
+            ok: function () {
+                window.location.href = '/gifts/power?id=' + id;
             },
             cancelValue: '取消',
             cancel: function () {}
