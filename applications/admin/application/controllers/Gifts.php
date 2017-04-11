@@ -1,4 +1,8 @@
 <?php
+/**
+ * 后台礼品管理
+ * @author 254274509@qq.com
+ */
 defined('BASEPATH') or exit('No direct script access allowed');
 class Gifts extends MY_Controller{
 
@@ -38,6 +42,9 @@ class Gifts extends MY_Controller{
         $this->load->view('gifts/index', $data);
     }
     
+    /**
+     * 礼品添加
+     */
     public function add(){
         $data = $this->data;
         if(IS_POST){
@@ -66,6 +73,9 @@ class Gifts extends MY_Controller{
         $this->load->view('gifts/add', $data);
     }
     
+    /**
+     * 修改礼品
+     */
     public function modify(){
         $data = $this->data;
         if(IS_POST){
@@ -95,6 +105,10 @@ class Gifts extends MY_Controller{
         $this->load->view('gifts/modify', $data);
     }
     
+    
+    /**
+     * 礼品记录查询
+     */
     public function exchange(){
         $data = $this->data;
         $pageconfig = C('page.page_lists');
@@ -161,6 +175,9 @@ class Gifts extends MY_Controller{
         $this->load->view('gifts/exchange', $data);
     }
     
+    /**
+     * 礼品领取
+     */
     public function get(){
         $id = $this->input->get('id');
         $res = $this->Mexchange_log->update_info(['status' => 1], ['id' => $id]);
@@ -170,6 +187,9 @@ class Gifts extends MY_Controller{
         $this->success('领取成功！','/gifts/exchange');
     }
     
+    /**
+     * 礼品上下架
+     */
     public function up_down(){
         $id = $this->input->get('id');
         $status = $this->input->get('status');
