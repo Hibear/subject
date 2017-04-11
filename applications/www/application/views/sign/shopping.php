@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
     <title>积分商城</title>
-    <link rel="stylesheet" href="css/shopping.css">
+    <link rel="stylesheet" href="<?php echo get_css_js_url('shopping.css', 'www')?>">
 </head>
 <body>
 
