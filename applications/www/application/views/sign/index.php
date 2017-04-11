@@ -9,27 +9,26 @@
 </head>
 <body>
 
-<!--签到首页 大div-->
+<!--签到首页 div-->
 <div id="home_background">
 
-    <!--div 用户信息-->
+    <!--用户信息 div-->
     <div class="head">
         <div class="user_info">
-            <img src="<?php echo $domain['statics']['url'];?>/www/images/001pic.jpg" alt="">
+            <img src="<?php echo $userImage ?> alt="">
             <div class="text_back">
-            <p class="name">阿波罗先生&nbsp;您好!</p>
+            <p class="name"><?php echo $username ?>先生&nbsp;您好！</p>
             </div>
         </div>
     </div>
 
 
-    <!--div 签到 抽奖-->
+    <!--div 签到抽奖-->
     <div class="sign_in_back">
         <div class="sign_in">
             <ul>
                 <li>马上签到</li>
                 <li>积分抽奖</li>
-                <li>社区发帖</li>
                 <li>积分兑换</li>
             </ul>
         </div>

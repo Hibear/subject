@@ -23,6 +23,10 @@ class Sign extends MY_Controller{
      */
     public function index(){
         $data = $this->data;
+        
+        $data['username'] = 'Apollo';
+        $data['userImage'] = 'http://img2.woyaogexing.com/2017/04/10/9679559f6c96342c!400x400_big.jpg';
+        
         $this->load->view('sign/index', $data);
     }
     
