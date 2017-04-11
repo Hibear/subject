@@ -72,7 +72,7 @@ $config = array(
                 ),
                 array(
                     'url'=>'/gifts',
-                    'name'=> '签到积分礼品',
+                    'name'=> '中铁魔都管理',
                     'active'=> 'gifts_list'
                 )
             ),
