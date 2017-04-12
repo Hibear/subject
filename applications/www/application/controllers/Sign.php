@@ -142,7 +142,33 @@ class Sign extends MY_Controller{
      * 礼品列表
      */
     public function goods(){
-        
+        $data = $this->data;
+        $data['list'] = $this->Mgifts->get_lists('id, title, cover_img, score, num', ['is_del' => 0], ['create_time' => 'desc'], $limit = 10);
+    }
+    
+    /**
+     * 获取更多礼品
+     * @author 254274509@qq.com
+     *
+     */
+    public function load_more(){
+    
+        $page = (int) $this->input->post('p');
+        $page = $page+1;
+        $info = $this->Mgifts->get_lists('*',['is_del'=>0], ['create_time' => 'desc' ], $limit = 10, ($page-1)*10);
+        if($info){
+            $list_data = array(
+                'p'=>$page,
+                'list'=>$info,
+                'status'=>0
+            );
+        }else{
+            $list_data = array(
+                'list'=>'',
+                'status'=>-1
+            );
+        }
+        $this->return_json($list_data);
     }
     
     /**
