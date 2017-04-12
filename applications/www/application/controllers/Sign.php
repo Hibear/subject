@@ -42,6 +42,12 @@ class Sign extends MY_Controller{
             'openid' => $openid
         ];
         $data['list'] = $this->Msign_log->get_lists($field, $where, ['create_time' => 'desc'], $limit = 10);
+        
+        print_r($data);
+      
+        $this->load->view('sign/progress',$data);
+        
+        
     }
     
     /**
@@ -136,6 +142,12 @@ class Sign extends MY_Controller{
             'openid' => $openid
         ];
         $data['list'] = $this->Mexchange_log->get_lists($field, $where, ['create_time' => 'desc'], $limit = 10);
+       
+        print_r($data['list']);
+        exit;
+        
+        $this->load->view('sign/shopping',$data);
+          
     }
     
     /**
@@ -144,6 +156,9 @@ class Sign extends MY_Controller{
     public function detail(){
         $id = $this->input->get('id');
         $info = $this->Mgifts->get_one('*', ['id' => $id]);
+        
+        $this->load->view('sign/shopdetail',$info);
+        
     }
     
     /**

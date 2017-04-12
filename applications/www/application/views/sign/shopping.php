@@ -23,38 +23,20 @@
 
     <!--shopping body-->
     <div class="shop_body">
+    
         <ul class="shop_body_ul">
-
+        <?php foreach ($list as $k=>$v):?>
+        
             <li class="body_ul_li">
-                <img class="li_img" src="image/aaa.jpg" alt="">
-                <p class="ul_li_name">南柯一梦抱枕</p>
-                <p class="ul_li_jifen">1300积分</p>
+                <a href="/sign/detail?id=<?php echo $v['id']?>"><img class="li_img" src="<?php echo get_img_url($v['cover_img']) ?>" alt=""></a>
+                <p class="ul_li_name"><?php echo $v['title']?></p>
+                <p class="ul_li_jifen"><?php echo $v['score']?></p>
             </li>
-
-            <li class="body_ul_li">
-                <img class="li_img" src="image/bbb.jpg" alt="">
-                <p class="ul_li_name">千度商品</p>
-                <p class="ul_li_jifen">2200积分</p>
-            </li>
-
-            <li class="body_ul_li">
-                <img class="li_img" src="image/ccc.jpg" alt="">
-                <p class="ul_li_name">智能马桶</p>
-                <p class="ul_li_jifen">1500积分</p>
-            </li>
-
-            <li class="body_ul_li">
-                <img class="li_img" src="image/ddd.jpg" alt="">
-                <p class="ul_li_name">护肤水</p>
-                <p class="ul_li_jifen">3000积分</p>
-            </li>
-
-            <li class="body_ul_li">
-                <img class="li_img" src="image/eee.jpg" alt="">
-                <p class="ul_li_name">iphone 7</p>
-                <p class="ul_li_jifen">2000积分</p>
-            </li>
+        
+        <?php endforeach; ?>
         </ul>
+        
+        
     </div>
 </div>
 
