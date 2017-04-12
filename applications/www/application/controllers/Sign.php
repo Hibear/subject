@@ -125,7 +125,7 @@ class Sign extends MY_Controller{
     }
     
     /**
-     * 礼品列表
+     * 礼品兑换列表
      */
     public function lists(){
         $data = $this->data;
@@ -136,6 +136,13 @@ class Sign extends MY_Controller{
             'openid' => $openid
         ];
         $data['list'] = $this->Mexchange_log->get_lists($field, $where, ['create_time' => 'desc'], $limit = 10);
+    }
+    
+    /**
+     * 礼品列表
+     */
+    public function goods(){
+        
     }
     
     /**
@@ -164,11 +171,25 @@ class Sign extends MY_Controller{
             $this->db->query('unlock table');
             //减去用户积分
             if($res){
-                $this->Msign_user->update_info(['decr' => ['score' => $info['score']], ['openid' => $openid]]);
-                $add = [
-                    
-                ];
+                $score = (int) $info['score'];
+                $ret = $this->Msign_user->update_info(['decr' => ['`score`' => $score]], ['openid' => $openid]);
+                //添加兑换记录
+                if($ret){
+                    $add = [
+                        'openid' => $openid,
+                        'exchange_goods_id' => $info['id'],
+                        'title' => $info['title'],
+                        'cover_img' => $info['cover_img'],
+                        'score' => $info['score'],
+                        'create_time' => date('Y-m-d H:i:s')
+                    ];
+                    $this->Mexchange_log->create($add);
+                    $this->return_json(['code' => 1, 'msg' => '兑换成功！']);
+                }else{
+                    $this->return_json(['code' => 0, 'msg' => '请重试！']);
+                }
             }else{
+                $this->Mgifts->update_info(['incr' => ['num' => 1 ]], ['id' => $id]);
                 $this->return_json(['code' => 0, 'msg' => '请重试！']);
             }
         }else{
