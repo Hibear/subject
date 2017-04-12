@@ -212,10 +212,10 @@ class Sign extends MY_Controller{
                     $this->Mexchange_log->create($add);
                     $this->return_json(['code' => 1, 'msg' => '兑换成功！']);
                 }else{
+                    $this->Mgifts->update_info(['incr' => ['num' => 1 ]], ['id' => $id]);
                     $this->return_json(['code' => 0, 'msg' => '请重试！']);
                 }
             }else{
-                $this->Mgifts->update_info(['incr' => ['num' => 1 ]], ['id' => $id]);
                 $this->return_json(['code' => 0, 'msg' => '请重试！']);
             }
         }else{
@@ -235,6 +235,48 @@ class Sign extends MY_Controller{
             $this->return_json(['code' => 0, 'msg' => '请重试！']);
         }
         $this->return_json(['code' => 1, 'msg' => '领取成功！']);
+    }
+    
+    /**
+     * 认证用户
+     * 认证完成后，可以获得+10积分
+     */
+    public function renzheng(){
+        $openid = $this->openid;
+        $realname = trim($this->input->post('realname'));
+        if(!$realname){
+            $this->return_json(['code' => 0, 'msg' => '姓名不能为空！']);
+        }
+        $tel = trim($this->input->post('tel'));
+        if(!$tel){
+            $this->return_json(['code' => 0, 'msg' => '手机号不能为空！']);
+        }
+        $addr = trim($this->input->post('addr'));
+        if(!$addr){
+            $this->return_json(['code' => 0, 'msg' => '地址不能为空！']);
+        }
+        if(!preg_match(C('regular_expression.mobile'), $tel)){
+            $this->return_json(['code' => 0, 'msg' => '手机号格式不正确！']);
+        }
+        //判断手机号是否已经被使用
+        $info = $this->Msign_user->count(['tel' => $tel]);
+        if($info == 1){
+            $this->return_json(['code' => 0, 'msg' => '手机号已经被注册过了！']);
+        }
+        $add = [
+            'realname' => $realname,
+            'tel' => $tel,
+            'addr' => $addr, 
+            'status' => 1, 
+            'incr' => [
+                '`score`' => 10
+            ]
+        ];
+        $res = $this->Msign_user->create($add);
+        if(!$res){
+            $this->return_json(['code' => 0, 'msg' => '请重试！']);
+        }
+        $this->return_json(['code' => 1, 'msg' => '认证成功']);
     }
     
     /**
