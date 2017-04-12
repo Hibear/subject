@@ -41,7 +41,8 @@
         })
      })
     
-	</script>
+</script>
+
 </body>
 </html>
 
