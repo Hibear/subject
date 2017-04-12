@@ -31,10 +31,6 @@
             success:function (data) {
                 if(data.code == 1){
                 	layer.msg(data.msg);
-//                 	setTimeout(function () {
-//                 		//跳转到签到列表
-//                 		window.open('/sign/log_list');
-//                 	}, 2000)
                 }else{
                 	layer.msg(data.msg);
                 }
