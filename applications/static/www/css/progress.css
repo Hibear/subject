@@ -73,6 +73,8 @@
 
 .li_time{
     line-height: 40px;
+	margin-top:5px;
+	background:white;
 }
 
 .li_time:first-child{

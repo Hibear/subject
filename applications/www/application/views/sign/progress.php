@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
-    <title>Ç©µ½¼ÇÂ¼</title>
+    <title>ç­¾åˆ°è®°å½•</title>
     <link rel="stylesheet" href="<?php echo get_css_js_url('progress.css', 'www')?>">
     <script src="<?php echo get_css_js_url('jquery-1.9.1.js', 'www')?>"></script>
      <script type="text/javascript" src="/WeixinPublic/plugins/layui/layui.js"></script>
@@ -25,19 +25,21 @@
 
             <div class="head_time"><?php echo date('Y-m-d') ?></div>
             <div class="qiandao">
-                <p>ÒÑÇ©µ½&verbar;Á¬Ğø3Ìì</p>
+                <p>å·²ç­¾åˆ°&verbar;è¿ç»­3å¤©</p>
             </div>
-            <input type="button" id="btn">
+            <input type="button" id="btn" value="&nbsp;ç­¾åˆ°&nbsp;">
 
         </div>
 
         <div class="pro_body">
-            <p class="record">Ç©µ½¼ÇÂ¼</p>
+            <p class="record">ç­¾åˆ°è®°å½•</p>
             <ul class="record_ul">
+            <?php foreach ($list as $v):?>
                 <li class="ul_li">
-                    <p class="li_time">2017-04-10</p>
+                    <p class="li_time"><?php echo $v['sign_time'] ?></p>
                     <!--<p class="li_score">+3</p>-->
                 </li>
+            <?php endforeach; ?>    
             </ul>
         </div>
 
@@ -57,7 +59,7 @@
                 }
             },
             error:function(){
-            	layer.msg('Î´Öª´íÎó£¡');
+            	layer.msg('æœªçŸ¥é”™è¯¯ï¼');
             }
         })
      })
