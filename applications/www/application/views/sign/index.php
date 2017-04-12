@@ -16,7 +16,7 @@
         });
     </script>
     
-    //////
+    
 </head>
 <body>
 
@@ -39,9 +39,9 @@
         <div class="sign_in">
             <ul>
                 <li id="signs">马上签到</li>
-                <li id="choujiang">积分抽奖</li>
+                <li id="choujiang">我的奖品</li>
                 <li id="list">商城列表</li>
-                <li id="choujiang">积分兑换</li>
+
             </ul>
         </div>
     </div>
@@ -56,7 +56,7 @@
 	
 	$('#list').click(function(){
 // 		window.open('/sign/lists');
-		window.location.href = '/sign/log_list';
+		window.location.href = '/sign/lists';
 	})
 	
 	

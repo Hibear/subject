@@ -20,13 +20,13 @@
 <p><?php echo $title ?></p>
 <p><?php echo $score ?></p>
 
-<input id="Receive" value='领取' type="button">
+<input id="Receive" value='兑换' type="button">
 
 <script type="text/javascript">
     $('#Receive').click(function(){
     	$.ajax({
             type:"post",
-            url:"/sign/get",
+            url:"/sign/exchange",
             dataType:'json',
             success:function (data) {
                 if(data.code == 1){
