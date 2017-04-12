@@ -49,10 +49,6 @@
             </p>
         </div>
         <img src="" class="logo t_center">
-        <?php if($status):?>
-        <img style="margin-top: 50%;" src="/static/game/images/fangzhouQRcode.jpg" class="t_center">
-        <a class="cehua" style="margin-bottom: 10%">【关注微信公众号,回复“2049”才能参与哦】</a>
-        <?php endif;?>
         <a class="cehua" href="">广告  全程策划:矩阵互动</a>
     </div>
     <p class="time lcdd">
