@@ -59,6 +59,35 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 未开始提示： </label>
+                                <div class="col-sm-9">
+                                	<input name="no_start_msg" value="活动未开始！"  class="datainp col-xs-10 col-sm-5"  type="text" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 已结束提示： </label>
+                                <div class="col-sm-9">
+                                    <input name="end_msg" value="活动已结束！" class="datainp col-xs-10 col-sm-5" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 人/每天/次： </label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="number" value="3" class="col-xs-10 col-sm-5">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 设置奖项： </label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="prize[prize_name][]" placeholder="奖项名称" class="col-xs-10 col-sm-1">
+                                    <input type="text" name="prize[prize][]" placeholder="奖品" class="col-xs-10 col-sm-1">
+                                    <input type="number" name="prize[v][]" placeholder="概率(0~100)" class="col-xs-10 col-sm-1">
+                                    <input type="number" name="prize[num][]" placeholder="数量" class="col-xs-10 col-sm-1">
+                                    <button id="adds" style="width:50px;height:28px;margin-left: 5px;">+</button>
+                                </div>
+                            </div>
+                            <div id="add_rows"></div>
+                            <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 简介： </label>
                                 <div class="col-sm-4">
                                     <textarea class="form-control limited" name="desc" style="margin-top: 0px; margin-bottom: 0px; height: 171px;"></textarea>
@@ -121,6 +150,20 @@
         d.width(320);
         d.showModal();
     });
+
+    $('#adds').on('click', function(e){
+        e.preventDefault();
+    	var html  ='<div class="form-group">';
+ 	        html +='<label class="col-sm-3 control-label no-padding-right" for="form-field-1"></label>';
+    		html +='<div class="col-sm-9" id="add_rows">';
+    	    html +='<input type="text" name="prize[prize_name][]" placeholder="奖项名称" class="col-xs-10 col-sm-1">';
+            html +='<input type="text" name="prize[prize][]" placeholder="奖品" class="col-xs-10 col-sm-1">';
+            html +='<input type="number" name="prize[v][]" placeholder="概率(0~100)" class="col-xs-10 col-sm-1">';
+            html +='<input type="number" name="prize[num][]" placeholder="数量" class="col-xs-10 col-sm-1">';
+            html +='</div></div>';
+    	$('#add_rows').append(html);
+    });
+
     
 </script>
 

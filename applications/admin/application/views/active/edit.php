@@ -57,6 +57,48 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 未开始提示： </label>
+                                <div class="col-sm-9">
+                                	<input name="no_start_msg" value="<?php echo $info['no_start_msg']?>"  class="datainp col-xs-10 col-sm-5"  type="text" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 已结束提示： </label>
+                                <div class="col-sm-9">
+                                    <input name="end_msg" value="<?php echo $info['end_msg']?>" class="datainp col-xs-10 col-sm-5" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 人/每天/次： </label>
+                                <div class="col-sm-9">
+                                    <input type="number" name="count" value="<?php echo $info['count']?>" class="col-xs-10 col-sm-5">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 设置奖项： </label>
+                                <div class="col-sm-9">
+                                    <button id="adds" style="width:50px;height:28px;margin-left: 5px;">+</button>
+                                </div>
+                            </div>
+                            <div id="add_rows">
+                                <?php if(isset($prize_lists)):?>
+                                <?php foreach ($prize_lists as $k => $v):?>
+                                <div id="rows_<?php echo $v['id']?>" class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 奖项（<?php echo $k+1?>）： </label>
+                                <div class="col-sm-9">
+                                    <input type="hidden" id="active_id_<?php echo $v['id']?>" value="<?php echo $v['active_id']?>" />
+                                    <input type="text" id="prize_name_<?php echo $v['id']?>"  value="<?php echo $v['prize_name']?>" placeholder="奖项名称" class="col-xs-10 col-sm-1">
+                                    <input type="text" id="prize_<?php echo $v['id']?>"  value="<?php echo $v['prize']?>" placeholder="奖品" class="col-xs-10 col-sm-1">
+                                    <input type="number" id="v_<?php echo $v['id']?>"  value="<?php echo $v['v']?>" placeholder="概率(0~100)" class="col-xs-10 col-sm-1">
+                                    <input type="number"  id="num_<?php echo $v['id']?>" value="<?php echo $v['num']?>" placeholder="数量" class="col-xs-10 col-sm-1">
+                                    <button class="update" data="<?php echo $v['id'];?>" style="width:50px;height:28px;margin-left: 5px;">更新</button>
+                                    <button class="delete" data="<?php echo $v['id'];?>" style="width:50px;height:28px;margin-left: 5px;">-</button>
+                                </div>
+                                </div>
+                                <?php endforeach;?>
+                                <?php endif?>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 简介： </label>
                                 <div class="col-sm-4">
                                     <textarea class="form-control limited" name="desc" style="margin-top: 0px; margin-bottom: 0px; height: 171px;"><?php echo $info['desc']?></textarea>
@@ -129,6 +171,83 @@
         d.width(320);
         d.showModal();
     });
+
+    $('#adds').on('click', function(e){
+        e.preventDefault();
+    	var html  ='<div class="form-group">';
+ 	        html +='<label class="col-sm-3 control-label no-padding-right" for="form-field-1"></label>';
+    		html +='<div class="col-sm-9" id="add_rows">';
+    	    html +='<input type="text" name="prize[prize_name][]" placeholder="奖项名称" class="col-xs-10 col-sm-1">';
+            html +='<input type="text" name="prize[prize][]" placeholder="奖品" class="col-xs-10 col-sm-1">';
+            html +='<input type="number" name="prize[v][]" placeholder="概率(0~100)" class="col-xs-10 col-sm-1">';
+            html +='<input type="number" name="prize[num][]" placeholder="数量" class="col-xs-10 col-sm-1">';
+            html +='</div></div>';
+    	$('#add_rows').append(html);
+    });
+
+    $('.delete').on('click', function(e){
+    	e.preventDefault();
+    	var _obj = $(this);
+    	var id = _obj.attr('data');
+    	var d = dialog({
+            title: "提示",
+            content: '确定删除该奖项吗？',
+            okValue: '确定',
+            ok: function () {
+            	$.post('/active/del_prize', {'id' : id}, function(data){
+            	    if(data){
+            	        if(data.code == 1){
+            	        	$('#rows_'+id).remove();
+                	    }else{
+                	        alert(data.msg)
+                    	}
+                	}else{
+                	    alert('网络异常');
+                    }
+                })
+            },
+            cancelValue: '取消',
+            cancel: function () {}
+        });
+        d.width(320);
+        d.showModal();
+    });
+
+    $('.update').on('click', function(e){
+    	e.preventDefault();
+    	var _obj = $(this);
+    	var id = _obj.attr('data');
+    	var active_id = $('#active_id_'+id).val();
+    	var prize_name = $('#prize_name_'+id).val();
+    	if(prize_name == '' || !prize_name){
+    	    alert('奖项名称不能为空！');
+    	    return false;
+        }
+    	var prize = $('#prize_'+id).val();
+    	var v = $('#v_'+id).val();
+    	var num = $('#num_'+id).val();
+    	$.post('/active/update_prize', {'id' : id, 'active_id':active_id, 'prize_name':prize_name, 'prize':prize, 'v':v, 'num':num}, function(data){
+    	    if(data){
+    	        if(data.code == 1){
+    	        	alert(data.msg)
+        	    }else{
+        	        alert(data.msg)
+            	}
+        	}else{
+        	    alert('网络异常');
+            }
+        })
+    });
+
+    function alert(info){
+    	var d = dialog({
+    		content: info
+    	});
+    	d.show();
+    	setTimeout(function () {
+    		d.close().remove();
+    	}, 2000);
+    }
 </script>
 
 <!-- 底部 -->
