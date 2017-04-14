@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 设置奖项： </label>
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 设置奖项（数量不限，请填 -1）： </label>
                                 <div class="col-sm-9">
                                     <input type="text" name="prize[prize_name][]" placeholder="奖项名称" class="col-xs-10 col-sm-1">
                                     <input type="text" name="prize[prize][]" placeholder="奖品" class="col-xs-10 col-sm-1">
@@ -93,6 +93,13 @@
                                     <textarea class="form-control limited" name="desc" style="margin-top: 0px; margin-bottom: 0px; height: 171px;"></textarea>
                                 </div>
                             </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 只能中奖一次： </label>
+                                <label class="col-sm-4">
+                                    <label><input type="radio" name="is_one"  value="1">是</label>
+                                    <label><input type="radio" name="is_one"  value="0">否</label>
+                                </div>
                             
                             <div class="clearfix form-actions">
                                 <div class="col-md-offset-3 col-md-9">

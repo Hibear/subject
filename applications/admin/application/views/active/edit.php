@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 设置奖项： </label>
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 设置奖项（数量不限，请填 -1）： </label>
                                 <div class="col-sm-9">
                                     <button id="adds" style="width:50px;height:28px;margin-left: 5px;">+</button>
                                 </div>
@@ -115,6 +115,13 @@
                                 <label class="col-sm-4">
                                     <label><input type="radio" name="is_del" <?php if(isset($info) && $info['is_del'] == 0){echo 'checked';}?> value="0">正常</label>
                                     <label><input type="radio" name="is_del" <?php if(isset($info) && $info['is_del'] == 1){echo 'checked';}?> value="1">删除</label>
+                                </div>
+                                
+                                <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 只能中奖一次： </label>
+                                <label class="col-sm-4">
+                                    <label><input type="radio" name="is_one" <?php if(isset($info) && $info['is_one'] == 1){echo 'checked';}?> value="1">是</label>
+                                    <label><input type="radio" name="is_one" <?php if(isset($info) && $info['is_one'] == 0){echo 'checked';}?> value="0">否</label>
                                 </div>
                             </div>
                             <div class="clearfix">

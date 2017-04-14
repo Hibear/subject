@@ -103,7 +103,58 @@ class Goldegg extends MY_Controller{
         }
         
         //计算通过奖项信息计算本次的中奖率
-        var_dump($prize);exit;
+        $this->do_lottery($prize, $id, $openid);
+    }
+    
+    /**
+     * 处理概率和奖项
+     * @param unknown $prize
+     * @param unknown $id
+     */
+    private function do_lottery($prize, $id, $openid){
+        foreach ($prize as $key => $val) {
+            $arr[$val['id']] = $val['v'];
+        }
+        //根据概率获取奖项id
+        $rid = $this->get_rands($arr);
+        $arr_k = '';
+        //如果改奖项没有数量限制，即num 为 -1
+        foreach ($prize as $k => $v){
+            if($v['id'] == $rid){
+                $arr_k = $k;
+                break;
+            }
+        }
+        if($prize[$arr_k]['num'] == -1){
+            //保存到数据库
+            $add = [
+                'openid' => $openid,
+                'prize_id' => $prize[$arr_k]['id'],
+                'prize_name' => $prize[$arr_k]['prize_name'],
+                'prize' => $prize[$arr_k]['prize'],
+                'create_time' => date('Y-m-d'),
+                'is_lottery' => $prize[$arr_k]['is_lottery'],
+                'active_id' => $id,
+            ];
+            $res = $this->Mgoldegg_log->create($add);
+        }else{
+            //查询数据库，当前中奖id的数量是否已经用完， 如果用完，再抽奖一次
+            $num = $this->Mactive_prize->count('num', ['id' => $rid]);
+            if($num >= $prize[$arr_k]['num']){
+                
+            }else{
+                $add = [
+                    'openid' => $openid,
+                    'prize_id' => $prize[$arr_k]['id'],
+                    'prize_name' => $prize[$arr_k]['prize_name'],
+                    'prize' => $prize[$arr_k]['prize'],
+                    'create_time' => date('Y-m-d'),
+                    'is_lottery' => $prize[$arr_k]['is_lottery'],
+                    'active_id' => $id,
+                ];
+                $res = $this->Mgoldegg_log->create($add);
+            }
+        }
     }
     
     /**
@@ -121,6 +172,26 @@ class Goldegg extends MY_Controller{
         }else if($time >= strtotime($end)){
             $this->return_json(['code' => 0, 'msg' => $end_msg]);
         }
+    }
+    
+    
+    private function get_rands($proArr){
+        $result = '';
+        //概率数组的总概率精度
+        $proSum = array_sum($proArr);
+        //概率数组循环
+        foreach ($proArr as $key => $proCur) {
+            $randNum = mt_rand(1, $proSum);
+            if ($randNum <= $proCur) {
+                $result = $key;
+                break;
+            } else {
+                $proSum -= $proCur;
+            }
+        }
+        unset ($proArr);
+    
+        return $result;
     }
     
 }
