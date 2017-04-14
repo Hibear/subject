@@ -71,6 +71,12 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 人/每天/次： </label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="number" value="3" class="col-xs-10 col-sm-5">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 设置奖项： </label>
                                 <div class="col-sm-9">
                                     <input type="text" name="prize[prize_name][]" placeholder="奖项名称" class="col-xs-10 col-sm-1">

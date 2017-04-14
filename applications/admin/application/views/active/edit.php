@@ -69,6 +69,12 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 人/每天/次： </label>
+                                <div class="col-sm-9">
+                                    <input type="number" name="count" value="<?php echo $info['count']?>" class="col-xs-10 col-sm-5">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 设置奖项： </label>
                                 <div class="col-sm-9">
                                     <button id="adds" style="width:50px;height:28px;margin-left: 5px;">+</button>
