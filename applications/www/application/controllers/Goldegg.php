@@ -32,7 +32,7 @@ class Goldegg extends MY_Controller{
         
         $user_info = $this->session->userdata('user_info');
         $data['user_info'] = $user_info;
-        $openid = $info['openid'];
+        $openid = $user_info['openid'];
         $data['info'] = $info;
         //查询本次砸金蛋的奖项
         $data['prize'] = $this->Mactive_prize->get_lists('*', ['active_id' => $info['id']]);
