@@ -184,7 +184,7 @@ class Weixin_login extends MY_Controller
     private function add_user($user_info){
         if(!empty($user_info)){
             //查找open_id 是否绑定本平台账户，若绑定则使用平台账户登录
-            $user = $this->Mgame_user->get_one('*', array('openid' => $user_info['openid'], 'is_del' => 0));
+            $user = $this->Mgame_user->get_one('*', array('openid' => $user_info['openid']));
             if($user){
                 //do nothing
             }else{
