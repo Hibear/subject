@@ -85,8 +85,7 @@ class Weixin_login extends MY_Controller
             );
         }
         $user_info = $this->get_weixin_user_info($res);
-        //将用户信息保存到会话
-        $this->session->set_userdata('user_info', $user_info);
+        
         $ret = $this->session->has_userdata('login_back_url');
         if($ret){
             $this->add_user($user_info);
@@ -186,13 +185,16 @@ class Weixin_login extends MY_Controller
             //查找open_id 是否绑定本平台账户，若绑定则使用平台账户登录
             $user = $this->Mgame_user->get_one('*', array('openid' => $user_info['openid']));
             if($user){
-                //do nothing
+                //将用户信息保存到会话
+                $this->session->set_userdata('user_info', $user);
             }else{
                 $add['openid'] = $user_info['openid'];
                 $add['nickname'] = $user_info['nickname'];
                 $add['head_img'] = $user_info['headimgurl'];
                 $add['create_time'] = $add['update_time'] = date('Y-m-d H:i:s');
-                $this->Muser->create($add);
+                $this->Mgame_user->create($add);
+                //将用户信息保存到会话
+                $this->session->set_userdata('user_info', $add);
             }
         }else{
             $this->return_failed('获取信息失败，请重试！');
