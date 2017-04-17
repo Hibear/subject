@@ -83,6 +83,7 @@
                                     <input type="text" name="prize[prize][]" placeholder="奖品" class="col-xs-10 col-sm-1">
                                     <input type="number" name="prize[v][]" placeholder="概率(0~100)" class="col-xs-10 col-sm-1">
                                     <input type="number" name="prize[num][]" placeholder="数量" class="col-xs-10 col-sm-1">
+                                    <input type="number"  nam="prize[is_lottery][]" value="" placeholder="是中奖项填1，不是填0" class="col-xs-10 col-sm-2">
                                     <button id="adds" style="width:50px;height:28px;margin-left: 5px;">+</button>
                                 </div>
                             </div>
@@ -167,6 +168,7 @@
             html +='<input type="text" name="prize[prize][]" placeholder="奖品" class="col-xs-10 col-sm-1">';
             html +='<input type="number" name="prize[v][]" placeholder="概率(0~100)" class="col-xs-10 col-sm-1">';
             html +='<input type="number" name="prize[num][]" placeholder="数量" class="col-xs-10 col-sm-1">';
+            html +='<input type="number"  nam="prize[is_lottery][]" value="" placeholder="是中奖项填1，不是填0" class="col-xs-10 col-sm-2">';
             html +='</div></div>';
     	$('#add_rows').append(html);
     });

@@ -56,7 +56,7 @@ class Goldegg extends MY_Controller{
                 $this->return_json(['code' => 0, 'msg' => '活动不存在']);
             }
         }
-        
+
         //判断当前时间是否在活动时间内
         $time = time();
         $start_time = $info['start_time'];

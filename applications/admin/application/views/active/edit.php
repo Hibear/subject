@@ -91,6 +91,7 @@
                                     <input type="text" id="prize_<?php echo $v['id']?>"  value="<?php echo $v['prize']?>" placeholder="奖品" class="col-xs-10 col-sm-1">
                                     <input type="number" id="v_<?php echo $v['id']?>"  value="<?php echo $v['v']?>" placeholder="概率(0~100)" class="col-xs-10 col-sm-1">
                                     <input type="number"  id="num_<?php echo $v['id']?>" value="<?php echo $v['num']?>" placeholder="数量" class="col-xs-10 col-sm-1">
+                                    <input type="number"  id="is_lottery_<?php echo $v['is_lottery']?>" value="<?php echo $v['is_lottery']?>" placeholder="是中奖项填1，不是填0" class="col-xs-10 col-sm-2">
                                     <button class="update" data="<?php echo $v['id'];?>" style="width:50px;height:28px;margin-left: 5px;">更新</button>
                                     <button class="delete" data="<?php echo $v['id'];?>" style="width:50px;height:28px;margin-left: 5px;">-</button>
                                 </div>
@@ -188,6 +189,7 @@
             html +='<input type="text" name="prize[prize][]" placeholder="奖品" class="col-xs-10 col-sm-1">';
             html +='<input type="number" name="prize[v][]" placeholder="概率(0~100)" class="col-xs-10 col-sm-1">';
             html +='<input type="number" name="prize[num][]" placeholder="数量" class="col-xs-10 col-sm-1">';
+            html =+'<input type="number"  nam="prize[is_lottery][]" value="" placeholder="是中奖项填1，不是填0" class="col-xs-10 col-sm-2">'
             html +='</div></div>';
     	$('#add_rows').append(html);
     });
@@ -226,6 +228,7 @@
     	var id = _obj.attr('data');
     	var active_id = $('#active_id_'+id).val();
     	var prize_name = $('#prize_name_'+id).val();
+    	var is_lottery = $('#is_lottery_'+id).val();
     	if(prize_name == '' || !prize_name){
     	    alert('奖项名称不能为空！');
     	    return false;
@@ -233,7 +236,7 @@
     	var prize = $('#prize_'+id).val();
     	var v = $('#v_'+id).val();
     	var num = $('#num_'+id).val();
-    	$.post('/active/update_prize', {'id' : id, 'active_id':active_id, 'prize_name':prize_name, 'prize':prize, 'v':v, 'num':num}, function(data){
+    	$.post('/active/update_prize', {'id' : id, 'active_id':active_id, 'prize_name':prize_name, 'prize':prize, 'v':v, 'num':num, 'is_lottery':is_lottery}, function(data){
     	    if(data){
     	        if(data.code == 1){
     	        	alert(data.msg)
