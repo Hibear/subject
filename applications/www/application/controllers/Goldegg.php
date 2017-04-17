@@ -39,7 +39,7 @@ class Goldegg extends MY_Controller{
         //查询今日抽奖的次数
         $data['num'] = $this->Mgoldegg_log->count(['openid' => $openid, 'create_time' => date('Y-m-d'), 'active_id' => $info['id']]);
         //查询本次活动的中奖记录
-        $data['prize_log'] = $this->Mgoldegg_log->get_lists('id, prize_name, prize, create_time', ['openid' => $openid, 'create_time' => date('Y-m-d'), 'actice_id' => $info['id']]);
+        $data['prize_log'] = $this->Mgoldegg_log->get_lists('id, prize_name, prize, create_time', ['openid' => $openid, 'create_time' => date('Y-m-d'), 'active_id' => $info['id']]);
         $this->load->view('goldegg/index', $data);
     }
     
