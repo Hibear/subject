@@ -87,11 +87,11 @@
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 奖项（<?php echo $k+1?>）： </label>
                                 <div class="col-sm-9">
                                     <input type="hidden" id="active_id_<?php echo $v['id']?>" value="<?php echo $v['active_id']?>" />
-                                    <input type="text" id="prize_name_<?php echo $v['id']?>"  value="<?php echo $v['prize_name']?>" placeholder="奖项名称" class="col-xs-10 col-sm-1">
-                                    <input type="text" id="prize_<?php echo $v['id']?>"  value="<?php echo $v['prize']?>" placeholder="奖品" class="col-xs-10 col-sm-1">
-                                    <input type="number" id="v_<?php echo $v['id']?>"  value="<?php echo $v['v']?>" placeholder="概率(0~100)" class="col-xs-10 col-sm-1">
-                                    <input type="number"  id="num_<?php echo $v['id']?>" value="<?php echo $v['num']?>" placeholder="数量" class="col-xs-10 col-sm-1">
-                                    <input type="number"  id="is_lottery_<?php echo $v['is_lottery']?>" value="<?php echo $v['is_lottery']?>" placeholder="是中奖项填1，不是填0" class="col-xs-10 col-sm-2">
+                                    <input type="text" id="prize_name_<?php echo $v['id']?>" title="奖项（如一等奖、二等奖、三等奖、谢谢参与）" value="<?php echo $v['prize_name']?>" placeholder="奖项名称" class="col-xs-10 col-sm-1">
+                                    <input type="text" id="prize_<?php echo $v['id']?>" title="奖品"  value="<?php echo $v['prize']?>" placeholder="奖品" class="col-xs-10 col-sm-1">
+                                    <input type="number" id="v_<?php echo $v['id']?>" title="概率，必须是整数， 概率总合（100或1000）"  value="<?php echo $v['v']?>" placeholder="概率(0~100)" class="col-xs-10 col-sm-1">
+                                    <input type="number"  id="num_<?php echo $v['id']?>" title="数量（必须为整数，填-1时，表示数量不限）" value="<?php echo $v['num']?>" placeholder="数量" class="col-xs-10 col-sm-1">
+                                    <input type="number"  id="is_lottery_<?php echo $v['is_lottery']?>" title="是否是中奖选项（填1是，填0不是）" value="<?php echo $v['is_lottery']?>" placeholder="是中奖项填1，不是填0" class="col-xs-10 col-sm-2">
                                     <button class="update" data="<?php echo $v['id'];?>" style="width:50px;height:28px;margin-left: 5px;">更新</button>
                                     <button class="delete" data="<?php echo $v['id'];?>" style="width:50px;height:28px;margin-left: 5px;">-</button>
                                 </div>
@@ -185,11 +185,11 @@
     	var html  ='<div class="form-group">';
  	        html +='<label class="col-sm-3 control-label no-padding-right" for="form-field-1"></label>';
     		html +='<div class="col-sm-9" id="add_rows">';
-    	    html +='<input type="text" name="prize[prize_name][]" placeholder="奖项名称" class="col-xs-10 col-sm-1">';
-            html +='<input type="text" name="prize[prize][]" placeholder="奖品" class="col-xs-10 col-sm-1">';
-            html +='<input type="number" name="prize[v][]" placeholder="概率(0~100)" class="col-xs-10 col-sm-1">';
-            html +='<input type="number" name="prize[num][]" placeholder="数量" class="col-xs-10 col-sm-1">';
-            html +='<input type="number"  nam="prize[is_lottery][]" placeholder="是中奖项填1，不是填0" class="col-xs-10 col-sm-2">';
+    	    html +='<input type="text" name="prize[prize_name][]" placeholder="奖项名称" title="奖项（如一等奖、二等奖、三等奖、谢谢参与）" class="col-xs-10 col-sm-1">';
+            html +='<input type="text" name="prize[prize][]" placeholder="奖品" title="奖品" class="col-xs-10 col-sm-1">';
+            html +='<input type="number" name="prize[v][]" placeholder="概率(0~100)" title="概率，必须是整数， 概率总合（100或1000）" class="col-xs-10 col-sm-1">';
+            html +='<input type="number" name="prize[num][]" placeholder="数量" title="数量（必须为整数，填-1时，表示数量不限）" class="col-xs-10 col-sm-1">';
+            html +='<input type="number"  nam="prize[is_lottery][]" placeholder="是中奖项填1，不是填0" title="是否是中奖选项（填1是，填0不是）" class="col-xs-10 col-sm-2">';
             html +='</div></div>';
     	$('#add_rows').append(html);
     });

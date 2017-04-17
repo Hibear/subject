@@ -79,11 +79,11 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 设置奖项（数量不限，请填 -1）： </label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="prize[prize_name][]" placeholder="奖项名称" class="col-xs-10 col-sm-1">
-                                    <input type="text" name="prize[prize][]" placeholder="奖品" class="col-xs-10 col-sm-1">
-                                    <input type="number" name="prize[v][]" placeholder="概率(0~100)" class="col-xs-10 col-sm-1">
-                                    <input type="number" name="prize[num][]" placeholder="数量" class="col-xs-10 col-sm-1">
-                                    <input type="number"  nam="prize[is_lottery][]" value="" placeholder="是中奖项填1，不是填0" class="col-xs-10 col-sm-2">
+                                    <input type="text" name="prize[prize_name][]" placeholder="奖项名称" title="奖项（如一等奖、二等奖、三等奖、谢谢参与）" class="col-xs-10 col-sm-1">
+                                    <input type="text" name="prize[prize][]" placeholder="奖品" title="奖品" class="col-xs-10 col-sm-1">
+                                    <input type="number" name="prize[v][]" placeholder="概率(0~1000)" title="概率，必须是整数， 概率总合（100或1000）" class="col-xs-10 col-sm-1">
+                                    <input type="number" name="prize[num][]" placeholder="数量" title="数量（必须为整数，填-1时，表示数量不限）" class="col-xs-10 col-sm-1">
+                                    <input type="number"  nam="prize[is_lottery][]" value="" placeholder="是中奖项填1，不是填0" title="是否是中奖选项（填1是，填0不是）" class="col-xs-10 col-sm-2">
                                     <button id="adds" style="width:50px;height:28px;margin-left: 5px;">+</button>
                                 </div>
                             </div>
@@ -164,11 +164,11 @@
     	var html  ='<div class="form-group">';
  	        html +='<label class="col-sm-3 control-label no-padding-right" for="form-field-1"></label>';
     		html +='<div class="col-sm-9" id="add_rows">';
-    	    html +='<input type="text" name="prize[prize_name][]" placeholder="奖项名称" class="col-xs-10 col-sm-1">';
-            html +='<input type="text" name="prize[prize][]" placeholder="奖品" class="col-xs-10 col-sm-1">';
-            html +='<input type="number" name="prize[v][]" placeholder="概率(0~100)" class="col-xs-10 col-sm-1">';
-            html +='<input type="number" name="prize[num][]" placeholder="数量" class="col-xs-10 col-sm-1">';
-            html +='<input type="number"  nam="prize[is_lottery][]" value="" placeholder="是中奖项填1，不是填0" class="col-xs-10 col-sm-2">';
+    	    html +='<input type="text" name="prize[prize_name][]" placeholder="奖项名称" title="奖项（如一等奖、二等奖、三等奖、谢谢参与）" class="col-xs-10 col-sm-1">';
+            html +='<input type="text" name="prize[prize][]" placeholder="奖品" title="奖品" class="col-xs-10 col-sm-1">';
+            html +='<input type="number" name="prize[v][]" placeholder="概率(0~1000)" title="概率，必须是整数， 概率总合（100或1000）" class="col-xs-10 col-sm-1">';
+            html +='<input type="number" name="prize[num][]" placeholder="数量" title="数量（必须为整数，填-1时，表示数量不限）" class="col-xs-10 col-sm-1">';
+            html +='<input type="number"  nam="prize[is_lottery][]" value="" placeholder="是中奖项填1，不是填0" title="是否是中奖选项（填1是，填0不是）" class="col-xs-10 col-sm-2">';
             html +='</div></div>';
     	$('#add_rows').append(html);
     });
