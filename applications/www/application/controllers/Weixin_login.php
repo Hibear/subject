@@ -191,7 +191,7 @@ class Weixin_login extends MY_Controller
                 $add['openid'] = $user_info['openid'];
                 $add['nickname'] = $user_info['nickname'];
                 $add['head_img'] = $user_info['headimgurl'];
-                $add['create_time'] = $add['update_time'] = date('Y-m-d H:i:s');
+                $add['create_time'] = date('Y-m-d H:i:s');
                 $this->Mgame_user->create($add);
                 //将用户信息保存到会话
                 $this->session->set_userdata('user_info', $add);
