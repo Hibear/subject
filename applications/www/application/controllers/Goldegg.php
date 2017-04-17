@@ -232,7 +232,6 @@ class Goldegg extends MY_Controller{
             redirect(C('domain.h5.url').'/weixin_login/login');
             exit;
         }
-        $this->openid = $info['openid'];
     }
     
 }
