@@ -2,9 +2,6 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class Goldegg extends MY_Controller{
     private $app;
-    private $AppID; //应用ID
-    private $AppSecret; //应用密匙
-    private $openid = "o-_Sft8oKOymmAjaEEWeOzrCdMbM";
     public function __construct(){
         parent::__construct();
         $this->load->model(array(
@@ -14,11 +11,7 @@ class Goldegg extends MY_Controller{
         ));
         //分享用的
         $this->app = C("appid_secret.dashi");
-        //艾客逊公众号，用户网页授权
-        $this->AppID = C('appid_secret.akx.app_id');
-        $this->AppSecret = C('appid_secret.akx.app_secret');
         $this->load->driver('cache');
-        
     }
     
     public function index(){
@@ -34,6 +27,8 @@ class Goldegg extends MY_Controller{
                 show_404();
             }
         }
+        //判断是否登陆
+        $this->check_login($info['id']);
         
         $data['info'] = $info;
         //查询本次砸金蛋的奖项
@@ -49,6 +44,11 @@ class Goldegg extends MY_Controller{
      * 砸蛋
      */
     public function zadan(){
+        $user_info = $this->session->userdata('user_info');
+        if(!$user_info){
+            $this->return_json(['code' => 0, 'msg' => '请先登陆！']);
+        }
+        $openid = $user_info['openid'];
         $id = (int) $this->input->get('active_id');
         $info = $this->cache->file->get('goldegg_'.$id);
         if(!$info){
@@ -72,10 +72,10 @@ class Goldegg extends MY_Controller{
         //判断当前用户是否能够砸蛋
         if($info['is_one'] == 1){
             //如果用户只能有一次中奖， 先判断是否已经中奖过了
-            $res = $this->Mgoldegg_log->count(['openid' => $this->openid, 'active_id' => $id, 'is_lottery' => 1]);
+            $res = $this->Mgoldegg_log->count(['openid' => $openid, 'active_id' => $id, 'is_lottery' => 1]);
             if(!$res){
                 //判断今天抽奖的次数是否已经用完
-                $res = $this->Mgoldegg_log->count(['openid' => $this->openid, 'active_id' => $id, 'create_time' => data('Y-m-d')]);
+                $res = $this->Mgoldegg_log->count(['openid' => $openid, 'active_id' => $id, 'create_time' => data('Y-m-d')]);
                 if($res >= $info['count']){
                     $this->return_json(['code' => 0, 'msg' => '您今天已经抽过'.$info['count'].'奖了！']);
                 }
@@ -83,14 +83,14 @@ class Goldegg extends MY_Controller{
             $this->return_json(['code' => 0, 'msg' => '您已经中过奖了！']);
         }else{
             //判断今天抽奖的次数是否已经用完
-            $res = $this->Mgoldegg_log->count(['openid' => $this->openid, 'active_id' => $id, 'create_time' => date('Y-m-d')]);
+            $res = $this->Mgoldegg_log->count(['openid' => $openid, 'active_id' => $id, 'create_time' => date('Y-m-d')]);
             if($res >= $info['count']){
                 $this->return_json(['code' => 0, 'msg' => '您今天已经抽过'.$info['count'].'奖了！']);
             }
         }
         
         //开始抽奖
-        $this->start_lottery($this->openid, $id);
+        $this->start_lottery($openid, $id);
         
     }
     
@@ -198,7 +198,11 @@ class Goldegg extends MY_Controller{
         }
     }
     
-    
+    /**
+     * 得到中奖项的id
+     * @param unknown $proArr
+     * @return Ambigous <string, unknown>
+     */
     private function get_rands($proArr){
         $result = '';
         //概率数组的总概率精度
@@ -216,6 +220,16 @@ class Goldegg extends MY_Controller{
         unset ($proArr);
     
         return $result;
+    }
+    
+    private function check_login($id = 0){
+        $user_info = $this->session->userdata('user_info');
+        if(!$user_info){
+            $this->session->set_userdata('login_back_url', '/goldegg/index?active_id='.$id);
+            redirect(C('domain.h5.url').'/weixin_login/login');
+            exit;
+        }
+        $this->openid = $info['openid'];
     }
     
 }
