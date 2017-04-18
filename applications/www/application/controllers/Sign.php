@@ -26,6 +26,8 @@ class Sign extends MY_Controller{
         
         $data['username'] = 'Apollo';
         $data['userImage'] = 'http://img2.woyaogexing.com/2017/04/10/9679559f6c96342c!400x400_big.jpg';
+       
+//         print_r($data);
         
         $this->load->view('sign/index', $data);
     }
@@ -42,6 +44,12 @@ class Sign extends MY_Controller{
             'openid' => $openid
         ];
         $data['list'] = $this->Msign_log->get_lists($field, $where, ['create_time' => 'desc'], $limit = 10);
+        
+        print_r($data); 
+      
+        $this->load->view('sign/progress',$data);
+        
+        
     }
     
     /**
@@ -136,6 +144,9 @@ class Sign extends MY_Controller{
             'openid' => $openid
         ];
         $data['list'] = $this->Mexchange_log->get_lists($field, $where, ['create_time' => 'desc'], $limit = 10);
+       
+        $this->load->view('sign/shopping',$data);
+          
     }
     
     /**
@@ -144,6 +155,10 @@ class Sign extends MY_Controller{
     public function goods(){
         $data = $this->data;
         $data['list'] = $this->Mgifts->get_lists('id, title, cover_img, score, num', ['is_del' => 0], ['create_time' => 'desc'], $limit = 10);
+        
+        print_r($data);
+        exit;
+        
     }
     
     /**
@@ -177,6 +192,8 @@ class Sign extends MY_Controller{
     public function detail(){
         $id = $this->input->get('id');
         $info = $this->Mgifts->get_one('*', ['id' => $id]);
+        $this->load->view('sign/shopdetail',$info);
+        
     }
     
     /**

@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>鎴戠殑濂栧搧</title>
+    <title>我的奖品</title>
 </head>
 <body>
 
 <img src="" alt="">
-<p>鎴戠殑濂栧搧</p>
+<p>我的奖品</p>
 
 
 </body>
