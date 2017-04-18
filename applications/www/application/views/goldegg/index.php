@@ -142,6 +142,16 @@ user:liushunyu
 
                 </div>
             </article>
+            <article class="a3">
+                <h6>我的奖品</h6>
+                <div style="line-height:200%">
+                    <?php if(isset($my_prize)):?>
+                    <?php foreach ($my_prize as $k => $v):?>
+                    <p><?php echo $v['prize_name']?>:<?php echo $v['prize']?></p>
+                    <?php endforeach;?>
+                    <?php endif;?>
+                </div>
+            </article>
 
 
         </div>
