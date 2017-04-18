@@ -185,7 +185,9 @@ if (! function_exists('get_css_js_url')){
 	        $database_time = strtotime($version_result->update_time);
 
 	        //比较配置文件和数据库中的版本号，选取较大的一个
-	        $version = intval($database_time) >= intval($config_time) ? $api_version :$version;
+	        //$version = intval($database_time) >= intval($config_time) ? $api_version :$version;
+	        //已修改，直接选择数据库的作为版本号
+	        $version =  $api_version;
         }
 
 
