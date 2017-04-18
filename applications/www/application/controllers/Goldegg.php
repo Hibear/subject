@@ -37,10 +37,12 @@ class Goldegg extends MY_Controller{
         //查询本次砸金蛋的奖项
         $data['prize'] = $this->Mactive_prize->get_lists('*', ['active_id' => $info['id']]);
         //查询今日抽奖的次数
-        $data['num'] = $this->Mgoldegg_log->count(['openid' => $openid, 'create_time' => date('Y-m-d'), 'active_id' => $info['id']]);
+        $data['num'] = (int) $this->Mgoldegg_log->count(['openid' => $openid, 'create_time' => date('Y-m-d'), 'active_id' => $info['id']]);
         //查询本次活动的中奖记录
         $data['prize_log'] = $this->Mgoldegg_log->get_lists('id, prize_name, prize, create_time', ['openid' => $openid, 'create_time' => date('Y-m-d'), 'active_id' => $info['id']]);
-        $this->load->view('goldegg/index', $data);
+        
+       
+        $this->load->view('goldegg/index',$data);
     }
     
     /**
@@ -80,7 +82,7 @@ class Goldegg extends MY_Controller{
                 //判断今天抽奖的次数是否已经用完
                 $res = $this->Mgoldegg_log->count(['openid' => $openid, 'active_id' => $id, 'create_time' => data('Y-m-d')]);
                 if($res >= $info['count']){
-                    $this->return_json(['code' => 0, 'msg' => '您今天已经抽过'.$info['count'].'奖了！']);
+                    $this->return_json(['code' => 0, 'msg' => '您今天已经抽过'.$info['count'].'次奖了！']);
                 }
             }
             $this->return_json(['code' => 0, 'msg' => '您已经中过奖了！']);
@@ -88,7 +90,7 @@ class Goldegg extends MY_Controller{
             //判断今天抽奖的次数是否已经用完
             $res = $this->Mgoldegg_log->count(['openid' => $openid, 'active_id' => $id, 'create_time' => date('Y-m-d')]);
             if($res >= $info['count']){
-                $this->return_json(['code' => 0, 'msg' => '您今天已经抽过'.$info['count'].'奖了！']);
+                $this->return_json(['code' => 0, 'msg' => '您今天已经抽过'.$info['count'].'次奖了！']);
             }
         }
         
