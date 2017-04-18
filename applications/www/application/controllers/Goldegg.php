@@ -146,9 +146,14 @@ class Goldegg extends MY_Controller{
                 'active_id' => $id,
             ];
             $res = $this->Mgoldegg_log->create($add);
-            $this->return_json(['code' => $add['is_lottery'], 'msg' => $add['prize'] ]);
+            if($add['is_lottery'] == 0){
+                $code = -1;
+            }else{
+                $code = $add['is_lottery'];
+            }
+            $this->return_json(['code' => $code, 'msg' => $add['prize'] ]);
         }else{
-            //查询数据库，当前中奖id的数量是否已经用完， 如果用完，再抽奖一次
+            //查询数据库，当前中奖id的数量是否已经用完， 如果用完，评定为不中奖
             $num = $this->Mactive_prize->count('num', ['id' => $rid]);
             if($num >= $prize[$arr_k]['num']){
                 $ar_k = '';//不中奖数据的索引
@@ -169,7 +174,7 @@ class Goldegg extends MY_Controller{
                     'active_id' => $id,
                 ];
                 $res = $this->Mgoldegg_log->create($add);
-                $this->return_json(['code' => $add['is_lottery'], 'msg' => $add['prize'] ]);
+                $this->return_json(['code' => -1, 'msg' => $add['prize'] ]);
             }else{
                 $add = [
                     'openid' => $openid,
@@ -181,7 +186,12 @@ class Goldegg extends MY_Controller{
                     'active_id' => $id,
                 ];
                 $res = $this->Mgoldegg_log->create($add);
-                $this->return_json(['code' => $add['is_lottery'], 'msg' => $add['prize'] ]);
+                if($add['is_lottery'] == 0){
+                    $code = -1;
+                }else{
+                    $code = $add['is_lottery'];
+                }
+                $this->return_json(['code' => $code, 'msg' => $add['prize'] ]);
             }
         }
     }

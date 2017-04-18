@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,15 +58,24 @@ user:liushunyu
                             async:true,
                             data:{active_id:<?php echo $info['id']?>},
                             success: function(res){
-                                if(0 != res.code){
+                                if(1 == res.code){
                                     evt.target.classList.toggle("luck");
                                 }
                                 setTimeout(function(){
-                                    if(0 != res.success){
+                                    if(1 == res.success){
                                         var urls = ["<?php echo $domain['statics']['url']?>/www/images/gold/coin.png"];
+                                        //今日抽取次数+1
+                                        var num = parseInt($('#usenums').text())+1;
+                                        $('#usenums').text(num);
                                         alert(res.msg);
+                                    }else if(-1 == res.code){
+                                        //今日抽取次数+1
+                                        var num = parseInt($('#usenums').text())+1;
+                                        $('#usenums').text(num);
+                                        alert(res.msg);
+                                        return;
                                     }else{
-                                        alert(res.msg);
+                                    	alert(res.msg);
                                         return;
                                     }
                                 }, 2000);
@@ -82,18 +90,31 @@ user:liushunyu
         };
         shape.addEventListener("click", hitObj, false);
     }, false);
-</script><div class="body pb_10" >
+
+    function alert(info){
+    	var d = dialog({
+    		content: info
+    	});
+    	d.showModal();
+    	setTimeout(function () {
+    		d.close().remove();
+    		window.location.href ="/goldegg/index?active_id=<?php echo $info['id']?>";
+    	}, 2000);
+    }
+        
+</script>
+<div class="body pb_10" >
     <div style="position:absolute;left:10px;top:10px;z-index:350;">
-        <a href="javascript:;" id="playbox" class="btn_music" onclick="playbox.init(this).play();" ontouchstart="event.stopPropagation();"></a><audio id="audio" loop src="tpl/static/goldenEgg/wap/default.mp3" style="pointer-events:none;display:none;width:0!important;height:0!important;"></audio>
+        <a href="javascript:;" id="playbox" class="btn_music" onclick="playbox.init(this).play();" ontouchstart="event.stopPropagation();"></a><audio id="audio" loop src="<?php echo $domain['statics']['url']?>/common/default.mp3" style="pointer-events:none;display:none;width:0!important;height:0!important;"></audio>
     </div>
     <section class="stage">
-        <img src="http://static.dev.wesogou.com/www/images/gold/stage.jpg" />
+        <img src="<?php echo $domain['statics']['url']?>/www/images/gold/stage.jpg" />
         <div id="shape" class="cube on">
             <div class="plane one"><span><figure>&nbsp;</figure></span></div>
             <div class="plane two"><span><figure>&nbsp;</figure></span></div>
             <div class="plane three"><span><figure>&nbsp;</figure></span></div>
         </div>
-        <div id="hit" class="hit"><img src="http://static.dev.wesogou.com/www/images/gold/1.png" /></div>
+        <div id="hit" class="hit"><img src="<?php echo $domain['statics']['url']?>/www/images/gold/1.png" /></div>
     </section>
     <section>
         <div class="instro_wall">
@@ -101,7 +122,7 @@ user:liushunyu
             <article>
                 <h6>参与次数</h6>
                 <div style="line-height:200%">
-                    <p><?php if($info['is_one'] == 1){echo '每天只能抽'.$info['count'].'次';}?> - 今天已抽取 <span class="red" id="usenums"><?php echo $num?></span> 次</p>
+                    <p><?php if($info['is_one'] == 0){echo '每天只能抽'.$info['count'].'次';}else{echo '每个人只能中一次奖';}?> - 今天已抽取 <span class="red" id="usenums"><?php echo $num?></span> 次</p>
                 </div>
             </article>
             <article>
@@ -127,22 +148,7 @@ user:liushunyu
     </section>
 
 </div>
-<script>
 
-
-
-function alert(info){
-	var d = dialog({
-		content: info
-	});
-	d.showModal();
-	setTimeout(function () {
-		d.close().remove();
-	}, 2000);
-}
-
-
-</script>
 <div mark="stat_code" style="width:0px; height:0px; display:none;">
 </div>
 
