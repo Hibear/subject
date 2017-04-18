@@ -1,8 +1,3 @@
-
-
-
-
-
 function getCoin(urls){
     var urls = urls;
     var num = Math.round((Math.random(3)+ 1)*7);
