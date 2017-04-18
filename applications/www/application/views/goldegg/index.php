@@ -57,14 +57,14 @@ user:liushunyu
                             type: "POST",
                             dataType: "json",
                             async:true,
-                            data:{id:5},
+                            data:{active_id:<?php echo $info['id']?>},
                             success: function(res){
                                 if(0 != res.code){
                                     evt.target.classList.toggle("luck");
                                 }
                                 setTimeout(function(){
                                     if(0 != res.success){
-                                        var urls = ["http://static.dev.wesogou.com/www/images/gold/coin.png"];
+                                        var urls = ["<?php echo $domain['statics']['url']?>/www/images/gold/coin.png"];
                                         alert(res.msg);
                                     }else{
                                         alert(res.msg);

@@ -54,7 +54,7 @@ class Goldegg extends MY_Controller{
             $this->return_json(['code' => 0, 'msg' => '请先登陆！']);
         }
         $openid = $user_info['openid'];
-        $id = (int) $this->input->get('active_id');
+        $id = (int) $this->input->post('active_id');
         $info = $this->cache->file->get('goldegg_'.$id);
         if(!$info){
             //根据id获取本次砸金蛋的数据
