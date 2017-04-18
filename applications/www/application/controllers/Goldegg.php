@@ -28,7 +28,7 @@ class Goldegg extends MY_Controller{
             }
         }
         //判断是否登陆
-//      $this->check_login($info['id']); 
+        $this->check_login($info['id']); 
 
         $user_info = $this->session->userdata('user_info');
         $data['user_info'] = $user_info;
