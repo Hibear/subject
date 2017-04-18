@@ -41,7 +41,7 @@ class Goldegg extends MY_Controller{
         //查询本次活动的中奖记录
         $data['prize_log'] = $this->Mgoldegg_log->get_lists('id, prize_name, prize, create_time', ['openid' => $openid, 'create_time' => date('Y-m-d'), 'active_id' => $info['id']]);
         
-        $data['my_prize'] = $this->Mgoldegg_log->get_lists('prize_name, prize',['active_id' => $info['id'], 'openid' => $openid, 'is_lottery' => 1]);
+        $data['my_prize'] = $this->Mgoldegg_log->get_lists('prize_name, prize, create_time',['active_id' => $info['id'], 'openid' => $openid, 'is_lottery' => 1]);
        
         $this->load->view('goldegg/index',$data);
     }
