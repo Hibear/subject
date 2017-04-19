@@ -17,7 +17,7 @@ class Guaguaka extends MY_Controller{
     public function index(){
         $data = $this->data;
         $id = (int) $this->input->get('active_id');
-        $info = $this->cache->file->get('goldegg_'.$id);
+        $info = $this->cache->file->get('guaguaka_'.$id);
         if(!$info){
             //根据id获取本次砸金蛋的数据
             $info = $this->Mactive->get_one('*', ['id' => $id, 'is_del' => 0]);
