@@ -91,7 +91,7 @@
                                     <input type="text" id="prize_<?php echo $v['id']?>" title="奖品"  value="<?php echo $v['prize']?>" placeholder="奖品" class="col-xs-10 col-sm-1">
                                     <input type="number" id="v_<?php echo $v['id']?>" title="概率，必须是整数， 概率总合（100或1000）"  value="<?php echo $v['v']?>" placeholder="概率(0~100)" class="col-xs-10 col-sm-1">
                                     <input type="number"  id="num_<?php echo $v['id']?>" title="数量（必须为整数，填-1时，表示数量不限）" value="<?php echo $v['num']?>" placeholder="数量" class="col-xs-10 col-sm-1">
-                                    <input type="number"  id="is_lottery_<?php echo $v['is_lottery']?>" title="是否是中奖选项（填1是，填0不是）" value="<?php echo $v['is_lottery']?>" placeholder="是中奖项填1，不是填0" class="col-xs-10 col-sm-2">
+                                    <input type="number"  id="is_lottery_<?php echo $v['id']?>" title="是否是中奖选项（填1是，填0不是）" value="<?php echo $v['is_lottery']?>" placeholder="是中奖项填1，不是填0" class="col-xs-10 col-sm-2">
                                     <button class="update" data="<?php echo $v['id'];?>" style="width:50px;height:28px;margin-left: 5px;">更新</button>
                                     <button class="delete" data="<?php echo $v['id'];?>" style="width:50px;height:28px;margin-left: 5px;">-</button>
                                 </div>

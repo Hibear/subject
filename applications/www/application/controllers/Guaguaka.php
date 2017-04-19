@@ -42,20 +42,20 @@ class Guaguaka extends MY_Controller{
         $data['prize_log'] = $this->Mprize_log->get_lists('id, prize_name, prize, create_time', ['openid' => $openid, 'create_time' => date('Y-m-d'), 'active_id' => $info['id']]);
         
         $data['my_prize'] = $this->Mprize_log->get_lists('prize_name, prize, create_time',['active_id' => $info['id'], 'openid' => $openid, 'is_lottery' => 1]);
-       
+        
+        $data['_this_prize'] = $this->guaguaka($info['id']);
         $this->load->view('guaguaka/index',$data);
     }
     
     /**
      * 砸蛋
      */
-    private function zadan(){
+    private function guaguaka($id = 0){
         $user_info = $this->session->userdata('user_info');
         if(!$user_info){
-            $this->return_json(['code' => 0, 'msg' => '请先登陆！']);
+            return (['code' => 0, 'msg' => '请先登陆！']);
         }
         $openid = $user_info['openid'];
-        $id = (int) $this->input->post('active_id');
         $info = $this->cache->file->get('goldegg_'.$id);
         if(!$info){
             //根据id获取本次砸金蛋的数据
@@ -63,7 +63,7 @@ class Guaguaka extends MY_Controller{
             if($info){
                 $this->cache->file->save('goldegg_'.$id, $info, 5*60);//缓存5分钟
             }else{
-                $this->return_json(['code' => 0, 'msg' => '活动不存在']);
+                return (['code' => 0, 'msg' => '活动不存在']);
             }
         }
 
@@ -83,15 +83,15 @@ class Guaguaka extends MY_Controller{
                 //判断今天抽奖的次数是否已经用完
                 $res = $this->Mprize_log->count(['openid' => $openid, 'active_id' => $id, 'create_time' => data('Y-m-d')]);
                 if($res >= $info['count']){
-                    $this->return_json(['code' => 0, 'msg' => '您今天已经抽过'.$info['count'].'次奖了！']);
+                    return (['code' => 0, 'msg' => '您今天已经抽过'.$info['count'].'次奖了！']);
                 }
             }
-            $this->return_json(['code' => 0, 'msg' => '您已经中过奖了！']);
+            return (['code' => 0, 'msg' => '您已经中过奖了！']);
         }else{
             //判断今天抽奖的次数是否已经用完
             $res = $this->Mprize_log->count(['openid' => $openid, 'active_id' => $id, 'create_time' => date('Y-m-d')]);
             if($res >= $info['count']){
-                $this->return_json(['code' => 0, 'msg' => '您今天已经抽过'.$info['count'].'次奖了！']);
+                return (['code' => 0, 'msg' => '您今天已经抽过'.$info['count'].'次奖了！']);
             }
         }
         
@@ -108,7 +108,7 @@ class Guaguaka extends MY_Controller{
             if($prize){
                 $this->cache->file->save('prize_'.$id, $prize, 5*60);
             }else{
-                $this->return_json(['code' => 0, 'msg' => '请重试！']);
+                return (['code' => 0, 'msg' => '请重试！']);
             }
         }
         
@@ -152,7 +152,7 @@ class Guaguaka extends MY_Controller{
             }else{
                 $code = $add['is_lottery'];
             }
-            $this->return_json(['code' => $code, 'msg' => $add['prize'] ]);
+            return (['code' => $code, 'msg' => $add['prize'] ]);
         }else{
             //查询数据库，当前中奖id的数量是否已经用完， 如果用完，再抽奖一次
             $num = $this->Mactive_prize->count('num', ['id' => $rid]);
@@ -180,7 +180,7 @@ class Guaguaka extends MY_Controller{
                 }else{
                     $code = $add['is_lottery'];
                 }
-                $this->return_json(['code' => $code, 'msg' => $add['prize'] ]);
+                return (['code' => $code, 'msg' => $add['prize'] ]);
             }else{
                 $add = [
                     'openid' => $openid,
@@ -197,7 +197,7 @@ class Guaguaka extends MY_Controller{
                 }else{
                     $code = $add['is_lottery'];
                 }
-                $this->return_json(['code' => $code, 'msg' => $add['prize'] ]);
+                return (['code' => $code, 'msg' => $add['prize'] ]);
             }
         }
     }
@@ -213,9 +213,9 @@ class Guaguaka extends MY_Controller{
     private function check_active_time($time, $start, $end, $no_start_msg, $end_msg){
         
         if($time < strtotime($start)){
-            $this->return_json(['code' => 0, 'msg' => $no_start_msg]);
+            return (['code' => 0, 'msg' => $no_start_msg]);
         }else if($time >= strtotime($end)){
-            $this->return_json(['code' => 0, 'msg' => $end_msg]);
+            return (['code' => 0, 'msg' => $end_msg]);
         }
     }
     
