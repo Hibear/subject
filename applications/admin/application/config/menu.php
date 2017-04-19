@@ -88,7 +88,7 @@ $config = array(
 					),
                 array(
                     'url'=>'/active',
-                    'name'=> '活动管理',
+                    'name'=> '抽奖活动管理',
                     'active'=> 'active_list'
                 )
             ),

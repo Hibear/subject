@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Goldegg extends MY_Controller{
+class Guaguaka extends MY_Controller{
     private $app;
     public function __construct(){
         parent::__construct();
