@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,12 +8,18 @@
     <link rel="stylesheet" href="<?php echo get_css_js_url('guaguaka/default.css', 'h5')?>">
     <link rel="stylesheet" href="<?php echo get_css_js_url('guaguaka/lucky-card.css', 'h5')?>">
     <script src="<?php echo get_css_js_url('guaguaka/lucky-card.min.js', 'h5')?>"></script>
+    <script src="<?php echo get_css_js_url('guaguaka/jquery-1.9.1.js', 'h5')?>"></script>
 </head>
 
 <body>
     <div id="bg2"><img id="bg2_img" width="295" height="195" data-cfstyle="position:absolute;" style="position:absolute;" src="<?php echo $domain['statics']['url']?>/h5/images/guaguaka/guaguaka_word.png"></div>
     <div id="scratch">
-        <div id="card"><?php echo $_this_prize['msg']?></div>
+        <div id="card"><?php echo $_prize['msg']?></div>
+    </div>
+    
+    <div class="active">
+        <a id="more" class="hide" href="/guaguaka/index?active_id=<?php echo $info['id']?>">再来一次</a>
+        <a href="/guaguaka/myprize?active_id=<?php echo $info['id']?>">我的奖品</a>
     </div>
     
     <div class="tips">
@@ -37,6 +42,15 @@
         ratio: 0.3
     }, function() {
         this.clearCover();
+        <?php if($num < $info['count']):?>
+            <?php if($info['is_one']):?>
+                <?php if($prize_log == 0):?>
+                    $('#more').removeClass('hide');
+                <?php endif;?>
+            <?php elseif($prize_log < $info['count']):?>
+                $('#more').removeClass('hide');
+            <?php endif;?>
+        <?php endif;?>
     });
     </script>
 </body>

@@ -23,7 +23,7 @@ body {
 
 #scratch {
 	
-	width: 13rem;
+	width: 18rem;
     height: 4rem;
 }
 #scratch ,.tips{
@@ -36,12 +36,12 @@ body {
 
 .tips{
 	margin-top: 1rem;
-	width: 24rem;
+	width: 21rem;
 	height:auto;
 	background:#d4787b;
 	border:0px;
 	border-radius: 0px;
-	padding:0.5rem 0.1rem 1rem 0.1rem;
+	padding:0.5rem 0.4rem 1rem 0.4rem;
 
 
 	color:white;
@@ -54,5 +54,40 @@ body {
 	color:white;
 	font-size:17px;
 	font-family:'黑体';
+}
+
+.active{
+	margin-top:1.03rem;
+	text-align:center;
+	width:100%;
+	height:42px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.active a{
+	
+	height:40px;
+	line-height:40px;
+	width:155px;
+	background:#e2a516;
+	padding:1.03rem;
+	color:white;
+	font-size:17px;
+	font-family:'黑体';
+	text-decoration:none;
+}
+
+.hide{
+	display:none;
+}
+
+.headimg{
+	text-align:center;
+}
+
+.headimg img{
+	border-radius: 3rem;
+	width:6rem;
 }
 

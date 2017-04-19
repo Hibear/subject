@@ -28,7 +28,15 @@ class Weixin_login extends MY_Controller
     {
         if ($this->check_login()) {
             //已经登录后不再拉取网页授权
-            show_404();
+            $function = $this->session->userdata('login_back_url');
+            if($function){
+                $back_url = C('domain.h5.url') .$function;
+                redirect($back_url);
+                exit;
+            }else{
+                show_404();
+            }
+            
         }
         $data = $this->data;
         $redirect_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' . $this->AppID;
@@ -47,7 +55,14 @@ class Weixin_login extends MY_Controller
     {
         if ($this->check_login()) {
             //已经登录后不再拉取网页授权
-            show_404();
+            $function = $this->session->userdata('login_back_url');
+            if($function){
+                $back_url = C('domain.h5.url') .$function;
+                redirect($back_url);
+                exit;
+            }else{
+                show_404();
+            }
         }
         $code = $this->input->get('code');
         if (empty($code)) {
@@ -90,7 +105,6 @@ class Weixin_login extends MY_Controller
         if($ret){
             $this->add_user($user_info);
             $function = $this->session->userdata('login_back_url');
-            $this->session->unset_userdata('login_back_url');
             $back_url = C('domain.h5.url') .$function;
             redirect($back_url);
             exit;
