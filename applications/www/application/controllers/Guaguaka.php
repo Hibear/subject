@@ -246,7 +246,7 @@ class Guaguaka extends MY_Controller{
     private function check_login($id = 0){
         $user_info = $this->session->userdata('user_info');
         if(!$user_info){
-            $this->session->set_userdata('login_back_url', '/goldegg/index?active_id='.$id);
+            $this->session->set_userdata('login_back_url', '/guaguaka/index?active_id='.$id);
             redirect(C('domain.h5.url').'/weixin_login/login');
             exit;
         }
