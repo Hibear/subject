@@ -28,7 +28,7 @@ class Guaguaka extends MY_Controller{
             }
         }
         //判断是否登陆
-        $this->check_login($info['id']); 
+        //$this->check_login($info['id']); 
 
         $user_info = $this->session->userdata('user_info');
         $data['user_info'] = $user_info;
@@ -43,13 +43,13 @@ class Guaguaka extends MY_Controller{
         
         $data['my_prize'] = $this->Mprize_log->get_lists('prize_name, prize, create_time',['active_id' => $info['id'], 'openid' => $openid, 'is_lottery' => 1]);
        
-        $this->load->view('goldegg/index',$data);
+        $this->load->view('guaguaka/index',$data);
     }
     
     /**
      * 砸蛋
      */
-    public function zadan(){
+    private function zadan(){
         $user_info = $this->session->userdata('user_info');
         if(!$user_info){
             $this->return_json(['code' => 0, 'msg' => '请先登陆！']);
