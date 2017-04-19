@@ -22,7 +22,7 @@ class Guaguaka extends MY_Controller{
             //根据id获取本次砸金蛋的数据
             $info = $this->Mactive->get_one('*', ['id' => $id, 'is_del' => 0]);
             if($info){
-                $this->cache->file->save('goldegg_'.$id, $info, 5*60);//缓存5分钟
+                $this->cache->file->save('guaguaka_'.$id, $info, 5*60);//缓存5分钟
             }else{
                 show_404();
             }

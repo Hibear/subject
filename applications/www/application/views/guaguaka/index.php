@@ -14,7 +14,7 @@
 <body>
     <div id="bg2"><img id="bg2_img" width="295" height="195" data-cfstyle="position:absolute;" style="position:absolute;" src="<?php echo $domain['statics']['url']?>/h5/images/guaguaka/guaguaka_word.png"></div>
     <div id="scratch">
-        <div id="card"><?php echo $_this_prize['msg']?></div>
+        <div id="card"><?php echo $_prize['msg']?></div>
     </div>
     
     <div class="tips">
