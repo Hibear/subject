@@ -198,7 +198,7 @@
 	
 	$('#add').on('click', function(){
 	    var data = $("form").serialize();
-	    $.post('/wenjuan/add', 'post': data, function(data){
+	    $.post('/wenjuan/add', {'post': data}, function(data){
 	    	if(data){
 	    	    if(data.code == 1){
 	    	        alert(data.msg);
