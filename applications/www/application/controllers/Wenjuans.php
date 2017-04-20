@@ -62,7 +62,6 @@ class Wenjuans extends MY_Controller{
         $add['info'] = json_encode($post);
         
         unset($post);
-        var_dump($add);exit;
         $ret = $this->Mwenjuan->count(['openid' => $user_info['openid']]);
         if($ret){
             $this->return_json(['code' => 0, 'msg' => '您已经提交过了，只能提交一次哦！']);
