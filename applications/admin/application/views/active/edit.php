@@ -37,6 +37,18 @@
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
                         <form class="form-horizontal" role="form" method="post" >
+                            
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 活动类型： </label>
+                                <div class="col-sm-9">
+                                    <select class="col-xs-3" name="type">
+                                        <?php foreach (C('active_type') as $k => $v):?>
+                                        <option <?php if($info['type'] == $v['id']){echo 'selected';}?> value="<?php echo $v['id']?>"><?php echo $v['name']?></option>
+                                        <?php endforeach;?>
+                                    </select>
+                                </div>
+                            </div>
+                            
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 活动名称： </label>
                                 <div class="col-sm-9">

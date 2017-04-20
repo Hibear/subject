@@ -74,6 +74,11 @@ $config = array(
                     'url'=>'/gifts',
                     'name'=> '中铁魔都管理',
                     'active'=> 'gifts_list'
+                ),
+                array(
+                    'url'=>'/public_vote',
+                    'name'=> '公共投票管理',
+                    'active'=> 'vote_list'
                 )
             ),
 		),
@@ -88,7 +93,7 @@ $config = array(
 					),
                 array(
                     'url'=>'/active',
-                    'name'=> '抽奖活动管理',
+                    'name'=> '活动管理',
                     'active'=> 'active_list'
                 )
             ),

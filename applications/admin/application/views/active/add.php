@@ -41,6 +41,16 @@
                         <!-- PAGE CONTENT BEGINS  enctype="multipart/form-data"-->
                         <form class="form-horizontal" role="form" method="post">
                             <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 活动类型： </label>
+                                <div class="col-sm-9">
+                                    <select class="col-xs-3" name="type">
+                                        <?php foreach (C('active_type') as $k => $v):?>
+                                        <option value="<?php echo $v['id']?>"><?php echo $v['name']?></option>
+                                        <?php endforeach;?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 活动名称： </label>
                                 <div class="col-sm-9">
                                     <input type="text" name="title" placeholder="活动名称" class="col-xs-10 col-sm-5">
@@ -73,7 +83,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 人/每天/次： </label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="number" value="3" class="col-xs-10 col-sm-5">
+                                    <input type="text" name="count" value="3" class="col-xs-10 col-sm-5">
                                 </div>
                             </div>
                             <div class="form-group">

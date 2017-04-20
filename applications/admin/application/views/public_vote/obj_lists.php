@@ -19,7 +19,7 @@
                     <li>
                         <a href="#">微活动</a>
                     </li>
-                    <li class="active">活动管理</li>
+                    <li class="active">投票参选对象</li>
                 </ul>
 
                 <div class="nav-search" id="nav-search">
@@ -49,21 +49,11 @@
                                     <form class="form-horizontal" role="form">
                                         <div class="form-group">
                                             <div class="col-sm-4">
-                                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 活动名称 </label>
+                                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 投票对象 </label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" name="title" value="<?php if(isset($title)){ echo $title;}?>"  class="col-xs-10 col-sm-12" />
+                                                    <input type="hidden" name="active_id" value="<?php echo $id?>" />
+                                                    <input type="text" name="vote_obj" value="<?php if(isset($vote_obj)){ echo $vote_obj;}?>"  class="col-xs-10 col-sm-12" />
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                              <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 开始时间 </label>
-                                              <div class="col-sm-9">
-                                                <div class="input-group date datepicker">
-                                                  <input class="form-control date-picker" type="text" name="start_time" value="<?php if(isset($start_time)){ echo $start_time;}?>" data-date-format="yyyy-mm-dd hh:ii">
-                                                  <span class="input-group-addon">
-                                                    <i class="icon-calendar bigger-110"></i>
-                                                  </span>
-                                                </div>
-                                              </div>
                                             </div>
                                         </div>
                                         <div class="clearfix form-actions">
@@ -76,9 +66,9 @@
                                                     <i class="icon-undo bigger-110"></i>
                                                     重置
                                                 </button>
-                                                <a class="btn" href="/active/add">
+                                                <a class="btn" href="/public_vote/add_obj?id=<?php echo $id?>">
                                                     <i class="icon-plus smaller-75"></i>
-                                                    添加活动
+                                                    添加对象
                                                 </a>
                                             </div>
                                         </div>
@@ -95,12 +85,11 @@
                                     <table id="sample-table-1" class="table table-striped table-bordered table-hover">
                                         <thead>
                                         <tr>
+                                            <th>id</th>
                                             <th>活动id</th>
                                             <th>名称</th>
-                                            <th>类型</th>
-                                            <th>开始时间</th>
-                                            <th>结束时间</th>
-                                            <th>活跃度（访问）/次</th>
+                                            <th>参选对象</th>
+                                            <th>获得分数（投票数）</th>
                                             <th>状态</th>
                                             <th>操作</th>
                                         </tr>
@@ -109,24 +98,14 @@
                                         <?php foreach ($list as $key => $value) : ?>
                                             <tr>
                                                 <td><?php echo $value['id'];?></td>
+                                                <td><?php echo $value['active_id'];?></td>
                                                 <td><?php echo $value['title'];?></td>
-                                                <td>
-                                                    <?php 
-                                                        foreach (C('active_type') as $k => $v){
-                                                            if($v['id'] == $value['type']){
-                                                                echo $v['name'];
-                                                                break;
-                                                            }
-                                                        }
-                                                    ?>
-                                                </td>
-                                                <td><?php echo $value['start_time'];?></td>
-                                                <td><?php echo $value['end_time'];?></td>
-                                                <td><?php echo $value['visits'];?></td>
+                                                <td><?php echo $value['vote_obj'];?></td>
+                                                <td><?php echo $value['score'];?></td>
                                                 <td><?php if($value['is_del'] == 1){echo '删除';}else{echo '正常';}?></td>
                                                 <td>
-                                                    <a class="green tooltip-info" href="/active/edit?id=<?php echo $value['id'];?>"  data-rel="tooltip" data-placement="top" title="" data-original-title="编辑">
-                                                        <i class="icon-edit bigger-230"></i>
+                                                    <a class="green tooltip-info" href="/active/obj_edit/active_id=<?php echo $id?>&obj_id=<?php echo $value['id'];?>"  data-rel="tooltip" data-placement="top" title="" data-original-title="编辑">
+                                                        <i class="ace-icon glyphicon glyphicon-user">编辑</i>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -148,25 +127,6 @@
 
 <!-- 加载尾部公用js -->
 <?php $this->load->view("common/footer");?>
-
-<script type="text/javascript">
-    $('[data-rel=tooltip]').tooltip();
-    $('.del-spa').click(function(){
-        var _self = $(this);
-        var d = dialog({
-            title: "提示",
-            content: '确定删除该规格吗？',
-            okValue: '确定',
-            ok: function () {
-                window.location.href = '/specification/del/' + _self.attr('data-id') + '/' + _self.attr('data-del');
-            },
-            cancelValue: '取消',
-            cancel: function () {}
-        });
-        d.width(320);
-        d.showModal();
-    });
-</script>
 
 <!-- 底部 -->
 <?php $this->load->view("common/bottom");?>
