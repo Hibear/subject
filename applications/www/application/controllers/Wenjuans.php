@@ -15,13 +15,12 @@ class Wenjuans extends MY_Controller{
     
     public function index(){
         $data = $this->data;
-        //$this->check_login();
+        $this->check_login();
         $this->load->view('wenjuans/index', $data);
     }
     
     public function add(){
         $post = $this->input->get_post();
-        var_dump($post);exit;
         $this->check_login();
         $user_info = $this->session->userdata('user_info');
         if(!$user_info){
