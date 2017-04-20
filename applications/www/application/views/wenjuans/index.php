@@ -98,27 +98,27 @@
 				
 				<li class="que_chex que_ac">
 					<h2>4哪类兴趣爱好分享活动您会感兴趣参加？（可多选）？</h2>
-					<input type="checkbox" name="class[]" value="体育类" class="qu_chex" id="q1" />
+					<input type="checkbox" name="hobby[class][]" value="体育类" class="qu_chex" id="q1" />
 					<label class="que2_01" for="q1">
 
 						<span>体育类</span>
 						<i class="icon_chex"></i>
 					</label>
-					<input type="checkbox" name="class[]" value="文艺类" class="qu_chex" id="q2" />
+					<input type="checkbox" name="hobby[class][]" value="文艺类" class="qu_chex" id="q2" />
 					<label class="que2_01" for="q2">
 
 						<span>文艺类</span>
 						<i class="icon_chex"></i>
 					</label>
 					<br />
-					<input type="checkbox" name="class[]" value="讲座类" class="qu_chex" id="q3" />
+					<input type="checkbox" name="hobby[class][]" value="讲座类" class="qu_chex" id="q3" />
 					<label class="que2_01" for="q3">
 
 						<span>讲座类</span>
 						<i class="icon_chex"></i>
 					</label>
 					
-					<input type="checkbox" name="class[]" value="生活类" class="qu_chex" id="q3" />
+					<input type="checkbox" name="hobby[class][]" value="生活类" class="qu_chex" id="q3" />
 					<label class="que2_01" for="q3">
 
 						<span>生活类</span>
@@ -128,7 +128,7 @@
 					<label class="que2_01" for="q6">
 						<span>其他</span>
 					</label>
-					<input type="text" name="class[]" class="chex_01" />
+					<input type="text" name="hobby[class][]" class="chex_01" />
 				</li>
 				
 				<li class="que_chex que_ac">
@@ -357,7 +357,7 @@
 					
 				</li>
 			</ul>
-			<p class="que_ps">对于未来方舟项目举办的业主活动内容，您的意见建议？</p>
+			<p class="que_ps">6 .对于未来方舟项目举办的业主活动内容，您的意见建议？</p>
 			<div class="phone" style="text-align: center;">
 				<textarea name="yj" style="width:80%; height:5rem;" placeholder="请输入意见"/></textarea>
 			</div>

@@ -20,7 +20,7 @@ class Wenjuans extends MY_Controller{
     }
     
     public function add(){
-        $post = $this->input->get_post();
+        $post = $this->input->post();
         $this->check_login();
         $user_info = $this->session->userdata('user_info');
         if(!$user_info){
@@ -39,16 +39,16 @@ class Wenjuans extends MY_Controller{
         $add['age'] = $post['age'];
         unset($post['age']);
         
-        if(!$post['class']){
+        if(!$post['hobby']['class']){
             $this->return_json(['code' => 0, 'msg' => '选择兴趣类型']);
         }
-        $add['class'] = $post['class'];
-        unset($post['sex']);
+        $add['class'] = json_encode($post['hobby']['class']);
+        unset($post['hobby']['class']);
         
-        if(!$post['sex']){
+        if(!isset($post['sex'])){
             $this->return_json(['code' => 0, 'msg' => '选择性别']);
         }
-        $add['sex'] = $post['sex'];
+        $add['sex'] = (int) $post['sex'];
         unset($post['sex']);
         
         if(!$post['yj']){
@@ -57,14 +57,16 @@ class Wenjuans extends MY_Controller{
         $add['yj'] = $post['yj'];
         unset($post['yj']);
         
-        $add['openid'] = 1;//$user_info['openid'];
+        $add['openid'] = $user_info['openid'];//$user_info['openid'];
         $add['create_time'] = date('Y-m-d');
         $add['info'] = json_encode($post);
         
-        if(!$post['zt']){
-            $this->return_json(['code' => 0, 'msg' => '请填写组团名称']);
-        }
         unset($post);
+        var_dump($add);exit;
+        $ret = $this->Mwenjuan->count(['openid' => $user_info['openid']]);
+        if($ret){
+            $this->return_json(['code' => 0, 'msg' => '您已经提交过了，只能提交一次哦！']);
+        }
         $res = $this->Mwenjuan->create($add);
         if(!$res){
             $this->return_json(['code' => 0, 'msg' => '提交失败']);
