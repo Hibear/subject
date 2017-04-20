@@ -75,12 +75,44 @@ class Public_vote extends MY_Controller{
         $data['page'] = $page;
         
         //获取分页
-        $pageconfig['base_url'] = "/public_vote/obj_lists?id=$id";
+        $pageconfig['base_url'] = "/public_vote/obj_lists?active_id=$id";
         $pageconfig['total_rows'] = $data_count;
         $this->pagination->initialize($pageconfig);
         $data['pagestr'] = $this->pagination->create_links(); // 分页信息
 
         $this->load->view('public_vote/obj_lists', $data);
+    }
+    
+    /**
+     * 添加公共参选对象
+     */
+    public function add_obj(){
+        $data = $this->data;
+        $data['active_id'] = (int) $this->input->get('active_id');
+        if(IS_POST){
+            $add = $this->input->post();
+            if(empty($add['vote_obj'])){
+                $this->error('请填写参选对象！');
+            }
+            if(empty($add['title'])){
+                $this->error('请填写参选标题！');
+            }
+            $add['create_time'] = date('Y-m-d');
+            if(empty($add['img_url'])){
+                $this->error('请上传封面图！');
+            }
+            $add['cover_img'] = $add['img_url'];
+            unset($add['img_url']);
+            if($add['images']){
+                $add['images'] = implode(';', $add['images']);
+            }
+            $res = $this->Mvote_obj->create($add);
+            if(!$res) {
+                $this->error('添加失败，请重试！');
+            }
+            $this->success('添加成功！','/public_vote//obj_lists?active_id='.$add['active_id']);
+        }
+        $this->load->view('public_vote/add_obj', $data);
     }
     
 }

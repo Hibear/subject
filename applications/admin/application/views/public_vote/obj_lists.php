@@ -66,7 +66,7 @@
                                                     <i class="icon-undo bigger-110"></i>
                                                     重置
                                                 </button>
-                                                <a class="btn" href="/public_vote/add_obj?id=<?php echo $id?>">
+                                                <a class="btn" href="/public_vote/add_obj?active_id=<?php echo $id?>">
                                                     <i class="icon-plus smaller-75"></i>
                                                     添加对象
                                                 </a>
