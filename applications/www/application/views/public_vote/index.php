@@ -53,8 +53,10 @@
             </div>
             <?php endforeach;?>
         <?php endif;?>
+        <div class="lists" style="height: 3rem;"></div>
         </div>
     </div>
+
     <footer class="footer">
         <button class="button" id="vote" data="0" status="0">投票</button>
     </footer>

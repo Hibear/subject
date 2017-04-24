@@ -103,7 +103,7 @@ class Public_vote extends MY_Controller{
             }
             $add['cover_img'] = $add['img_url'];
             unset($add['img_url']);
-            if($add['images']){
+            if(isset($add['images'])){
                 $add['images'] = implode(';', $add['images']);
             }
             $res = $this->Mvote_obj->create($add);
@@ -140,7 +140,7 @@ class Public_vote extends MY_Controller{
             }
             $add['cover_img'] = $add['img_url'];
             unset($add['img_url']);
-            if($add['images']){
+            if(isset($add['images'])){
                 $add['images'] = implode(';', $add['images']);
             }
 

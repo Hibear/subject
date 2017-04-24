@@ -97,6 +97,7 @@
                                             <th>结束时间</th>
                                             <th>活跃度（访问）/次</th>
                                             <th>状态</th>
+                                            <th>活动链接</th>
                                             <th>操作</th>
                                         </tr>
                                         </thead>
@@ -109,6 +110,7 @@
                                                 <td><?php echo $value['end_time'];?></td>
                                                 <td><?php echo $value['visits'];?></td>
                                                 <td><?php if($value['is_del'] == 1){echo '删除';}else{echo '正常';}?></td>
+                                                <td><?php echo $domain['h5']['url']?>/public_vote/index?active_id=<?php echo $value['id']?></td>
                                                 <td>
                                                     <a class="green tooltip-info" href="/public_vote/obj_lists?active_id=<?php echo $value['id'];?>"  data-rel="tooltip" data-placement="top" title="" data-original-title="投票对象列表">
                                                         <i class="ace-icon glyphicon glyphicon-user">投票对象列表</i>
