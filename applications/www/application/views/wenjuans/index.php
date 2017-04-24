@@ -98,28 +98,28 @@
 				
 				<li class="que_chex que_ac">
 					<h2>4哪类兴趣爱好分享活动您会感兴趣参加？（可多选）？</h2>
-					<input type="checkbox" name="class[]" value="体育类" class="qu_chex" id="q1" />
+					<input type="checkbox" name="hobby[class][]" value="体育类" class="qu_chex" id="q1" />
 					<label class="que2_01" for="q1">
 
 						<span>体育类</span>
 						<i class="icon_chex"></i>
 					</label>
-					<input type="checkbox" name="class[]" value="文艺类" class="qu_chex" id="q2" />
+					<input type="checkbox" name="hobby[class][]" value="文艺类" class="qu_chex" id="q2" />
 					<label class="que2_01" for="q2">
 
 						<span>文艺类</span>
 						<i class="icon_chex"></i>
 					</label>
 					<br />
-					<input type="checkbox" name="class[]" value="讲座类" class="qu_chex" id="q3" />
+					<input type="checkbox" name="hobby[class][]" value="讲座类" class="qu_chex" id="q3" />
 					<label class="que2_01" for="q3">
 
 						<span>讲座类</span>
 						<i class="icon_chex"></i>
 					</label>
 					
-					<input type="checkbox" name="class[]" value="生活类" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[class][]" value="生活类" class="qu_chex" id="q4" />
+					<label class="que2_01" for="q4">
 
 						<span>生活类</span>
 						<i class="icon_chex"></i>
@@ -128,80 +128,80 @@
 					<label class="que2_01" for="q6">
 						<span>其他</span>
 					</label>
-					<input type="text" name="class[]" class="chex_01" />
+					<input type="text" name="hobby[class][]" class="chex_01" />
 				</li>
 				
 				<li class="que_chex que_ac">
 					<h2>5-1如果有下列活动，哪些是您希望参加的？ 体育类（可多选）</h2>
-					<input type="checkbox" name="hobby[ty][]" value="足球" class="qu_chex" id="q1" />
-					<label class="que2_01" for="q1">
+					<input type="checkbox" name="hobby[ty][]" value="足球" class="qu_chex" id="q5" />
+					<label class="que2_01" for="q5">
 
 						<span>足球</span>
 						<i class="icon_chex"></i>
 					</label>
-					<input type="checkbox" name="hobby[ty][]" value="篮球" class="qu_chex" id="q2" />
-					<label class="que2_01" for="q2">
+					<input type="checkbox" name="hobby[ty][]" value="篮球" class="qu_chex" id="q6" />
+					<label class="que2_01" for="q6">
 
 						<span>篮球</span>
 						<i class="icon_chex"></i>
 					</label>
-					<input type="checkbox" name="hobby[ty][]" value="羽毛球" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[ty][]" value="羽毛球" class="qu_chex" id="q7" />
+					<label class="que2_01" for="q7">
 
 						<span>羽毛球</span>
 						<i class="icon_chex"></i>
 					</label>
-					<input type="checkbox" name="hobby[ty][]" value="滑轮" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[ty][]" value="滑轮" class="qu_chex" id="q8" />
+					<label class="que2_01" for="q8">
 
 						<span>滑轮</span>
 						<i class="icon_chex"></i>
 					</label>
 					
-					<input type="checkbox" name="hobby[ty][]" value="钓鱼" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[ty][]" value="钓鱼" class="qu_chex" id="q9" />
+					<label class="que2_01" for="q9">
 
 						<span>钓鱼</span>
 						<i class="icon_chex"></i>
 					</label>
 					
-					<input type="checkbox" name="hobby[ty][]" value="游泳" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[ty][]" value="游泳" class="qu_chex" id="q10" />
+					<label class="que2_01" for="q10">
 
 						<span>游泳</span>
 						<i class="icon_chex"></i>
 					</label>
 					
-					<input type="checkbox" name="hobby[ty][]" value="旅游" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[ty][]" value="旅游" class="qu_chex" id="q11" />
+					<label class="que2_01" for="q11">
 
 						<span>旅游</span>
 						<i class="icon_chex"></i>
 					</label>
 					
-					<input type="checkbox" name="hobby[ty][]" value="登山" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[ty][]" value="登山" class="qu_chex" id="q12" />
+					<label class="que2_01" for="q12">
 
 						<span>登山</span>
 						<i class="icon_chex"></i>
 					</label>
 					
-					<input type="checkbox" name="hobby[ty][]" value="游泳" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[ty][]" value="游泳" class="qu_chex" id="q13" />
+					<label class="que2_01" for="q13">
 
 						<span>游泳</span>
 						<i class="icon_chex"></i>
 					</label>
 					
-					<input type="checkbox" name="hobby[ty][]" value="跑步" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[ty][]" value="跑步" class="qu_chex" id="q14" />
+					<label class="que2_01" for="q14">
 
 						<span>跑步</span>
 						<i class="icon_chex"></i>
 					</label>
 					
-					<input type="checkbox" name="hobby[ty][]" value="自行车" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[ty][]" value="自行车" class="qu_chex" id="q15" />
+					<label class="que2_01" for="q15">
 
 						<span>自行车</span>
 						<i class="icon_chex"></i>
@@ -211,40 +211,40 @@
 				
 				<li class="que_chex que_ac">
 					<h2>5-2如果有下列活动，哪些是您希望参加的？ 生活类（可多选）</h2>
-					<input type="checkbox" name="hobby[sh][]" value="十字绣/手工" class="qu_chex" id="q1" />
-					<label class="que2_01" for="q1">
+					<input type="checkbox" name="hobby[sh][]" value="十字绣/手工" class="qu_chex" id="q16" />
+					<label class="que2_01" for="q16">
 
 						<span>十字绣/手工</span>
 						<i class="icon_chex"></i>
 					</label>
-					<input type="checkbox" name="hobby[sh][]" value="美食/烹饪" class="qu_chex" id="q2" />
+					<input type="checkbox" name="hobby[sh][]" value="美食/烹饪" class="qu_chex" id="q16" />
 					<label class="que2_01" for="q2">
 
 						<span>美食/烹饪</span>
 						<i class="icon_chex"></i>
 					</label>
-					<input type="checkbox" name="hobby[sh][]" value="养生知识" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[sh][]" value="养生知识" class="qu_chex" id="q17" />
+					<label class="que2_01" for="q17">
 
 						<span>养生知识</span>
 						<i class="icon_chex"></i>
 					</label>
-					<input type="checkbox" name="hobby[sh][]" value="读书" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[sh][]" value="读书" class="qu_chex" id="q18" />
+					<label class="que2_01" for="q18">
 
 						<span>读书</span>
 						<i class="icon_chex"></i>
 					</label>
 					
-					<input type="checkbox" name="hobby[sh][]" value="花艺盆景" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[sh][]" value="花艺盆景" class="qu_chex" id="q19" />
+					<label class="que2_01" for="q19">
 
 						<span>花艺盆景</span>
 						<i class="icon_chex"></i>
 					</label>
 					
-					<input type="checkbox" name="hobby[sh][]" value="棋牌" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[sh][]" value="棋牌" class="qu_chex" id="q20" />
+					<label class="que2_01" for="q20">
 
 						<span>棋牌</span>
 						<i class="icon_chex"></i>
@@ -254,47 +254,47 @@
 				
 				<li class="que_chex que_ac">
 					<h2>5-3如果有下列活动，哪些是您希望参加的？文艺类（可多选）</h2>
-					<input type="checkbox" name="hobby[wy][]" value="舞蹈" class="qu_chex" id="q1" />
-					<label class="que2_01" for="q1">
+					<input type="checkbox" name="hobby[wy][]" value="舞蹈" class="qu_chex" id="q21" />
+					<label class="que2_01" for="q21">
 
 						<span>舞蹈</span>
 						<i class="icon_chex"></i>
 					</label>
-					<input type="checkbox" name="hobby[wy][]" value="影视/音乐" class="qu_chex" id="q2" />
-					<label class="que2_01" for="q2">
+					<input type="checkbox" name="hobby[wy][]" value="影视/音乐" class="qu_chex" id="q22" />
+					<label class="que2_01" for="q22">
 
 						<span>影视/音乐</span>
 						<i class="icon_chex"></i>
 					</label>
-					<input type="checkbox" name="hobby[wy][]" value="卡拉ok" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[wy][]" value="卡拉ok" class="qu_chex" id="q23" />
+					<label class="que2_01" for="q23">
 
 						<span>卡拉ok</span>
 						<i class="icon_chex"></i>
 					</label>
-					<input type="checkbox" name="hobby[wy][]" value="乐器演奏" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[wy][]" value="乐器演奏" class="qu_chex" id="24" />
+					<label class="que2_01" for="q24">
 
 						<span>乐器演奏</span>
 						<i class="icon_chex"></i>
 					</label>
 					
-					<input type="checkbox" name="hobby[wy][]" value="摄影" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[wy][]" value="摄影" class="qu_chex" id="q25" />
+					<label class="que2_01" for="q25">
 
 						<span>摄影</span>
 						<i class="icon_chex"></i>
 					</label>
 					
-					<input type="checkbox" name="hobby[wy][]" value="绘画" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[wy][]" value="绘画" class="qu_chex" id="q26" />
+					<label class="que2_01" for="q26">
 
 						<span>绘画</span>
 						<i class="icon_chex"></i>
 					</label>
 					
-					<input type="checkbox" name="hobby[wy][]" value="书法" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[wy][]" value="书法" class="qu_chex" id="q27" />
+					<label class="que2_01" for="q27">
 
 						<span>书法</span>
 						<i class="icon_chex"></i>
@@ -304,47 +304,47 @@
 				
 				<li class="que_chex que_ac">
 					<h2>5-4如果有下列活动，哪些是您希望参加的？讲座类（ 可多选）</h2>
-					<input type="checkbox" name="hobby[jz][]" value="养生" class="qu_chex" id="q1" />
-					<label class="que2_01" for="q1">
+					<input type="checkbox" name="hobby[jz][]" value="养生" class="qu_chex" id="q28" />
+					<label class="que2_01" for="q28">
 
 						<span>养生</span>
 						<i class="icon_chex"></i>
 					</label>
-					<input type="checkbox" name="hobby[jz][]" value="教育"  class="qu_chex" id="q2" />
-					<label class="que2_01" for="q2">
+					<input type="checkbox" name="hobby[jz][]" value="教育"  class="qu_chex" id="q29" />
+					<label class="que2_01" for="q29">
 
 						<span>教育</span>
 						<i class="icon_chex"></i>
 					</label>
-					<input type="checkbox" name="hobby[jz][]" value="理财" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[jz][]" value="理财" class="qu_chex" id="q30" />
+					<label class="que2_01" for="q30">
 
 						<span>理财</span>
 						<i class="icon_chex"></i>
 					</label>
-					<input type="checkbox" name="hobby[jz][]" value="风水" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[jz][]" value="风水" class="qu_chex" id="q31" />
+					<label class="que2_01" for="q31">
 
 						<span>风水</span>
 						<i class="icon_chex"></i>
 					</label>
 					
-					<input type="checkbox" name="hobby[jz][]" value="法律" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[jz][]" value="法律" class="qu_chex" id="q32" />
+					<label class="que2_01" for="q32">
 
 						<span>法律</span>
 						<i class="icon_chex"></i>
 					</label>
 					
-					<input type="checkbox" name="hobby[jz][]" value="家庭急救" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[jz][]" value="家庭急救" class="qu_chex" id="q33" />
+					<label class="que2_01" for="q33">
 
 						<span>家庭急救</span>
 						<i class="icon_chex"></i>
 					</label>
 					
-					<input type="checkbox" name="hobby[jz][]" value="孕育" class="qu_chex" id="q3" />
-					<label class="que2_01" for="q3">
+					<input type="checkbox" name="hobby[jz][]" value="孕育" class="qu_chex" id="q34" />
+					<label class="que2_01" for="q34">
 
 						<span>孕育</span>
 						<i class="icon_chex"></i>
@@ -352,12 +352,12 @@
 					
 					<label class="que2_01">
 						<span>其他：</span>
-						<input type="text" name="hobby[jz][]" name="zutuan" class="chex_01">
+						<input type="text" name="hobby[jz][]" class="chex_01">
 					</label>
 					
 				</li>
 			</ul>
-			<p class="que_ps">对于未来方舟项目举办的业主活动内容，您的意见建议？</p>
+			<p class="que_ps">6 .对于未来方舟项目举办的业主活动内容，您的意见建议？</p>
 			<div class="phone" style="text-align: center;">
 				<textarea name="yj" style="width:80%; height:5rem;" placeholder="请输入意见"/></textarea>
 			</div>
