@@ -153,6 +153,5 @@ class Public_vote extends MY_Controller{
         
         $data['info'] = $this->Mvote_obj->get_one('*', ['id' => $id]);
         $this->load->view('public_vote/edit_obj', $data);
-    }
-    
+    }  
 }

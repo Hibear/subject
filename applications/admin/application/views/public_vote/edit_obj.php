@@ -95,6 +95,13 @@
                                     <textarea class="form-control limited" name="desc" style="margin-top: 0px; margin-bottom: 0px; height: 171px;"><?php echo $info['desc']?></textarea>
                                 </div>
                             </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 状态： </label>
+                                <label class="col-sm-4">
+                                <label><input type="radio" name="is_del" <?php if(isset($info) && $info['is_del'] == 0){echo 'checked';}?> value="0">正常</label>
+                                <label><input type="radio" name="is_del" <?php if(isset($info) && $info['is_del'] == 1){echo 'checked';}?> value="1">删除</label>
+                            </div>
 
                             <div class="clearfix form-actions">
                                 <div class="col-md-offset-3 col-md-9">
