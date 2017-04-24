@@ -115,4 +115,44 @@ class Public_vote extends MY_Controller{
         $this->load->view('public_vote/add_obj', $data);
     }
     
+    /**
+     * 编辑公共参选对象
+     */
+    public function edit_obj(){
+        $data = $this->data;
+        $data['active_id'] = (int) $this->input->get('active_id');
+        $id = (int) $this->input->get('obj_id');
+        if(IS_POST){
+            $add = $this->input->post();
+            $active_id = $add['active_id'];
+            unset($add['active_id']);
+            $id = $add['id'];
+            unset($add['id']);
+            if(empty($add['vote_obj'])){
+                $this->error('请填写参选对象！');
+            }
+            if(empty($add['title'])){
+                $this->error('请填写参选标题！');
+            }
+            $add['create_time'] = date('Y-m-d');
+            if(empty($add['img_url'])){
+                $this->error('请上传封面图！');
+            }
+            $add['cover_img'] = $add['img_url'];
+            unset($add['img_url']);
+            if($add['images']){
+                $add['images'] = implode(';', $add['images']);
+            }
+
+            $res = $this->Mvote_obj->update_info($add, ['id' => $id, 'active_id' => $active_id]);
+            if(!$res) {
+                $this->error('操作失败，请重试！');
+            }
+            $this->success('编辑成功！','/public_vote/obj_lists?active_id='.$active_id);
+        }
+        
+        $data['info'] = $this->Mvote_obj->get_one('*', ['id' => $id]);
+        $this->load->view('public_vote/edit_obj', $data);
+    }
+    
 }

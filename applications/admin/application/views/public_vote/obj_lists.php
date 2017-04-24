@@ -104,7 +104,7 @@
                                                 <td><?php echo $value['score'];?></td>
                                                 <td><?php if($value['is_del'] == 1){echo '删除';}else{echo '正常';}?></td>
                                                 <td>
-                                                    <a class="green tooltip-info" href="/active/obj_edit/active_id=<?php echo $id?>&obj_id=<?php echo $value['id'];?>"  data-rel="tooltip" data-placement="top" title="" data-original-title="编辑">
+                                                    <a class="green tooltip-info" href="/public_vote/edit_obj?active_id=<?php echo $id?>&obj_id=<?php echo $value['id'];?>"  data-rel="tooltip" data-placement="top" title="" data-original-title="编辑">
                                                         <i class="ace-icon glyphicon glyphicon-user">编辑</i>
                                                     </a>
                                                 </td>
