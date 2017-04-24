@@ -31,8 +31,11 @@
             </div>
         </div>
         <div class="search">
-            <input placeholder="输入被投票的对象..." type="text" name="vote_obj"/>
-            <button>查找</button>
+            <form>
+                <input type="hidden" name="active_id" value="<?php echo $info['id']?>">
+                <input placeholder="输入被投票的对象..." type="text" name="vote_obj"/>
+                <button>查找</button>
+            </form>
         </div>
         <div class="line"></div>
         <div class="main">
@@ -57,6 +60,10 @@
     </footer>
     <script src="<?php echo get_css_js_url('guaguaka/jquery-1.9.1.js', 'h5')?>"></script>
     <script>
+
+        <?php if(!$lists):?>
+            alert('暂无消息！');
+        <?php endif;?>
         //选择
         $('.m-radio').on('click', function(){
             var _obj = $(this);

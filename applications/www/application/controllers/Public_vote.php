@@ -97,7 +97,7 @@ class Public_vote extends MY_Controller{
         }
     }
     
-    private function check_today_and_vote($openid, $active_id, $obj_id, $counts){
+    private function check_today_and_vote( $active_id, $openid, $obj_id, $counts){
         //判断是否投票过今日允许的范围
         $count = $this->Mactive_vote_log->count(['create_time' => date('Y-m-d'), 'active_id' => $active_id, 'openid' => $openid]);
         if($count >= $counts){
@@ -118,7 +118,7 @@ class Public_vote extends MY_Controller{
             'score' => 1,
             'create_time' => date('Y-m-d')
         ];
-        $res = $this->Mactive_vote_log($add);
+        $res = $this->Mactive_vote_log->create($add);
         if($res){
             //涨分
             $id = $res;
@@ -145,7 +145,7 @@ class Public_vote extends MY_Controller{
         $user_info = $this->session->userdata('user_info');
         if(!$user_info){
             $this->session->set_userdata('login_back_url', '/public_vote/index?active_id='.$id);
-            redirect(C('domain.h5.url').'/weixin_login/login');
+            redirect(C('domain.h5.url').'/weixin_active_login/login');
             exit;
         }
     }
