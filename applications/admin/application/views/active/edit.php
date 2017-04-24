@@ -1,5 +1,5 @@
 <!-- 加载公用css -->
-<?php $this->load->view('common/header');?>
+<?php $this->load->view('common/header2');?>
 
 <!-- 头部 -->
 <?php $this->load->view('common/top');?>
@@ -54,6 +54,24 @@
                                 <div class="col-sm-9">
                                 	<input type="hidden" name="id" value="<?php echo $info['id']?>">
                                     <input type="text" name="title" value="<?php echo $info['title']?>" placeholder="活动名称" class="col-xs-10 col-sm-5">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 封面图： </label>
+                                <div class="col-sm-9">
+                                    <ul id="uploader_img_url">
+                                        <?php if($info['cover_img']):?>
+    				                    <li class="pic pro_gre" style="margin-right: 20px; clear: none">
+        				                    <a class="close del-pic" href="javascript:;"></a>
+        				                    <img src="<?php echo get_img_url($info['cover_img'])?>" style="width: 100%; height: 100%">
+        				                    <input type="hidden" name="img_url" value="<?php echo $info['cover_img']?>">
+    				                    </li>
+    				                    <?php endif;?>
+    	                               <li class="pic pic-add add-pic" style="float: left;width: 220px;height: 175px;clear:none; list-style-type:none">
+    	                                   <a href="javascript:;" class="up-img"  id="btn_img_url"><span>+</span><br>添加照片</a>
+    	                               </li>
+	                               </ul>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -131,7 +149,7 @@
                                 </div>
                                 
                                 <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 只能中奖一次： </label>
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 只能中奖一次(针对抽奖类)： </label>
                                 <label class="col-sm-4">
                                     <label><input type="radio" name="is_one" <?php if(isset($info) && $info['is_one'] == 1){echo 'checked';}?> value="1">是</label>
                                     <label><input type="radio" name="is_one" <?php if(isset($info) && $info['is_one'] == 0){echo 'checked';}?> value="0">否</label>
@@ -271,6 +289,21 @@
     	}, 2000);
     }
 </script>
+
+<!-- 上传 -->
+<?php $this->load->view("common/sea_footer");?>
+<script type="text/javascript">
+    var object = [
+          {"obj": "#uploader_img_url", "btn": "#btn_img_url"}
+    ];
+    
+    seajs.use(['admin_uploader','jqueryswf','swfupload'], function(swfupload) {
+    	swfupload.swfupload(object);
+    });
+    
+
+</script>
+<!-- 上传 -->
 
 <!-- 底部 -->
 <?php $this->load->view("common/bottom");?>

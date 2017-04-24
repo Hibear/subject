@@ -64,6 +64,10 @@ class Active extends MY_Controller{
             }
             $prize = $add['prize'];
             unset($add['prize']);
+            if(isset($add['img_url'])){
+                $add['cover_img'] = $add['img_url'];
+                unset($add['img_url']);
+            }
             $res = $this->Mactive->create($add);
             if(!$res){
                 $this->error('操作失败！');
@@ -154,6 +158,11 @@ class Active extends MY_Controller{
             }
             $id = (int) $up['id'];
             unset($up['id']);
+            
+            if(isset($up['img_url'])){
+                $up['cover_img'] = $up['img_url'];
+                unset($up['img_url']);
+            }
             
             $res = $this->Mactive->update_info($up, ['id' => $id]);
             if(!$res) {
