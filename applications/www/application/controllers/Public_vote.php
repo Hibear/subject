@@ -33,6 +33,8 @@ class Public_vote extends MY_Controller{
                 $this->cache->file->save('vote_'.$active_id, $info, 5*60); //缓存5分钟
             }
         }
+        //增加访问量
+        $this->Mweixin_active->update_info(['incr' => ['visits' => 1]], ['id' => $info['id']]);
         
         $data['info'] = $info;
         $data['total'] = $this->Mvote_obj->get_lists('sum(score) as total', ['active_id' => $active_id, 'is_del' => 0])[0]['total'];

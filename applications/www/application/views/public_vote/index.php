@@ -42,7 +42,7 @@
         <?php if(isset($lists)):?>
         <?php foreach ($lists as $k => $v):?>
             <div class="lists">
-                <div class="m-coverimg"><img alt="" src="<?php echo get_img_url($v['cover_img'])?>"></div>
+                <div class="m-coverimg"><img class="lazy" alt="" src="<?php echo get_img_url($v['cover_img'])?>"></div>
                 <div class="m-title"><div class="m-radio" data="<?php echo $v['id']?>"></div><?php echo $v['vote_obj'].'-《'.$v['title'].'》'?></div>
                 <div class="m-score">
                     <div class="jdt">
@@ -98,5 +98,11 @@
             }
         });
     </script>
+    <script type="text/javascript" src="/comment/js/jquery.lazyload.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+    	$("img.lazy").lazyload({ threshold : 200 });
+    });
+</script>
 </body>
 </html>
