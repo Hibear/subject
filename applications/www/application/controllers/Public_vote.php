@@ -21,7 +21,7 @@ class Public_vote extends MY_Controller{
         if(!$active_id){
             show_404();
         }
-        //$this->check_login($active_id);
+        $this->check_login($active_id);
         
         $info = $this->cache->file->get('vote_'.$active_id);
         $vote_obj = trim($this->input->get('vote_obj'));
