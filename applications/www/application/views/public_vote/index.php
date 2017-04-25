@@ -42,8 +42,8 @@
         <?php if(isset($lists)):?>
         <?php foreach ($lists as $k => $v):?>
             <div class="lists">
-                <div class="m-coverimg"><img class="lazy" alt="" src="<?php echo get_img_url($v['cover_img'])?>"></div>
-                <div class="m-title"><div class="m-radio" data="<?php echo $v['id']?>"></div><?php echo $v['vote_obj'].'-《'.$v['title'].'》'?></div>
+                <div class="m-coverimg"><img class="lazy" data="<?php echo $v['id']?>" data-original="<?php echo get_img_url($v['cover_img'])?>"></div>
+                <div class="m-title"><div class="m-radio" data="<?php echo $v['id']?>" id="l_<?php echo $v['id']?>"></div><?php echo $v['vote_obj'].'-《'.$v['title'].'》'?></div>
                 <div class="m-score">
                     <div class="jdt">
                         <div style="width:<?php echo sprintf('%.2f', ($v['score']/$total)*100)?>%" class="jdz"></div>
@@ -96,6 +96,19 @@
                     }
                 })
             }
+        });
+
+        //点击图片选择
+        $('.lazy').on('click', function(){
+            var id = $(this).attr('data');
+        	//所有同胞失去焦点
+            $('.m-radio').removeClass('act');
+            $('#l_'+id).addClass('act');
+
+            //激活投票按钮
+            $('#vote').attr('data', id);
+            $('#vote').attr('status', 1);
+            $('#vote').addClass('active');
         });
     </script>
     <script type="text/javascript" src="/comment/js/jquery.lazyload.min.js"></script>
