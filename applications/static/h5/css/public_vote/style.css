@@ -31,7 +31,7 @@
 .h-coverimg img{
 	width:99%;
 	height:auto;
-	max-height:6.3rem;
+	/*max-height:6.3rem;*/
 	border:1px solid #CCC;
 	overflow: hidden;
 }
@@ -111,7 +111,7 @@
 .m-coverimg img{
 	width:99%;
 	height:auto;
-	max-height:8.3rem;
+	/*max-height:8.3rem;*/
 	border:1px solid #CCC;
 }
 

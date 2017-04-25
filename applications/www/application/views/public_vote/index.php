@@ -23,7 +23,7 @@
     <div class="container center">
         <div class="header">
             <div class="h-title"><?php echo $info['title']?></div>
-            <div class="h-time"><?php echo date('Y-m-d', strtotime($info['start_time']));?></div>
+            <!--  div class="h-time"><?php echo date('Y-m-d', strtotime($info['start_time']));?></div-->
             <div class="h-coverimg"><img alt="" src="<?php echo get_img_url($info['cover_img']);?>"></div>
             <div class="h-desc">
                 <span>投票说明：</span>
@@ -33,7 +33,7 @@
         <div class="search">
             <form>
                 <input type="hidden" name="active_id" value="<?php echo $info['id']?>">
-                <input placeholder="输入被投票的对象..." type="text" name="vote_obj"/>
+                <input placeholder="输入选手姓名..." type="text" name="vote_obj"/>
                 <button>查找</button>
             </form>
         </div>
