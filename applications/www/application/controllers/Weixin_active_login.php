@@ -10,7 +10,7 @@ class Weixin_active_login extends MY_Controller
     {
         parent::__construct();
         $this->load->model(array(
-            'Model_vote_user' => 'Mvote_user'
+            'Model_game_user' => 'Mgame_user'
         ));
         //艾客逊公众号，用户网页授权
         $this->AppID = C('appid_secret.akx.app_id');
@@ -206,7 +206,7 @@ class Weixin_active_login extends MY_Controller
                 $add['nickname'] = $user_info['nickname'];
                 $add['head_img'] = $user_info['headimgurl'];
                 $add['create_time'] = date('Y-m-d H:i:s');
-                $this->Mvote_user->create($add);
+                $this->Mgame_user->create($add);
                 //将用户信息保存到会话
                 $this->session->set_userdata('user_info', $add);
             }
