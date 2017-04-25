@@ -114,7 +114,7 @@
     <script type="text/javascript" src="/comment/js/jquery.lazyload.min.js"></script>
     <script type="text/javascript">
     $(function() {
-    	$("img.lazy").lazyload({ threshold : 200 });
+    	$("img.lazy").lazyload({ threshold : 500 });
     });
 </script>
 </body>
