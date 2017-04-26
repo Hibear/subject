@@ -173,7 +173,7 @@
 
 <!-- 加载尾部公用js -->
 <?php $this->load->view("common/footer");?>
-<script src="/static/jedate/jedate.min.js"></script>
+<script src="<?php echo get_css_js_url('jedate.js', 'common')?>"></script>
 <script type="text/javascript">
 
     jeDate({
