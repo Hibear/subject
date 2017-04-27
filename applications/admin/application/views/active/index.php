@@ -98,6 +98,7 @@
                                             <th>活动id</th>
                                             <th>名称</th>
                                             <th>类型</th>
+                                            <th>活动链接</th>
                                             <th>开始时间</th>
                                             <th>结束时间</th>
                                             <th>活跃度（访问）/次</th>
@@ -119,6 +120,17 @@
                                                             }
                                                         }
                                                     ?>
+                                                </td>
+                                                <td>
+                                                    <?php if($value['type'] == C('active_type.zjd.id')):?>
+                                                        <?php echo $domain['h5']['url']?>/goldegg/index?active_id=<?php echo $value['id']?>
+                                                    <?php elseif($value['type'] == C('active_type.tp.id')):?>
+                                                        请到 【H5后台数据->公共投票管】理查看
+                                                    <?php elseif($value['type'] == C('active_type.ggk.id')):?>
+                                                        <?php echo $domain['h5']['url']?>/guaguaka/index?active_id=<?php echo $value['id']?>
+                                                    <?php elseif($value['type'] == C('active_type.qt.id')):?>
+                                                    请咨询开发人员
+                                                    <?php endif;?>
                                                 </td>
                                                 <td><?php echo $value['start_time'];?></td>
                                                 <td><?php echo $value['end_time'];?></td>
