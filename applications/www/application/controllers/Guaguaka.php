@@ -43,22 +43,9 @@ class Guaguaka extends MY_Controller{
         $data['num'] = (int) $this->Mprize_log->count(['openid' => $openid, 'create_time' => date('Y-m-d'), 'active_id' => $info['id']]);
         //查询本次活动的中奖记录
         $data['prize_log'] = $this->Mprize_log->count(['openid' => $openid, 'create_time' => date('Y-m-d'), 'is_lottery' => 1, 'active_id' => $info['id']]);
-        
-        //生成刮刮卡信息
-        if($data['num'] < $info['count']){
-            if($info['is_one'] == 1){
-                if(!$data['prize_log']){
-                    $data['_prize'] = $this->guaguaka($info['id']);
-                }else{
-                    $data['_prize'] = ['code' => 0, 'msg' => '您已经中过奖了'];
-                }
-            }else{
-                $data['_prize'] = $this->guaguaka($info['id']);
-            }
-        }else{
-            $data['_prize'] = ['code' => 0, 'msg' => '今日次数超限'];
-        }
-        
+               
+        $data['_prize'] = $this->guaguaka($info['id']);
+
         $this->load->view('guaguaka/index',$data);
     }
     
