@@ -69,7 +69,7 @@ class Public_vote extends MY_Controller{
             $data['vote_obj'] = $vote_obj;
         }
         
-        $data['list'] = $this->Mvote_obj->get_lists('*', $where, ['create_time' => 'desc'], $pageconfig['per_page'], ($page-1)*$pageconfig['per_page']);
+        $data['list'] = $this->Mvote_obj->get_lists('*', $where, ['score' => 'desc', 'create_time' => 'desc'], $pageconfig['per_page'], ($page-1)*$pageconfig['per_page']);
         $data_count = $this->Mvote_obj->count($where);
         $data['data_count'] = $data_count;
         $data['page'] = $page;
