@@ -32,8 +32,8 @@ window.onload = function(){
     function init() {
         //定义map变量 调用 qq.maps.Map() 构造函数   获取地图显示容器
          var map = new qq.maps.Map(document.getElementById("containers"), {
-            center: new qq.maps.LatLng(40,117.16),      // 地图的中心地理坐标。
-            zoom:11,                                                // 地图的中心地理坐标。
+            center: new qq.maps.LatLng(26.642089,106.651368),      // 地图的中心地理坐标。
+            zoom:15,                                                // 地图的中心地理坐标。
           	//启用缩放控件
             zoomControl: true,
             //设置缩放控件的位置和样式
