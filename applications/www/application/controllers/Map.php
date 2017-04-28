@@ -5,17 +5,27 @@ class Map extends MY_Controller{
         parent::__construct();
         //切换到媒介系统数据库
         $this->db->db_select('adv_manage');
+        
+        $this->load->Model([
+            'Model_points' => 'Mpoints',
+            'Model_medias' => 'Mmedias'
+        ]);
     }
     
     public function index(){
         $data = $this->data;
-        $data['lists'] =[
-            ['id' => 1, 'name' => 'marker_1', 'is_use' => 1 , 'x' => 26.644755, 'y' => 106.649823],
-            ['id' => 2, 'name' => 'marker_2', 'is_use' => 0 , 'x' => 26.641226, 'y' => 106.649630],
-            ['id' => 3, 'name' => 'marker_3', 'is_use' => 1 , 'x' => 26.642395, 'y' => 106.649716],
-            ['id' => 4, 'name' => 'marker_4', 'is_use' => 1 , 'x' => 26.639197, 'y' => 106.651062]
-            
-        ];
+        //查询媒体资源表获取高杆广告ids,高杆类型type = 2
+        $info = $this->Mmedias->get_lists('id', ['type' => 2, 'is_del' => 0]);
+        if($info){
+            $ids = array_column($info, 'id');
+            if($ids){
+                $fields = 'id,price,address,tx_coordinate,is_lock';
+                $lists = $this->Mpoints->get_lists($fields, ['in' => ['id' => $ids], 'is_del' => 0]);
+            }
+        }
+        if($lists){
+            $data['lists'] = $lists;
+        }
         $this->load->view('map/index', $data);
     }
     

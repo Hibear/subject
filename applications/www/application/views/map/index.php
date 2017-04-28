@@ -50,8 +50,10 @@ window.onload = function(){
          });
          
         //遍历所有灯箱
+        <?php if(isset($lists)):?>
         <?php foreach ($lists as $k  => $v):?>
-            var center = new qq.maps.LatLng(<?php echo $v['x']?>, <?php echo $v['y']?>);
+            <?php if($v['tx_coordinate']):?>
+            var center = new qq.maps.LatLng(<?php echo $v['tx_coordinate']?>);
             var marker_<?php echo $k?> = new qq.maps.Marker({
                 //设置Marker的位置坐标
                 position: center,
@@ -68,7 +70,7 @@ window.onload = function(){
             size = new qq.maps.Size(25, 25),
             origin = new qq.maps.Point(0, 0),
             markerIcon = new qq.maps.MarkerImage(
-                <?php if($v['is_use']):?>
+                <?php if($v['is_lock']):?>
                 "<?php echo $domain['statics']['url']?>/h5/images/map/yellow.png",
                 <?php else:?>
                 "<?php echo $domain['statics']['url']?>/h5/images/map/green.png",
@@ -78,8 +80,9 @@ window.onload = function(){
                 anchor
             );
         marker_<?php echo $k?>.setIcon(markerIcon);
-
+        <?php endif;?>
     <?php endforeach;?>
+    <?php endif;?>
     }
     //调用初始化函数地图 setClickable(clickable:Boolean)
     init();
@@ -88,7 +91,6 @@ window.onload = function(){
         $('.showdetail').addClass('show');
         $('.h-lt').addClass('act');
         $('.navbar').addClass('navact');
-        console.log(id);
     }
 
     $('.h-lt').on('click', function(){
