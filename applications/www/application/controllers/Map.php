@@ -3,6 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Map extends MY_Controller{
     public function __construct(){
         parent::__construct();
+        //切换到媒介系统数据库
+        $this->db->db_select('adv_manage');
     }
     
     public function index(){
@@ -16,4 +18,5 @@ class Map extends MY_Controller{
         ];
         $this->load->view('map/index', $data);
     }
+    
 }
