@@ -9,33 +9,43 @@
 </head>
 <body>
 
-<!--background div-->
-<div id="background">
-    <!--shopping head-->
-    <div class="shop_head">
-        <!--head image-->
-        <img  class="head_image" src="image/head_pic.jpg">
-        <!--head jifen-->
-        <div class="head_jifen">
-            <p>我的积分&nbsp;132</p>;
+
+
+    <div id="head_background">
+
+        <div id="pic_back"></div>
+        <div class="jifen_back">
+            <div class="head_jifen">我的积分:</div>
+            <p><?php echo $userscore['score'] ?></p>
         </div>
     </div>
 
+<!--background div-->
+<div id="background">
+     
     <!--shopping body-->
     <div class="shop_body">
-    
-        <ul class="shop_body_ul">
-        <?php foreach ($list as $k=>$v):?>
-        
-            <li class="body_ul_li">
-                <a href="/sign/detail?id=<?php echo $v['id']?>"><img class="li_img" src="<?php echo get_img_url($v['cover_img']) ?>" alt=""></a>
-                <p class="ul_li_name"><?php echo $v['title']?></p>
-                <p class="ul_li_jifen"><?php echo $v['score']?></p>
-            </li>
-        
-        <?php endforeach; ?>
-        </ul>
-        
+    <?php foreach ($list as $k=>$v):?>
+        <div class="lipin">
+            <a href="/sign/detail?id=<?php echo $v['id']?>">
+                <img src="/WeixinPublic/images/caideng.jpg" alt="">
+            </a>
+                <p>名称:<?php echo $v['title']?></p>
+                <p style="color:orangered">积分:<?php echo $v['score']?></p>
+                <p>
+                    <?php
+                    if($userscore['score'] > $v['score'])
+                    {?>
+                        <?php echo '可兑换'; ?>
+                    <?php
+                    }
+                    else
+                    {?>
+                        <?php echo '不能兑换';
+                    }?>
+                </p>
+        </div>
+    <?php endforeach; ?>
         
     </div>
 </div>

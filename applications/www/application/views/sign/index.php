@@ -39,7 +39,7 @@
         <div class="sign_in">
             <ul>
                 <li id="signs">马上签到</li>
-                <li id="choujiang">我的奖品</li>
+                <li id="choujiang">我的礼品</li>
                 <li id="list">商城列表</li>
 
             </ul>
@@ -55,6 +55,11 @@
 	})
 	
 	$('#list').click(function(){
+// 		window.open('/sign/lists');
+		window.location.href = '/sign/goods';
+	})
+	
+		$('#choujiang').click(function(){
 // 		window.open('/sign/lists');
 		window.location.href = '/sign/lists';
 	})

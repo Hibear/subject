@@ -3,9 +3,14 @@
     margin: 0;
 }
 
+body{
+	border-bottom:2%;
+}
+
 #progress{
-    background: white;
-    height: 600px;
+    background: #e0e0e0;
+    min-height: 600px;
+	padding-bottom:10px;
 }
 
 .pro_head{
@@ -25,6 +30,7 @@
     height: 10%;
     background: white;
     width: 50%;
+	margin-top:15%;
     margin-bottom: 5%;
     text-align: center;
 }
@@ -35,6 +41,16 @@
     width: 50%;
     margin-bottom: 5%;
     text-align: center;
+}
+
+#all_score{
+	background:white;
+	margin-bottom: 5%;
+}
+
+#btn{
+	margin-bottom: 5%;
+	font-size:20px;
 }
 
 .pro_body{
@@ -51,38 +67,54 @@
     background: white;
     margin-top: 1%;
     line-height: 40px;
+	padding-left:2%;
 }
 
 .record_ul{
 
     height: 10%;
-    background: white;
+    background: #e0e0e0;
 
     margin-top: 1%;
 }
 
-.li_li{
-    width: 25%;
+.ul_li{
+    width: 100%;
     display: flex;
     display: -webkit-flex;
     -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
+	
 }
 
 .li_time{
+	
     line-height: 40px;
 	margin-top:5px;
 	background:white;
+	flex:3;
+	padding-left:2%;
+	
 }
 
-.li_time:first-child{
-    margin-right: auto;
+.li_continuous{
+	flex:2;
+	line-height: 40px;
+	background:white;
+	margin-top:5px;
+	text-align:right;
 }
 
 .li_score{
-
+    float:right;
+	line-height:40px;
+	margin-top:5px;
+	
+	background:white;
+	flex:1;
+	text-align:center;
 }
 
 

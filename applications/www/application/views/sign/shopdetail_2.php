@@ -1,13 +1,18 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
-    <title>商品详情</title>
+    <title>礼品详情</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" href="<?php echo get_css_js_url('style.css', 'www')?>">
+    <script type="text/javascript" src="<?php echo get_css_js_url('common.js', 'www')?>"></script>
+    <script type="text/javascript" src="<?php echo get_css_js_url('jquery-min.js', 'www')?>"></script>
+    <script type="text/javascript" src="<?php echo get_css_js_url('TouchSlide.1.1.js', 'www')?>"></script>
     <script src="<?php echo get_css_js_url('jquery-1.9.1.js', 'www')?>"></script>
     <script type="text/javascript" src="/WeixinPublic/plugins/layui/layui.js"></script>
-    <link rel="stylesheet" href="<?php echo get_css_js_url('shopdetail.css', 'www')?>">
     <link rel="stylesheet" type="text/css" href="<?php echo get_css_js_url('gold/dialog.css', 'www')?>" media="all" />
     <link rel="stylesheet" type="text/css" href="<?php echo get_css_js_url('ui-dialog.css', 'common')?>" media="all" />
     <script type="text/javascript" src="<?php echo get_css_js_url('gold/dialog_min.js', 'www')?>"></script>
@@ -19,35 +24,48 @@
             layer = layui.layer;
         });
     </script>
+    
 </head>
 <body>
+<div id="slideBox" class="slideBox">
+    <div class="bd">
+        <ul>
+            <li>
+                <a class="pic" href="#"><img src="/WeixinPublic/images/caideng.jpg" /></a>
+            </li>
 
-<!--div background-->
-<div id="background">
-   
-    <div class="my_score">我的积分:
-        <p id="score_p"><?php echo $userscore['score'] ?></p>
-    </div>
-   
-    <!--div image-->
-    <div class="detail_image">
-        <img alt="" src="/WeixinPublic/images/caideng.jpg"> 
-    </div> 
-   
-    <!--商品名-->
-    <p class="title">商品名:&nbsp;<?php echo $info['title'] ?></p>
-    
-    <!--商品积分-->
-    <p class="score">商品积分:&nbsp;<?php echo $info['score'] ?></p>
-   
-    <!--描述-->
-    <div class="desc">
-        <p>商品介绍:&nbsp;<?php echo $info['desc'] ?></p>
+        </ul>
     </div>
 
-    <!-- 兑换 -->
-    <input id="Receive" value='兑换' type="button">
+    <div class="hd">
+        <ul></ul>
+    </div>
+</div>
+
+<div class="clear"></div>
+
+
+<div class="xj">
+    <p>商品名:<?php echo $info['title'] ?> </p>
+    <p>商品积分:<?php echo $info['score'] ?> </p>
     
+    
+</div>
+
+
+
+<div id="wrap">
+    <div id="tit">
+        <span class="select">产品详情</span>
+                        商品介绍: <?php echo $info['desc'] ?>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div class="foot">
+    <div >
+        <a id="Receive" href="#" style="font-size: 1.5em"><p>我的积分:</p>>兑换</a>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -69,8 +87,8 @@
    	                 	layer.msg(data.msg);
    	                 }
 
-   	                 $("#score_p").text(data.score.score);
-   	                 
+   	                 $(".xj p:nth-child(3)").text(data.score.score);
+
    	             },
    	             error:function(){
    	             	layer.msg('未知错误！');
@@ -87,5 +105,3 @@
 
 </body>
 </html>
-
-

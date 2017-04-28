@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
-    <title>Á≠æÂà∞ËÆ∞ÂΩï</title>
+    <title>√ø»’«©µΩ</title>
     <link rel="stylesheet" href="<?php echo get_css_js_url('progress.css', 'www')?>">
     <script src="<?php echo get_css_js_url('jquery-1.9.1.js', 'www')?>"></script>
      <script type="text/javascript" src="/WeixinPublic/plugins/layui/layui.js"></script>
@@ -25,27 +25,44 @@
 
             <div class="head_time"><?php echo date('Y-m-d') ?></div>
             <div class="qiandao">
-                <p>Â∑≤Á≠æÂà∞&verbar;ËøûÁª≠3Â§©</p>
+                <p>
+                   <?php
+                    if($list[0]['sign_time'] == date('Y-m-d'))
+                    {?>
+                        <?php echo '“—«©µΩ'; ?>
+                    <?php
+                    }
+                    else
+                    {?>
+                        <?php echo 'Œ¥«©µΩ';
+                    }?>
+                &verbar;
+                                                “—¡¨–¯«©µΩ<?php echo $list[0]['continuous_days'] ?>ÃÏ
+                </p>                                
             </div>
-            <input type="button" id="btn" value="&nbsp;Á≠æÂà∞&nbsp;">
+            
+            <div id='all_score'>
+                                                        ◊‹ª˝∑÷:<?php echo $userscore['score'] ?>
+            </div>
+            
+            <input type="button" id="btn" value="&nbsp;«©µΩ&nbsp;">
 
         </div>
-
         <div class="pro_body">
-            <p class="record">Á≠æÂà∞ËÆ∞ÂΩï</p>
-            <ul class="record_ul">
+            <p class="record">«©µΩº«¬º</p>
+            <div class="record_ul">
             <?php foreach ($list as $v):?>
-                <li class="ul_li">
-                    <p class="li_time"><?php echo $v['sign_time'] ?></p>
-                    <!--<p class="li_score">+3</p>-->
-                </li>
+                <div class="ul_li">
+                    <div class="li_time"><?php echo $v['sign_time'] ?></div>
+                    <div class="li_continuous">¡¨–¯«©µΩ<?php echo $v['continuous_days'] ?>ÃÏ</div>
+                    <div class="li_score">+<?php echo $v['score'] ?>∑÷</div>
+                </div>
             <?php endforeach; ?>    
-            </ul>
+            </div>
         </div>
 
     </div>
 <script type="text/javascript">
-    
     $('#btn').click(function(){
     	$.ajax({
             type:"post",
@@ -57,9 +74,10 @@
                 }else{
                 	layer.msg(data.msg);
                 }
+                window.location.reload();
             },
             error:function(){
-            	layer.msg('Êú™Áü•ÈîôËØØÔºÅ');
+            	layer.msg('Œ¥÷™¥ÌŒÛ£°');
             }
         })
      })

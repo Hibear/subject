@@ -27,9 +27,21 @@ class Sign extends MY_Controller{
         $data['username'] = 'Apollo';
         $data['userImage'] = 'http://img2.woyaogexing.com/2017/04/10/9679559f6c96342c!400x400_big.jpg';
        
-//         print_r($data);
+
+//      print_r($data);
         
-        $this->load->view('sign/index', $data);
+        $this->load->view('sign/index_2', $data);
+    }
+    
+    //测试首页界面
+    public function index_2(){
+   
+        $this->load->view('sign/index_2');
+    }
+    //测试签到界面
+    public function progress_2(){
+         
+        $this->load->view('sign/progress_2');
     }
     
     /**
@@ -43,11 +55,13 @@ class Sign extends MY_Controller{
         $where = [
             'openid' => $openid
         ];
+        //获取当前用户信息
+        $data['userscore'] = $this->Msign_user->get_one('score', ['openid' => $openid]);
         $data['list'] = $this->Msign_log->get_lists($field, $where, ['create_time' => 'desc'], $limit = 10);
         
-        print_r($data); 
+//         print_r($data); 
       
-        $this->load->view('sign/progress',$data);
+        $this->load->view('sign/progress_2',$data);
         
         
     }
@@ -143,22 +157,58 @@ class Sign extends MY_Controller{
         $where = [
             'openid' => $openid
         ];
+        $where['status'] = 2;
+        $data['userscore'] = $this->Msign_user->get_one('score', ['openid' => $openid]);
         $data['list'] = $this->Mexchange_log->get_lists($field, $where, ['create_time' => 'desc'], $limit = 10);
-       
-        $this->load->view('sign/shopping',$data);
-          
+        
+//         print_r($data);
+        
+        $this->load->view('sign/myprize',$data);
+        
     }
+    /**
+     * 未领取礼品列表
+     */
+    public function get_status_lists(){
+        $data = $this->data;
+        //todo 登陆
+        $openid = $this->openid;
+        $field = 'id,title,score,cover_img,create_time,get_time,num,status';
+        $status = (int) $this->input->post('status');
+        
+        $where = [];
+        if($status == 2){
+            $where['status'] = 2;
+        }elseif ($status == 1){
+            $where['status <='] = $status;
+        }
+        
+        $where['openid']=  $openid;
+        
+        $info = $this->Mexchange_log->get_lists($field, $where, ['create_time' => 'desc'], $limit = 10);
+        
+        foreach ($info as $k=>$v){
+            $info[$k]['create_time'] = date('Y-m-d',strtotime($v['create_time']));
+        }
+
+        if(!$info){
+            $this->return_json(['code' => 0, 'msg' => '没有物品']);
+        }
+            $this->return_json(['code' => 1, 'score' => $info]);
+        
+    }
+    
     
     /**
      * 礼品列表
      */
     public function goods(){
         $data = $this->data;
+        $openid = $this->openid;
+        //获取当前用户信息
+        $data['userscore'] = $this->Msign_user->get_one('score', ['openid' => $openid]);
         $data['list'] = $this->Mgifts->get_lists('id, title, cover_img, score, num', ['is_del' => 0], ['create_time' => 'desc'], $limit = 10);
-        
-        print_r($data);
-        exit;
-        
+        $this->load->view('sign/shopping',$data);
     }
     
     /**
@@ -190,9 +240,13 @@ class Sign extends MY_Controller{
      * 礼品详情
      */
     public function detail(){
+        
+        $openid = $this->openid;
+        //获取当前用户信息
+        $data['userscore'] = $this->Msign_user->get_one('score', ['openid' => $openid]);
         $id = $this->input->get('id');
-        $info = $this->Mgifts->get_one('*', ['id' => $id]);
-        $this->load->view('sign/shopdetail',$info);
+        $data['info'] = $this->Mgifts->get_one('*', ['id' => $id]);
+        $this->load->view('sign/shopdetail_2',$data);
         
     }
     
@@ -203,7 +257,7 @@ class Sign extends MY_Controller{
         $openid = $this->openid;
         //获取当前用户信息
         $user = $this->Msign_user->get_one('score', ['openid' => $openid]);
-        $id = $this->input->get('id');
+        $id = $this->input->post('id');
         //查询兑换的礼品信息， 使用悲观锁
         $this->db->query('lock table t_gifts read');
         $info = $this->Mgifts->get_one('id, title, cover_img, score, num', ['id' => $id, 'is_del' => 0]);
@@ -212,8 +266,10 @@ class Sign extends MY_Controller{
             $this->db->query('lock table t_gifts write');
             $res = $this->Mgifts->update_info(['decr' => ['num' => 1 ]], ['id' => $id]);
             $this->db->query('unlock table');
+            
             //减去用户积分
             if($res){
+                
                 $score = (int) $info['score'];
                 $ret = $this->Msign_user->update_info(['decr' => ['`score`' => $score]], ['openid' => $openid]);
                 //添加兑换记录
@@ -227,7 +283,8 @@ class Sign extends MY_Controller{
                         'create_time' => date('Y-m-d H:i:s')
                     ];
                     $this->Mexchange_log->create($add);
-                    $this->return_json(['code' => 1, 'msg' => '兑换成功！']);
+                    $user_score = $this->Msign_user->get_one('score', ['openid' => $openid]);
+                    $this->return_json(['code' => 1, 'msg' => '兑换成功！','score'=>$user_score]);
                 }else{
                     $this->Mgifts->update_info(['incr' => ['num' => 1 ]], ['id' => $id]);
                     $this->return_json(['code' => 0, 'msg' => '请重试！']);
@@ -237,7 +294,7 @@ class Sign extends MY_Controller{
             }
         }else{
             $this->db->query('unlock table');
-            $this->return_json(['code' => 0, 'msg' => '不能兑换！']);
+            $this->return_json(['code' => 0, 'msg' => '积分不够！']);
         }
     }
     
@@ -245,7 +302,7 @@ class Sign extends MY_Controller{
      * 领取
      */
     public function get(){
-        $id = $this->input->get('id');
+        $id = $this->input->get('sign_id');
         $openid = $this->openid;
         $res = $this->Mexchange_log->update_info(['status' => 2, 'get_time' => date('Y-m-d H:i:s')], ['id' => $id, 'openid' => $openid]);
         if(!$res) {

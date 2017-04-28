@@ -99,6 +99,7 @@
     cursor: default;
 }
 .ui-dialog-body {
+	width:90%;
     padding: 20px;
     text-align: center;
 }
@@ -130,9 +131,10 @@
     vertical-align: middle;
 }
 .ui-dialog-button {
-    float: right;
+    float: left;
     white-space: nowrap;
 }
+
 .ui-dialog-footer button+button {
     margin-bottom: 0;
     margin-left: 5px;
@@ -218,6 +220,7 @@
   color: #ffffff;
   background-color: #428bca;
   border-color: #357ebd;
+  margin-left:20%;
 }
 
 .ui-dialog-footer button.ui-dialog-autofocus:hover,
