@@ -1,4 +1,4 @@
-#containers{
+#containers, #jin_ditu{
 	width:100%;
 	height:auto;
 	min-height: 100%;
@@ -126,4 +126,29 @@
 }
 .swiper-container {
     height: 200px;
-} 
+}
+
+.jiejing{
+	position: fixed;
+    width: 100%;
+	min-height:100%;
+	z-index:2;
+}
+
+.ditu{
+	position: fixed;
+    width: 100%;
+	min-height:100%;
+	z-index:2;
+}
+
+
+
+
+
+
+
+
+
+
+

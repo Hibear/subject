@@ -31,8 +31,10 @@ window.onload = function(){
     //初始化地图函数  自定义函数名init
     function init() {
         //定义map变量 调用 qq.maps.Map() 构造函数   获取地图显示容器
+        var x = '26.642089';
+        var y = '106.651368';
          var map = new qq.maps.Map(document.getElementById("containers"), {
-            center: new qq.maps.LatLng(26.642089,106.651368),      // 地图的中心地理坐标。
+            center: new qq.maps.LatLng(x,y),      // 地图的中心地理坐标。
             zoom:15,                                                // 地图的中心地理坐标。
           	//启用缩放控件
             zoomControl: true,
@@ -89,13 +91,18 @@ window.onload = function(){
 
     function showdetail(data){
         //初始化赋值
-        console.log(data);
+        //给idjin_ditu赋值
+        $('#ditu').attr('center', data.tx_coordinate);
+        //console.log(data);
         
         if(data.tx_jiejingid != ''){
         	$('#jiejing').text('进入街景');
-            $('#jiejing').attr('href', 'http://apis.map.qq.com/uri/v1/streetview?&pano='+data.tx_jiejingid+'&heading=0&pitch=0');
+            $('#jiejing').attr('data', data.tx_jiejingid);
+            //配置为可点击
+            $('#jiejing').attr('status', 1);
         }else{
             $('#jiejing').text('暂无街景');
+            $('#jiejing').attr('status', 0);
         }
         //配置图集
         if(data.images != ''){
@@ -111,28 +118,86 @@ window.onload = function(){
         		  pagination: '.swiper-pagination',
         	      paginationClickable: true,
         	      spaceBetween: 30,
-        	})
+        	});
         }else{
         	$('.swiper-wrapper').html('');
         }
         
         $('.showdetail').addClass('show');
         $('.h-lt').addClass('act');
+        $('.h-lt').attr('status', 1);
         $('.navbar').addClass('navact');
     }
 
     $('.h-lt').on('click', function(){
-        $(this).removeClass('act');
+        var status = $(this).attr('status');
+        if(status == 2){
+        	$('.jiejing').removeClass('show');
+        	$(this).attr('status', 1);
+        	return false;
+        }
+        if(status == 3){
+        	$('.ditu').removeClass('show');
+        	$(this).attr('status', 1);
+        	return false;
+        }
+        if(status == 1){
+        	$(this).removeClass('act');
+        }
+        $('.jiejing').removeClass('show');
         $('.showdetail').removeClass('show');
         $('.navbar').removeClass('navact');
     });
+
+    $('#jiejing').on('click', function(){
+    	var status = $(this).attr('status');
+    	if(status == 0){
+    	    return false;
+        }
+    	$('.h-lt').attr('status', 2);
+        var id = $(this).attr('data');
+        $('.jiejing').addClass('show');
+        init_jiejing(id);
+    });
+
+    //进入地图
+    $('#ditu').on('click', function(){
+    	$('.h-lt').attr('status', 3);
+        var point =$(this).attr('center');
+        $('.ditu').addClass('show');
+        var point = point.split(",");
+        var maps = new qq.maps.Map(document.getElementById("jin_ditu"), {
+            center: new qq.maps.LatLng(point[0],point[1]),      // 地图的中心地理坐标。
+            zoom:18,                                                // 地图的中心地理坐标。
+          	//启用缩放控件
+            zoomControl: true,
+            //设置缩放控件的位置和样式
+            zoomControlOptions: {
+                //设置缩放控件的位置为相对左方中间位置对齐.
+                position: qq.maps.ControlPosition.LEFT_CENTER,
+                //设置缩放控件样式为仅包含放大缩小两个按钮
+                style: qq.maps.ZoomControlStyle.SMALL
+            }
+        });
+    })
+
+    function init_jiejing(id) {
+        // 创建街景
+        pano = new qq.maps.Panorama(document.getElementById('pano_container'), {
+            "pano": id,
+            "pov":{
+                heading:0,
+                pitch:0
+            }
+        });
+    }
 
 }
 </script>
 </head>
 <body>
 <div class="h-tips">
-            <span class="h-lt">&lt;</span>贵阳腾讯房产广告灯箱分布
+            <span status="1" class="h-lt">&lt;</span>贵阳腾讯房产广告灯箱分布
 </div>
 <div class="tip">
     <img src="<?php echo $domain['statics']['url']?>/h5/images/map/yellow.png">表示有档期
@@ -167,9 +232,15 @@ window.onload = function(){
         </table>
 	</div>
     <div class="navbar">
-      <a class=" jsaction" onclick="return false;">进入地图</a>
-      <a class=" jsaction" id="jiejing" href="">进入街景</a>
+      <a class=" jsaction" id="ditu" center="">进入地图</a>
+      <a class=" jsaction" status="" id="jiejing">进入街景</a>
     </div>
+</div>
+<div class="jiejing">
+    <div style="width:100%;height:auto;min-height:550px" id="pano_container"></div>
+</div>
+<div class="ditu">
+    <div id="jin_ditu" style="width:100%;height:auto;min-height:550px"></div>
 </div>
 <div class="f-tips">请点击坐标查看详情</div>
 </body>
