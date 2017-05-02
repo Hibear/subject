@@ -65,7 +65,7 @@ window.onload = function(){
             
             //添加监听事件
             qq.maps.event.addListener(marker_<?php echo $k?>, 'click', function() {
-                showdetail(<?php echo $v['id']?>);
+                showdetail(<?php echo json_encode($v)?>);
             });
             
             var anchor = new qq.maps.Point(0, 39),
@@ -93,7 +93,6 @@ window.onload = function(){
         //初始化赋值
         //给idjin_ditu赋值
         $('#ditu').attr('center', data.tx_coordinate);
-        //console.log(data);
         
         if(data.tx_jiejingid != ''){
         	$('#jiejing').text('进入街景');
@@ -108,9 +107,11 @@ window.onload = function(){
         if(data.images != ''){
         	var html ='';
         	for(i=0;i<data.images.length;i++){
-        		html += '<div class="swiper-slide">';
+            	if(data.images[i] != ''){
+            		html += '<div class="swiper-slide">';
         			html += '<img class="full" src="<?php echo $domain['adv']['url']?>'+data.images[i]+'" />';
-        		html += '</div>';
+        		    html += '</div>';
+                }
             }
             $('.swiper-wrapper').html(html);
             
