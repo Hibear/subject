@@ -63,7 +63,7 @@ window.onload = function(){
             
             //添加监听事件
             qq.maps.event.addListener(marker_<?php echo $k?>, 'click', function() {
-                showdetail(<?php echo $v['id']?>);
+                showdetail(<?php echo json_encode($v)?>);
             });
             
             var anchor = new qq.maps.Point(0, 39),
@@ -87,7 +87,35 @@ window.onload = function(){
     //调用初始化函数地图 setClickable(clickable:Boolean)
     init();
 
-    function showdetail(id){
+    function showdetail(data){
+        //初始化赋值
+        console.log(data);
+        
+        if(data.tx_jiejingid != ''){
+        	$('#jiejing').text('进入街景');
+            $('#jiejing').attr('href', 'http://apis.map.qq.com/uri/v1/streetview?&pano='+data.tx_jiejingid+'&heading=0&pitch=0');
+        }else{
+            $('#jiejing').text('暂无街景');
+        }
+        //配置图集
+        if(data.images != ''){
+        	var html ='';
+        	for(i=0;i<data.images.length;i++){
+        		html += '<div class="swiper-slide">';
+        			html += '<img class="full" src="<?php echo $domain['adv']['url']?>'+data.images[i]+'" />';
+        		html += '</div>';
+            }
+            $('.swiper-wrapper').html(html);
+            
+            var mySwiper = new Swiper ('.swiper-container', {
+        		  pagination: '.swiper-pagination',
+        	      paginationClickable: true,
+        	      spaceBetween: 30,
+        	})
+        }else{
+        	$('.swiper-wrapper').html('');
+        }
+        
         $('.showdetail').addClass('show');
         $('.h-lt').addClass('act');
         $('.navbar').addClass('navact');
@@ -118,10 +146,7 @@ window.onload = function(){
     <!-- 幻灯片开始 -->
     <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><img class="full" src="http://oss.360ads.com/c/de851cc04d3a6210e9ab0d2863036fa4.JPG?x-oss-process=style/thumb_wsy_mobile1_jpg"></div>
-            <div class="swiper-slide"></div>
-            <div class="swiper-slide"></div>
-            <div class="swiper-slide"></div>
+        
         </div>
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
@@ -143,16 +168,9 @@ window.onload = function(){
 	</div>
     <div class="navbar">
       <a class=" jsaction" onclick="return false;">进入地图</a>
-      <a class=" jsaction" onclick="return false;">进入街景</a>
+      <a class=" jsaction" id="jiejing" href="">进入街景</a>
     </div>
 </div>
 <div class="f-tips">请点击坐标查看详情</div>
-<script>        
-  var mySwiper = new Swiper ('.swiper-container', {
-	  pagination: '.swiper-pagination',
-      paginationClickable: true,
-      spaceBetween: 30,
-  })        
-  </script>
 </body>
 </html>

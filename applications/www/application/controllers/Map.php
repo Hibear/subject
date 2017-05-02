@@ -19,12 +19,18 @@ class Map extends MY_Controller{
         if($info){
             $ids = array_column($info, 'id');
             if($ids){
-                $fields = 'id,price,address,tx_coordinate,is_lock';
+                $fields = 'id,price,address,tx_coordinate,tx_jiejingid,images,is_lock';
                 $lists = $this->Mpoints->get_lists($fields, ['in' => ['id' => $ids], 'is_del' => 0]);
             }
         }
         if($lists){
             $data['lists'] = $lists;
+            foreach ($lists as $k => $v){
+                if($v['images']){
+                    $data['lists'][$k]['images'] = explode(';', $v['images']);
+                }
+            }
+            
         }
         $this->load->view('map/index', $data);
     }
