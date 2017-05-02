@@ -42,6 +42,10 @@ $config = array(
     'h5' => array(
         'name' => '网站域名',
         'url' => 'http://h5.wesogou.com'
+    ),
+    'adv' => array(
+        'name' => '媒介',
+        'url' => 'http://adv.dev.wesogou.com'
     )
         
 );
