@@ -31,11 +31,11 @@ window.onload = function(){
     //初始化地图函数  自定义函数名init
     function init() {
         //定义map变量 调用 qq.maps.Map() 构造函数   获取地图显示容器
-        var x = '26.642089';
-        var y = '106.651368';
+        var x = '26.598351';
+        var y = '106.668320';
          var map = new qq.maps.Map(document.getElementById("containers"), {
             center: new qq.maps.LatLng(x,y),      // 地图的中心地理坐标。
-            zoom:15,                                                // 地图的中心地理坐标。
+            zoom:11,                              // 缩放等级。
           	//启用缩放控件
             zoomControl: true,
             //设置缩放控件的位置和样式
@@ -51,7 +51,7 @@ window.onload = function(){
              map: map
          });
          
-        //遍历所有灯箱
+        //遍历所有高杆
         <?php if(isset($lists)):?>
         <?php foreach ($lists as $k  => $v):?>
             <?php if($v['tx_coordinate']):?>
@@ -124,7 +124,26 @@ window.onload = function(){
         }else{
         	$('.swiper-wrapper').html('');
         }
-        
+        //配置点位价格
+        $('#price').text(data.price+' 元/日');
+        //配置位置
+        $('#address').text(data.address);
+        //点位编号
+        $('#points_code').text(data.points_code);
+        //是否锁定
+        if(data.is_lock == 1){
+        	$('#is_lock').text('是');
+        	//占用客户
+            $('#customer_name').text(data.customer_name);
+        }else{
+        	$('#is_lock').text('否');
+        }
+        //投放时间
+        $('#start_end_time').text(data.lock_start_time+"~"+data.lock_end_time);
+
+        //点位规格
+        $('#specification_name').text(data.specification_name);
+
         $('.showdetail').addClass('show');
         $('.h-lt').addClass('act');
         $('.h-lt').attr('status', 1);
@@ -206,7 +225,7 @@ window.onload = function(){
 </head>
 <body>
 <div class="h-tips">
-            <span status="1" class="h-lt">&lt;</span>贵阳腾讯房产广告灯箱分布
+            <span status="1" class="h-lt">&lt;</span>贵阳腾讯房产高杆广告分布
 </div>
 <div class="tip">
     <img src="<?php echo $domain['statics']['url']?>/h5/images/map/yellow.png">表示有档期
@@ -228,14 +247,13 @@ window.onload = function(){
     <div style="padding:10px 0;display:block">
         <table class="btable tabdw" style="display: table;">
             <tbody>
-                <tr><td class="s1">媒体位置</td><td class="s2">东山宾馆东门</td></tr>
-                <tr><td class="d1">区域属性</td><td class="d2">海滨路 </td></tr>
-                <tr><td class="s1">媒体形式</td><td class="s2">灯箱</td></tr>
-                <tr><td class="d1">媒体规格</td><td class="d2">erqwerf</td></tr>
-                <tr><td class="s1">交通流量</td><td class="s2">8万辆/天 10万人次/天</td></tr>
-                <tr><td class="d1">亮灯时间</td><td class="d2">18:00-22:00</td></tr>
-                <tr><td class="s1">刊例价</td><td class="s2">qpweortq]pe4</td></tr>
-                <tr><td class="d1">媒体档期</td><td class="d2">无档期</td></tr>
+                <tr><td class="s1">媒体位置</td><td class="s2" id="address"></td></tr>
+                <tr><td class="d1">点位编号</td><td class="d2" id="points_code"></td></tr>
+                <tr><td class="s1">是否锁定</td><td class="s2" id="is_lock"></td></tr>
+                <tr><td class="d1">占用客户</td><td class="d2" id="customer_name"></td></tr>
+                <tr><td class="s1">投放时间</td><td class="s2" id="start_end_time"></td></tr>
+                <tr><td class="d1">点位价格</td><td class="d2" id="price"></td></tr>
+                <tr><td class="s1">点位规格</td><td class="s2" id="specification_name"></td></tr>
             </tbody>
         </table>
 	</div>
