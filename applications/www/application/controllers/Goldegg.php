@@ -85,8 +85,10 @@ class Goldegg extends MY_Controller{
                 if($res >= $info['count']){
                     $this->return_json(['code' => 0, 'msg' => '您今天已经抽过'.$info['count'].'次奖了！']);
                 }
+            }else{
+                $this->return_json(['code' => 0, 'msg' => '您已经中过奖了！']);
             }
-            $this->return_json(['code' => 0, 'msg' => '您已经中过奖了！']);
+            
         }else{
             //判断今天抽奖的次数是否已经用完
             $res = $this->Mprize_log->count(['openid' => $openid, 'active_id' => $id, 'create_time' => date('Y-m-d')]);
