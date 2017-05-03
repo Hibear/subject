@@ -68,9 +68,9 @@ window.onload = function(){
                 showdetail(<?php echo json_encode($v)?>);
             });
             
-            var anchor = new qq.maps.Point(0, 39),
-            size = new qq.maps.Size(25, 25),
-            origin = new qq.maps.Point(0, 0),
+            var anchor = new qq.maps.Point(12.5, 39),
+            size = new qq.maps.Size(25, 37.5),
+            origin = new qq.maps.Point(0, -12.5),
             markerIcon = new qq.maps.MarkerImage(
                 <?php if($v['is_lock']):?>
                 "<?php echo $domain['statics']['url']?>/h5/images/map/yellow.png",
@@ -106,6 +106,7 @@ window.onload = function(){
         //配置图集
         if(data.images != ''){
         	var html ='';
+        	$('.swiper-wrapper').html('');//初始化
         	for(i=0;i<data.images.length;i++){
             	if(data.images[i] != ''){
             		html += '<div class="swiper-slide">';
@@ -118,7 +119,7 @@ window.onload = function(){
             var mySwiper = new Swiper ('.swiper-container', {
         		  pagination: '.swiper-pagination',
         	      paginationClickable: true,
-        	      spaceBetween: 30,
+        	      spaceBetween: 0,
         	});
         }else{
         	$('.swiper-wrapper').html('');
@@ -166,10 +167,11 @@ window.onload = function(){
     	$('.h-lt').attr('status', 3);
         var point =$(this).attr('center');
         $('.ditu').addClass('show');
-        var point = point.split(",");
+        var points = point.split(",");
+        var center = new qq.maps.LatLng(points[0],points[1]);
         var maps = new qq.maps.Map(document.getElementById("jin_ditu"), {
-            center: new qq.maps.LatLng(point[0],point[1]),      // 地图的中心地理坐标。
-            zoom:18,                                                // 地图的中心地理坐标。
+            center: center,      // 地图的中心地理坐标。
+            zoom:18,                                                // 缩放等级。
           	//启用缩放控件
             zoomControl: true,
             //设置缩放控件的位置和样式
@@ -179,6 +181,12 @@ window.onload = function(){
                 //设置缩放控件样式为仅包含放大缩小两个按钮
                 style: qq.maps.ZoomControlStyle.SMALL
             }
+        });
+        
+        //创建marker
+        var marker = new qq.maps.Marker({
+            position: center,
+            map: maps
         });
     })
 
@@ -212,10 +220,6 @@ window.onload = function(){
     <!-- 幻灯片开始 -->
     <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><img class="full" src="http://oss.360ads.com/c/de851cc04d3a6210e9ab0d2863036fa4.JPG?x-oss-process=style/thumb_wsy_mobile1_jpg"></div>
-            <div class="swiper-slide"></div>
-            <div class="swiper-slide"></div>
-            <div class="swiper-slide"></div>
         </div>
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
@@ -249,12 +253,5 @@ window.onload = function(){
     <div id="jin_ditu" style="width:100%;height:auto;min-height:550px"></div>
 </div>
 <div class="f-tips">请点击坐标查看详情</div>
-<script>        
-  var mySwiper = new Swiper ('.swiper-container', {
-	  pagination: '.swiper-pagination',
-      paginationClickable: true,
-      spaceBetween: 30,
-  })        
-  </script>
 </body>
 </html>
