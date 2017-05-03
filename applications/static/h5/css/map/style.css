@@ -108,7 +108,7 @@
 	width:100%; border:1px #b0b0b0 solid;
 }
 .btable tr { }
-    .btable td { height: 32px; line-height: 32px; background: #fff;vertical-align: middle ;color:#595757;font-size:12px;}
+    .btable td { height: 32px; background: #fff;vertical-align: middle ;color:#595757;font-size:12px;}
     .btable td.s1{background:#d8d8d8;text-align:center;width:80px}
     .btable td.s2{background:#e6e6e6;padding:0 5px}
     .btable td.d1{background:#eeeeee;text-align:center;width:80px}
