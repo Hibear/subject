@@ -256,8 +256,8 @@ window.onload = function(){
                 <tr><td class="d1">点位编号</td><td class="d2" id="points_code"></td></tr>
                 <tr><td class="s1">点位情况</td><td class="s2" id="point_status"></td></tr>
                 <tr><td class="d1">占用客户</td><td class="d2" id="customer_name"></td></tr>
-                <tr><td class="d1">点位价格</td><td class="d2" id="price"></td></tr>
-                <tr><td class="s1">点位规格</td><td class="s2" id="specification_name"></td></tr>
+                <tr><td class="s1">点位价格</td><td class="s2" id="price"></td></tr>
+                <tr><td class="d1">点位规格</td><td class="d2" id="specification_name"></td></tr>
             </tbody>
         </table>
 	</div>
