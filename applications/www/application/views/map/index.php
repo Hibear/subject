@@ -72,7 +72,9 @@ window.onload = function(){
             size = new qq.maps.Size(25, 37.5),
             origin = new qq.maps.Point(0, -12.5),
             markerIcon = new qq.maps.MarkerImage(
-                <?php if($v['is_lock']):?>
+                <?php if($v['point_status'] == 3):?>
+                "<?php echo $domain['statics']['url']?>/h5/images/map/red.png",
+                <?php elseif($v['point_status'] == 2):?>
                 "<?php echo $domain['statics']['url']?>/h5/images/map/yellow.png",
                 <?php else:?>
                 "<?php echo $domain['statics']['url']?>/h5/images/map/green.png",
@@ -130,14 +132,16 @@ window.onload = function(){
         $('#address').text(data.address);
         //点位编号
         $('#points_code').text(data.points_code);
-        //是否锁定
-        if(data.is_lock == 1){
-        	$('#is_lock').text('是');
-        	//占用客户
-            $('#customer_name').text(data.customer_name);
+        //占用状态
+        if(data.point_status == 1){
+        	$('#point_status').text('空闲中');
+        }else if(data.point_status == 2){
+        	$('#point_status').text('被预约');
         }else{
-        	$('#is_lock').text('否');
+        	$('#point_status').text('被占用');
         }
+        //占用客户
+        $('#customer_name').text(data.customer_name);
         //投放时间
         $('#start_end_time').text(data.lock_start_time+"~"+data.lock_end_time);
 
@@ -228,8 +232,9 @@ window.onload = function(){
             <span status="1" class="h-lt">&lt;</span>时代传媒高杆广告分布
 </div>
 <div class="tip">
-    <img src="<?php echo $domain['statics']['url']?>/h5/images/map/yellow.png">表示有档期
-    <img src="<?php echo $domain['statics']['url']?>/h5/images/map/green.png">表示无档期
+    <img src="<?php echo $domain['statics']['url']?>/h5/images/map/red.png">被占用
+    <img src="<?php echo $domain['statics']['url']?>/h5/images/map/yellow.png">被预约
+    <img src="<?php echo $domain['statics']['url']?>/h5/images/map/green.png">空闲中
 </div>
 <!--   定义地图显示容器   -->
 <div id="containers"></div>
@@ -249,9 +254,8 @@ window.onload = function(){
             <tbody>
                 <tr><td class="s1">媒体位置</td><td class="s2" id="address"></td></tr>
                 <tr><td class="d1">点位编号</td><td class="d2" id="points_code"></td></tr>
-                <tr><td class="s1">是否锁定</td><td class="s2" id="is_lock"></td></tr>
+                <tr><td class="s1">点位情况</td><td class="s2" id="point_status"></td></tr>
                 <tr><td class="d1">占用客户</td><td class="d2" id="customer_name"></td></tr>
-                <tr><td class="s1">投放时间</td><td class="s2" id="start_end_time"></td></tr>
                 <tr><td class="d1">点位价格</td><td class="d2" id="price"></td></tr>
                 <tr><td class="s1">点位规格</td><td class="s2" id="specification_name"></td></tr>
             </tbody>

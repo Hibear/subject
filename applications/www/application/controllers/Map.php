@@ -21,7 +21,7 @@ class Map extends MY_Controller{
         if($info){
             $ids = array_column($info, 'id');
             if($ids){
-                $fields = 'id,price,address,customer_id,tx_coordinate,tx_jiejingid,images,is_lock,points_code,lock_start_time,lock_end_time';
+                $fields = 'id,price,address,customer_id,tx_coordinate,tx_jiejingid,images,is_lock,points_code,lock_start_time,lock_end_time,point_status';
                 $lists = $this->Mpoints->get_lists($fields, ['in' => ['media_id' => $ids], 'is_del' => 0]);
             }
         }
