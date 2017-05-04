@@ -17,9 +17,9 @@
                         <a href="#">首页</a>
                     </li>
                     <li>
-                        <a href="#">微活动</a>
+                        <a href="#">h5后台数据</a>
                     </li>
-                    <li class="active">投票管理</li>
+                    <li class="active">活动列表</li>
                 </ul>
 
                 <div class="nav-search" id="nav-search">
@@ -49,7 +49,7 @@
                                     <form class="form-horizontal" role="form">
                                         <div class="form-group">
                                             <div class="col-sm-4">
-                                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 投票活动名称 </label>
+                                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 活动名称 </label>
                                                 <div class="col-sm-9">
                                                     <input type="text" name="title" value="<?php if(isset($title)){ echo $title;}?>"  class="col-xs-10 col-sm-12" />
                                                 </div>
