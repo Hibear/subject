@@ -123,7 +123,7 @@ class Public_lottery extends MY_Controller{
         $data = $this->data;
         $active_id = (int) $this->input->get('active_id');
         $id = (int) $this->input->get('id');
-        $res = $this->Mprize_log->update_info(['status' => 1], ['active_id' => $active_id, 'id' => $id]);
+        $res = $this->Mprize_log->update_info(['status' => 1, 'update_time' => date('Y-m-d H:i:s')], ['active_id' => $active_id, 'id' => $id]);
         if(!$res){
             $this->error('领取失败，请重试！');
         }

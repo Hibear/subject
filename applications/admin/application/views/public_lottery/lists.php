@@ -89,6 +89,7 @@
                                             <th>中奖奖项</th>
                                             <th>奖品</th>
                                             <th>状态</th>
+                                            <th>领取时间</th>
                                             <th>操作</th>
                                         </tr>
                                         </thead>
@@ -102,6 +103,7 @@
                                                 <td><?php echo $value['prize_name'];?></td>
                                                 <td><?php echo $value['prize'];?></td>
                                                 <td><?php if($value['status'] == 1){echo '已领取';}else{echo '未领取';}?></td>
+                                                <td><?php if($value['update_time'] != '0000-00-00 00:00:00'){echo $value['update_time'];}?></td>
                                                 <td>
                                                     <?php if($value['status'] == 0):?>
                                                     <a class="green tooltip-info" href="/public_lottery/lingqu?active_id=<?php echo $id?>&id=<?php echo $value['id'];?>"  data-rel="tooltip" data-placement="top" title="" data-original-title="编辑">
