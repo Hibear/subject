@@ -147,7 +147,7 @@ user:liushunyu
                 <div style="line-height:200%">
                     <?php if(isset($my_prize)):?>
                     <?php foreach ($my_prize as $k => $v):?>
-                    <p><?php echo $v['create_time']?>抽中<?php echo $v['prize_name']?>获得<?php echo $v['prize']?> [<?php if($v['status'] == 1){echo '已领取';}?>]</p>
+                    <p><?php echo $v['create_time']?>抽中<?php echo $v['prize_name']?>获得<?php echo $v['prize']?> [<?php if($v['status'] == 1){echo '已领取';}else{echo '未领取';}?>]</p>
                     <?php endforeach;?>
                     <?php endif;?>
                 </div>
