@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-    <title>时代传媒高杆广告分布</title>
+    <title><?php echo $title?></title>
     <link rel="stylesheet" type="text/css" href="<?php echo get_css_js_url('gold/reset.css', 'www')?>" media="all" />
     <link rel="stylesheet" type="text/css" href="<?php echo get_css_js_url('map/style.css', 'h5')?>" media="all" />
     <link rel="stylesheet" type="text/css" href="<?php echo get_css_js_url('swiper/swiper.min.css', 'h5')?>" media="all" />
@@ -229,7 +229,7 @@ window.onload = function(){
 </head>
 <body>
 <div class="h-tips">
-            <span status="1" class="h-lt">&lt;</span>时代传媒高杆广告分布
+            <span status="1" class="h-lt">&lt;</span><?php echo $title?>
 </div>
 <div class="tip">
     <img src="<?php echo $domain['statics']['url']?>/h5/images/map/red.png">被占用

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-    <title>媒体点位演示</title>
+    <title>媒体点位演示系统</title>
     <link rel="stylesheet" type="text/css" href="<?php echo get_css_js_url('gold/reset.css', 'www')?>" media="all" />
     <link rel="stylesheet" type="text/css" href="<?php echo get_css_js_url('map/main.css', 'h5')?>" media="all" />
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />

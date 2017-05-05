@@ -20,6 +20,13 @@ class Map extends MY_Controller{
         if(!$typeid){
             $this->load->view('map/main', $data);
         }else{
+            $data['title'] = '';
+            foreach (C('media.media_type') as $k => $v){
+                if($typeid == $k){
+                    $data['title'] = '时代传媒'.$v.'分布';
+                    break;
+                }
+            }
             //查询媒体资源类型
             $info = $this->Mmedias->get_lists('id', ['type' => $typeid, 'is_del' => 0]);
             if($info){
