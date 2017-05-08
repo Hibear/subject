@@ -154,7 +154,15 @@
                                     <label><input type="radio" name="is_one" <?php if(isset($info) && $info['is_one'] == 1){echo 'checked';}?> value="1">是</label>
                                     <label><input type="radio" name="is_one" <?php if(isset($info) && $info['is_one'] == 0){echo 'checked';}?> value="0">否</label>
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 是否单页（投票）： </label>
+                                    <label class="col-sm-4">
+                                    <label><input type="radio" name="singlepage" <?php if(isset($info) && $info['singlepage'] == 0){echo 'checked';}?> value="0">非单页</label>
+                                    <label><input type="radio" name="singlepage" <?php if(isset($info) && $info['singlepage'] == 1){echo 'checked';}?> value="1">单页</label>
+                                </div>
+                        </div>
+                            
+                            
                             <div class="clearfix">
                                 <div class="col-md-offset-3 col-md-9">
                                     <button class="btn btn-info" type="submit">

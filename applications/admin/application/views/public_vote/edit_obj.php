@@ -110,7 +110,7 @@
                                 <label><input type="radio" name="is_del" <?php if(isset($info) && $info['is_del'] == 0){echo 'checked';}?> value="0">正常</label>
                                 <label><input type="radio" name="is_del" <?php if(isset($info) && $info['is_del'] == 1){echo 'checked';}?> value="1">删除</label>
                             </div>
-
+                            
                             <div class="clearfix form-actions">
                                 <div class="col-md-offset-3 col-md-9">
                                     <button class="btn btn-info" type="submit">

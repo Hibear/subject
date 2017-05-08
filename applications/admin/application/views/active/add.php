@@ -121,6 +121,12 @@
                                     <label><input type="radio" name="is_one"  value="1">是</label>
                                     <label><input type="radio" name="is_one"  value="0">否</label>
                                 </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 是否单页（投票）： </label>
+                                <label class="col-sm-4">
+                                <label><input type="radio" name="singlepage"  value="0">非单页</label>
+                                <label><input type="radio" name="singlepage"  value="1">单页</label>
+                            </div>
                             
                             <div class="clearfix form-actions">
                                 <div class="col-md-offset-3 col-md-9">
