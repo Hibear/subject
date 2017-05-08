@@ -43,7 +43,7 @@
         <?php foreach ($lists as $k => $v):?>
             <div class="lists">
                 <div id="p_<?php echo $v['id']?>" class="m-coverimg">
-                    <img class="lazy" data="<?php echo $v['id']?>" video="<?php if($v['video']){echo $v['video'];}else{echo 0;}?>" data-original="<?php echo get_img_url($v['cover_img'])?>">
+                    <img class="lazy" data="<?php echo $v['id']?>" data-page="<?php echo $info['singlepage']?>" video="<?php if($v['video']){echo $v['video'];}else{echo 0;}?>" data-original="<?php echo get_img_url($v['cover_img'])?>">
                 </div>
 				
                 <div class="m-title"><div class="m-radio" data="<?php echo $v['id']?>" id="l_<?php echo $v['id']?>"></div><?php echo $v['vote_obj'].'-《'.$v['title'].'》'?></div>
@@ -67,7 +67,7 @@
     <script>
 
         <?php if(!$lists):?>
-            alert('暂无消息！');
+            alert('暂无信息！');
         <?php endif;?>
         //选择
         $('.m-radio').on('click', function(){
@@ -104,12 +104,20 @@
         //点击图片选择
         $('.lazy').on('click', function(){
             var id = $(this).attr('data');
-            
+            var singlepage = parseInt($(this).attr('data-page'));
             var video = $(this).attr('video');
         	//所有同胞失去焦点
             $('.m-radio').removeClass('act');
             $('#l_'+id).addClass('act');
-            
+
+            //如果不是单页即包含详情页， 跳转到详情页
+            if(singlepage != 1){
+            	var active_id = <?php echo $info['id']?>;
+            	self.location.href = "<?php echo $domain['h5']['url']?>/public_vote/detail?active_id="+active_id+"&obj_id="+id;
+            	return;
+            }
+
+            //绑定视频
             if(video!= 0 || video!= '0'){
                 //隐藏视频显示视频
                 $(this).hide();
@@ -117,7 +125,6 @@
                 var html ='<iframe frameborder="0" width="100%" height="" src="'+video+'" allowfullscreen></iframe>';
                 $('#p_'+id).append(html);
             }
-            
 
             //激活投票按钮
             $('#vote').attr('data', id);

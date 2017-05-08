@@ -21,7 +21,7 @@ class Public_vote extends MY_Controller{
         if(!$active_id){
             show_404();
         }
-        $this->check_login($active_id);
+        //$this->check_login($active_id);
         
         $info = $this->cache->file->get('vote_'.$active_id);
         $vote_obj = trim($this->input->get('vote_obj'));
@@ -46,6 +46,56 @@ class Public_vote extends MY_Controller{
         }
         $data['lists'] = $this->Mvote_obj->get_lists('id,title,cover_img,vote_obj,score,video', $where, ['create_time' => 'desc']);
         $this->load->view('public_vote/index', $data);
+    }
+    
+    public function detail(){
+        $data = $this->data;
+        $active_id = (int) $this->input->get('active_id');
+        $obj_id = (int) $this->input->get('obj_id');
+        
+        $info = $this->cache->file->get('vote_'.$active_id);
+        $vote_obj = trim($this->input->get('vote_obj'));
+        
+        //获取活动信息
+        if(!$info){
+            $info = $this->Mweixin_active->get_one('*', ['id' => $active_id, 'is_del' => 0, 'type' => C('active_type.tp.id')]);
+            if(!$info){
+                show_404();
+            }else{
+                $this->cache->file->save('vote_'.$active_id, $info, 5*60); //缓存5分钟
+            }
+        }
+        //登陆
+        $this->check_login($active_id);
+        
+        $data['active_id'] =$active_id;
+        //查询被投对象的数据
+        $data['obj'] = $this->Mvote_obj->get_one('*', ['active_id' => $active_id, 'id' => $obj_id, 'is_del' => 0]);
+        if(!$data['obj']){
+            show_404();
+        }
+        //获取用户的排行
+        $data['range'] = $this->get_obj_range($obj_id, $active_id);
+        $this->load->view('public_vote/detail', $data);
+        
+    }
+    
+    private function get_obj_range($id, $active_id){
+        $range = '暂无';
+        $lists = $this->cache->file->get('range_list_'.$active_id);
+        if(!$lists){
+            $lists = $this->Mvote_obj->get_lists('id, score', ['active_id' => $active_id, 'is_del' => 0], ['score' => 'desc']);
+            if(!$lists){
+                return $range;
+            }
+            $this->cache->file->save('range_list_'.$active_id, $lists, 3*60);//缓存3分钟
+        }
+
+        foreach ($lists as $k => $v){
+            if($v['id'] == $id){
+                return $k+1;
+            }
+        }
     }
     
     /**
