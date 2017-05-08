@@ -44,7 +44,7 @@ class Public_vote extends MY_Controller{
                 'vote_obj' => $vote_obj
             ];
         }
-        $data['lists'] = $this->Mvote_obj->get_lists('id,title,cover_img,vote_obj,score', $where, ['create_time' => 'desc']);
+        $data['lists'] = $this->Mvote_obj->get_lists('id,title,cover_img,vote_obj,score,video', $where, ['create_time' => 'desc']);
         $this->load->view('public_vote/index', $data);
     }
     

@@ -42,7 +42,10 @@
         <?php if(isset($lists)):?>
         <?php foreach ($lists as $k => $v):?>
             <div class="lists">
-                <div class="m-coverimg"><img class="lazy" data="<?php echo $v['id']?>" data-original="<?php echo get_img_url($v['cover_img'])?>"></div>
+                <div id="p_<?php echo $v['id']?>" class="m-coverimg">
+                    <img class="lazy" data="<?php echo $v['id']?>" video="<?php if($v['video']){echo $v['video'];}else{echo 0;}?>" data-original="<?php echo get_img_url($v['cover_img'])?>">
+                </div>
+				
                 <div class="m-title"><div class="m-radio" data="<?php echo $v['id']?>" id="l_<?php echo $v['id']?>"></div><?php echo $v['vote_obj'].'-《'.$v['title'].'》'?></div>
                 <div class="m-score">
                     <div class="jdt">
@@ -101,9 +104,20 @@
         //点击图片选择
         $('.lazy').on('click', function(){
             var id = $(this).attr('data');
+            
+            var video = $(this).attr('video');
         	//所有同胞失去焦点
             $('.m-radio').removeClass('act');
             $('#l_'+id).addClass('act');
+            
+            if(video!= 0 || video!= '0'){
+                //隐藏视频显示视频
+                $(this).hide();
+            	//开始播放视频
+                var html ='<iframe frameborder="0" width="100%" height="" src="'+video+'" allowfullscreen></iframe>';
+                $('#p_'+id).append(html);
+            }
+            
 
             //激活投票按钮
             $('#vote').attr('data', id);
