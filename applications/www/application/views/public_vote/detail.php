@@ -39,7 +39,7 @@
 </head>
 <body>
 <div class="user_top">
-    <a href="javascript:window.history.go(-1);" style="left: -20px">返回</a>
+    <a href="javascript:window.history.go(-1);" style="left: -20px"> &lt;返回</a>
 </div>
 
 <div class="user_p">
