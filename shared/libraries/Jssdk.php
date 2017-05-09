@@ -13,14 +13,14 @@ class JSSDK {
   public function getSignPackage() {
     $jsapiTicket = $this->getJsApiTicket();
 
-    // ×¢Òâ URL Ò»¶¨Òª¶¯Ì¬»ñÈ¡£¬²»ÄÜ hardcode.
+    // ×¢ï¿½ï¿½ URL Ò»ï¿½ï¿½Òªï¿½ï¿½Ì¬ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ hardcode.
     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
     $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
     $timestamp = time();
     $nonceStr = $this->createNonceStr();
 
-    // ÕâÀï²ÎÊıµÄË³ĞòÒª°´ÕÕ key Öµ ASCII ÂëÉıĞòÅÅĞò
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ key Öµ ASCII ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     $string = "jsapi_ticket=$jsapiTicket&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
 
     $signature = sha1($string);
@@ -83,13 +83,11 @@ class JSSDK {
 
     private function httpGet($url) {
         $curl = curl_init();
-        @curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        @curl_setopt($curl, CURLOPT_TIMEOUT, 500);
-        // Îª±£Ö¤µÚÈı·½·şÎñÆ÷ÓëÎ¢ĞÅ·şÎñÆ÷Ö®¼äÊı¾İ´«ÊäµÄ°²È«ĞÔ£¬ËùÓĞÎ¢ĞÅ½Ó¿Ú²ÉÓÃhttps·½Ê½µ÷ÓÃ£¬±ØĞëÊ¹ÓÃÏÂÃæ2ĞĞ´úÂë´ò¿ªssl°²È«Ğ£Ñé¡£
-        // Èç¹ûÔÚ²¿Êğ¹ı³ÌÖĞ´úÂëÔÚ´Ë´¦ÑéÖ¤Ê§°Ü£¬Çëµ½ http://curl.haxx.se/ca/cacert.pem ÏÂÔØĞÂµÄÖ¤ÊéÅĞ±ğÎÄ¼ş¡£
-        @curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
-        @curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, true);
-        @curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 500);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($curl, CURLOPT_URL, $url);
     
         $res = curl_exec($curl);
         curl_close($curl);

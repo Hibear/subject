@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * 通用model
- * @author: yuanxiaolin@global28.com
+ * @author: 1034487709@qq.com
  * @version: 1.0.0
  * @since: datetime
  */

@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * 通用model
- * @author: yuanxiaolin@global28.com
+ * @author: 1034487709@qq.com
  * @version: 1.0.0
  * @since: datetime
  */
@@ -15,7 +15,7 @@ class MY_Model extends CI_Model {
     }
 
     /**
-     * @author: yuanxiaolin@global28.com
+     * @author: 1034487709@qq.com
      * @description 创建记录
      */
     public function create($data) {
@@ -25,7 +25,7 @@ class MY_Model extends CI_Model {
     }
 
     /**
-     * @author yuanxiaolin@global28.com
+     * @author 1034487709@qq.com
      * @description 批量插入
      */
     public function create_batch($data) {
@@ -35,18 +35,17 @@ class MY_Model extends CI_Model {
     
     /**
      * 插入或更新记录
-     * @author yuanxiaolin@global28.com
+     * @author 1034487709@qq.com
      * @param  array $data
      * @ruturn return_type
      */
     public function replace_into($data){
-    	//var_dump($data);exit;
     	$this->db->replace($this->_table, $data);
     	return $this->db->affected_rows();
     }
 
     /**
-     * @author: yuanxiaolin@global28.com
+     * @author: 1034487709@qq.com
      * @description 更新信息
      */
     public function update_info($data, $where) {
@@ -100,7 +99,7 @@ class MY_Model extends CI_Model {
     
     /**
      * 删除信息
-     * @author yuanxiaolin@global28.com
+     * @author 1034487709@qq.com
      * @param unknown $where
      * @return number
      */
@@ -123,7 +122,7 @@ class MY_Model extends CI_Model {
     }
     
     /**
-     * @author: yuanxiaolin@global28.com
+     * @author: 1034487709@qq.com
      * @description 获取所有信息
      * @param: mixed $fields array('uid', '..')
      * @param: array $where array('name' => 'aaa', 'uid >' => $id);
@@ -151,7 +150,7 @@ class MY_Model extends CI_Model {
     }
 
     /**
-     * @author: yuanxiaolin@global28.com
+     * @author: 1034487709@qq.com
      * @description 获取所有信息
      * @param: mixed $fields array('uid', '..')
      * @param: array $where array('name' => 'aaa', 'uid >' => $id);
@@ -186,7 +185,7 @@ class MY_Model extends CI_Model {
 
 
     /**
-     * @author: yuanxiaolin@global28.com
+     * @author: 1034487709@qq.com
      * @description 获取列表
      * @param: array fields 查询的字段
      * @param: array where 查询条件
@@ -279,7 +278,7 @@ class MY_Model extends CI_Model {
     }
 
     /**
-     * @author: yuanxiaolin@global28.com
+     * @author: 1034487709@qq.com
      * @description 查询单条记录
      */
     public function get_one($fields, $query, $order_by='') {
@@ -330,7 +329,7 @@ class MY_Model extends CI_Model {
 
 
     /**
-     * @author: yuanxiaolin@global28.com
+     * @author: 1034487709@qq.com
      * @description
      * @param: array arr 需要转成json的数组
      */

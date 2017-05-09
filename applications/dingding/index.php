@@ -54,15 +54,17 @@
  * NOTE: If you change these, also change the error_reporting() code below
  */
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
-/*
- * 判断请求方式
- * nengfu@gz-zc.cn
- */
-define('REQUEST_METHOD',$_SERVER['REQUEST_METHOD']);
-define('IS_GET',        REQUEST_METHOD =='GET' ? true : false);
-define('IS_POST',       REQUEST_METHOD =='POST' ? true : false);
-define('IS_PUT',        REQUEST_METHOD =='PUT' ? true : false);
-define('IS_DELETE',     REQUEST_METHOD =='DELETE' ? true : false);
+
+ /*
+  * 判断请求方式
+  * 1034487709@qq.com
+  */
+    define('REQUEST_METHOD',$_SERVER['REQUEST_METHOD']);
+    define('IS_GET',        REQUEST_METHOD =='GET' ? true : false);
+    define('IS_POST',       REQUEST_METHOD =='POST' ? true : false);
+    define('IS_PUT',        REQUEST_METHOD =='PUT' ? true : false);
+    define('IS_DELETE',     REQUEST_METHOD =='DELETE' ? true : false);
+
 
 /*
  *---------------------------------------------------------------
@@ -247,7 +249,7 @@ switch (ENVIRONMENT)
 			$application_folder = $_temp;
 		}
 
-		define('APPPATH', $application_folder.DIRECTORY_SEPARATOR);
+		define('APPPATH',str_replace('\\', '/',$application_folder.DIRECTORY_SEPARATOR) );
 	}
 	else
 	{
