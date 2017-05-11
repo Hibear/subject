@@ -24,7 +24,7 @@
           <link href="<?php echo css_js_url('font-awesome-ie7.min.css', 'admin');?>" rel="stylesheet" />
         <![endif]-->
 
-        <link href="<?php echo css_js_url('ace.min.css', 'admin');?>" rel="stylesheet" />
+        <link href="<?php echo css_js_url('dace.min.css', 'admin');?>" rel="stylesheet" />
 
         <!--[if lte IE 8]>
           <link href="<?php echo css_js_url('ace-ie.min.css', 'admin');?>" rel="stylesheet" />

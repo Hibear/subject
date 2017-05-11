@@ -8,20 +8,20 @@
 <div class="main-container" id="main-container">
     <div class="main-container-inner">
         <!-- 左边导航菜单 -->
-        <?php $this->load->view('common/left');?>
+        <?php //$this->load->view('common/left');?>
 
         <div class="main-content">
             <div class="breadcrumbs" id="breadcrumbs">
                 <ul class="breadcrumb">
                     <li>
                         <i class="icon-home home-icon"></i>
-                        <a href="#">首页</a>
+                        <a href="/">首页</a>
                     </li>
                 </ul>
             </div>
 
             <div class="page-content">
-                <h1>欢迎使用仓库管理系统</h1>
+                
             </div>
         </div>
     </div>

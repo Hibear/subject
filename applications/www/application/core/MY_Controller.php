@@ -1,18 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
 class MY_Controller extends CI_Controller {
-
     public $data = array();
     public function __construct() {
         parent::__construct();
       
-
        $_GET = xss_clean($_GET);
        $_POST = xss_clean($_POST);
-
         $this->data['domain'] = C('domain');
         $this->data['c_modle'] = $this->uri->segment(1);
-
        
         $this->load->library('session');
         $this->load->library('encrypt');
@@ -33,10 +28,8 @@ class MY_Controller extends CI_Controller {
 		);
 		$request_url= "http://123.57.238.232:8090/index.php?m=Share&a=index";
 	    return json_decode(Http::Request($request_url,$data,"POST"),true);
-
 	}
 	
-
     /**
      * 转化为json字符串
      * @author yuanxiaolin@global28.com
@@ -50,7 +43,6 @@ class MY_Controller extends CI_Controller {
         header('Cache-Control: no-cache');
         echo json_encode($arr);exit;
     }
-
      /**
       * 请求成功返回
       * @author yuanxiaolin@global28.com
@@ -59,7 +51,6 @@ class MY_Controller extends CI_Controller {
       * @ruturn return_type
       */
     public function return_success($data = array(),$msg = 'request is ok') {
-
         $this->return_json(
                 array(
                     'status'=> C('status.success.value'),
@@ -67,9 +58,7 @@ class MY_Controller extends CI_Controller {
                     'msg'   => $msg,
                 )
         );
-
     }
-
     /**
      * 请求失败返回
      * @author yuanxiaolin@global28.com
@@ -79,7 +68,6 @@ class MY_Controller extends CI_Controller {
      * @ruturn return_type
      */
     public function return_failed ( $msg = 'request failed',$data = '',$status = -1) {
-
         $this->return_json(
             array(
                 'status'    => isset($status) ? $status : C('status.failed.value'),
@@ -88,7 +76,6 @@ class MY_Controller extends CI_Controller {
             )
         );
     }
-
     /**
      * 通用的HTTP请求工具
      * @author yuanxiaolin@global28.com
@@ -105,7 +92,6 @@ class MY_Controller extends CI_Controller {
         $this->benchmark->mark('start');//start clock....
         
         $api_url = $this->create_url($path);
-
         $response = $this->get_response($api_url,$data,$method,$cookie,$multi,$headers);
         
         if ($debug === true) {
@@ -120,7 +106,6 @@ class MY_Controller extends CI_Controller {
         
         return $response;
    }
-
     /**
      * 创建接口请求URL
      * @author yuanxiaolin@global28.com
@@ -130,10 +115,6 @@ class MY_Controller extends CI_Controller {
     public function create_url($path = ''){
         return sprintf('%s/%s',$this->data['domain']['service']['url'],$path);
     }
-
-
-
-
     protected function get_user_info($user_base_info){
         
         if(empty($user_base_info))
@@ -161,7 +142,6 @@ class MY_Controller extends CI_Controller {
             }
         }
     }
-
     /**
      * 创建并设置访问token
      * @ruturn return_type
@@ -175,7 +155,6 @@ class MY_Controller extends CI_Controller {
         $this->session->set_userdata(array('user_token'  => $this->data['token']));
 		return $this->data['token'];
     }
-
     /**
      * 检查是否是有效token
      * @param string $token
@@ -192,7 +171,6 @@ class MY_Controller extends CI_Controller {
         }
         return true;
     }
-
     /**
      * 销毁访问token
      * @ruturn return_type
@@ -206,7 +184,6 @@ class MY_Controller extends CI_Controller {
             $this->session->unset_userdata('user_token');
         }
     }
-
     /**
      * 限制用户在一定时间不能重复点赞
      * @params id 评论ID
@@ -214,7 +191,6 @@ class MY_Controller extends CI_Controller {
     public  function set_token_dz($id = 0){
         $this->session->set_userdata(array('token_dz_'.$id  => md5($id)));
     }
-
     /**
      * 检查是否是有效token
      * @param ID $token
@@ -227,7 +203,6 @@ class MY_Controller extends CI_Controller {
         }
         return false;
     }
-
     /**
      * 从底层服务请求数据
      *
@@ -261,24 +236,19 @@ class MY_Controller extends CI_Controller {
      * @ruturn return_type
      */
     private function log_message($url = '', $data = array()){
-
         //日志初始化参数
         $params = array(
             'path'=>C('log.api.path'),
             'level'=>C('log.api.level')
         );
-
         //日志开关
         if(C('log.api.enable') === false){
             return ;
         }
-
         //加载日志工具
         $this->load->library('Logfile',$params);
-
         //接口时差，单位为毫秒
         $cost_time = $this->benchmark->elapsed_time('start','end') * 1000;
-
         if(isset($data['status']))
         {
             if($data['status'] == C('status.success.value'))
@@ -365,10 +335,8 @@ class MY_Controller extends CI_Controller {
 	**/
 	public function get_rand($proArr) {
 		$result = '';
-
 		//概率数组的总概率精度 
 		$proSum = array_sum($proArr);
-
 		//概率数组循环 
 		foreach ($proArr as $key => $proCur) {
 			$randNum = mt_rand(1, $proSum);
@@ -380,7 +348,6 @@ class MY_Controller extends CI_Controller {
 			}
 		}
 		unset($proArr);
-
 		return $result;
 	}
 	
@@ -392,25 +359,10 @@ class MY_Controller extends CI_Controller {
 	   $str = null;
 	   $strPol = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
 	   $max = strlen($strPol)-1;
-
 	   for($i=0;$i<$length;$i++){
 		$str.=$strPol[rand(0,$max)];//rand($min,$max)生成介于min和max两个数之间的一个随机整数
 	   }
-
 	   return $str;
 	  }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

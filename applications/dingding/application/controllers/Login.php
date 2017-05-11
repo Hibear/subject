@@ -16,43 +16,20 @@ class Login extends CI_Controller {
             'Model_configes' => 'Mconfiges'
          ]);
 
-      // $this->load->library('session');
-
+        $this->load->library('auth_ding', C('ding'));
+        $this->load->library('session');
       }
 
     public function index() {
         $data['domain'] = C('domain');
-        $data['verify'] = $this->Mconfiges->get_one("val",array("key"=>"verify"));
+        
+        if(isset($_SESSION['USER'])&& $_SESSION['USER']){
+            header('location:' . C('domain.ding.url'));exit;
+        }
+        $data['config'] = (array) json_decode($this->auth_ding->get_config());
         $this->load->view("login", $data);
     }
     
-    public function getaccess(){
-        $url = "https://oapi.dingtalk.com/sns/gettoken?appid={}&appsecret={}";
-        var_dump($this->httpGet($url));
-    }
-    
-    private function httpGet($url) {
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_TIMEOUT, 500);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($curl, CURLOPT_URL, $url);
-    
-        $res = curl_exec($curl);
-        curl_close($curl);
-    
-        return $res;
-    }
-
-    /*
-     * 验证码
-     * 1034487709@qq.com
-     */
-    public function code(){
-        $this->load->library('valicode');
-        $this->valicode->outImg();
-     }
 
 
     /*
@@ -60,60 +37,29 @@ class Login extends CI_Controller {
      * 1034487709@qq.com
      */
     public function login(){
-
-        if($this->input->is_ajax_request()){
-            $name = $this->input->post("name",true);
-            $password = $this->input->post("password",true);
-
-
-            if(empty($name) || !isset($name)){
-                $this->return_json(array("code"=>2,"msg"=>"用户名不能为空！"));
+        $code =  $this->input->post('code');
+        $name = $this->input->post('name');
+        $headimg = $this->input->post('headimg');
+        $access_token = $this->auth_ding->get_access_token();
+        //获取用户信息
+        $user_info = (array) json_decode($this->auth_ding->get_user_info($access_token, $code));
+        if($user_info && $user_info['errcode'] == 0){
+            if($user_info['is_sys']){
+                $user['userid'] = $user_info['userid'];
+                $user['name'] = $name;
+                $user['headimg'] =$headimg;
+                $user['id'] = 1;
+                $this->session->set_userdata(array("USER"=>$user));
+                $this->return_json(['code' => 1, 'msg' => '登陆成功']);
+            }else{
+                $this->return_json(['code' => 0, 'msg' => '未允许的用户']);
             }
-            if(empty($password) || !isset($password)){
-                $this->return_json(array("code"=>3,"msg"=>"密码不能为空！"));
-            }
-            session_start();
-
-            if(!empty($name) && !empty($password))
-            {
-                $where['name']		= $name;
-                $where['is_del']	= 1;
-                $where['type']	= 0;
-                #验证用户信息
-                $user_info =$this->Madmins->get_one("*",$where);
-
-                if($user_info){
-                    if($user_info['disabled'] == 2){
-                        $this->return_json(array("code"=>2,"msg"=>"该用户已被禁用!"));
-                    }
-                    if($user_info['password'] == md5($password)) {
-
-                        $purview_ids = explode(',', $user_info['purview_ids']);
-                        $user_info['purview_url'] = array_column($this->Madmins_purview->get_urls($purview_ids),"url",'id');
-
-                        unset($user_info['password']);
-                        $_SESSION['USER'] = $user_info;
-
-                        #记录登录日志
-                        $this->Mlogin_log->create(array(
-                            'admin_id'		=>isset($user_info['id']) ? $user_info['id'] : 0,
-                            'login_time'	=>date('Y-m-d H:i:s'),
-                            'login_ip'		=>get_client_ip(),
-                            'login_name'	=>$name,
-                        ));
-                       $this->return_json(array("code"=>0,"msg"=>"登录成功"));
-
-                    }else{
-                        $this->return_json(array("code"=>3,"msg"=>"密码错误请重新输入"));
-                    }
-                }else{
-                    $this->return_json(array("code"=>2,"msg"=>"用户名错误"));
-                }
-
-            }
+        }else{
+            $this->return_json(['code' => 0, 'msg' => '获取信息失败']);
         }
-
     }
+    
+    
 
     /**
      * 转化为json字符串

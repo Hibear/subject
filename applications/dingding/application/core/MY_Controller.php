@@ -8,14 +8,13 @@ class MY_Controller extends CI_Controller {
     public $isGet = false;
 
     public function __construct() {
-
         parent::__construct();
         $this->load->model([
-            'Model_admins' => 'Madmins',
+            'Model_admins' => 'Madmins'
         ]);
 
-        session_start();
-
+        $this->load->library('session');
+        $this->data['domain'] = C('domain');
         //解决swfupload上传不传session问题
         $url = strtolower($this->uri->segment(1)); //控制器
         if($url == 'file'){
@@ -25,59 +24,36 @@ class MY_Controller extends CI_Controller {
         $_GET = xss_clean($_GET);
         $_POST = xss_clean($_POST);
 
-        $this->data['domain'] = C('domain');
         $this->data['action'] = $this->uri->segment(1);
-
-         if(@$_SESSION['USER']){
-             $this->data['userInfo'] = $_SESSION['USER'];
-
+        
+        if(@$this->session->userdata('USER')){
+            $this->data['userInfo'] = $this->session->userdata('USER');
          }else{
             header('location:' . C('domain.ding.url') .'/login');
             exit;
-
         }
-
+        
         //获取菜单
-        $this->get_menu();
-
+        $this->data['menu'] = $this->Madmins->getMenus();
+        
         /*
          * 权限判断pur_code -1没有权限 -0 有权限
          */
         $pur_view_info =  $this->check_purview();
-       if($this->input->is_ajax_request()){
+        if($this->input->is_ajax_request()){
             $this->data['pur_code'] = $pur_view_info['pur_code'];
-         }
+        }
         else{
             if($pur_view_info['pur_code'] == 1){
                 $this->error("你没有权限");
             }
         }
     }
-
-    public function  get_menu(){
-        $this->data['menu'] = $this->Madmins->getMenus();
-    }
-
-    /*
-     * 操作日志
-     * @param $operate_id 操作人ID
-     * @param $operate_type 操作类型 1-添加 2-编辑 3-删除
-     * @param $operate_content 操作内容
-     */
-    public function write_log($operate_id,$operate_type,$operate_content){
-        $this->load->model(['Model_admins_operate_log' => 'Madmins_operate_log']);
-        $post_data['operate_id'] = $operate_id;
-        $post_data['operate_type'] = $operate_type;
-        $post_data['operate_content'] = $operate_content;
-        $post_data['create_time'] = time();
-        $this->Madmins_operate_log->create($post_data);
-
-    }
-
-
+    
+    
     /*
      * 权限检验
-     * 1034487709@qq.com
+     * nengfu@gz-zc.cn
      */
     public function check_purview(){
 
@@ -85,6 +61,11 @@ class MY_Controller extends CI_Controller {
         $action =  $this->uri->segment(2) ? strtolower($this->uri->segment(2)) : ''; //方法
         $url = strtolower($this->uri->segment(1)); //控制器
 
+        //登录状态下控制器为空处理
+        if($url === ''){
+            $url = $this->router->default_controller;
+        }
+        
         if($action=='return_url')
             $action = '';
 
@@ -114,6 +95,7 @@ class MY_Controller extends CI_Controller {
         }
 
         #判断权限
+        
         if(!in_array($url,$_SESSION['USER']['purview_url']))
         {
             return array("msg"=>'抱歉，您没有此操作权限','pur_code'=>1);
@@ -122,7 +104,7 @@ class MY_Controller extends CI_Controller {
 
     /**
      * 转化为json字符串
-     * @author 1034487709@qq.com
+     * @author yuanxiaolin@global28.com
      * @param unknown $arr
      * @ruturn return_type
      */
@@ -136,7 +118,7 @@ class MY_Controller extends CI_Controller {
 
     /**
      * 请求成功返回
-     * @author 1034487709@qq.com
+     * @author yuanxiaolin@global28.com
      * @param unknown $data
      * @param string $msg
      * @ruturn return_type
@@ -145,7 +127,7 @@ class MY_Controller extends CI_Controller {
 
         $this->return_json(
             array(
-                'status'=> 0,
+                'status'=> C('status.success.value'),
                 'data'    => $data,
                 'msg'   => $msg,
             )
@@ -155,7 +137,7 @@ class MY_Controller extends CI_Controller {
 
     /**
      * 请求失败返回
-     * @author 1034487709@qq.com
+     * @author yuanxiaolin@global28.com
      * @param string $result
      * @param string $success_msg
      * @param string $failure_msg
@@ -165,7 +147,7 @@ class MY_Controller extends CI_Controller {
 
         $this->return_json(
             array(
-                'status'    => isset($status) ? $status : 1,
+                'status'    => isset($status) ? $status : C('status.failed.value'),
                 'msg'       => $msg,
                 'data'        => $data
             )
@@ -176,7 +158,7 @@ class MY_Controller extends CI_Controller {
 
     /**
      * 创建接口请求URL
-     * @author 1034487709@qq.com
+     * @author yuanxiaolin@global28.com
      * @param string $path
      * @return string
      */
@@ -199,7 +181,7 @@ class MY_Controller extends CI_Controller {
 
     /**
      * 创建并设置访问token
-     * @author 1034487709@qq.com
+     * @author yuanxiaolin@global28.com
      * @ruturn return_type
      */
     public  function set_token(){
@@ -210,7 +192,7 @@ class MY_Controller extends CI_Controller {
 
     /**
      * 检查是否是有效token
-     * @author 1034487709@qq.com
+     * @author yuanxiaolin@global28.com
      * @param string $token
      * @throws Exception
      * @ruturn return_type
@@ -225,7 +207,7 @@ class MY_Controller extends CI_Controller {
 
     /**
      * 销毁访问token
-     * @author 1034487709@qq.com
+     * @author yuanxiaolin@global28.com
      * @ruturn return_type
      */
     public function unset_token(){
@@ -239,7 +221,7 @@ class MY_Controller extends CI_Controller {
 
     /**
      * 接口日志记录（此方法只限于接口监控使用）
-     * @author 1034487709@qq.com
+     * @author yuanxiaolin@global28.com
      * @param unknown $data
      * @ruturn return_type
      */
@@ -322,7 +304,7 @@ class MY_Controller extends CI_Controller {
 
     /**
      * 通用的HTTP请求工具
-     * @author 1034487709@qq.com
+     * @author yuanxiaolin@global28.com
      * @param string $path 接口请求path
      * @param unknown $data get|post请求数据
      * @param string $debug 接口的debug模式， 为true将会把数据原包返回
@@ -409,7 +391,7 @@ class MY_Controller extends CI_Controller {
     }
 
     /**
-     * 1034487709@qq.com
+     * nengfu@gz-zc.cn
      * 操作错误跳转
      * @param string $message 错误信息
      * @param string $jumpUrl 页面跳转地址
@@ -424,7 +406,7 @@ class MY_Controller extends CI_Controller {
 
 
     /**
-     * 1034487709@qq.com
+     * nengfu@gz-zc.cn
      * 操作成功跳转
      * @param string $message 错误信息
      * @param string $jumpUrl 页面跳转地址
@@ -434,7 +416,7 @@ class MY_Controller extends CI_Controller {
     }
 
     /**
-     * 1034487709@qq.com
+     * nengfu@gz-zc.cn
      * 默认跳转操作 支持错误导向和正确跳转
     * @param string $message 提示信息
      * @param Boolean $status 状态
@@ -443,14 +425,13 @@ class MY_Controller extends CI_Controller {
      * @return void
      */
     private function dispatchJump($message,$status=1,$jumpUrl='') {
-        $data = $this->data;
-        $data['title'] = array("信息提示");
+       $data = $this->data;
+
         // 提示标题
        if($status) { //发送成功信息
-
             $data['message'] = $message ? $message : "操作成功";
             // 成功操作后默认停留1秒
-             $data['waitSecond'] = 3 ;
+             $data['waitSecond'] = 2 ;
             // 默认操作成功自动返回操作前页面
                if($jumpUrl){
                    $data['jumpUrl'] = $jumpUrl;
@@ -462,7 +443,6 @@ class MY_Controller extends CI_Controller {
              $this->output->_display();
              die();
         }else{
-
              $data['message'] = $message ? $message : "操作失败";
             //发生错误时候默认停留3秒
              $data['waitSecond'] = 3;
