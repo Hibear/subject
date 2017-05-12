@@ -108,6 +108,20 @@ class Home extends MY_Controller{
         $this->load->view('home/edit', $data);
     }
     
+    public function del(){
+        $id = (int) $this->input->get('id');
+        //查询次物件是否还有未归还的记录
+        $num = $this->Mborrow_log->count(['borrow_id' => $id, 'status' => 0]);
+        if($num){
+            $this->error('该物件还有未归还的记录，请先归还！');
+        }
+        $res = $this->Mwarehouse->update_info(['is_del' => 1], ['id' => $id]);
+        if(!$res){
+            $this->error('操作失败！');
+        }
+        $this->success('删除成功！', '/home');
+    }
+    
     public function cate(){
         $data = $this->data;
         $page =  intval($this->input->get("per_page",true)) ?  : 1;

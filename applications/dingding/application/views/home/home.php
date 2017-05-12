@@ -121,6 +121,7 @@
                                                 <td id="o_<?php echo $value['id']?>"><?php echo $value['out_num']?></td>
                                                 <td>
                                                     <p onclick="edit(<?php echo $value['id']?>)" class="btn btn-minier btn-purple">编辑</p>
+                                                    <p onclick="del(<?php echo $value['id']?>)" class="btn btn-minier btn-purple">删除</p>
                                                     <p data="<?php echo $value['id']?>" class="btn btn-minier btn-purple borrow">借出</p>
                                                     <p onclick="borrow(<?php echo $value['id']?>)" class="btn btn-minier btn-purple">查看记录</p>
                                                 </td>
@@ -144,6 +145,9 @@
 <!-- 加载尾部公用js -->
 <?php $this->load->view("common/footer");?>
 <script type="text/javascript">
+    function del(id){
+        window.location.href = "/home/del?id="+id;
+    }
     function edit(id){
         window.location.href = "/home/edit?id="+id;
     }
@@ -152,7 +156,6 @@
     }
 </script>
 <script src="https://g.alicdn.com/dingding/dingtalk-pc-api/2.7.0/index.js"></script>
-<script src="<?php echo get_css_js_url('guaguaka/jquery-1.9.1.js', 'h5')?>"></script>
     <script type="text/javascript">
     DingTalkPC.config({
         agentId: "<?php echo $config['agentid']?>", // 必填，微应用ID

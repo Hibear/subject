@@ -8,7 +8,7 @@
             <a href="#" class="navbar-brand">
                 <small>
                     <i class="icon-leaf"></i>
-                    仓库理系统
+                    仓库管理系统
                 </small>
             </a>
         </div>
