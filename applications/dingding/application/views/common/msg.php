@@ -11,9 +11,6 @@
 
 <div class="main-container" id="main-container">
    <div class="main-container-inner">
-       <!-- 左边导航菜单 -->
-       <?php $this->load->view('common/left');?>
-
         <div class="main-content">
             <div class="breadcrumbs" id="breadcrumbs">
                 <script type="text/javascript">
@@ -23,11 +20,7 @@
                 <ul class="breadcrumb">
                     <li>
                         <i class="icon-home home-icon"></i>
-                        <a href="/home">Home</a>
-                    </li>
-
-                    <li>
-                        <a href="#">信息提示</a>
+                        <a href="/">首页</a>
                     </li>
 
                 </ul><!-- .breadcrumb -->

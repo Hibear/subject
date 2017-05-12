@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * desc:后台登陆
- * 1034487709@qq.com
+ * yonghua
  */
 
 class Login extends CI_Controller {
@@ -22,7 +22,10 @@ class Login extends CI_Controller {
 
     public function index() {
         $data['domain'] = C('domain');
-        
+        //判断是否是手机端访问
+        if(ismobile()){
+            exit('<h1 style="text-align:center;">请使用钉钉pc端访问！</h1>');
+        }
         if(isset($_SESSION['USER'])&& $_SESSION['USER']){
             header('location:' . C('domain.ding.url'));exit;
         }
@@ -34,7 +37,7 @@ class Login extends CI_Controller {
 
     /*
      * 登录验证
-     * 1034487709@qq.com
+     * yonghua
      */
     public function login(){
         $code =  $this->input->post('code');
