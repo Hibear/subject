@@ -75,12 +75,34 @@ class Public_vote extends MY_Controller{
             show_404();
         }
         //获取用户的排行
-        $data['range'] = $this->get_obj_range($obj_id, $active_id);
+        $obj_score = $data['obj']['score'];
+        $data['range'] = $this->get_obj_ranges($obj_id, $obj_score, $active_id);
         $this->load->view('public_vote/detail', $data);
         
     }
     
-    private function get_obj_range($id, $active_id){
+    /**
+     * 改良版计算排名
+     * @param 用户id $id
+     * @param 用户积分 $score
+     * @param 投票活动id $active_id
+     * @return 排名数 string|number
+     */
+    private function get_obj_ranges($id, $score, $active_id){
+        $range = '暂无';
+        $lists = $this->Mvote_obj->get_lists('id,score', ['active_id' => $active_id, 'score>=' => $score, 'is_del' => 0], ['score' => 'desc']);
+        if(!$lists){
+            return $range;
+        }
+        foreach ($lists as $k => $v){
+                if($v['id'] == $id){
+                    return $k+1;
+                }
+            }
+        }
+    
+    
+    private function get_obj_range($id, $score, $active_id){
         $range = '暂无';
         $lists = $this->cache->file->get('range_list_'.$active_id);
         if(!$lists){
