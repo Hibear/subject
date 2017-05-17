@@ -47,7 +47,8 @@ class Login extends CI_Controller {
         //获取用户信息
         $user_info = (array) json_decode($this->auth_ding->get_user_info($access_token, $code));
         if($user_info && $user_info['errcode'] == 0){
-            if($user_info['is_sys']){
+            //普通员工不能使用
+            if($user_info['is_sys'] >= 1 ){
                 $user['userid'] = $user_info['userid'];
                 $user['name'] = $name;
                 $user['headimg'] =$headimg;
