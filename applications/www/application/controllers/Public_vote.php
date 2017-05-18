@@ -149,9 +149,42 @@ class Public_vote extends MY_Controller{
         $end_time = $info['end_time'];
         $this->check_active_time($time, $start_time, $end_time, $no_start_msg, $end_msg);
         
+        //计算选手得票速率
+        $this->calculate($obj_id, $start_time, $time, $end_time);
+        
         //判断今天是否能够投票
         $openid = $user_info['openid'];
         $this->check_today_and_vote($active_id, $openid, $obj_id, $info['count']);
+    }
+    
+    /**
+     * 判断选手得票速率
+     */
+    private function calculate($id, $s_time, $time, $e_time){
+        $v = 0.5; //不得超过的速率
+        //获取选手得票数
+        $info = $this->Mvote_obj->get_one('score', ['id' => $id]);
+        if($info['score'] > 0){
+            $t = ($time-strtotime($s_time));
+            if($t > 0){
+                if( ($info['score']/$t) >  $v){
+                    $num = $this->cache->file->get('stop_log'); 
+                    if(num){
+                        if(isset($num[$id])){
+                            $list[$id] += 1;
+                            $this->cache->file->save('stop_log', $list, (strtotime($e_time)- $time) );//缓存到活动结束
+                        }else{
+                            $list[$id] = 1;
+                            $this->cache->file->save('stop_log', $list, (strtotime($e_time)- $time) );//缓存到活动结束
+                        }
+                    }else{
+                        $list[$id] = 1;
+                        $this->cache->file->save('stop_log', $list, (strtotime($e_time)- $time) );//缓存到活动结束
+                    }
+                    $this->return_json(['code' => 0, 'msg' => "操作过于频繁，请稍后再试！"]);
+                }
+            }
+        }
     }
     
     /**
