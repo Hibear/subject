@@ -161,7 +161,7 @@ class Public_vote extends MY_Controller{
      * 判断选手得票速率
      */
     private function calculate($id, $s_time, $time, $e_time){
-        $v = 0.5; //不得超过的速率
+        $v = 0.2; //不得超过的速率
         //获取选手得票数
         $info = $this->Mvote_obj->get_one('score', ['id' => $id]);
         if($info['score'] > 0){
@@ -170,17 +170,18 @@ class Public_vote extends MY_Controller{
                 if( ($info['score']/$t) >  $v){
                     $num = $this->cache->file->get('stop_log'); 
                     if(num){
-                        if(isset($num[$id])){
-                            $list[$id] += 1;
-                            $this->cache->file->save('stop_log', $list, (strtotime($e_time)- $time) );//缓存到活动结束
+                        if(isset($num['t_'.$id])){
+                            $num['t_'.$id] =$num['t_'.$id] + 1;
+                            $this->cache->file->save('stop_log', $num, (strtotime($e_time)- $time) );//缓存到活动结束
                         }else{
-                            $list[$id] = 1;
-                            $this->cache->file->save('stop_log', $list, (strtotime($e_time)- $time) );//缓存到活动结束
+                            $num['t_'.$id] = 1;
+                            $this->cache->file->save('stop_log', $num, (strtotime($e_time)- $time) );//缓存到活动结束
                         }
                     }else{
-                        $list[$id] = 1;
+                        $list['t_'.$id] = 1;
                         $this->cache->file->save('stop_log', $list, (strtotime($e_time)- $time) );//缓存到活动结束
                     }
+                    $msg = $info['score']/$t;
                     $this->return_json(['code' => 0, 'msg' => "操作过于频繁，请稍后再试！"]);
                 }
             }
@@ -214,7 +215,10 @@ class Public_vote extends MY_Controller{
         //判断今天是否对次对象投票过
         $count = $this->Mactive_vote_log->count(['create_time' => date('Y-m-d'), 'active_id' => $active_id, 'obj_id' => $obj_id, 'openid' => $openid]);
         if($count){
-            $this->return_json(['code' => 0, 'msg' => '你已经对此投过票了！']);
+            if($active_id != 13){
+                $this->return_json(['code' => 0, 'msg' => '你已经对此投过票了！']);
+            }
+            
         }
         
         //开始添加投票记录
