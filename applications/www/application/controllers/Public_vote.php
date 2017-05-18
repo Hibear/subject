@@ -215,10 +215,7 @@ class Public_vote extends MY_Controller{
         //判断今天是否对次对象投票过
         $count = $this->Mactive_vote_log->count(['create_time' => date('Y-m-d'), 'active_id' => $active_id, 'obj_id' => $obj_id, 'openid' => $openid]);
         if($count){
-            if($active_id != 13){
-                $this->return_json(['code' => 0, 'msg' => '你已经对此投过票了！']);
-            }
-            
+            $this->return_json(['code' => 0, 'msg' => '你已经对此投过票了！']);
         }
         
         //开始添加投票记录
