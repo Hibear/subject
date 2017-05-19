@@ -12,15 +12,6 @@
         <script src="<?php echo get_css_js_url('swiper/swiper.min.js', 'h5')?>" type="text/javascript"></script>
     </head>
 <body>
-    <div class="message">
-          <div class="form-group">
-            <input type="hidden" id ="_csrf" value="<?php echo $csrf;?>">
-            <textarea class="form-control" id="msg" placeholder="请您留言"></textarea>
-            <p id="tip"></p>
-            <p id="success"></p>
-          </div>
-          <button type="submit" class="btn btn-default">提交</button>
-    </div>
     <?php if($lists):?>
     <div class="list">
         <h4>&nbsp;最新留言：</h4>
@@ -38,6 +29,17 @@
         </div>
     </div>
     <?php endif;?>
+
+    <div class="message">
+          <div class="form-group">
+            <input type="hidden" id ="_csrf" value="<?php echo $csrf;?>">
+            <textarea class="form-control" id="msg" placeholder="请您留言"></textarea>
+            <p id="tip"></p>
+            <p id="success"></p>
+          </div>
+          <button type="submit" class="btn btn-default">提交</button>
+    </div>
+    
     <script type="text/javascript">
         var mySwiper = new Swiper('.swiper-container', {
         	autoplay: 10000,//可选选项，自动滑动
@@ -57,6 +59,9 @@
                     }else{
                         $('#msg').val('');
                     	$('#success').text(data.msg);
+                    	setInterval(function(){
+                    		$('#success').text('');
+            			}, 3000);
                     }
                 }else{
                 	$('#tip').text('网络异常！');
