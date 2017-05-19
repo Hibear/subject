@@ -36,6 +36,11 @@ class Message extends MY_Controller{
                     if($count >= 6){
                         $this->return_json(['code' => 0, 'msg' => "当前ip:{$ip}今日留言次数超限"]);
                     }
+                    //判断留言是否重复
+                    $count = $this->Message->count(['msg' => $msg]);
+                    if($count){
+                        $this->return_json(['code' => 0, 'msg' => "您的留言内容已经被人抢先发表啦！"]);
+                    }
                     $time = date('Y-m-d H:i:s');
                     $add = [
                         'msg' => $msg,
@@ -49,7 +54,7 @@ class Message extends MY_Controller{
                     }
                     $this->return_json(['code' => 1, 'msg' => '留言成功', 'time' => $time]);
                 }else{
-                    $this->return_json(['code' => 0, 'msg' => 'error: csrf is error']);
+                    $this->return_json(['code' => 0, 'msg' => '请重新刷新当前页面']);
                 }
             }else{
                 $this->return_json(['code' => 0, 'msg' => 'error: csrf is empty']);
