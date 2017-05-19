@@ -56,7 +56,7 @@
                     	$('#tip').text(data.msg);
                     }else{
                         $('#msg').val('');
-                    	$('#success').val(data.msg);
+                    	$('#success').text(data.msg);
                     }
                 }else{
                 	$('#tip').text('网络异常！');
