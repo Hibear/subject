@@ -31,14 +31,15 @@ class Message extends MY_Controller{
                 $_csrf = $this->session->userdata('_csrf');
                 if($csrf == $_csrf){
                     //判断今天是否能提交留言
-                    $count = $this->Message->count(['time' => date('Y-m-d'), 'ip' => get_client_ip()]);
-                    if($count >= 3){
-                        $this->return_json(['code' => 0, 'msg' => '当前ip今日留言次数超限']);
+                    $ip = get_client_ip();
+                    $count = $this->Message->count(['time' => date('Y-m-d'), 'ip' => $ip]);
+                    if($count >= 6){
+                        $this->return_json(['code' => 0, 'msg' => "当前ip:{$ip}今日留言次数超限"]);
                     }
                     $time = date('Y-m-d H:i:s');
                     $add = [
                         'msg' => $msg,
-                        'ip' => get_client_ip(),
+                        'ip' => $ip,
                         'time' => date('Y-m-d'),
                         'create_time' => $time
                     ];
