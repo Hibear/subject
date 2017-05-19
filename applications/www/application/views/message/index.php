@@ -33,14 +33,24 @@
     <div class="message">
           <div class="form-group">
             <input type="hidden" id ="_csrf" value="<?php echo $csrf;?>">
-            <textarea class="form-control" id="msg" placeholder="请您留言"></textarea>
+            <textarea style="height: 100px;" class="form-control" id="msg" placeholder="请您留言"></textarea>
             <p id="tip"></p>
             <p id="success"></p>
           </div>
-          <button type="submit" class="btn btn-default">提交</button>
+          <div class="form-group">
+            <img id="verify_img" style="border: 1px solid #ccc;" src="/message/code" /><br><br>
+            <input type="text" style="height:34px;" class="col-xs-5 col-sm-3" id="p_yzm" placeholder="请您留言" />
+            <button type="submit" class="btn btn-default">提交</button>
+          </div>
+          
     </div>
     
     <script type="text/javascript">
+
+        $('#verify_img').click(function(){
+            $('#verify_img').attr('src',$('#verify_img').attr('src')+'?');
+        });
+    
         var mySwiper = new Swiper('.swiper-container', {
         	autoplay: 10000,//可选选项，自动滑动
         })
@@ -48,16 +58,22 @@
         $('.btn.btn-default').on('click' , function(){
             var _csrf = $('#_csrf').val();
             var msg = $('#msg').val();
+            var p_yzm = $('#p_yzm').val();
+            if(p_yzm == '' || !p_yzm){
+                $('#tip').text('验证码不能为空！');
+                return;
+            }
             if(msg == '' || !msg){
                 $('#tip').text('留言不能为空！');
                 return;
             }
-            $.post('/message/save', {'_csrf':_csrf, 'msg':msg}, function(data){
+            $.post('/message/save', {'_csrf':_csrf, 'msg':msg, 'p_yzm':p_yzm}, function(data){
                 if(data){
                     if(data.code == 0){
                     	$('#tip').text(data.msg);
                     }else{
                         $('#msg').val('');
+                        $('#p_yzm').val('');
                     	$('#success').text(data.msg);
                     	setInterval(function(){
                     		$('#success').text('');

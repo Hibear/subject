@@ -18,10 +18,23 @@ class Message extends MY_Controller{
         $this->load->view('message/index', $data);
     }
     
+    public function code(){
+        $this->load->library('valicode');
+        $this->valicode->outImg('p_yzm');
+    }
+    
     public function save(){
         $url = C('domain.h5.url');
         header( "Access-Control-Allow-Origin: {$url}");
         if(IS_POST){
+            $p_yzm = trim($this->input->post('p_yzm'));
+            if(!p_yzm){
+                $this->return_json(['code' => 0, 'msg' => '验证码不能为空']);
+            }
+            //判断验证码是否正确
+            if($p_yzm != $_SESSION['p_yzm']){
+                $this->return_json(['code' => 0, 'msg' => '验证码错误']);
+            }
             $msg = trim($this->input->post('msg'));
             if(!$msg){
                 $this->return_json(['code' => 0, 'msg' => '留言不能为空']);
@@ -32,10 +45,6 @@ class Message extends MY_Controller{
                 if($csrf == $_csrf){
                     //判断今天是否能提交留言
                     $ip = get_client_ip();
-                    $count = $this->Message->count(['time' => date('Y-m-d'), 'ip' => $ip]);
-                    if($count >= 6){
-                        $this->return_json(['code' => 0, 'msg' => "当前ip:{$ip}今日留言次数超限"]);
-                    }
                     //判断留言是否重复
                     $count = $this->Message->count(['msg' => $msg]);
                     if($count){

@@ -30,9 +30,9 @@
 		}
 
 		//通过访问该方法向浏览器中输出图像
-		public function outImg(){
+		public function outImg($code = 'code'){
             session_start();
-            $_SESSION["code"]=strtoupper($this->checkCode);  //加到session中
+            $_SESSION[$code]=strtoupper($this->checkCode);  //加到session中
 			$this->getCreateImage();                 //调用内部方法创建画布并对其进行初使化
 			//如果传递了外部字体，使用外部字体，否则使用内置字体
 			if(!empty($this->fontPath) && file_exists($this->fontPath)){
