@@ -47,7 +47,7 @@ class Message extends MY_Controller{
                     if(!$res){
                         $this->return_json(['code' => 0, 'msg' => '留言失败，请重试']);
                     }
-                    $this->return_json(['code' => 1, 'msg' => 'success', 'time' => $time]);
+                    $this->return_json(['code' => 1, 'msg' => '留言成功', 'time' => $time]);
                 }else{
                     $this->return_json(['code' => 0, 'msg' => 'error: csrf is error']);
                 }
