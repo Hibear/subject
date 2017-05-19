@@ -39,7 +39,7 @@
           </div>
           <div class="form-group">
             <img id="verify_img" style="border: 1px solid #ccc;" src="/message/code" /><br><br>
-            <input type="text" style="height:34px;" class="col-xs-5 col-sm-3" id="p_yzm" placeholder="请您留言" />
+            <input type="text" style="height:34px;" class="col-xs-5 col-sm-3" id="p_yzm" placeholder="验证码" />
             <button type="submit" class="btn btn-default">提交</button>
           </div>
           
