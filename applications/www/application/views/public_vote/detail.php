@@ -83,7 +83,7 @@
     });
     $(function(){
 
-    	$('#vote').on('click', function(){
+    	$('#tp').on('click', function(){
             status = $(this).attr('status');
             if(status == 1){
                 var obj_id = $(this).attr('data');
