@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="<?php echo get_css_js_url('gold/reset.css', 'www')?>" media="all" />
     <link rel="stylesheet" type="text/css" href="<?php echo get_css_js_url('public_vote/style.css', 'h5')?>" media="all" />
+    <link rel="stylesheet" type="text/css" href="<?php echo get_css_js_url('ui-dialog.css', 'common')?>" media="all" />
     <title><?php echo $info['title']?></title>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
     <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
@@ -64,6 +65,7 @@
         <button class="button" id="vote" data="0" status="0">投票</button>
     </footer>
     <script src="<?php echo get_css_js_url('guaguaka/jquery-1.9.1.js', 'h5')?>"></script>
+    <script src="<?php echo get_css_js_url('dialog.js', 'common')?>"></script>
     <script>
 
         <?php if(!$lists):?>
@@ -87,17 +89,36 @@
             if(status == 1){
                 var obj_id = $(this).attr('data');
                 var active_id = <?php echo $info['id']?>;
-                $.post('/public_vote/add_vote', {'obj_id':obj_id, 'active_id':active_id}, function(data){
-                    if(data){
-                        if(data.code == 1){
-                        	alert(data.msg);
-                        }else{
-                        	alert(data.msg);
+                var html = '<div style="text-align:center">'
+                html += '<img src="/public_vote/code/'+obj_id+'" />';
+                html += '<input id="code" style="width:100px;height:30px;" autofocus />';
+                html += '</div>'
+                var d = dialog({
+                	title: '请输入验证码',
+                	content: html,
+                	width:150,
+                	okValue: '确定',
+                	ok : function(){
+                    	if($('#code').val() == ''){
+                    	    return false;
                         }
-                    }else{
-                        alert('网络异常')
+                        var code = $('#code').val();
+                        
+                		$.post('/public_vote/add_vote', {'obj_id':obj_id, 'active_id':active_id, 'code':code}, function(data){
+                            if(data){
+                                if(data.code == 1){
+                                	alert(data.msg);
+                                }else{
+                                	alert(data.msg);
+                                }
+                            }else{
+                                alert('网络异常')
+                            }
+                        });
                     }
-                })
+                });
+                d.showModal();
+                
             }
         });
 

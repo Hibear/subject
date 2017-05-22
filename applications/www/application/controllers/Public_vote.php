@@ -129,8 +129,17 @@ class Public_vote extends MY_Controller{
         if(!$user_info){
             $this->return_json(['code' => 0, 'msg' => '请先登陆！']);
         }
+        
         $active_id = (int) $this->input->post('active_id');
         $obj_id = (int) $this->input->post('obj_id');
+        $code = trim($this->input->post('code'));
+        if(!$code){
+            $this->return_json(['code' => 0, 'msg' => '请填写验证码！']);
+        }
+        //判断验证码是否正确
+        if($code != $_SESSION['tp_yzm_'.$obj_id]){
+            $this->return_json(['code' => 0, 'msg' => '验证码错误']);
+        }
         $info = $this->cache->file->get('vote_'.$active_id);
         if(!$info){
             $info = $this->Mweixin_active->get_one('*', ['id' => $active_id, 'is_del' => 0, 'type' => C('active_type.tp.id')]);
@@ -256,5 +265,10 @@ class Public_vote extends MY_Controller{
             redirect(C('domain.h5.url').'/weixin_active_login/login');
             exit;
         }
+    }
+    
+    public function code($id = 0){
+        $this->load->library('valicode');
+        $this->valicode->outImg('tp_yzm_'.$id);
     }
 }
