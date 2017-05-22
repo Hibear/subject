@@ -83,43 +83,40 @@
     });
     $(function(){
 
-    	$('#tp').on('click', function(){
-            status = $(this).attr('status');
-            if(status == 1){
-                var obj_id = $(this).attr('data');
-                var active_id = <?php echo $info['id']?>;
-                var html = '<div style="text-align:center">'
-                html += '<img src="/public_vote/code/'+obj_id+'" />';
-                html += '<input id="code" style="width:100px;height:30px;" autofocus />';
-                html += '</div>'
-                var d = dialog({
-                	title: '请输入验证码',
-                	content: html,
-                	width:150,
-                	okValue: '确定',
-                	ok : function(){
-                    	if($('#code').val() == ''){
-                    	    return false;
-                        }
-                        var code = $('#code').val();
-                        
-                		$.post('/public_vote/add_vote', {'obj_id':obj_id, 'active_id':active_id, 'code':code}, function(data){
-                            if(data){
-                                if(data.code == 1){
-                                	alert(data.msg);
-                                }else{
-                                	alert(data.msg);
-                                }
-                            }else{
-                                alert('网络异常')
-                            }
-                        });
+        $("#tp").click(function(){
+        	var obj_id = <?php echo $obj['id']?>;
+            var active_id = <?php echo $active_id?>;
+            
+            var html = '<div style="text-align:center">'
+            html += '<img src="/public_vote/code/'+obj_id+'" />';
+            html += '<input id="code" style="width:100px;height:30px;" autofocus />';
+            html += '</div>'
+            var d = dialog({
+            	title: '请输入验证码',
+            	content: html,
+            	width:150,
+            	okValue: '确定',
+            	ok : function(){
+                	if($('#code').val() == ''){
+                	    return false;
                     }
-                });
-                d.showModal();
-                
-            }
-        });
+                    var code = $('#code').val();
+                    
+            		$.post('/public_vote/add_vote', {'obj_id':obj_id, 'active_id':active_id, 'code':code}, function(data){
+                        if(data){
+                            if(data.code == 1){
+                            	alert(data.msg);
+                            }else{
+                            	alert(data.msg);
+                            }
+                        }else{
+                            alert('网络异常')
+                        }
+                    });
+                }
+            });
+            d.showModal();
+        })
     })
 
 </script>
