@@ -10,7 +10,7 @@ class Child extends MY_Controller{
     
     public function index(){
         $data = $this->data;
-        $this->check_login();
+        //$this->check_login();
         $this->load->view('child/index', $data);
     }
     

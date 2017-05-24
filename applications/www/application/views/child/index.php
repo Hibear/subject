@@ -455,7 +455,7 @@
 
 </head>
 <body>
-<div style="position:absolute; left:20px; top:20px; z-index:9999">时代传媒▪腾讯房产贵州站</div>
+
     <div id="content">
        <div id="load">
             <div class="action2"></div>

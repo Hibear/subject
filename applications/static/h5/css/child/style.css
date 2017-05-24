@@ -158,6 +158,7 @@ html, body {
     width: 100%;
     height: 100%;
     background-image: url(../../images/child/bg.jpg);
+	background-size: cover;
     display: none;
 }
 
@@ -2872,6 +2873,7 @@ html, body {
     width:100%;
     height:100%;
     background-image:url(../../images/child/bg.jpg);
+	background-size: cover;
     display:none;
 }
 #result .layer{
@@ -3099,7 +3101,7 @@ opacity:1;
 width:42px;
 height:42px;
 position:absolute;
-top:0px;
+top:65px;
 right:5px;
 background-size:70% 70%;
 }
