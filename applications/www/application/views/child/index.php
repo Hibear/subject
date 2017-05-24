@@ -12,6 +12,16 @@
     <script src="<?php echo get_css_js_url('child/question.js', 'h5')?>"></script>
     
     <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?e2539c7271055443ffc698b8c5c88300";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    
+    <script>
         
         var load = new Load(function (p) {
             var text = $("#load .text");
