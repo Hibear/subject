@@ -57,14 +57,14 @@ html, body {
     @keyframes sixth
     {
         0%{transform: translate3d(0,-20px,0);background-image: url(../../images/child/load_1.png)}
-        50%{transform: translate3d(0,-20px,0);background-image: url(../../images/child/load_2.png)}
-        100%{transform: translate3d(0,-20px,0);background-image: url(../../images/child/load_3.png)}
+        50%{transform: translate3d(0,-20px,0);background-image: url(../../images/child/load_1.png)}
+        100%{transform: translate3d(0,-20px,0);background-image: url(../../images/child/load_1.png)}
     }
     @-webkit-keyframes sixth
     {
         0%{-webkit-transform: translate3d(0,-20px,0);background-image: url(../../images/child/load_1.png)}
-        50%{-webkit-transform: translate3d(0,-20px,0);background-image: url(../../images/child/load_2.png)}
-        100%{-webkit-transform: translate3d(0,-20px,0);background-image: url(../../images/child/load_3.png)}
+        50%{-webkit-transform: translate3d(0,-20px,0);background-image: url(../../images/child/load_1.png)}
+        100%{-webkit-transform: translate3d(0,-20px,0);background-image: url(../../images/child/load_1.png)}
     }
     #load .action2 {
         margin: auto;
@@ -2871,7 +2871,7 @@ html, body {
 {
     width:100%;
     height:100%;
-    background-image:url(../../images/child/bgq.jpg);
+    background-image:url(../../images/child/bg.jpg);
     display:none;
 }
 #result .layer{
