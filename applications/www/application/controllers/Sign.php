@@ -167,15 +167,16 @@ class Sign extends MY_Controller{
         $where['openid']=  $openid;
         
         $info = $this->Mexchange_log->get_lists($field, $where, ['create_time' => 'desc'], $limit = 10);
-        
-        foreach ($info as $k=>$v){
-            $info[$k]['create_time'] = date('Y-m-d',strtotime($v['create_time']));
-        }
-
         if(!$info){
             $this->return_json(['code' => 0, 'msg' => '没有物品']);
         }
-            $this->return_json(['code' => 1, 'score' => $info]);
+        foreach ($info as $k=>$v){
+            if($v['cover_img']){
+                $info[$k]['cover_img'] = get_img_url($v['cover_img']);
+            }
+            $info[$k]['create_time'] = date('Y-m-d',strtotime($v['create_time']));
+        }
+        $this->return_json(['code' => 1, 'score' => $info]);
         
     }
     

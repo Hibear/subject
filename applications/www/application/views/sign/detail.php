@@ -31,7 +31,7 @@
     <div class="bd">
         <ul>
             <li>
-                <a class="pic" href="#"><img src="/WeixinPublic/images/caideng.jpg" /></a>
+                <a class="pic" href="#"><img src="<?php echo get_img_url($info['cover_img'])?>" /></a>
             </li>
 
         </ul>

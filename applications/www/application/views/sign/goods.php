@@ -16,7 +16,7 @@
     <?php foreach ($list as $k=>$v):?>
         <div class="lipin">
             <a href="/sign/detail?id=<?php echo $v['id']?>">
-                <img src="/WeixinPublic/images/caideng.jpg" alt="<?php echo get_img_url($v['cover_img'])?>">
+                <img src="<?php echo get_img_url($v['cover_img'])?>" alt="">
             </a>
                 <p>名称:<?php echo $v['title']?></p>
                 <p style="text-align:center;">

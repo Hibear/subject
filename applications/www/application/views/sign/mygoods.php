@@ -41,7 +41,7 @@
         <?php if($v['status']==2): ?>
         <div class="none_lipin">
         <a href="/sign/detail?id=<?php echo $v['id']?>">
-            <img src="/WeixinPublic/images/caideng.jpg" alt="">
+            <img src="<?php echo get_img_url($v['cover_img'])?>" alt="">
         </a>
             <p>名称:<?php echo $v['title']?></p>
             <p id="score_color">积分:<?php echo $v['score']?></p>
@@ -91,7 +91,7 @@
                      for(var i=0;i<score.length;i++){
 
                                  html += '<div class="none_lipin">';
-        						 html += '<img src="/WeixinPublic/images/caideng.jpg" alt="">';
+        						 html += '<img src="'+score[i]["cover_img"]+'" alt="">';
         						 html += '<p>名称:'+score[i]['title']+'</p>';
         						 html += '<p id="score_color">积分:'+score[i]['score']+'</p>';
         						 if(status ==2){
