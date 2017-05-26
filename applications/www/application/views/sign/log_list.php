@@ -72,7 +72,7 @@
     </div>
 
     <div id="bottom_nav">
-            <div class="hr_text"><p>兑换礼品</p></div>
+            <div class="hr_text"><p onclick="window.open('/sign/goods', '_self')">兑换礼品</p></div>
     </div>
     
 </div>

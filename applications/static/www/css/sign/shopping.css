@@ -2,10 +2,14 @@
     margin: 0;
     padding: 0;
 }
+html{
+	min-height:100%;
+	background:#f6f6f6;
+}
 
 #background{
 	
-    min-height: 600px;
+    min-height: 100%;
     display: flex;
     display: -webkit-flex;
     -webkit-flex-direction: column;
@@ -33,7 +37,7 @@
     display: -webkit-flex;
     -webkit-flex-direction: column;
     flex-direction: column;
-	position:fixed;/*¹Ì¶¨×÷ÓÃ*/
+	position:fixed;/*ï¿½Ì¶ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	
 }
 #head_background #pic_back{
@@ -83,8 +87,6 @@
 
 .shop_body{
     min-height: 450px;
-    background:#f6f6f6;
-    margin-top:35%;
 	display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: row;
@@ -120,7 +122,7 @@
 	background:white;
 	margin-left:1.7%;
 	margin-top:2%;
-	border: solid 1px #919191;
+	border: solid 1px #fab722;;
 	
 }
 

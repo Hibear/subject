@@ -6,7 +6,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class Sign extends MY_Controller{
 
-    private $openid = 'o-_Sft8oKOymmAjaEEWeOzrCdMbM';
+    private $openid = '';
     public function __construct(){
         parent::__construct();
         $this->load->model(array(
@@ -16,6 +16,9 @@ class Sign extends MY_Controller{
              'Model_sign_log' => 'Msign_log'
         ));
         $this->load->driver('cache');
+        $this->check_login();
+        $user_info = $this->session->userdata('user_info');
+        $this->openid = $user_info['openid'];
     }
     
     /**
@@ -23,9 +26,7 @@ class Sign extends MY_Controller{
      */
     public function index(){
         $data = $this->data;
-        
-        $data['username'] = 'Apollo';
-        $data['userImage'] = 'http://img2.woyaogexing.com/2017/04/10/9679559f6c96342c!400x400_big.jpg';        
+        $data['user_info'] = $this->session->userdata('user_info');
         $this->load->view('sign/index', $data);
     }
     
@@ -35,7 +36,6 @@ class Sign extends MY_Controller{
      */
     public function log_list(){
         $data = $this->data;
-        //todo 登陆
         $openid = $this->openid;
         $field = 'id, sign_time, score, continuous_days';
         $where = [
@@ -134,7 +134,6 @@ class Sign extends MY_Controller{
      */
     public function my_goods(){
         $data = $this->data;
-        //todo 登陆
         $openid = $this->openid;
         $field = '*';
         $where = [
@@ -146,7 +145,7 @@ class Sign extends MY_Controller{
         
 //         print_r($data);
         
-        $this->load->view('sign/myprize',$data);
+        $this->load->view('sign/mygoods',$data);
         
     }
     /**
@@ -154,7 +153,6 @@ class Sign extends MY_Controller{
      */
     public function get_status_lists(){
         $data = $this->data;
-        //todo 登陆
         $openid = $this->openid;
         $field = 'id,title,score,cover_img,create_time,get_time,num,status';
         $status = (int) $this->input->post('status');
@@ -191,7 +189,7 @@ class Sign extends MY_Controller{
         //获取当前用户信息
         $data['userscore'] = $this->Msign_user->get_one('score', ['openid' => $openid]);
         $data['list'] = $this->Mgifts->get_lists('id, title, cover_img, score, num', ['is_del' => 0], ['create_time' => 'desc'], $limit = 10);
-        $this->load->view('sign/shopping',$data);
+        $this->load->view('sign/goods',$data);
     }
     
     /**
@@ -229,7 +227,7 @@ class Sign extends MY_Controller{
         $data['userscore'] = $this->Msign_user->get_one('score', ['openid' => $openid]);
         $id = $this->input->get('id');
         $data['info'] = $this->Mgifts->get_one('*', ['id' => $id]);
-        $this->load->view('sign/shopdetail_2',$data);
+        $this->load->view('sign/detail',$data);
         
     }
     
@@ -285,9 +283,10 @@ class Sign extends MY_Controller{
      * 领取
      */
     public function get(){
-        $id = $this->input->get('sign_id');
+        $id = $this->input->post('sign_id');
         $openid = $this->openid;
         $res = $this->Mexchange_log->update_info(['status' => 2, 'get_time' => date('Y-m-d H:i:s')], ['id' => $id, 'openid' => $openid]);
+        var_dump($this->db->last_query());exit;
         if(!$res) {
             $this->return_json(['code' => 0, 'msg' => '请重试！']);
         }
@@ -340,7 +339,12 @@ class Sign extends MY_Controller{
      * 检测是否登陆
      * @param string $methd 当前检测是否登陆的控制器方法， 便于登陆后返回当前的页面
      */
-    private function check_login($methd = 'index'){
-        
+    private function check_login(){
+        $user_info = $this->session->userdata('user_info');
+        if(!$user_info){
+            $this->session->set_userdata('login_back_url', '/sign/index');
+            redirect(C('domain.h5.url').'/weixin_active_login/login');
+            exit;
+        }
     }
 }

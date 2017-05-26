@@ -139,17 +139,13 @@ div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,blockqu
 }
 
 
-.foot div:nth-child(1) {
-
-    float:left;
-    width:50%;
+.foot div {
     border:1px solid #fe798e;
-    margin-left: 5em;
     text-align:center;
-    font-size:.8rem;
+    font-size:0.8rem;
     height:100%;
-    border-radius:.5rem;
-
+    border-radius: 0.5rem;
+	line-height: 1rem;
 }
 
 .foot div:nth-child(1) a {
