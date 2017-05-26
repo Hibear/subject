@@ -5,14 +5,13 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
     <title>签到首页</title>
-    <link rel="stylesheet" href="<?php echo get_css_js_url('index.css', 'www')?>">
+    <link rel="stylesheet" href="<?php echo get_css_js_url('sign/index.css', 'www')?>">
     <script src="<?php echo get_css_js_url('jquery-1.9.1.js', 'www')?>"></script>
      <script type="text/javascript" src="/WeixinPublic/plugins/layui/layui.js"></script>
     <script type="text/javascript">
         var layer = '';
         layui.use(['layer'], function(){
             layer = layui.layer;
-
         });
     </script>
     
@@ -21,15 +20,13 @@
 <body>
 
 <!--签到首页 div-->
-<div id="home_background">
+<div class="home_background">
 
     <!--用户信息 div-->
     <div class="head">
         <div class="user_info">
-            <img src="<?php echo $userImage ?> alt="">
-            <div class="text_back">
-            <p class="name"><?php echo $username ?>&nbsp;您好！</p>
-            </div>
+            <img src="<?php if(isset($user_info['headimgur'])){echo $user_info['headimgur'];}?> alt="">
+            <p><?php if(isset($user_info['nickname'])){echo $user_info['nickname'];}?>&nbsp;您好！</p>
         </div>
     </div>
 
@@ -37,35 +34,19 @@
     <!--div 抽奖-->
     <div class="sign_in_back">
         <div class="sign_in">
-            <ul>
-                <li id="signs">马上签到</li>
-                <li id="choujiang">我的礼品</li>
-                <li id="list">商城列表</li>
-
-            </ul>
+            <button onclick="jump(this)" url="/sign/log_list">马上签到</button>
+            <button onclick="jump(this)" url="/sign/goods">积分商城</button>
+            <button onclick="jump(this)" url="/sign/my_goods">我的礼品</button>
         </div>
     </div>
     </div>
   
 <script type="text/javascript">
 
-	$('#signs').click(function(){
-// 		window.open('/sign/log_list');
-		window.location.href = '/sign/log_list';
-	})
-	
-	$('#list').click(function(){
-// 		window.open('/sign/lists');
-		window.location.href = '/sign/goods';
-	})
-	
-		$('#choujiang').click(function(){
-// 		window.open('/sign/lists');
-		window.location.href = '/sign/lists';
-	})
-	
-	
-
+    function jump(obj){
+        var url = $(obj).attr('url');
+    	window.location.href = url;
+    }
 </script>
     
 

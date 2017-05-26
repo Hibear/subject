@@ -25,24 +25,10 @@ class Sign extends MY_Controller{
         $data = $this->data;
         
         $data['username'] = 'Apollo';
-        $data['userImage'] = 'http://img2.woyaogexing.com/2017/04/10/9679559f6c96342c!400x400_big.jpg';
-       
-
-//      print_r($data);
-        
-        $this->load->view('sign/index_2', $data);
+        $data['userImage'] = 'http://img2.woyaogexing.com/2017/04/10/9679559f6c96342c!400x400_big.jpg';        
+        $this->load->view('sign/index', $data);
     }
     
-    //测试首页界面
-    public function index_2(){
-   
-        $this->load->view('sign/index_2');
-    }
-    //测试签到界面
-    public function progress_2(){
-         
-        $this->load->view('sign/progress_2');
-    }
     
     /**
      * 签到记录列表
@@ -57,11 +43,8 @@ class Sign extends MY_Controller{
         ];
         //获取当前用户信息
         $data['userscore'] = $this->Msign_user->get_one('score', ['openid' => $openid]);
-        $data['list'] = $this->Msign_log->get_lists($field, $where, ['create_time' => 'desc'], $limit = 10);
-        
-//         print_r($data); 
-      
-        $this->load->view('sign/progress_2',$data);
+        $data['list'] = $this->Msign_log->get_lists($field, $where, ['create_time' => 'desc'], $limit = 15);
+        $this->load->view('sign/log_list',$data);
         
         
     }
@@ -147,9 +130,9 @@ class Sign extends MY_Controller{
     }
     
     /**
-     * 礼品兑换列表
+     * 我的礼品
      */
-    public function lists(){
+    public function my_goods(){
         $data = $this->data;
         //todo 登陆
         $openid = $this->openid;
