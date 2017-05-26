@@ -1,5 +1,5 @@
 <!-- 加载公用css -->
-<?php $this->load->view('common/header');?>
+<?php $this->load->view('common/header2');?>
 
 <!-- 头部 -->
 <?php $this->load->view('common/top');?>
@@ -37,11 +37,41 @@
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
                         <form class="form-horizontal" role="form" method="post" >
+                            
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 活动类型： </label>
+                                <div class="col-sm-9">
+                                    <select class="col-xs-3" name="type">
+                                        <?php foreach (C('active_type') as $k => $v):?>
+                                        <option <?php if($info['type'] == $v['id']){echo 'selected';}?> value="<?php echo $v['id']?>"><?php echo $v['name']?></option>
+                                        <?php endforeach;?>
+                                    </select>
+                                </div>
+                            </div>
+                            
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 活动名称： </label>
                                 <div class="col-sm-9">
                                 	<input type="hidden" name="id" value="<?php echo $info['id']?>">
                                     <input type="text" name="title" value="<?php echo $info['title']?>" placeholder="活动名称" class="col-xs-10 col-sm-5">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 封面图： </label>
+                                <div class="col-sm-9">
+                                    <ul id="uploader_img_url">
+                                        <?php if($info['cover_img']):?>
+    				                    <li class="pic pro_gre" style="margin-right: 20px; clear: none">
+        				                    <a class="close del-pic" href="javascript:;"></a>
+        				                    <img src="<?php echo get_img_url($info['cover_img'])?>" style="width: 100%; height: 100%">
+        				                    <input type="hidden" name="img_url" value="<?php echo $info['cover_img']?>">
+    				                    </li>
+    				                    <?php endif;?>
+    	                               <li class="pic pic-add add-pic" style="float: left;width: 220px;height: 175px;clear:none; list-style-type:none">
+    	                                   <a href="javascript:;" class="up-img"  id="btn_img_url"><span>+</span><br>添加照片</a>
+    	                               </li>
+	                               </ul>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -91,7 +121,7 @@
                                     <input type="text" id="prize_<?php echo $v['id']?>" title="奖品"  value="<?php echo $v['prize']?>" placeholder="奖品" class="col-xs-10 col-sm-1">
                                     <input type="number" id="v_<?php echo $v['id']?>" title="概率，必须是整数， 概率总合（100或1000）"  value="<?php echo $v['v']?>" placeholder="概率(0~100)" class="col-xs-10 col-sm-1">
                                     <input type="number"  id="num_<?php echo $v['id']?>" title="数量（必须为整数，填-1时，表示数量不限）" value="<?php echo $v['num']?>" placeholder="数量" class="col-xs-10 col-sm-1">
-                                    <input type="number"  id="is_lottery_<?php echo $v['is_lottery']?>" title="是否是中奖选项（填1是，填0不是）" value="<?php echo $v['is_lottery']?>" placeholder="是中奖项填1，不是填0" class="col-xs-10 col-sm-2">
+                                    <input type="number"  id="is_lottery_<?php echo $v['id']?>" title="是否是中奖选项（填1是，填0不是）" value="<?php echo $v['is_lottery']?>" placeholder="是中奖项填1，不是填0" class="col-xs-10 col-sm-2">
                                     <button class="update" data="<?php echo $v['id'];?>" style="width:50px;height:28px;margin-left: 5px;">更新</button>
                                     <button class="delete" data="<?php echo $v['id'];?>" style="width:50px;height:28px;margin-left: 5px;">-</button>
                                 </div>
@@ -119,12 +149,20 @@
                                 </div>
                                 
                                 <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 只能中奖一次： </label>
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 只能中奖一次(针对抽奖类)： </label>
                                 <label class="col-sm-4">
                                     <label><input type="radio" name="is_one" <?php if(isset($info) && $info['is_one'] == 1){echo 'checked';}?> value="1">是</label>
                                     <label><input type="radio" name="is_one" <?php if(isset($info) && $info['is_one'] == 0){echo 'checked';}?> value="0">否</label>
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 是否单页（投票）： </label>
+                                    <label class="col-sm-4">
+                                    <label><input type="radio" name="singlepage" <?php if(isset($info) && $info['singlepage'] == 0){echo 'checked';}?> value="0">非单页</label>
+                                    <label><input type="radio" name="singlepage" <?php if(isset($info) && $info['singlepage'] == 1){echo 'checked';}?> value="1">单页</label>
+                                </div>
+                        </div>
+                            
+                            
                             <div class="clearfix">
                                 <div class="col-md-offset-3 col-md-9">
                                     <button class="btn btn-info" type="submit">
@@ -143,7 +181,7 @@
 
 <!-- 加载尾部公用js -->
 <?php $this->load->view("common/footer");?>
-<script src="/static/jedate/jedate.min.js"></script>
+<script src="<?php echo get_css_js_url('jedate.js', 'common')?>"></script>
 <script type="text/javascript">
 
     jeDate({
@@ -187,7 +225,7 @@
     		html +='<div class="col-sm-9" id="add_rows">';
     	    html +='<input type="text" name="prize[prize_name][]" placeholder="奖项名称" title="奖项（如一等奖、二等奖、三等奖、谢谢参与）" class="col-xs-10 col-sm-1">';
             html +='<input type="text" name="prize[prize][]" placeholder="奖品" title="奖品" class="col-xs-10 col-sm-1">';
-            html +='<input type="number" name="prize[v][]" placeholder="概率(0~100)" title="概率，必须是整数， 概率总合（100或1000）" class="col-xs-10 col-sm-1">';
+            html +='<input type="number" name="prize[v][]" placeholder="概率(0~1000)" title="概率，必须是整数， 概率总合（100或1000）" class="col-xs-10 col-sm-1">';
             html +='<input type="number" name="prize[num][]" placeholder="数量" title="数量（必须为整数，填-1时，表示数量不限）" class="col-xs-10 col-sm-1">';
             html +='<input type="number"  nam="prize[is_lottery][]" placeholder="是中奖项填1，不是填0" title="是否是中奖选项（填1是，填0不是）" class="col-xs-10 col-sm-2">';
             html +='</div></div>';
@@ -259,6 +297,21 @@
     	}, 2000);
     }
 </script>
+
+<!-- 上传 -->
+<?php $this->load->view("common/sea_footer");?>
+<script type="text/javascript">
+    var object = [
+          {"obj": "#uploader_img_url", "btn": "#btn_img_url"}
+    ];
+    
+    seajs.use(['admin_uploader','jqueryswf','swfupload'], function(swfupload) {
+    	swfupload.swfupload(object);
+    });
+    
+
+</script>
+<!-- 上传 -->
 
 <!-- 底部 -->
 <?php $this->load->view("common/bottom");?>

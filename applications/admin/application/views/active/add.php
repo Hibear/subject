@@ -1,5 +1,5 @@
 <!-- 加载公用css -->
-<?php $this->load->view('common/header');?>
+<?php $this->load->view('common/header2');?>
 
 <!-- 头部 -->
 <?php $this->load->view('common/top');?>
@@ -41,9 +41,29 @@
                         <!-- PAGE CONTENT BEGINS  enctype="multipart/form-data"-->
                         <form class="form-horizontal" role="form" method="post">
                             <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 活动类型： </label>
+                                <div class="col-sm-9">
+                                    <select class="col-xs-3" name="type">
+                                        <?php foreach (C('active_type') as $k => $v):?>
+                                        <option value="<?php echo $v['id']?>"><?php echo $v['name']?></option>
+                                        <?php endforeach;?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 活动名称： </label>
                                 <div class="col-sm-9">
                                     <input type="text" name="title" placeholder="活动名称" class="col-xs-10 col-sm-5">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 封面图： </label>
+                                <div class="col-sm-9">
+                                    <ul id="uploader_img_url">
+    	                               <li class="pic pic-add add-pic" style="float: left;width: 220px;height: 175px;clear:none; list-style-type:none">
+    	                                   <a href="javascript:;" class="up-img"  id="btn_img_url"><span>+</span><br>添加照片</a>
+    	                               </li>
+	                               </ul>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -73,7 +93,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 人/每天/次： </label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="number" value="3" class="col-xs-10 col-sm-5">
+                                    <input type="text" name="count" value="3" class="col-xs-10 col-sm-5">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -96,11 +116,17 @@
                             </div>
                             
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 只能中奖一次： </label>
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 只能中奖一次(针对抽奖类)： </label>
                                 <label class="col-sm-4">
                                     <label><input type="radio" name="is_one"  value="1">是</label>
                                     <label><input type="radio" name="is_one"  value="0">否</label>
                                 </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 是否单页（投票）： </label>
+                                <label class="col-sm-4">
+                                <label><input type="radio" name="singlepage"  value="0">非单页</label>
+                                <label><input type="radio" name="singlepage"  value="1">单页</label>
+                            </div>
                             
                             <div class="clearfix form-actions">
                                 <div class="col-md-offset-3 col-md-9">
@@ -120,7 +146,7 @@
 
 <!-- 加载尾部公用js -->
 <?php $this->load->view("common/footer");?>
-<script src="/static/jedate/jedate.min.js"></script>
+<script src="<?php echo get_css_js_url('jedate.js', 'common')?>"></script>
 <script type="text/javascript">
 
     jeDate({
@@ -175,6 +201,21 @@
 
     
 </script>
+
+<!-- 上传 -->
+<?php $this->load->view("common/sea_footer");?>
+<script type="text/javascript">
+    var object = [
+          {"obj": "#uploader_img_url", "btn": "#btn_img_url"}
+    ];
+    
+    seajs.use(['admin_uploader','jqueryswf','swfupload'], function(swfupload) {
+    	swfupload.swfupload(object);
+    });
+    
+
+</script>
+<!-- 上传 -->
 
 <!-- 底部 -->
 <?php $this->load->view("common/bottom");?>

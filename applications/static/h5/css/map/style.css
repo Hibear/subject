@@ -1,0 +1,154 @@
+#containers, #jin_ditu{
+	width:100%;
+	height:auto;
+	min-height: 100%;
+}
+.tip{
+	position: fixed;
+	top: 44px;
+	padding-top:2px;
+	width:100%;
+	min-height:26px;
+	height:4%;
+	text-align:center;
+	z-index: 1;
+	background-color: #FFF;
+	border-bottom:1px solid gray;
+}
+.h-tips{
+	position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    height: 44px;
+	line-height:44px;
+	color:#fff;
+	text-align: center;
+    background-color: #0080FF;
+}
+.f-tips{
+	position: fixed;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #FF6700;
+    bottom: 0;
+    color: #fff;
+    filter: alpha(opacity=80);
+    opacity: 0.8;
+    text-align: center;
+}
+
+.h-lt{
+	position: fixed;
+	font-size: 1.1rem;
+	left: 1rem;
+	display:none;
+}
+.act{
+	display:block;
+}
+
+.showdetail{
+	position: fixed;
+    width: 100%;
+	min-height:100%;
+	z-index:2;
+}
+.show{
+	top:44px;
+	background:#FFF;
+}
+
+.navbar{
+	position: fixed;
+    bottom: -44;
+    left: 0;
+    width: 100%;
+    box-orient: horizontal;
+    box-pack: center;
+    box-align: center;
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    display: -moz-box;
+    -moz-box-orient: horizontal;
+    -moz-box-pack: center;
+    -moz-box-align: center;
+    display: box;
+    box-orient: horizontal;
+    box-pack: center;
+    box-align: center;
+    z-index: 2;
+    background: #0080FF;
+    height: 44px;
+}
+
+.navact{
+	bottom: 0;
+}
+
+.navbar .jsaction:first-child{
+	border-right: solid 1px #fff;
+}
+.jsaction{
+	color: #fff;
+    box-flex: 1;
+    -webkit-box-flex: 1;
+    height: 100%;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+}
+
+.btable{
+	width:100%; border:1px #b0b0b0 solid;
+}
+.btable tr { }
+    .btable td { height: 32px; background: #fff;vertical-align: middle ;color:#595757;font-size:12px;}
+    .btable td.s1{background:#d8d8d8;text-align:center;width:80px}
+    .btable td.s2{background:#e6e6e6;padding:0 5px}
+    .btable td.d1{background:#eeeeee;text-align:center;width:80px}
+    .btable td.d2{background:#fefefe;padding:0 5px}
+
+	.tabdtdw td.s1{width:94px;}
+	.tabdtdw td.d1{width:94px;}
+    a.wlink{display:block}
+    a.wlink:link, a.wlink:active, a.wlink:visited { text-decoration: underline; color: #0000ff; }
+    
+    
+.full{
+	height:100%;
+	width: 100%;
+}
+.swiper-container {
+    height: 150px;
+}
+
+.jiejing{
+	position: fixed;
+    width: 100%;
+	min-height:100%;
+	z-index:2;
+}
+
+.ditu{
+	position: fixed;
+    width: 100%;
+	min-height:100%;
+	z-index:2;
+}
+
+
+
+
+
+
+
+
+
+
+

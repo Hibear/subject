@@ -1,0 +1,33 @@
+.containers{
+	width:100%;
+	height:auto;
+	min-height: 100%;
+	background:url('../../images/map/bg.png');
+	background-size: 100%;
+	font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+}
+.title{
+	text-align:center;
+	margin-top: 20%;
+}
+.title span {
+	font-size:1.8rem;
+	color:#fff;
+}
+.media-lists{
+	text-align:center;
+	margin-top: 14%;
+}
+.btn-lists{
+	width:100%;
+	height:5rem;
+	line-height:3rem;
+}
+.btn-lists button{
+	height:3rem;
+	border-radius:5px;
+	border:2px solid #fff;
+	width:12rem;
+	color:#fff;
+	background-color: rgba(0,0,0,0);
+}

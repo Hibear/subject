@@ -7,7 +7,7 @@ class Goldegg extends MY_Controller{
         $this->load->model(array(
                 'Model_active' => 'Mactive',
                 'Model_active_prize' => 'Mactive_prize',
-                'Model_goldegg_log' => 'Mgoldegg_log'
+                'Model_prize_log' => 'Mprize_log'
         ));
         //分享用的
         $this->app = C("appid_secret.dashi");
@@ -20,7 +20,7 @@ class Goldegg extends MY_Controller{
         $info = $this->cache->file->get('goldegg_'.$id);
         if(!$info){
             //根据id获取本次砸金蛋的数据
-            $info = $this->Mactive->get_one('*', ['id' => $id, 'is_del' => 0]);
+            $info = $this->Mactive->get_one('*', ['id' => $id, 'type' => C('active_type.zjd.id'),  'is_del' => 0]);
             if($info){
                 $this->cache->file->save('goldegg_'.$id, $info, 5*60);//缓存5分钟
             }else{
@@ -28,7 +28,10 @@ class Goldegg extends MY_Controller{
             }
         }
         //判断是否登陆
-        $this->check_login($info['id']); 
+        $this->check_login($info['id']);
+        
+        //更新页面访问量
+        $this->Mactive->update_info(['incr' => ['visits' => 1]], ['id' => $info['id']]);
 
         $user_info = $this->session->userdata('user_info');
         $data['user_info'] = $user_info;
@@ -37,11 +40,11 @@ class Goldegg extends MY_Controller{
         //查询本次砸金蛋的奖项
         $data['prize'] = $this->Mactive_prize->get_lists('*', ['active_id' => $info['id']]);
         //查询今日抽奖的次数
-        $data['num'] = (int) $this->Mgoldegg_log->count(['openid' => $openid, 'create_time' => date('Y-m-d'), 'active_id' => $info['id']]);
+        $data['num'] = (int) $this->Mprize_log->count(['openid' => $openid, 'create_time' => date('Y-m-d'), 'active_id' => $info['id']]);
         //查询本次活动的中奖记录
-        $data['prize_log'] = $this->Mgoldegg_log->get_lists('id, prize_name, prize, create_time', ['openid' => $openid, 'create_time' => date('Y-m-d'), 'active_id' => $info['id']]);
+        $data['prize_log'] = $this->Mprize_log->get_lists('id, prize_name, prize, create_time', ['openid' => $openid, 'create_time' => date('Y-m-d'), 'active_id' => $info['id']]);
         
-        $data['my_prize'] = $this->Mgoldegg_log->get_lists('prize_name, prize',['active_id' => $info['id'], 'openid' => $openid, 'is_lottery' => 1]);
+        $data['my_prize'] = $this->Mprize_log->get_lists('prize_name, prize, create_time, status',['active_id' => $info['id'], 'openid' => $openid, 'is_lottery' => 1]);
        
         $this->load->view('goldegg/index',$data);
     }
@@ -78,18 +81,20 @@ class Goldegg extends MY_Controller{
         //判断当前用户是否能够砸蛋
         if($info['is_one'] == 1){
             //如果用户只能有一次中奖， 先判断是否已经中奖过了
-            $res = $this->Mgoldegg_log->count(['openid' => $openid, 'active_id' => $id, 'is_lottery' => 1]);
+            $res = $this->Mprize_log->count(['openid' => $openid, 'active_id' => $id, 'is_lottery' => 1]);
             if(!$res){
                 //判断今天抽奖的次数是否已经用完
-                $res = $this->Mgoldegg_log->count(['openid' => $openid, 'active_id' => $id, 'create_time' => data('Y-m-d')]);
+                $res = $this->Mprize_log->count(['openid' => $openid, 'active_id' => $id, 'create_time' => date('Y-m-d')]);
                 if($res >= $info['count']){
                     $this->return_json(['code' => 0, 'msg' => '您今天已经抽过'.$info['count'].'次奖了！']);
                 }
+            }else{
+                $this->return_json(['code' => 0, 'msg' => '您已经中过奖了！']);
             }
-            $this->return_json(['code' => 0, 'msg' => '您已经中过奖了！']);
+            
         }else{
             //判断今天抽奖的次数是否已经用完
-            $res = $this->Mgoldegg_log->count(['openid' => $openid, 'active_id' => $id, 'create_time' => date('Y-m-d')]);
+            $res = $this->Mprize_log->count(['openid' => $openid, 'active_id' => $id, 'create_time' => date('Y-m-d')]);
             if($res >= $info['count']){
                 $this->return_json(['code' => 0, 'msg' => '您今天已经抽过'.$info['count'].'次奖了！']);
             }
@@ -146,7 +151,7 @@ class Goldegg extends MY_Controller{
                 'is_lottery' => $prize[$arr_k]['is_lottery'],
                 'active_id' => $id,
             ];
-            $res = $this->Mgoldegg_log->create($add);
+            $res = $this->Mprize_log->create($add);
             if($add['is_lottery'] == 0){
                 $code = -1;
             }else{
@@ -174,7 +179,7 @@ class Goldegg extends MY_Controller{
                     'is_lottery' => $prize[$ar_k]['is_lottery'],
                     'active_id' => $id,
                 ];
-                $res = $this->Mgoldegg_log->create($add);
+                $res = $this->Mprize_log->create($add);
                 if($add['is_lottery'] == 0){
                     $code = -1;
                 }else{
@@ -191,7 +196,7 @@ class Goldegg extends MY_Controller{
                     'is_lottery' => $prize[$arr_k]['is_lottery'],
                     'active_id' => $id,
                 ];
-                $res = $this->Mgoldegg_log->create($add);
+                $res = $this->Mprize_log->create($add);
                 if($add['is_lottery'] == 0){
                     $code = -1;
                 }else{

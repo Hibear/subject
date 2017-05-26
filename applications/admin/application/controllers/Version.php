@@ -9,9 +9,10 @@ class Version extends MY_Controller{
     public function __construct(){
         parent::__construct();
         $this->load->model([
-               'Model_version' => 'Mversion',
-               'Model_admins' => 'Madmins',
+               'Model_version' => 'Mversion'
         ]);
+        $this->data['code'] = 'admin_user_manage';
+        $this->data['active'] = 'version_list';
     }
     
     
@@ -57,7 +58,7 @@ class Version extends MY_Controller{
             $info['update_time'] = date("Y-m-d h:i:s");
             $add = $this->Mversion->create($info);
             if($add){
-                $this->success('操作成功');
+                $this->success('操作成功','/version');
             }else{
                 $this->error('操作失败');
             }

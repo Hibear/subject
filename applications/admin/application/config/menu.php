@@ -74,6 +74,16 @@ $config = array(
                     'url'=>'/gifts',
                     'name'=> '中铁魔都管理',
                     'active'=> 'gifts_list'
+                ),
+                array(
+                    'url'=>'/public_vote',
+                    'name'=> '公共投票管理',
+                    'active'=> 'vote_list'
+                ),
+                array(
+                    'url'=>'/public_lottery',
+                    'name'=> '公共中奖人员',
+                    'active'=> 'lottery_list'
                 )
             ),
 		),
@@ -94,26 +104,31 @@ $config = array(
             ),
 		),
 
-        // '管理员管理' => array(
-        //     'code' => 'admin_user_manage',
-        //     'icon' => 'glyphicon glyphicon-user menu-i',
-        //     'list' => array(
-        //         array(
-        //             'url' => '/admin',
-        //             'name' => '管理员列表',
-        //             'active' => 'admin_list'
-        //         ),
-        //         array(
-        //             'url' => '/admingroup',
-        //             'name' => '角色管理',
-        //             'active' => 'group_list'
-        //         ),
-        //         array(
-        //             'url' => '/adminspurview',
-        //             'name' => '权限管理',
-        //             'active' => 'purview'
-        //         ) 
-        //     ) 
-        // ),
+        '管理员管理' => array(
+            'code' => 'admin_user_manage',
+            'icon' => 'glyphicon glyphicon-user menu-i',
+            'list' => array(
+                array(
+                    'url' => '/admin',
+                    'name' => '管理员列表',
+                    'active' => 'admin_list'
+                ),
+                array(
+                    'url' => '/admingroup',
+                    'name' => '角色管理',
+                    'active' => 'group_list'
+                ),
+                array(
+                    'url' => '/adminspurview',
+                    'name' => '权限管理',
+                    'active' => 'purview'
+                ),
+                array(
+                    'url' => '/version',
+                    'name' => '资源版本号',
+                    'active' => 'version_list'
+                )
+            ) 
+        )  
     ) 
 );

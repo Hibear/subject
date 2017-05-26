@@ -1,0 +1,93 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+	position: relative;
+    background: url(../../images/guaguaka/guaguaka_bg.png) no-repeat 50% 0;
+    height: 640px;
+    overflow: hidden;
+}
+
+#card {
+    height: 100%;
+	color:red;
+    font-weight: bold;
+    font-size: 1.5rem;
+    line-height: 4rem;
+    text-align: center;
+    background: #FAFAFA;
+}
+
+#scratch {
+	
+	width: 18rem;
+    height: 4rem;
+}
+#scratch ,.tips{
+    margin: 0px auto 0;
+    border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+#bg2{width:295px;height:195px;margin:0 auto;}
+
+.tips{
+	margin-top: 1rem;
+	width: 21rem;
+	height:auto;
+	background:#d4787b;
+	border:0px;
+	border-radius: 0px;
+	padding:0.5rem 0.4rem 1rem 0.4rem;
+
+
+	color:white;
+	font-size:15px;
+	font-family:'黑体';
+}
+
+.tips p{
+	padding-bottom:0.01rem ;
+	color:white;
+	font-size:17px;
+	font-family:'黑体';
+}
+
+.active{
+	margin-top:1.03rem;
+	text-align:center;
+	width:100%;
+	height:42px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.active a{
+	
+	height:40px;
+	line-height:40px;
+	width:155px;
+	background:#e2a516;
+	padding:1.03rem;
+	color:white;
+	font-size:17px;
+	font-family:'黑体';
+	text-decoration:none;
+}
+
+.hide{
+	display:none;
+}
+
+.headimg{
+	text-align:center;
+}
+
+.headimg img{
+	border-radius: 3rem;
+	width:6rem;
+}
+
