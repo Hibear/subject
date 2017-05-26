@@ -121,7 +121,7 @@ hr{
 .hr_background{
 	padding-top:3%;
 	padding-bottom:3%;
-	margin-top:2%;
+	margin-top:3%;
 	background:#f9f9f9;
 	height:20%;
 	width:90%;
@@ -243,11 +243,11 @@ hr{
 }
 
 #bottom_nav div p{
-	    background-color: #fab722;
+	background-color: #fab722;
 	width:100%;
 	height:100%;
 	text-align: center;
-	font-size:15px;
+	font-size:14px;
 	border-radius:24px;
 	border: solid 1px #f1d072;
 	color:#fff;

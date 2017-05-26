@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
-    <title>签到首页</title>
+    <title>中铁魔都签到首页</title>
     <link rel="stylesheet" href="<?php echo get_css_js_url('sign/index.css', 'www')?>">
     <script src="<?php echo get_css_js_url('jquery-1.9.1.js', 'www')?>"></script>
      <script type="text/javascript" src="/WeixinPublic/plugins/layui/layui.js"></script>
@@ -25,7 +25,7 @@
     <!--用户信息 div-->
     <div class="head">
         <div class="user_info">
-            <img src="<?php if(isset($user_info['headimgur'])){echo $user_info['headimgur'];}?> alt="">
+            <img src="<?php if(isset($user_info['head_img'])){echo $user_info['head_img'];}?>" alt="">
             <p><?php if(isset($user_info['nickname'])){echo $user_info['nickname'];}?>&nbsp;您好！</p>
         </div>
     </div>

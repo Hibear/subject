@@ -59,6 +59,7 @@
         <span class="select">产品详情</span>
                         商品介绍: <?php echo $info['desc'] ?>
     </div>
+    <div style="height: 70px;"></div>
     <div class="clear"></div>
 </div>
 

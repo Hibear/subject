@@ -12,7 +12,7 @@ class Sign extends MY_Controller{
         $this->load->model(array(
              'Model_gifts' => 'Mgifts',
              'Model_exchange_log' => 'Mexchange_log',
-             'Model_sign_user' => 'Msign_user',
+             'Model_game_user' => 'Mgame_user',
              'Model_sign_log' => 'Msign_log'
         ));
         $this->load->driver('cache');
@@ -42,7 +42,7 @@ class Sign extends MY_Controller{
             'openid' => $openid
         ];
         //获取当前用户信息
-        $data['userscore'] = $this->Msign_user->get_one('score', ['openid' => $openid]);
+        $data['userscore'] = $this->Mgame_user->get_one('score', ['openid' => $openid]);
         $data['list'] = $this->Msign_log->get_lists($field, $where, ['create_time' => 'desc'], $limit = 15);
         $this->load->view('sign/log_list',$data);
         
@@ -83,7 +83,7 @@ class Sign extends MY_Controller{
             $ret = $this->Msign_log->create($add);
             if($ret){
                 //更新用户的总积分
-                $this->Msign_user->update_info(['incr' => ['`score`' => 1]], ['openid' => $openid]);
+                $this->Mgame_user->update_info(['incr' => ['`score`' => 1]], ['openid' => $openid]);
                 $this->return_json(['code' => 1, 'msg' => '签到成功！', 'score' => 1]);
             }else{
                 $this->return_json(['code' => 0, 'msg' => '请重试！']);
@@ -103,7 +103,7 @@ class Sign extends MY_Controller{
                 $ret = $this->Msign_log->create($add);
                 if($ret){
                     //更新用户的总积分
-                    $this->Msign_user->update_info(['incr' => ['`score`' => $limit]], ['openid' => $openid]);
+                    $this->Mgame_user->update_info(['incr' => ['`score`' => $limit]], ['openid' => $openid]);
                     $this->return_json(['code' => 1, 'msg' => '签到成功！', 'score' => $limit]);
                 }else{
                     $this->return_json(['code' => 0, 'msg' => '请重试！']);
@@ -120,7 +120,7 @@ class Sign extends MY_Controller{
                 if($ret){
                     //更新用户的总积分
                     $score = $res['score'] + 1;
-                    $this->Msign_user->update_info(['incr' => ['`score`' => $score]], ['openid' => $openid]);
+                    $this->Mgame_user->update_info(['incr' => ['`score`' => $score]], ['openid' => $openid]);
                     $this->return_json(['code' => 1, 'msg' => '签到成功！', 'score' => $score]);
                 }else{
                     $this->return_json(['code' => 0, 'msg' => '请重试！']);
@@ -140,7 +140,7 @@ class Sign extends MY_Controller{
             'openid' => $openid
         ];
         $where['status'] = 2;
-        $data['userscore'] = $this->Msign_user->get_one('score', ['openid' => $openid]);
+        $data['userscore'] = $this->Mgame_user->get_one('score', ['openid' => $openid]);
         $data['list'] = $this->Mexchange_log->get_lists($field, $where, ['create_time' => 'desc'], $limit = 10);
         
 //         print_r($data);
@@ -174,6 +174,7 @@ class Sign extends MY_Controller{
             if($v['cover_img']){
                 $info[$k]['cover_img'] = get_img_url($v['cover_img']);
             }
+            $info[$k]['get_time'] = date('Y-m-d',strtotime($v['get_time']));
             $info[$k]['create_time'] = date('Y-m-d',strtotime($v['create_time']));
         }
         $this->return_json(['code' => 1, 'score' => $info]);
@@ -188,7 +189,7 @@ class Sign extends MY_Controller{
         $data = $this->data;
         $openid = $this->openid;
         //获取当前用户信息
-        $data['userscore'] = $this->Msign_user->get_one('score', ['openid' => $openid]);
+        $data['userscore'] = $this->Mgame_user->get_one('score', ['openid' => $openid]);
         $data['list'] = $this->Mgifts->get_lists('id, title, cover_img, score, num', ['is_del' => 0], ['create_time' => 'desc'], $limit = 10);
         $this->load->view('sign/goods',$data);
     }
@@ -225,7 +226,7 @@ class Sign extends MY_Controller{
         
         $openid = $this->openid;
         //获取当前用户信息
-        $data['userscore'] = $this->Msign_user->get_one('score', ['openid' => $openid]);
+        $data['userscore'] = $this->Mgame_user->get_one('score', ['openid' => $openid]);
         $id = $this->input->get('id');
         $data['info'] = $this->Mgifts->get_one('*', ['id' => $id]);
         $this->load->view('sign/detail',$data);
@@ -238,7 +239,7 @@ class Sign extends MY_Controller{
     public function exchange(){
         $openid = $this->openid;
         //获取当前用户信息
-        $user = $this->Msign_user->get_one('score', ['openid' => $openid]);
+        $user = $this->Mgame_user->get_one('score', ['openid' => $openid]);
         $id = $this->input->post('id');
         //查询兑换的礼品信息， 使用悲观锁
         $this->db->query('lock table t_gifts read');
@@ -253,7 +254,7 @@ class Sign extends MY_Controller{
             if($res){
                 
                 $score = (int) $info['score'];
-                $ret = $this->Msign_user->update_info(['decr' => ['`score`' => $score]], ['openid' => $openid]);
+                $ret = $this->Mgame_user->update_info(['decr' => ['`score`' => $score]], ['openid' => $openid]);
                 //添加兑换记录
                 if($ret){
                     $add = [
@@ -265,7 +266,7 @@ class Sign extends MY_Controller{
                         'create_time' => date('Y-m-d H:i:s')
                     ];
                     $this->Mexchange_log->create($add);
-                    $user_score = $this->Msign_user->get_one('score', ['openid' => $openid]);
+                    $user_score = $this->Mgame_user->get_one('score', ['openid' => $openid]);
                     $this->return_json(['code' => 1, 'msg' => '兑换成功！','score'=>$user_score]);
                 }else{
                     $this->Mgifts->update_info(['incr' => ['num' => 1 ]], ['id' => $id]);
@@ -287,7 +288,6 @@ class Sign extends MY_Controller{
         $id = $this->input->post('sign_id');
         $openid = $this->openid;
         $res = $this->Mexchange_log->update_info(['status' => 2, 'get_time' => date('Y-m-d H:i:s')], ['id' => $id, 'openid' => $openid]);
-        var_dump($this->db->last_query());exit;
         if(!$res) {
             $this->return_json(['code' => 0, 'msg' => '请重试！']);
         }
@@ -316,7 +316,7 @@ class Sign extends MY_Controller{
             $this->return_json(['code' => 0, 'msg' => '手机号格式不正确！']);
         }
         //判断手机号是否已经被使用
-        $info = $this->Msign_user->count(['tel' => $tel]);
+        $info = $this->Mgame_user->count(['tel' => $tel]);
         if($info == 1){
             $this->return_json(['code' => 0, 'msg' => '手机号已经被注册过了！']);
         }
@@ -329,7 +329,7 @@ class Sign extends MY_Controller{
                 '`score`' => 10
             ]
         ];
-        $res = $this->Msign_user->create($add);
+        $res = $this->Mgame_user->create($add);
         if(!$res){
             $this->return_json(['code' => 0, 'msg' => '请重试！']);
         }

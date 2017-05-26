@@ -11,7 +11,7 @@ class Gifts extends MY_Controller{
         $this->load->model(array(
              'Model_gifts' => 'Mgifts',
              'Model_exchange_log' => 'Mexchange_log',
-             'Model_sign_user' => 'Msign_user'
+             'Model_game_user' => 'Mgame_user'
         ));
         $this->data['code'] = 'question_manage';
         $this->data['active'] = 'gifts_list';
@@ -121,7 +121,7 @@ class Gifts extends MY_Controller{
         $status = 1;
         if($realname){
             $data['realname'] = $realname;
-            $info = $this->Msign_user->get_lists('openid, realname, tel, addr', ['like' => ['realname' => $realname], 'is_del' => 0 ]);
+            $info = $this->Mgame_user->get_lists('openid, realname, tel, addr', ['like' => ['realname' => $realname], 'is_del' => 0 ]);
             if($info && count($info) > 0){
                 $where['in'] = [
                     'openid' => array_column($info, 'openid')
@@ -148,7 +148,7 @@ class Gifts extends MY_Controller{
                     //根据兑换记录表的openid, 查询用户的信息
                     $openids = array_column($list, 'openid');
                     if($openids){
-                        $user_lists = $this->Msign_user->get_lists('openid, realname, tel, addr', ['in' => ['openid' => $openids], 'is_del' => 0]);
+                        $user_lists = $this->Mgame_user->get_lists('openid, realname, tel, addr', ['in' => ['openid' => $openids], 'is_del' => 0]);
                         if($user_lists){
                             foreach ($list as $k => $v){
                                 foreach ($user_lists as $key => $val){

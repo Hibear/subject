@@ -80,7 +80,7 @@
              dataType:'json',
              success: function(data){
             	 if(data.code == 0){
-	                 	layer.msg;
+	                 	layer.msg('未领取的礼品不存在');
 	                 	return;
 	                }
 	                
@@ -148,8 +148,10 @@
    	                 }else{
    	                 	layer.msg(data.msg);
    	                 }
-
-      	             window.location.reload();
+      	             setTimeout(function () {
+        	            	window.location.reload();
+      	   	       	 }, 2000);
+      	             
    
    	             },
    	             error:function(){
