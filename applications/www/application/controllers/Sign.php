@@ -277,7 +277,7 @@ class Sign extends MY_Controller{
             }
         }else{
             $this->db->query('unlock table');
-            $this->return_json(['code' => 0, 'msg' => '积分不够！']);
+            $this->return_json(['code' => 0, 'msg' => '积分不够！或库存不足']);
         }
     }
     
