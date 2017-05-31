@@ -37,7 +37,14 @@
         
     </div>
 </div>
-
-
+<div class="backtoindex">
+    <p>返回首页</p>
+</div>
+<script src="<?php echo get_css_js_url('jquery-1.9.1.js', 'www')?>"></script>
+<script type="text/javascript">
+    $('.backtoindex').on('click', function(){
+        window.open('/sign/index', '_self');
+    });
+</script>
 </body>
 </html>

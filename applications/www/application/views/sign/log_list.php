@@ -22,7 +22,7 @@
 
     <!-- 签到头部 -->
     <div id="sign_head">      
-        <div id="sign"  status="<?php if($list[0]['sign_time'] == date('Y-m-d')){ echo 1;}else{echo 0;}?>" >
+        <div id="sign" rz="<?php echo $user['status'] ?>"  status="<?php if($list[0]['sign_time'] == date('Y-m-d')){ echo 1;}else{echo 0;}?>" >
             <div id="sign_1">
                 <?php
                     if($list[0]['sign_time'] == date('Y-m-d'))
@@ -40,7 +40,7 @@
             <div id="sign_2">连续<?php echo $list[0]['continuous_days'] ?>天</div>
             <?php endif;?>
         </div>
-                <div style="margin-top:10px;color: #e28b3b;">积分：<?php echo $userscore['score'] ?></div>
+                <div style="margin-top:10px;color: #e28b3b;">积分：<?php echo $user['score'] ?></div>
                 <div class="hr_background">
             
                  <hr class="hr_1">
@@ -66,7 +66,7 @@
                   <p class="record_3">+<?php echo $v['score'] ?>分</p>
              </div>
         <?php endforeach; ?>
-             <div style="text-align:center;height:50px;color: #757575;font-family:微软雅黑;padding:5px;font-size: 10px;">只能显示最新15次的签到哦</div>
+             <div style="text-align:center;height:50px;color: #757575;font-family:微软雅黑;padding:5px;font-size: 10px;">显示最新15次的签到哦</div>
         </div>
 
     </div>
@@ -79,6 +79,14 @@
 <script type="text/javascript">
     $('#sign').click(function(){
         var status = $(this).attr('status');
+        var rz_status = $(this).attr('rz');
+        if(rz_status != 1){
+        	layer.msg('您还未认证个人信息！');
+        	setTimeout(function () {
+            	window.open('/sign/renzheng', '_self');
+ 	       	}, 2000);
+ 	       	return;
+        }
         if(status == 0){
         	$.ajax({
                 type:"post",

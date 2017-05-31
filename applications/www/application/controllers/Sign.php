@@ -27,6 +27,11 @@ class Sign extends MY_Controller{
     public function index(){
         $data = $this->data;
         $data['user_info'] = $this->session->userdata('user_info');
+        $res = $this->Mgame_user->get_one('realname, status', ['openid' => $this->openid]);
+        $data['user_info']['realname'] = '';
+        if($res['status'] == 1){
+            $data['user_info']['realname'] = $res['realname'];
+        }
         $this->load->view('sign/index', $data);
     }
     
@@ -42,7 +47,7 @@ class Sign extends MY_Controller{
             'openid' => $openid
         ];
         //获取当前用户信息
-        $data['userscore'] = $this->Mgame_user->get_one('score', ['openid' => $openid]);
+        $data['user'] = $this->Mgame_user->get_one('score, status', ['openid' => $openid]);
         $data['list'] = $this->Msign_log->get_lists($field, $where, ['create_time' => 'desc'], $limit = 15);
         $this->load->view('sign/log_list',$data);
         
@@ -53,10 +58,12 @@ class Sign extends MY_Controller{
      * 签到
      */
     public function log(){
-        //判断是否已经登陆, 并且已经完善了个人信息 TODO
-        
         //判断今天是否已经签到
         $openid = $this->openid;
+        $res = $this->Mgame_user->get_one('status', ['openid' => $this->openid]);
+        if($res['status'] == 0){
+            $this->return_json(['code' => 0, 'msg' => '请先通过认证！']);
+        }
         $where = [
             'openid' => $openid,
             'sign_time'  => date('Y-m-d')
@@ -299,41 +306,52 @@ class Sign extends MY_Controller{
      * 认证完成后，可以获得+10积分
      */
     public function renzheng(){
-        $openid = $this->openid;
-        $realname = trim($this->input->post('realname'));
-        if(!$realname){
-            $this->return_json(['code' => 0, 'msg' => '姓名不能为空！']);
+        
+        if(IS_POST){
+            $openid = $this->openid;
+            $realname = trim($this->input->post('realname'));
+            if(!$realname){
+                $this->return_json(['code' => 0, 'msg' => '姓名不能为空！']);
+            }
+            $tel = trim($this->input->post('tel'));
+            if(!$tel){
+                $this->return_json(['code' => 0, 'msg' => '手机号不能为空！']);
+            }
+            $addr = trim($this->input->post('addr'));
+            if(!$addr){
+                $this->return_json(['code' => 0, 'msg' => '地址不能为空！']);
+            }
+            if(!preg_match(C('regular_expression.mobile'), $tel)){
+                $this->return_json(['code' => 0, 'msg' => '手机号格式不正确！']);
+            }
+            //判断手机号是否已经被使用
+            $info = $this->Mgame_user->count(['tel' => $tel]);
+            if($info == 1){
+                $this->return_json(['code' => 0, 'msg' => '手机号已经被注册过了！']);
+            }
+            $up = [
+                'realname' => $realname,
+                'tel' => $tel,
+                'addr' => $addr,
+                'status' => 1,
+                'incr' => [
+                    '`score`' => 10
+                ]
+            ];
+            $res = $this->Mgame_user->update_info($up, ['openid' => $openid, 'status' => 0]);
+            if(!$res){
+                $this->return_json(['code' => 0, 'msg' => '请重试！']);
+            }
+            $this->return_json(['code' => 1, 'msg' => '认证成功']);
         }
-        $tel = trim($this->input->post('tel'));
-        if(!$tel){
-            $this->return_json(['code' => 0, 'msg' => '手机号不能为空！']);
+        $data = $this->data;
+        
+        $res = $this->Mgame_user->get_one('status', ['openid' => $this->openid]);
+        if($res['status'] == 1){
+            show_404();exit;
         }
-        $addr = trim($this->input->post('addr'));
-        if(!$addr){
-            $this->return_json(['code' => 0, 'msg' => '地址不能为空！']);
-        }
-        if(!preg_match(C('regular_expression.mobile'), $tel)){
-            $this->return_json(['code' => 0, 'msg' => '手机号格式不正确！']);
-        }
-        //判断手机号是否已经被使用
-        $info = $this->Mgame_user->count(['tel' => $tel]);
-        if($info == 1){
-            $this->return_json(['code' => 0, 'msg' => '手机号已经被注册过了！']);
-        }
-        $add = [
-            'realname' => $realname,
-            'tel' => $tel,
-            'addr' => $addr, 
-            'status' => 1, 
-            'incr' => [
-                '`score`' => 10
-            ]
-        ];
-        $res = $this->Mgame_user->create($add);
-        if(!$res){
-            $this->return_json(['code' => 0, 'msg' => '请重试！']);
-        }
-        $this->return_json(['code' => 1, 'msg' => '认证成功']);
+        $this->load->view('sign/renzheng', $data);
+        
     }
     
     /**

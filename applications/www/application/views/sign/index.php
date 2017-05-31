@@ -26,7 +26,7 @@
     <div class="head">
         <div class="user_info">
             <img src="<?php if(isset($user_info['head_img'])){echo $user_info['head_img'];}?>" alt="">
-            <p><?php if(isset($user_info['nickname'])){echo $user_info['nickname'];}?>&nbsp;您好！</p>
+            <p><?php if(isset($user_info['realname']) && !empty($user_info['realname'])){echo $user_info['realname'];}elseif(isset($user_info['nickname'])){echo $user_info['nickname'];}?>&nbsp;您好！</p>
         </div>
     </div>
 

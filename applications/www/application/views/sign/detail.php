@@ -48,7 +48,7 @@
 <div class="xj">
     <p>商品名:<?php echo $info['title'] ?> </p>
     <p>兑换积分:<?php echo $info['score'] ?> </p>
-    
+    <p>库存量:<span id="last_num"><?php echo $info['num'] ?></span></span></p>
     
 </div>
 
@@ -65,12 +65,17 @@
 
 <div class="foot">
     <div >
-        <a id="Receive" href="#" style="font-size: 1.5em">兑换</a>
+        <a id="Receive" num="<?php echo $info['num'] ?>" href="#" style="font-size: 1.5em">兑换</a>
     </div>
 </div>
 
 <script type="text/javascript">
     $('#Receive').click(function(){
+        var num = parseInt($(this).attr('num'));
+        if(num == 0){
+        	layer.msg('库存不足！');
+        	return;
+        }
     	var d = dialog({
     		content: '确定要兑换吗?',
     		okValue: '确定',
@@ -83,16 +88,15 @@
    	             data:{id:<?php echo $info['id'] ?>},
    	             success:function (data) {
    	                 if(data.code == 1){
-   	                 	layer.msg(data.msg);
+   	                 	 layer.msg(data.msg);
+      	                 var num = parseInt($("#last_num").text()) -1;
+        	             $("#last_num").text(num);
    	                 }else{
    	                 	layer.msg(data.msg);
    	                 }
-
-   	                 $(".xj p:nth-child(3)").text(data.score.score);
-
    	             },
    	             error:function(){
-   	             	layer.msg('未知错误！');
+   	             	layer.msg('网络错误！');
    	             }
    	         })
     		},

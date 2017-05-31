@@ -113,17 +113,32 @@ html{
 
 }
 
-/*background-image: initial;*/
-/*background-position-x: initial;*/
-/*background-position-y: initial;*/
-/*background-size: initial;*/
-/*background-repeat-x: initial;*/
-/*background-repeat-y: initial;*/
-/*background-attachment: initial;*/
-/*background-origin: initial;*/
-/*background-clip: initial;*/
-/*background-color: blue;*/
+.from{
+	margin-top: 25%;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+	width:80%;
+	height:5rem;
+	text-align:center;
+}
+.f-title{
+	text-align:center;
+	color:#fff;
+	margin-bottom:2rem;
+	font-size: 1.2rem;
+}
+.field{
+	height:3rem;
+	color:#fff;
+}
 
+.field input{
+	height: 1.6rem;
+	border-radius: 5px;
+    border: 2px solid #fff;
+	outline: none;
+}
 
 
 
