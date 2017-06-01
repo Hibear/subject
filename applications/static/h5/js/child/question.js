@@ -54,10 +54,10 @@ var questions =
         {
 
             answers: [
-                {score: 10, result: 1 },
+                {score: 0, result: 0 },
                 { score: 10, result: 1},
-                { score: 10, result: 1 },
-                { score: 10, result: 1}
+                { score: 0, result: 0 },
+                { score: 0, result: 0}
             ]
         },
                     //No7

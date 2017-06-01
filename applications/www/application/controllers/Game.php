@@ -17,9 +17,9 @@ class Game extends MY_Controller{
         ));
         //分享用的
         $this->app = C("appid_secret.dashi");
+        $this->AppSecret = C('appid_secret.akx.app_secret');
         //艾客逊公众号，用户网页授权
         $this->AppID = C('appid_secret.akx.app_id');
-        $this->AppSecret = C('appid_secret.akx.app_secret');
         $this->load->driver('cache');
     }
     

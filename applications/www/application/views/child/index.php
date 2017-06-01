@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>试试能拿多少分！--你学到的有多少已还给老师？</title>
+    <title>试试能拿多少分！--您学到的有多少已还给老师？</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
     <link type="text/css" rel="stylesheet" href="<?php echo get_css_js_url('child/style.css', 'h5')?>">
    
@@ -526,4 +526,5 @@
         <div id="bgm_btn"></div>
 
     </div>
+    <?php $this->load->view('common/share_common.php')?>
 </body></html>
