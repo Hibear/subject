@@ -83,7 +83,7 @@ $config = array(
                 array(
                     'url'=>'/guessing',
                     'name'=> '竞猜活动管理',
-                    'active'=> 'vote_list'
+                    'active'=> 'guessing'
                 ),
                 array(
                     'url'=>'/public_lottery',
