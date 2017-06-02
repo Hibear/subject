@@ -135,6 +135,25 @@
                                     <textarea class="form-control limited" name="desc" style="margin-top: 0px; margin-bottom: 0px; height: 171px;"><?php echo $info['desc']?></textarea>
                                 </div>
                             </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 图片形式简介： </label>
+                                <div class="col-sm-9">
+                                    <ul id="uploader_img_desc">
+                                       <?php if($info['img_desc']):?>
+    				                    <li class="pic pro_gre" style="margin-right: 20px; clear: none">
+        				                    <a class="close del-pic" href="javascript:;"></a>
+        				                    <img src="<?php echo get_img_url($info['img_desc'])?>" style="width: 100%; height: 100%">
+        				                    <input type="hidden" name="img_desc" value="<?php echo $info['img_desc']?>">
+    				                    </li>
+    				                    <?php endif;?>
+    	                               <li class="pic pic-add add-pic" style="float: left;width: 220px;height: 175px;clear:none; list-style-type:none">
+    	                                   <a href="javascript:;" class="up-img"  id="btn_img_desc"><span>+</span><br>添加照片</a>
+    	                               </li>
+	                               </ul>
+                                </div>
+                            </div>
+                            
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 活跃度（访问）/次： </label>
                                 <div class="col-sm-9">
@@ -309,7 +328,8 @@
 <?php $this->load->view("common/sea_footer");?>
 <script type="text/javascript">
     var object = [
-          {"obj": "#uploader_img_url", "btn": "#btn_img_url"}
+          {"obj": "#uploader_img_url", "btn": "#btn_img_url"},
+          {"obj": "#uploader_img_desc", "btn": "#btn_img_desc"}
     ];
     
     seajs.use(['admin_uploader','jqueryswf','swfupload'], function(swfupload) {

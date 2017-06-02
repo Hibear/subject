@@ -116,6 +116,17 @@
                             </div>
                             
                             <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 图片形式简介： </label>
+                                <div class="col-sm-9">
+                                    <ul id="uploader_img_desc">
+    	                               <li class="pic pic-add add-pic" style="float: left;width: 220px;height: 175px;clear:none; list-style-type:none">
+    	                                   <a href="javascript:;" class="up-img"  id="btn_img_desc"><span>+</span><br>添加照片</a>
+    	                               </li>
+	                               </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 只能中奖一次(针对抽奖类)： </label>
                                 <label class="col-sm-4">
                                     <label><input type="radio" name="is_one"  value="1">是</label>
@@ -213,7 +224,8 @@
 <?php $this->load->view("common/sea_footer");?>
 <script type="text/javascript">
     var object = [
-          {"obj": "#uploader_img_url", "btn": "#btn_img_url"}
+          {"obj": "#uploader_img_url", "btn": "#btn_img_url"},
+          {"obj": "#uploader_img_desc", "btn": "#btn_img_desc"}
     ];
     
     seajs.use(['admin_uploader','jqueryswf','swfupload'], function(swfupload) {

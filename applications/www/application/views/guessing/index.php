@@ -41,6 +41,11 @@
                 <span>竞猜说明：</span>
                 <?php echo $info['desc']?>
             </div>
+            <div style="text-align:center;"><br><button id="show_desc_img" status="0" style="border: 1px solid #ccc;height: 1.7rem;width: 4rem;">显示详情</button>
+                <?php if($info['img_desc']):?>
+                <img id="desc_img" style="display: none;width:100%;margin-top: 1rem;" alt="" src="<?php echo get_img_url($info['img_desc']);?>" />
+                <?php endif;?>
+            </div>
         </div>
         <div class="search">
             <form>
@@ -55,7 +60,7 @@
         <?php foreach ($lists as $k => $v):?>
             <div class="lists">
                 <div id="p_<?php echo $v['id']?>" class="m-coverimg">
-                    <img class="lazy" data="<?php echo $v['id']?>" data-page="<?php echo $info['singlepage']?>" video="<?php if($v['video']){echo $v['video'];}else{echo 0;}?>" data-original="<?php echo get_img_url($v['cover_img'])?>">
+                    <img class="lazy" data="<?php echo $v['id']?>" data-page="1" video="<?php if($v['video']){echo $v['video'];}else{echo 0;}?>" data-original="<?php echo get_img_url($v['cover_img'])?>">
                 </div>
 				
                 <div class="m-title"><div class="m-radio" data="<?php echo $v['id']?>" id="l_<?php echo $v['id']?>"></div><?php echo $v['vote_obj'].'-《'.$v['title'].'》'?></div>
@@ -169,6 +174,17 @@
             $('#vote').attr('status', 1);
             $('#vote').addClass('active');
         });
+
+        $('#show_desc_img').on('click', function(){
+            var status = $(this).attr('status');
+            if(status == 0){
+                $('#desc_img').show();
+                $(this).attr('status', 1);
+            }else if(status == 1){
+            	$('#desc_img').hide();
+                $(this).attr('status', 0);
+            }
+        })
     </script>
     <script type="text/javascript" src="/comment/js/jquery.lazyload.min.js"></script>
     <script type="text/javascript">
