@@ -13,13 +13,13 @@ class Weixin_active_login extends MY_Controller
             'Model_game_user' => 'Mgame_user'
         ));
         //艾客逊公众号，用户网页授权
-        $this->AppID = C('appid_secret.akx.app_id');
-        $this->AppSecret = C('appid_secret.akx.app_secret');
+        $this->AppID = C('appid_secret.sdzh.app_id');
+        $this->AppSecret = C('appid_secret.sdzh.app_secret');
         $this->load->driver('cache');
         $param = array(
             'app_id' => $this->AppID,
             'app_secret' => $this->AppSecret,
-            'per' => 'akx_'    //缓存前缀
+            'per' => 'sdzh_'    //缓存前缀
         );
         $this->load->library('jssdk', $param);
     }
@@ -66,7 +66,7 @@ class Weixin_active_login extends MY_Controller
         }
         $code = $this->input->get('code');
         if (empty($code)) {
-            $this->return_failed('获取信息失败！');
+            $this->return_failed('获取code失败！');
         }
         $openid_url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$this->AppID}&secret={$this->AppSecret}&code={$code}&grant_type=authorization_code";
         $openid_ch = curl_init();
@@ -78,7 +78,7 @@ class Weixin_active_login extends MY_Controller
         $openid_arr = json_decode($openid_data, true);
         //如果拉取不到用户openid信息
         if (!isset($openid_arr['openid'])) {
-            $this->return_failed('获取信息失败！');
+            $this->return_failed('获取openid信息失败！');
         }
         $openid = $openid_arr['openid'];
         $access_token = $openid_arr['access_token'];
@@ -149,15 +149,15 @@ class Weixin_active_login extends MY_Controller
     private function getAccessToken() {
         $this->load->driver('cache');
         if(!$this->cache->file->get('access_token')){
-            $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".C('appid_secret.akx.app_id')."&secret=".C('appid_secret.akx.app_secret');
+            $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".C('appid_secret.sdzh.app_id')."&secret=".C('appid_secret.sdzh.app_secret');
             $res = json_decode($this->httpGet($url));
             $access_token = $res->access_token;
             if ($access_token) {
-                $this->cache->file->save('akx_access_token', $access_token, 7000);
+                $this->cache->file->save('sdzh_access_token', $access_token, 7000);
                 return $access_token;
             }
         }else{
-            return $this->cache->file->get('akx_access_token');
+            return $this->cache->file->get('sdzh_access_token');
         }  
     }
 

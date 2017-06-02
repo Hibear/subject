@@ -34,7 +34,7 @@
 <body>
     <div class="container center">
         <div class="header">
-            <div class="h-title"><?php echo $info['title']?></div>
+            
             <!--  div class="h-time"><?php echo date('Y-m-d', strtotime($info['start_time']));?></div-->
             <div class="h-coverimg"><img alt="" src="<?php echo get_img_url($info['cover_img']);?>"></div>
             <div class="h-desc">
@@ -43,7 +43,7 @@
             </div>
             <div style="text-align:center;"><br><button id="show_desc_img" status="0" style="border: 1px solid #ccc;height: 1.7rem;width: 4rem;">显示详情</button>
                 <?php if($info['img_desc']):?>
-                <img id="desc_img" style="display: none;width:100%;margin-top: 1rem;" alt="" src="<?php echo get_img_url($info['img_desc']);?>" />
+                <img id="desc_img" style="display: none;width:92%;margin-top: 1rem;" alt="" src="<?php echo get_img_url($info['img_desc']);?>" />
                 <?php endif;?>
             </div>
         </div>
@@ -105,31 +105,31 @@
             if(status == 1){
                 var obj_id = $(this).attr('data');
                 var active_id = <?php echo $info['id']?>;
-                var html = '<div style="text-align:center">'
-                html += '<img src="/public_vote/code/'+obj_id+'" />';
-                html += '<input id="code" style="width:100px;height:30px;" autofocus />';
-                html += '</div>'
+                var html = '<div style="text-align:left">'
+                   html += '<img src="/guessing/code/'+obj_id+'" />';
+                   html += '<input id="code" placeholder="验证码" style="width:100px;height:30px;" autofocus />';
+                   <?php if($r_status != 1):?>
+                   html += '<input id="realname" placeholder="真实姓名" style="width:100px;height:30px;"/>';
+                   html += '<input type="tel" id="tel" placeholder="手机号" style="width:100px;height:30px;"  />';
+                   <?php endif;?>
+                   html += '</div>'
                 var d = dialog({
                 	title: '请输入验证码',
                 	content: html,
-                	width:150,
+                	width:200,
                 	okValue: '确定',
                 	ok : function(){
                     	if($('#code').val() == ''){
                     	    return false;
                         }
                         var code = $('#code').val();
+                        var realname = $('#realname').val();
+                        var tel = $('#tel').val();
                         
-                		$.post('/guessing/add_vote', {'obj_id':obj_id, 'active_id':active_id, 'code':code}, function(data){
+                		$.post('/guessing/add_vote', {'obj_id':obj_id, 'active_id':active_id, 'code':code, 'realname':realname, 'tel':tel}, function(data){
                             if(data){
                                 if(data.code == 1){
                                 	alert(data.msg);
-                                }else if(data.code == -1){
-                                	alert(data.msg);
-                                	setTimeout(function () {
-                                    	window.open('/renzheng/index', '_self');
-                         	       	}, 2000);
-                         	       	return;
                                 }else{
                                 	alert(data.msg);
                                 }
@@ -179,8 +179,10 @@
             var status = $(this).attr('status');
             if(status == 0){
                 $('#desc_img').show();
+                $(this).text('隐藏详细');
                 $(this).attr('status', 1);
             }else if(status == 1){
+            	$(this).text('查看详细');
             	$('#desc_img').hide();
                 $(this).attr('status', 0);
             }

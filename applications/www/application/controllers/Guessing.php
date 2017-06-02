@@ -22,8 +22,10 @@ class Guessing extends MY_Controller{
         if(!$active_id){
             show_404();
         }
-        //$this->check_login($active_id);
-        
+        $this->check_login($active_id);
+        $user_info = $this->session->userdata('user_info');
+        $openid = $user_info['openid'];
+        $data['r_status'] = $this->Mgame_user->get_one('status', ['openid' => $openid])['status'];
         $info = $this->cache->file->get('vote_'.$active_id);
         $vote_obj = trim($this->input->get('vote_obj'));
         if(!$info){
@@ -45,6 +47,7 @@ class Guessing extends MY_Controller{
                 'vote_obj' => $vote_obj
             ];
         }
+
         $data['lists'] = $this->Mvote_obj->get_lists('id,title,cover_img,vote_obj,score,video', $where, ['create_time' => 'desc']);
         $this->load->view('guessing/index', $data);
     }
@@ -130,7 +133,6 @@ class Guessing extends MY_Controller{
         if(!$user_info){
             $this->return_json(['code' => 0, 'msg' => '请先登陆！']);
         }
-        
         $active_id = (int) $this->input->post('active_id');
         $obj_id = (int) $this->input->post('obj_id');
         $code = trim($this->input->post('code'));
@@ -141,6 +143,41 @@ class Guessing extends MY_Controller{
         if($code != $_SESSION['jc_yzm_'.$obj_id]){
             $this->return_json(['code' => 0, 'msg' => '验证码错误']);
         }
+        
+        $r_status = $this->Mgame_user->get_one('status', ['openid' => $user_info['openid']])['status'];
+        if(!$r_status){
+            //添加用户信息
+            $realname = trim($this->input->post('realname'));
+            if(!$realname){
+                $this->return_json(['code' => 0, 'msg' => '姓名不能为空！']);
+            }
+            $tel = trim($this->input->post('tel'));
+            if(!$tel){
+                $this->return_json(['code' => 0, 'msg' => '手机号不能为空！']);
+            }
+            if(!preg_match(C('regular_expression.mobile'), $tel)){
+                $this->return_json(['code' => 0, 'msg' => '手机号格式不正确！']);
+            }
+            //判断手机号是否已经被使用
+            $info = $this->Mgame_user->count(['tel' => $tel]);
+            if($info == 1){
+                $this->return_json(['code' => 0, 'msg' => '手机号已经被注册过了！']);
+            }
+            $up = [
+                'realname' => $realname,
+                'tel' => $tel,
+                'addr' => '',
+                'status' => 1,
+                'incr' => [
+                    '`score`' => 10
+                ]
+            ];
+            $res = $this->Mgame_user->update_info($up, ['openid' => $user_info['openid'], 'status' => 0]);
+            if(!$res){
+                $this->return_json(['code' => 0, 'msg' => '请重试！']);
+            }
+        }
+        
         $info = $this->cache->file->get('vote_'.$active_id);
         if(!$info){
             $info = $this->Mweixin_active->get_one('*', ['id' => $active_id, 'is_del' => 0, 'type' => C('active_type.jc.id')]);
@@ -151,10 +188,6 @@ class Guessing extends MY_Controller{
             }
         }
         
-        //判断活动是否需要认证
-        if($info['is_renzheng'] == 1){
-            $this->renzheng($user_info['openid'], $active_id);
-        }
         
         //判断当前时间是否在活动时间内
         $time = time();
@@ -169,7 +202,7 @@ class Guessing extends MY_Controller{
         
         //判断今天是否能够投票
         $openid = $user_info['openid'];
-        $this->check_today_and_vote($active_id, $openid, $obj_id, $info['count']);
+        $this->check_today_and_vote($active_id, $openid, $obj_id, $info['count'], $info['is_one']);
     }
     
     private function renzheng($openid, $active_id){
@@ -228,7 +261,16 @@ class Guessing extends MY_Controller{
         }
     }
     
-    private function check_today_and_vote( $active_id, $openid, $obj_id, $counts){
+    private function check_today_and_vote( $active_id, $openid, $obj_id, $counts, $is_one){
+        
+        //判断是否已经竞猜过了
+        if($is_one == 1){
+            $count = $this->Mactive_vote_log->count(['active_id' => $active_id, 'openid' => $openid]);
+            if($count){
+                $this->return_json(['code' => 0, 'msg' => '您只能竞猜一次！']);
+            }
+        }
+        
         //判断是否投票过今日允许的范围
         $count = $this->Mactive_vote_log->count(['create_time' => date('Y-m-d'), 'active_id' => $active_id, 'openid' => $openid]);
         if($count >= $counts){
