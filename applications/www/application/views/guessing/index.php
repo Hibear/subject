@@ -122,7 +122,7 @@
                                 }else if(data.code == -1){
                                 	alert(data.msg);
                                 	setTimeout(function () {
-                                    	window.open('/renzheng/to_renzheng', '_self');
+                                    	window.open('/renzheng/index', '_self');
                          	       	}, 2000);
                          	       	return;
                                 }else{
