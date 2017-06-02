@@ -122,10 +122,17 @@
                                     <label><input type="radio" name="is_one"  value="0">否</label>
                                 </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 是否单页（投票）： </label>
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 是否单页（针对投票类）： </label>
                                 <label class="col-sm-4">
                                 <label><input type="radio" name="singlepage"  value="0">非单页</label>
                                 <label><input type="radio" name="singlepage"  value="1">单页</label>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 是否需要个人真实姓名、电话： </label>
+                                <label class="col-sm-4">
+                                <label><input type="radio" name="is_renzheng"  value="0">非必须</label>
+                                <label><input type="radio" name="is_renzheng"  value="1">必须</label>
                             </div>
                             
                             <div class="clearfix form-actions">

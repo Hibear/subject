@@ -13,6 +13,10 @@ $config = array(
         'id' => 3,
         'name' => '投票'
     ),
+    'jc' => array(
+        'id' => 4,
+        'name' => '竞猜'
+    ),
     'qt' => array(
         'id' => 0,
         'name' => '其他'

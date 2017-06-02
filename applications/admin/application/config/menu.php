@@ -81,6 +81,11 @@ $config = array(
                     'active'=> 'vote_list'
                 ),
                 array(
+                    'url'=>'/guessing',
+                    'name'=> '竞猜活动管理',
+                    'active'=> 'vote_list'
+                ),
+                array(
                     'url'=>'/public_lottery',
                     'name'=> '公共中奖人员',
                     'active'=> 'lottery_list'
