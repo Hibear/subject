@@ -7,7 +7,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo get_css_js_url('ui-dialog.css', 'common')?>" media="all" />
     <title><?php echo $info['title']?></title>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
     <meta name="Keywords" content="" />
     <meta name="Description" content="" />
     <!-- Mobile Devices Support @begin -->
@@ -16,7 +17,6 @@
     <meta content="no-cache" http-equiv="pragma">
     <meta content="0" http-equiv="expires">
     <meta content="telephone=no, address=no" name="format-detection">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     
