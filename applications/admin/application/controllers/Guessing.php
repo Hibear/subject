@@ -10,7 +10,9 @@ class Guessing extends MY_Controller{
         parent::__construct();
         $this->load->model(array(
             'Model_vote_obj' => 'Mvote_obj',
-            'Model_active' => 'Mactive'
+            'Model_active' => 'Mactive',
+            'Model_active_vote_log' => 'Mactive_vote_log',
+            'Model_game_user' => 'Mgame_user'
         ));
         $this->load->library('pagination');
         $this->data['code'] = 'question_manage';
@@ -81,6 +83,85 @@ class Guessing extends MY_Controller{
         $data['pagestr'] = $this->pagination->create_links(); // 分页信息
 
         $this->load->view('guessing/obj_lists', $data);
+    }
+    
+    public function dowmload(){
+        $active_id = (int) $this->input->get('active_id');
+        //获取本次活动的所有参与者openid
+        $user_list = $this->Mactive_vote_log->get_lists('openid, obj_id, create_time', ['active_id' => $active_id], ['create_time' => 'asc']);
+        if(!$user_list){
+            echo '<h1>暂无数据</h1>';
+            exit;
+        }
+        //根据openid获取用户的姓名
+        $openids = array_column($user_list, 'openid');
+        $user_list_info = $this->Mgame_user->get_lists('openid, realname, nickname, tel', ['in' => ['openid' => $openids]]);
+        //获取支持的总队伍
+        $obj_ids = array_column($user_list, 'obj_id');
+        $obj_list = $this->Mvote_obj->get_lists('id,vote_obj', ['in' => ['active_id' => $active_id]]);
+        
+        //拼接数据
+        $lists = $user_list;
+        foreach ($user_list as $k => $v){
+            
+            foreach ($user_list_info as $key => $val){
+                if($v['openid'] == $val['openid']){
+                    $lists[$k]['realname'] = $val['realname'];
+                    $lists[$k]['nickname'] = $val['nickname'];
+                    $lists[$k]['tel'] = $val['tel'];
+                    break;
+                }
+            }
+            foreach ($obj_list as $key => $val){
+                if($v['obj_id'] == $val['id']){
+                    $lists[$k]['obj_name'] = $val['vote_obj'];
+                    break;
+                }
+            }
+        }
+        
+        //导出加载phpexcel
+        $this->load->library("PHPExcel");
+    
+        //设置表头
+        $table_header =  array(
+            '姓名'=>"realname",
+            '微信昵称'=>"nickname",
+            '电话' => 'tel',
+            '支持队伍'=>"obj_name",
+            '生成时间' => 'create_time'
+        );
+    
+        $i = 0;
+        foreach($table_header as  $kk=>$v){
+            $cell = PHPExcel_Cell::stringFromColumnIndex($i).'1';
+            $this->phpexcel->setActiveSheetIndex(0)->setCellValue($cell, $kk);
+            $i++;
+        }
+    
+        $where =  array();
+        $where['in']['level'] = [1,5];
+    
+    
+        $h = 2;
+        foreach($lists as $key=>$val){
+            $j = 0;
+            foreach($table_header as $k => $v){
+                $cell = PHPExcel_Cell::stringFromColumnIndex($j++).$h;
+                $this->phpexcel->getActiveSheet(0)->setCellValue($cell, $val[$v].' ');
+            }
+            $h++;
+        }
+    
+        $this->phpexcel->setActiveSheetIndex(0);
+        // 输出
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename=竞猜数据_'.date("YmdHis").'.xls');
+        header('Cache-Control: max-age=0');
+    
+        $objWriter = PHPExcel_IOFactory::createWriter($this->phpexcel, 'Excel5');
+        $objWriter->save('php://output');
+
     }
     
     /**

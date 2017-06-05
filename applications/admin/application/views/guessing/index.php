@@ -115,6 +115,9 @@
                                                     <a class="green tooltip-info" href="/guessing/obj_lists?active_id=<?php echo $value['id'];?>"  data-rel="tooltip" data-placement="top" title="" data-original-title="竞猜对象列表">
                                                         <i class="ace-icon glyphicon glyphicon-user">竞猜对象列表</i>
                                                     </a>
+                                                    <a class="green tooltip-info" href="/guessing/dowmload?active_id=<?php echo $value['id'];?>"  data-rel="tooltip" data-placement="top" title="" data-original-title="竞猜对象列表">
+                                                        <i class="ace-icon fa fa-download">导出竞猜列表</i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

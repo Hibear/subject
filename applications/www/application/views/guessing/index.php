@@ -47,13 +47,7 @@
                 <?php endif;?>
             </div>
         </div>
-        <div class="search">
-            <form>
-                <input type="hidden" name="active_id" value="<?php echo $info['id']?>">
-                <input placeholder="输入竞猜选手或队伍..." type="text" name="vote_obj"/>
-                <button>查找</button>
-            </form>
-        </div>
+        
         <div class="line"></div>
         <div class="main">
         <?php if(isset($lists)):?>
