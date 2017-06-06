@@ -1,0 +1,175 @@
+/*-----------------------------ȫ����ʽ-------------------------------------*/
+body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,span,a,input,textarea,p,blockquote,th,td,header,nav,footer,article,section,aside,time,figure{margin:0;padding:0;-webkit-tap-highlight-color:rgba(0,0,0,0);background-clip:padding-box}
+h1,h2,h3,h4,h5,h6{font-size:.12rem;font-weight:normal}
+ul{list-style:none}
+legend{display:none}
+fieldset,img{border:none;vertical-align:middle}
+em,cite,i{font-style:normal}
+input,button,textarea{outline:none;border:0;vertical-align:middle;border:0;font-size:.12rem;font-family:inherit;-webkit-appearance:none}
+input[type="submit"],input[type="reset"],input[type="button"],button {-webkit-appearance:none;border-radius:0}
+select{-webkit-appearance:none;-moz-appearance:none;appearance:none;font-size:.12rem;font-family:inherit}
+textarea{resize:none}
+html{height:100%;font-size:100px;overflow:hidden}/*.1rem=10px*/
+body{font:.12rem/1 tahoma, arial,"Hiragino Sans GB", "Microsoft Yahei", \5b8b\4f53, sans-serif;position:relative;color:#000;min-width:320px;height:100%;overflow:hidden}
+a{color:#000;text-decoration:none;cursor:pointer}
+a:hover,a:active,a:focus{text-decoration:none;outline:none}
+/*-----------------------------���-------------------------------------*/
+.swiper-container{overflow:hidden;width:100%;height:100%;position:absolute;left:0;top:0;max-width:640px;right:0;margin:auto}
+.swiper-slide{width:100%;height:100%;overflow:hidden;position:relative}
+.page{width:100%;height:100%;position:absolute;left:0;top:0;overflow:hidden}
+.auto-x{position:absolute;left:0;right:0;margin:auto}
+.auto-y{position:absolute;top:0;bottom:0;margin:auto}
+.bg{width:100%;height:100%}
+img{display:block;width:100%}
+.bg img{height:100%}
+.natural img{/*max-width:100%;*/width:auto;margin:0 auto}
+.animate{opacity:0}
+.hidden{visibility:hidden}
+.none{display:none}
+.page-tip{width:.26rem;height:.23rem;bottom:.1rem;display:none;animation:up 2s linear infinite;-webkit-animation:up 2s linear infinite}
+@keyframes up{0%{transform:translateY(0)}10%{transform:translateY(-.1rem)}20%{transform:translateY(0)}30%{transform:translateY(-.1rem)}40%{transform:translateY(0)}100%{transform:translateY(0)}}
+@-webkit-keyframes up{0%{-webkit-transform:translateY(0)}10%{-webkit-transform:translateY(-.1rem)}20%{-webkit-transform:translateY(0)}30%{-webkit-transform:translateY(-.1rem)}40%{-webkit-transform:translateY(0)}100%{-webkit-transform:translateY(0)}}
+/*-----------------------------������-------------------------------------*/
+#loading{background:#000}
+.loading{width:1.13rem;height:1.5rem;bottom:15%;left:.4rem}
+.loading-img{width:1.13rem;height:1.5rem;overflow:hidden;position:relative;opacity:0}
+.loading-img img{position:absolute;width:1.13rem;height:4.5rem}
+.on .loading-img img{animation:loading-img 2s steps(1) infinite;-webkit-animation:loading-img 2s steps(1) infinite}
+@keyframes loading-img{0%{transform:translateY(0)}33%{transform:translateY(-1.5rem)}66%{transform:translateY(-3rem)}100%{transform:translateY(-3rem)}}
+@-webkit-keyframes loading-img{0%{-webkit-transform:translateY(0)}33%{-webkit-transform:translateY(-1.5rem)}66%{-webkit-transform:translateY(-3rem)}100%{-webkit-transform:translateY(-3rem)}}
+.on .loading-img{animation:fade-in 2s linear both;-webkit-animation:fade-in 2s linear both}
+#percent{position:absolute;right:.5rem;top:110%;color:#fff;text-align:center;left:0;opacity:0.7}
+/*-----------------------------����-------------------------------------*/
+#music{position:absolute;width:.33rem;height:.33rem;right:.02rem;top:.02rem;z-index:500;visibility:hidden}
+.music{width:100%;height:100%;background:url(../../images/father/music.png?v=20170606) no-repeat center bottom;background-size:100%}
+.play{background-position:center top}
+#music>span{color:#fff;position:absolute;left:-.52rem;top:0;line-height:.33rem;font-size:.14rem;opacity:0;-webkit-transition:all 0.3s linear;transition:all 0.3s linear}
+#music>span.zshow{left:-.3rem;opacity:1}
+/*-----------------------------��һ��-------------------------------------*/
+.text-1{position:absolute;width:1.09rem;height:1.58rem;right:.28rem;top:.2rem}
+@keyframes fade-in{0%{opacity:0}100%{opacity:1}}
+@-webkit-keyframes fade-in{0%{opacity:0}100%{opacity:1}}
+@keyframes fade-out{0%{opacity:1}100%{opacity:0}}
+@-webkit-keyframes fade-out{0%{opacity:1}100%{opacity:0}}
+.on .text-1-1{animation:fade-in 1s linear both;-webkit-animation:fade-in 1s linear both}
+.on .text-1-2{animation:fade-in 1s linear both 1s;-webkit-animation:fade-in 1s linear both 1s}
+.on .text-1-3{animation:fade-in 1s linear both 2.5s;-webkit-animation:fade-in 1s linear both 2.5s}
+.on .text-1-4{animation:fade-in 1s linear both 6.5s;-webkit-animation:fade-in 1s linear both 6.5s}
+@keyframes bg{0%{transform:scale(1)}100%{transform:scale(1.1)}}
+@-webkit-keyframes bg{0%{-webkit-transform:scale(1)}100%{-webkit-transform:scale(1.1)}}
+.on>.bg{animation:bg 10s linear both;-webkit-animation:bg 10s linear both}
+/*-----------------------------�ڶ���-------------------------------------*/
+.text-2{position:absolute;width:1.17rem;height:1.45rem;left:1.06rem;top:0}
+.on .text-2-1{animation:fade-in 1s linear both;-webkit-animation:fade-in 1s linear both}
+.on .text-2-2{animation:fade-in 1s linear both 1s;-webkit-animation:fade-in 1s linear both 1s}
+.on .text-2-3{animation:fade-in 1s linear both 2.5s;-webkit-animation:fade-in 1s linear both 2.5s}
+.on .text-2-4{animation:fade-in 1s linear both 4s;-webkit-animation:fade-in 1s linear both 4s}
+/*-----------------------------������-------------------------------------*/
+.text-3{position:absolute;width:1.09rem;height:1.3rem;left:1.7rem;top:.12rem}
+.on .text-3-1{animation:fade-in 1s linear both;-webkit-animation:fade-in 1s linear both}
+.on .text-3-2{animation:fade-in 1s linear both 0.7s;-webkit-animation:fade-in 1s linear both 0.7s}
+.on .text-3-3{animation:fade-in 1s linear both 2s;-webkit-animation:fade-in 1s linear both 2s}
+.on .text-3-4{animation:fade-in 1s linear both 3.5s;-webkit-animation:fade-in 1s linear both 3.5s}
+/*-----------------------------������-------------------------------------*/
+.text-4{position:absolute;width:1.12rem;height:1.89rem;left:1.85rem;top:.16rem}
+.train{width:35.2rem}
+.on .train{animation:train 1.5s steps(1) both 3;-webkit-animation:train 1.5s steps(1) both 3}
+.on .train>.bg{animation:trains 3s steps(1) both 4.5s;-webkit-animation:trains 3s steps(1) both 4.5s}
+.on .train img{animation:train-img 1.5s steps(1) infinite 7.2s;-webkit-animation:train-img 1.5s steps(1) infinite 7.2s}
+@keyframes train{0%{transform:translateX(0)}33%{transform:translateX(-3.2rem)}66%{transform:translateX(-6.4rem)}100%{transform:translateX(-6.4rem)}}
+@-webkit-keyframes train{0%{-webkit-transform:translateX(0)}33%{-webkit-transform:translateX(-3.2rem)}66%{-webkit-transform:translateX(-6.4rem)}100%{-webkit-transform:translateX(-6.4rem)}}
+@keyframes trains{0%{transform:translateX(0)}16%{transform:translateX(-3.2rem)}32%{transform:translateX(-6.4rem)}48%{transform:translateX(-9.6rem)}64%{transform:translateX(-12.8rem)}80%{transform:translateX(-16rem)}100%{transform:translateX(-19.2rem)}}
+@-webkit-keyframes trains{0%{-webkit-transform:translateX(0)}16%{-webkit-transform:translateX(-3.2rem)}32%{-webkit-transform:translateX(-6.4rem)}48%{-webkit-transform:translateX(-9.6rem)}64%{-webkit-transform:translateX(-12.8rem)}80%{-webkit-transform:translateX(-16rem)}100%{-webkit-transform:translateX(-19.2rem)}}
+@keyframes train-img{0%{transform:translateX(0)}33%{transform:translateX(-3.2rem)}66%{transform:translateX(-6.4rem)}100%{transform:translateX(-6.4rem)}}
+@-webkit-keyframes train-img{0%{-webkit-transform:translateX(0)}33%{-webkit-transform:translateX(-3.2rem)}66%{-webkit-transform:translateX(-6.4rem)}100%{-webkit-transform:translateX(-6.4rem)}}
+.on .text-4-1{animation:fade-in 1s linear both;-webkit-animation:fade-in 1s linear both}
+.on .text-4-2{animation:fade-in 1s linear both 1s;-webkit-animation:fade-in 1s linear both 1s}
+.on .text-4-3{animation:fade-in 1s linear both 3s;-webkit-animation:fade-in 1s linear both 3s}
+.on .text-4-4{animation:fade-in 1s linear both 5s;-webkit-animation:fade-in 1s linear both 5s}
+.on .text-4-5{animation:fade-in 1s linear both 6.5s;-webkit-animation:fade-in 1s linear both 6.5s}
+/*-----------------------------������-------------------------------------*/
+.text-5{position:absolute;width:1.3rem;height:1.09rem;left:1.3rem;top:.25rem}
+.on .text-5-1{animation:fade-in 1s linear both;-webkit-animation:fade-in 1s linear both}
+.on .text-5-2{animation:fade-in 1s linear both 1s;-webkit-animation:fade-in 1s linear both 1s}
+.on .text-5-3{animation:fade-in 1s linear both 2.5s;-webkit-animation:fade-in 1s linear both 2.5s}
+.on .text-5-4{animation:fade-in 1s linear both 4.5s;-webkit-animation:fade-in 1s linear both 4.5s}
+.on .text-5-5{animation:fade-in 1s linear both 7s;-webkit-animation:fade-in 1s linear both 7s}
+/*-----------------------------������-------------------------------------*/
+.text-6{position:absolute;width:.93rem;height:1.37rem;left:1.08rem;top:.54rem}
+.on .text-6-1{animation:fade-in 1s linear both;-webkit-animation:fade-in 1s linear both}
+.on .text-6-2{animation:fade-in 1s linear both 1.5s;-webkit-animation:fade-in 1s linear both 1.5s}
+.on .text-6-3{animation:fade-in 1s linear both 2.5s;-webkit-animation:fade-in 1s linear both 2.5s}
+/*-----------------------------������-------------------------------------*/
+.text-7{position:absolute;width:1.29rem;height:1.3rem;left:1.35rem;top:.75rem}
+.text-8{position:absolute;width:.52rem;height:1.09rem;left:1.75rem;top:.8rem}
+.text-9{position:absolute;width:.81rem;height:1.84rem;left:1.43rem;top:.3rem}
+.on .text-7-1{animation:fade-in 1s linear both;-webkit-animation:fade-in 1s linear both}
+.on .text-7-2{animation:fade-in 1s linear both 1s;-webkit-animation:fade-in 1s linear both 1s}
+.on .text-7-3{animation:fade-in 1s linear both 2.4s;-webkit-animation:fade-in 1s linear both 2.4s}
+.on .text-7-4{animation:fade-in 1s linear both 3.2s;-webkit-animation:fade-in 1s linear both 3.2s}
+.on .text-7{animation:fade-out 0.5s linear both 4.5s;-webkit-animation:fade-out 0.5s linear both 4.5s}
+.on .text-8-1{animation:fade-in 1s linear both 4.5s;-webkit-animation:fade-in 1s linear both 4.5s}
+.on .text-8-2{animation:fade-in 1s linear both 5.5s;-webkit-animation:fade-in 1s linear both 5.5s}
+.on .text-8{animation:fade-out 0.5s linear both 7s;-webkit-animation:fade-out 0.5s linear both 7s}
+.on .text-9-1{animation:fade-in 1s linear both 7s;-webkit-animation:fade-in 1s linear both 7s;transform-origin:.67rem .75rem;-webkit-transform-origin:.67rem .75rem}
+.on .text-9-2{animation:fade-in 1s linear both 8s;-webkit-animation:fade-in 1s linear both 8s;transform-origin:.37rem .92rem;-webkit-transform-origin:.37rem .92rem}
+.on .text-9-1 img{animation:fade-in-big 3s linear both 7s;-webkit-animation:fade-in-big 3s linear both 7s}
+.on .text-9-2 img{animation:fade-in-big 3s linear both 7s;-webkit-animation:fade-in-big 3s linear both 7s}
+@keyframes fade-in-big{0%{transform:scale(0.8)}100%{transform:scale(1)}}
+@-webkit-keyframes fade-in-big{0%{-webkit-transform:scale(0.8)}100%{-webkit-transform:scale(1)}}
+/*-----------------------------�ڰ���-------------------------------------*/
+.logo{position:absolute;width:1.03rem;left:.14rem;top:.18rem}
+.liwu{position:absolute;left:0;width:3.2rem;height:2.26rem;bottom:1.8rem;opacity:0}
+.text-end{position:absolute;left:.35rem;width:2.44rem;height:.33rem;bottom:1.25rem;opacity:0}
+.button{bottom:.36rem;opacity:0}
+.button a{position:absolute;top:0;width:50%;height:100%;text-indent:-9999px;overflow:hidden}
+.link{left:0}
+.share{right:0}
+@keyframes fade-in-down{0%{transform:translate(0,-50%);opacity:0}100%{transform:none;opacity:1}}
+@-webkit-keyframes fade-in-down{0%{-webkit-transform:translate(0,-50%);opacity:0}100%{-webkit-transform:none;opacity:1}}
+.on .liwu{animation:fade-in-down 1s ease both;-webkit-animation:fade-in-down 1s ease both}
+.on .text-end{animation:fade-in 1s linear both 1s;-webkit-animation:fade-in 1s linear both 1s}
+.on .button{animation:fade-in 1s linear both 2s;-webkit-animation:fade-in 1s linear both 2s}
+#share{background-color:rgba(0,0,0,0.9)}
+/*-----------------------------��Ļ����-------------------------------------*/
+/*for huawei weixin*/
+@media screen and (width:384px) and (height:567px){
+.no-full-top img{position:relative;height:auto;top:0}
+.no-full-center img{position:absolute;height:auto;top:-2rem;bottom:-2rem;margin:auto}
+.no-full-bottom img{position:absolute;height:auto;bottom:0;left:0}
+.scale{transform-origin:center top;-webkit-transform-origin:center top;transform:scale(0.92);-webkit-transform:scale(0.92);height:122%;overflow:visible}
+}
+/*for huawei weixin*/
+@media screen and (width:360px) and (height:519px){
+.no-full-top img{position:relative;height:auto;top:0}
+.no-full-center img{position:absolute;height:auto;top:-2rem;bottom:-2rem;margin:auto}
+.no-full-bottom img{position:absolute;height:auto;bottom:0;left:0}
+.scale{transform-origin:center top;-webkit-transform-origin:center top;transform:scale(0.92);-webkit-transform:scale(0.92);height:122%;overflow:visible}
+}
+/*for android-*/
+@media screen and (max-height:500px){
+.no-full-top img{position:relative;height:auto;top:0}
+.no-full-center img{position:absolute;height:auto;top:-2rem;bottom:-2rem;margin:auto}
+.no-full-bottom img{position:absolute;height:auto;bottom:0;left:0}
+.scale{transform-origin:center top;-webkit-transform-origin:center top;transform:scale(0.89);-webkit-transform:scale(0.89);height:112%;overflow:visible}
+}
+/*for iphone4 weixin*/
+@media screen and (max-height:450px){
+.no-full-top img{position:relative;height:auto;top:0}
+.no-full-center img{position:absolute;height:auto;top:-2rem;bottom:-2rem;margin:auto}
+.no-full-bottom img{position:absolute;height:auto;bottom:0;left:0}
+.scale{transform-origin:center top;-webkit-transform-origin:center top;transform:scale(0.82);-webkit-transform:scale(0.82);height:122%;overflow:visible}
+.end{height:5.4rem;top:auto;bottom:-.3rem}
+}
+/*for meizu weixin*/
+@media screen and (width:384px) and (height:519px){
+.no-full-top img{position:relative;height:auto;top:0}
+.no-full-center img{position:absolute;height:auto;top:-2rem;bottom:-2rem;margin:auto}
+.no-full-bottom img{position:absolute;height:auto;bottom:0;left:0}
+.scale{transform-origin:center top;-webkit-transform-origin:center top;transform:scale(0.82);-webkit-transform:scale(0.82);height:122%;overflow:visible}
+.end{height:5.4rem;top:auto;bottom:-.3rem}
+}
+/*for pc or pad */
+@media screen and (min-width:640px){
+body{width:640px;margin:auto}
+}
