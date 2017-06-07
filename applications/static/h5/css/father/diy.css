@@ -1,0 +1,72 @@
+.msglist{
+	position: absolute;
+	top: 0;
+	width:100%;
+	min-height:100%;
+}
+.p-list:nth-child(1){
+	/*margin-top: 0.5rem;*/
+}
+.p-list{
+	height: auto;
+    min-height: 0.8rem;
+	width:90%;
+	margin: 0 auto;
+	margin-top: 0.1rem;
+	border-bottom: 1px solid #5cc0d6;
+}
+.p-head img{
+	width:0.4rem;
+	border-radius:0.2rem;
+}
+.p-head{
+	float: left;
+    width: 0.4rem;
+}
+.p-name{
+	float: left;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    margin-left: 0.1rem;
+}
+.p-zan{
+	float: right;
+    height: 0.4rem;
+    line-height: 0.26rem;
+    margin-right: 0.4rem;
+}
+.p-zan img {
+	float: right;
+	width: 0.22rem;
+}
+.p-zan{
+	float: right;
+	margin-right: 0.1rem;
+}
+.p-zan span{
+	padding-right: 5px;
+}
+.p-msg{
+	clear: both;
+    padding-top: 0.01rem;
+    width: 90%;
+    margin-left: 0.4rem;
+}
+.p-msg p{
+	padding-bottom: 0.03rem;
+}
+
+.see-and-say{
+	position: absolute;
+    width: 50%;
+    height: 0.3rem;
+    bottom: 0;
+    left: 30%;
+}
+
+.see-and-say a{
+	border: 1px solid #5cc0d6;
+    border-radius: 0.05rem;
+    padding: 0.05rem;
+	font-size: 0.1rem;
+}

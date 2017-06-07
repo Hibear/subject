@@ -4,6 +4,8 @@
 <meta charset="utf-8" />
 <title>为爸爸致敬</title>
 <link rel="stylesheet" href="<?php echo get_css_js_url('father/skin.css', 'h5')?>" />
+<link rel="stylesheet" href="<?php echo get_css_js_url('father/diy.css', 'h5')?>" />
+<link rel="stylesheet" type="text/css" href="<?php echo get_css_js_url('ui-dialog.css', 'common')?>" media="all" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <meta name="format-detection" content="telephone=no" />
 <meta name="MobileOptimized" content="320"/>
@@ -122,16 +124,36 @@ function setElement(){var clientWidth=document.documentElement.clientWidth;scale
 		<!--第八屏 start-->
 		<div class="swiper-slide">
 			<div class="page end">
-				<div class="bg no-full-bottom"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/bg-8.jpg" /></div>
-				<div class="liwu"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/liwu.png" /></div>
-				<div class="text-end share"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/text-end.png" /></div>
-				<div class="button auto-x">
-					<!-- <div class="bg"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/button.png?v=20170606" /></div-->
-					<!-- <a class="link" href="">为爸爸献礼</a-->
-					<!-- <a class="share">为爸爸分享</a-->
+				<div class="bg no-full-bottom"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/new_8.jpg" /></div>
+				<div class="msglist">
+				    <?php if($list):?>
+				    <?php foreach ($list as $k => $v):?>
+				    <div class="p-list">
+				        <div class="p-info">
+				            <div class="p-head">
+				                <img src="<?php echo $v['head_img']?>">
+				            </div>
+                            <div class="p-name">
+                                <p><?php echo $v['nickname']?></p>
+                            </div>
+                            <div class="p-zan">
+				                <span id="zan_<?php echo $v['id']?>"><?php echo $v['zan_num']?></span>
+				                <img class="img_zan" data="<?php echo $v['id']?>" src="<?php echo $domain['statics']['url']?>/h5/images/father/zan.png">
+				            </div>
+				            <div class="p-msg">
+                                <p><?php echo $v['msg']?></p>
+                            </div>
+                        </div>
+				    </div>
+				    <?php endforeach;?>
+				    <?php endif;?>
+				    <div class="see-and-say">
+				        <a href="/father/lists">查看更多</a>
+				        <a id="say" href="#">我也要说</a>
+				    </div>
 				</div>
 			</div>
-			<div class="logo"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/logo.png" /></div>
+			<!-- div class="logo"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/logo.png" /></div-->
 		</div>
 		<!--第八屏 end-->
 	</div>
@@ -147,9 +169,65 @@ function setElement(){var clientWidth=document.documentElement.clientWidth;scale
 		<div class="music play"></div>
 		<span>开启</span>
 	</div>
+	
 	<!--音乐 end-->
 	<script type="text/javascript" src="<?php echo get_css_js_url('father/jquery-2.1.1.min.js', 'h5')?>"></script>
-	<script type="text/javascript" src="<?php echo get_css_js_url('father/js.js', 'h5')?>"></script>		
+	<script type="text/javascript" src="<?php echo get_css_js_url('father/js.js', 'h5')?>"></script>
+	<script src="<?php echo get_css_js_url('dialog.js', 'common')?>"></script>
+	<script type="text/javascript">
+        $('.img_zan').on('click', function(){
+            var _obj = $(this);
+        	var id = _obj.attr('data');
+            $.get('/father/zan', {'p_id':id}, function(data){
+                if(data){
+                    if(data.code == 1){
+                    	_obj.attr('src', "<?php echo $domain['statics']['url']?>/h5/images/father/zaned.png");
+                        $('#zan_'+id).text( (parseInt($('#zan_'+id).text())+1) );
+                    }else{
+                    	alert(data.msg);
+                    }
+                }else{
+                    alert('网络异常');
+                }
+            });
+        });
+        
+        //留言
+        $('#say').on('click', function(){
+            html  = '';
+            html += '<textarea placeholder="请留言..." style="border: 1px solid #e5e5e5;height: 0.6rem;width: 100%;" id="saymsg"></textarea>';
+            html += '<img style="height: 35px;width: 49%;" src="/father/code" />';
+            html += '<input style="border: 1px solid #e5e5e5;height: 0.25rem;width: 100%;" placeholder="图片验证码" type="text" id="code">';
+            <?php if($r_status == 0):?>
+            html += '<input style="border: 1px solid #e5e5e5;height: 0.25rem;width: 100%;" placeholder="姓名" type="text" id="realname">';
+            html += '<input style="border: 1px solid #e5e5e5;height: 0.25rem;width: 100%;" placeholder="手机号" type="tel" id="tel">';
+            <?php endif;?>
+        	var d = dialog({
+        		title: '留言',
+        		content: html,
+        		width:240,
+        		cancel: false,
+        		okValue: "确认",
+        		ok: function () {
+        		    var msg = $('#saymsg').val();
+        		    var code = $('#code').val();
+        		    var realname = $('#realname').val();
+        		    var tel = $('#tel').val();
+        		    var _f_token = "<?php echo $f_csrf?>";
+        		    $.post('/father/say', {'msg':msg, 'f_yzm':code, 'realname':realname, 'tel':tel, '_f_csrf':_f_token}, function(data){
+        		    	if(data){
+                            alert(data.msg);
+                        }else{
+                            alert('网络异常');
+                        }
+            		})
+                },
+                cancelValue: '取消',
+            	cancel: function () {}
+        	});
+        	d.showModal();
+        });
+	</script>	
     <?php $this->load->view('common/share_common.php')?>
 	</body>
 </html>
