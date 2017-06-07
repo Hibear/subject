@@ -124,36 +124,16 @@ function setElement(){var clientWidth=document.documentElement.clientWidth;scale
 		<!--第八屏 start-->
 		<div class="swiper-slide">
 			<div class="page end">
-				<div class="bg no-full-bottom"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/new_8.jpg" /></div>
-				<div class="msglist">
-				    <?php if($list):?>
-				    <?php foreach ($list as $k => $v):?>
-				    <div class="p-list">
-				        <div class="p-info">
-				            <div class="p-head">
-				                <img src="<?php echo $v['head_img']?>">
-				            </div>
-                            <div class="p-name">
-                                <p><?php echo $v['nickname']?></p>
-                            </div>
-                            <div class="p-zan">
-				                <span id="zan_<?php echo $v['id']?>"><?php echo $v['zan_num']?></span>
-				                <img class="img_zan" data="<?php echo $v['id']?>" src="<?php echo $domain['statics']['url']?>/h5/images/father/zan.png">
-				            </div>
-				            <div class="p-msg">
-                                <p><?php echo $v['msg']?></p>
-                            </div>
-                        </div>
-				    </div>
-				    <?php endforeach;?>
-				    <?php endif;?>
-				    <div class="see-and-say">
-				        <a href="/father/lists">查看更多</a>
-				        <a id="say" href="#">我也要说</a>
-				    </div>
+				<div class="bg no-full-bottom"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/new-8.png" /></div>
+				<div class="liwu"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/liwu.png" /></div>
+				<div class="text-end"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/text-end.png" /></div>
+				<div class="button auto-x">
+					<div class="bg">
+					</div>
+					<a class="link" href="/father/list">为爸爸赢大礼</a>
+					<a class="gz" onclick="alert(1)">规则</a>
 				</div>
 			</div>
-			<!-- div class="logo"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/logo.png" /></div-->
 		</div>
 		<!--第八屏 end-->
 	</div>
@@ -168,6 +148,11 @@ function setElement(){var clientWidth=document.documentElement.clientWidth;scale
 	<div id="music">
 		<div class="music play"></div>
 		<span>开启</span>
+	</div>
+	
+	<div id="logo" style="display:none;">
+	   <div class="logo-left"><img src="<?php echo $domain['statics']['url']?>/h5/images/father/logo-left.png"></div>
+	   <div class="logo-right"><img src="<?php echo $domain['statics']['url']?>/h5/images/father/logo-right.png"></div>
 	</div>
 	
 	<!--音乐 end-->

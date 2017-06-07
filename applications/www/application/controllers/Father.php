@@ -16,8 +16,7 @@ class Father extends MY_Controller{
     
     public function index(){
         $data = $this->data;
-        //微信登陆 
-        $this->check_login();
+        //微信登陆 $this->check_login();
         
         $user_info = $this->session->userdata('user_info');
         $data['r_status'] = 0;

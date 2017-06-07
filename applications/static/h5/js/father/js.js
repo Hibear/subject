@@ -141,6 +141,7 @@ $(function() {
 			setTimeout(function(){
 				load1 = true;
 				enter();
+				$('#logo').show();
 			},3000)
 			var img = $("body").find("img[loadsrc]");//图片数组
 			var length = img.length;//图片数量

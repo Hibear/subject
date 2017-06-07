@@ -40,13 +40,13 @@ img{display:block;width:100%}
 .on .loading-img{animation:fade-in 2s linear both;-webkit-animation:fade-in 2s linear both}
 #percent{position:absolute;right:.5rem;top:110%;color:#fff;text-align:center;left:0;opacity:0.7}
 /*-----------------------------����-------------------------------------*/
-#music{position:absolute;width:.33rem;height:.33rem;right:.02rem;top:.02rem;z-index:500;visibility:hidden}
+#music{position:absolute;width:.33rem;height:.33rem;right:.02rem;top:0.6rem;z-index:500;visibility:hidden}
 .music{width:100%;height:100%;background:url(../../images/father/music.png?v=20170606) no-repeat center bottom;background-size:100%}
 .play{background-position:center top}
 #music>span{color:#fff;position:absolute;left:-.52rem;top:0;line-height:.33rem;font-size:.14rem;opacity:0;-webkit-transition:all 0.3s linear;transition:all 0.3s linear}
 #music>span.zshow{left:-.3rem;opacity:1}
 /*-----------------------------��һ��-------------------------------------*/
-.text-1{position:absolute;width:1.09rem;height:1.58rem;right:.28rem;top:.2rem}
+.text-1{position:absolute;width:1.09rem;height:1.58rem;right:.28rem;top:0.62rem}
 @keyframes fade-in{0%{opacity:0}100%{opacity:1}}
 @-webkit-keyframes fade-in{0%{opacity:0}100%{opacity:1}}
 @keyframes fade-out{0%{opacity:1}100%{opacity:0}}
@@ -59,19 +59,19 @@ img{display:block;width:100%}
 @-webkit-keyframes bg{0%{-webkit-transform:scale(1)}100%{-webkit-transform:scale(1.1)}}
 .on>.bg{animation:bg 10s linear both;-webkit-animation:bg 10s linear both}
 /*-----------------------------�ڶ���-------------------------------------*/
-.text-2{position:absolute;width:1.17rem;height:1.45rem;left:1.06rem;top:0}
+.text-2{position:absolute;width:1.17rem;height:1.45rem;left:1.06rem;top:0.36rem}
 .on .text-2-1{animation:fade-in 1s linear both;-webkit-animation:fade-in 1s linear both}
 .on .text-2-2{animation:fade-in 1s linear both 1s;-webkit-animation:fade-in 1s linear both 1s}
 .on .text-2-3{animation:fade-in 1s linear both 2.5s;-webkit-animation:fade-in 1s linear both 2.5s}
 .on .text-2-4{animation:fade-in 1s linear both 4s;-webkit-animation:fade-in 1s linear both 4s}
 /*-----------------------------������-------------------------------------*/
-.text-3{position:absolute;width:1.09rem;height:1.3rem;left:1.7rem;top:.12rem}
+.text-3{position:absolute;width:1.09rem;height:1.3rem;left:1.7rem;top:0.66rem}
 .on .text-3-1{animation:fade-in 1s linear both;-webkit-animation:fade-in 1s linear both}
 .on .text-3-2{animation:fade-in 1s linear both 0.7s;-webkit-animation:fade-in 1s linear both 0.7s}
 .on .text-3-3{animation:fade-in 1s linear both 2s;-webkit-animation:fade-in 1s linear both 2s}
 .on .text-3-4{animation:fade-in 1s linear both 3.5s;-webkit-animation:fade-in 1s linear both 3.5s}
 /*-----------------------------������-------------------------------------*/
-.text-4{position:absolute;width:1.12rem;height:1.89rem;left:1.85rem;top:.16rem}
+.text-4{position:absolute;width:1.12rem;height:1.89rem;left:1.85rem;top:0.66rem}
 .train{width:35.2rem}
 .on .train{animation:train 1.5s steps(1) both 3;-webkit-animation:train 1.5s steps(1) both 3}
 .on .train>.bg{animation:trains 3s steps(1) both 4.5s;-webkit-animation:trains 3s steps(1) both 4.5s}
@@ -88,7 +88,7 @@ img{display:block;width:100%}
 .on .text-4-4{animation:fade-in 1s linear both 5s;-webkit-animation:fade-in 1s linear both 5s}
 .on .text-4-5{animation:fade-in 1s linear both 6.5s;-webkit-animation:fade-in 1s linear both 6.5s}
 /*-----------------------------������-------------------------------------*/
-.text-5{position:absolute;width:1.3rem;height:1.09rem;left:1.3rem;top:.25rem}
+.text-5{position:absolute;width:1.3rem;height:1.09rem;left:1.3rem;top:0.65rem}
 .on .text-5-1{animation:fade-in 1s linear both;-webkit-animation:fade-in 1s linear both}
 .on .text-5-2{animation:fade-in 1s linear both 1s;-webkit-animation:fade-in 1s linear both 1s}
 .on .text-5-3{animation:fade-in 1s linear both 2.5s;-webkit-animation:fade-in 1s linear both 2.5s}
@@ -102,7 +102,7 @@ img{display:block;width:100%}
 /*-----------------------------������-------------------------------------*/
 .text-7{position:absolute;width:1.29rem;height:1.3rem;left:1.35rem;top:.75rem}
 .text-8{position:absolute;width:.52rem;height:1.09rem;left:1.75rem;top:.8rem}
-.text-9{position:absolute;width:.81rem;height:1.84rem;left:1.43rem;top:.3rem}
+.text-9{position:absolute;width:.81rem;height:1.84rem;left:1.43rem;top:0.66rem}
 .on .text-7-1{animation:fade-in 1s linear both;-webkit-animation:fade-in 1s linear both}
 .on .text-7-2{animation:fade-in 1s linear both 1s;-webkit-animation:fade-in 1s linear both 1s}
 .on .text-7-3{animation:fade-in 1s linear both 2.4s;-webkit-animation:fade-in 1s linear both 2.4s}
@@ -119,12 +119,10 @@ img{display:block;width:100%}
 @-webkit-keyframes fade-in-big{0%{-webkit-transform:scale(0.8)}100%{-webkit-transform:scale(1)}}
 /*-----------------------------�ڰ���-------------------------------------*/
 .logo{position:absolute;width:1.03rem;left:.14rem;top:.18rem}
-.liwu{position:absolute;left:0;width:3.2rem;height:2.26rem;bottom:1.8rem;opacity:0}
+.liwu{position:absolute;left:0;width:3.2rem;height:2.26rem;bottom:2.26rem;opacity:0}
 .text-end{position:absolute;left:.35rem;width:2.44rem;height:.33rem;bottom:1.25rem;opacity:0}
 .button{bottom:.36rem;opacity:0}
-.button a{position:absolute;top:0;width:50%;height:100%;text-indent:-9999px;overflow:hidden}
-.link{left:0}
-.share{right:0}
+
 @keyframes fade-in-down{0%{transform:translate(0,-50%);opacity:0}100%{transform:none;opacity:1}}
 @-webkit-keyframes fade-in-down{0%{-webkit-transform:translate(0,-50%);opacity:0}100%{-webkit-transform:none;opacity:1}}
 .on .liwu{animation:fade-in-down 1s ease both;-webkit-animation:fade-in-down 1s ease both}
