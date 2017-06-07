@@ -210,7 +210,15 @@ function setElement(){var clientWidth=document.documentElement.clientWidth;scale
         		okValue: "确认",
         		ok: function () {
         		    var msg = $('#saymsg').val();
+        		    if(!msg || msg == ''){
+        		        alert('请填写留言');
+        		        return;
+            		}
         		    var code = $('#code').val();
+        		    if(!code || code == ''){
+        		        alert('请填写图片验证码');
+        		        return;
+            		}
         		    var realname = $('#realname').val();
         		    var tel = $('#tel').val();
         		    var _f_token = "<?php echo $f_csrf?>";
