@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>为爸爸致敬</title>
+<title>父爱如山，我的爸爸是超人</title>
 <link rel="stylesheet" href="<?php echo get_css_js_url('father/skin.css', 'h5')?>" />
 <link rel="stylesheet" href="<?php echo get_css_js_url('father/diy.css', 'h5')?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo get_css_js_url('ui-dialog.css', 'common')?>" media="all" />
