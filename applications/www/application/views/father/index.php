@@ -130,8 +130,8 @@ function setElement(){var clientWidth=document.documentElement.clientWidth;scale
 				<div class="button auto-x">
 					<div class="bg">
 					</div>
-					<a class="link" href="/father/list">为爸爸赢大礼</a>
-					<a class="gz" onclick="alert(1)">规则</a>
+					<a class="link" onclick="alert('赢大礼')">为爸爸赢大礼</a>
+					<a class="gz" onclick="alert('规则')">规则</a>
 				</div>
 			</div>
 		</div>
