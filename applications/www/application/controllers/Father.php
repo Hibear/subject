@@ -17,17 +17,6 @@ class Father extends MY_Controller{
     public function index(){
         $data = $this->data;
         //微信登陆 $this->check_login();
-        
-        $user_info = $this->session->userdata('user_info');
-        $data['r_status'] = 0;
-        if($user_info){
-            //判断当前用户是否已经验证
-            $data['r_status'] = (int) $this->Mgame_user->get_one('status', ['openid' => $user_info['openid']])['status'];
-        }
-        //生成token
-        $token = $this->createNonceStr();
-        $data['f_csrf'] = $token;
-        $this->session->set_userdata('_f_csrf', $token);
         //查询点赞数前十的数据
         $list = $this->Msay_to_father->get_lists('id, openid, msg, zan_num', ['is_del' => 0], ['zan_num' => 'desc', 'create_time' => 'desc'], $limit = 4);
         $data['list'] = $list;
@@ -51,7 +40,6 @@ class Father extends MY_Controller{
             }
         }
         
-        
         //分享
         $data['title'] = "父亲节-为爸爸的超能力致敬！";
         $data['link'] = C("domain.www.url")."/father/index";
@@ -60,6 +48,27 @@ class Father extends MY_Controller{
         
         $data['signPackage'] = $this->share($this->app['app_id'],$this->app['app_secret']);
         $this->load->view('father/index', $data);
+    }
+    
+    public function message(){
+        $data = $this->data;
+        //微信登陆 $this->check_login();
+        $user_info = $this->session->userdata('user_info');
+        $data['r_status'] = 0;
+        if($user_info){
+            //判断当前用户是否已经验证
+            $data['r_status'] = (int) $this->Mgame_user->get_one('status', ['openid' => $user_info['openid']])['status'];
+        }
+        //生成token
+        $token = $this->createNonceStr();
+        $data['f_csrf'] = $token;
+        $this->session->set_userdata('_f_csrf', $token);
+        $this->load->view('father/message', $data);
+    }
+    
+    public function other(){
+        $data = $this->data;
+        $this->load->view('father/other', $data);
     }
     
     /**

@@ -130,7 +130,7 @@ function setElement(){var clientWidth=document.documentElement.clientWidth;scale
 				<div class="button auto-x">
 					<div class="bg">
 					</div>
-					<a class="link" onclick="alert('赢大礼')">为爸爸赢大礼</a>
+					<a class="link" href="/father/message">为爸爸赢大礼</a>
 					<a class="gz" onclick="alert('规则')">规则</a>
 				</div>
 			</div>
@@ -177,49 +177,7 @@ function setElement(){var clientWidth=document.documentElement.clientWidth;scale
             });
         });
         
-        //留言
-        $('#say').on('click', function(){
-            html  = '';
-            html += '<textarea placeholder="请留言..." style="border: 1px solid #e5e5e5;height: 0.6rem;width: 100%;" id="saymsg"></textarea>';
-            html += '<img style="height: 35px;width: 49%;" src="/father/code" />';
-            html += '<input style="border: 1px solid #e5e5e5;height: 0.25rem;width: 100%;" placeholder="图片验证码" type="text" id="code">';
-            <?php if($r_status == 0):?>
-            html += '<input style="border: 1px solid #e5e5e5;height: 0.25rem;width: 100%;" placeholder="姓名" type="text" id="realname">';
-            html += '<input style="border: 1px solid #e5e5e5;height: 0.25rem;width: 100%;" placeholder="手机号" type="tel" id="tel">';
-            <?php endif;?>
-        	var d = dialog({
-        		title: '留言',
-        		content: html,
-        		width:240,
-        		cancel: false,
-        		okValue: "确认",
-        		ok: function () {
-        		    var msg = $('#saymsg').val();
-        		    if(!msg || msg == ''){
-        		        alert('请填写留言');
-        		        return;
-            		}
-        		    var code = $('#code').val();
-        		    if(!code || code == ''){
-        		        alert('请填写图片验证码');
-        		        return;
-            		}
-        		    var realname = $('#realname').val();
-        		    var tel = $('#tel').val();
-        		    var _f_token = "<?php echo $f_csrf?>";
-        		    $.post('/father/say', {'msg':msg, 'f_yzm':code, 'realname':realname, 'tel':tel, '_f_csrf':_f_token}, function(data){
-        		    	if(data){
-                            alert(data.msg);
-                        }else{
-                            alert('网络异常');
-                        }
-            		})
-                },
-                cancelValue: '取消',
-            	cancel: function () {}
-        	});
-        	d.showModal();
-        });
+        
 	</script>	
     <?php $this->load->view('common/share_common.php')?>
 	</body>
