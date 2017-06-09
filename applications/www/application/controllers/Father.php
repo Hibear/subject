@@ -17,28 +17,33 @@ class Father extends MY_Controller{
     public function index(){
         $data = $this->data;
         //判断是否已经关注了未来方舟，回复关键字进入的
+        $flat = 0;
         $_openid = trim($this->input->get('openid'));
         if(!$_openid){
-            //判断是否已经回复过关键词
-            $s_openid = $this->session->userdata('opneid');
-            if(!$s_openid){
-                //确定是没有关注访问 todo
-                
-            }
+            $flat += 1;
         }else{
             $this->session->set_userdata('opneid', $_openid);
         }
-
-        //微信登陆 $this->check_login();
-        //分享
-        $data['title'] = "父亲节-为爸爸的超能力致敬！";
-        $data['link'] = C("domain.www.url")."/father/index";
-        $data['imgUrl'] = C("domain.statics.url").'/h5/images/father/share_img.png';
-        $data['desc'] = "";
-        
-        $data['signPackage'] = $this->share($this->app['app_id'],$this->app['app_secret']);
-        $this->load->view('father/index', $data);
+        $s_openid = $this->session->userdata('opneid');
+        if(!$s_openid){
+            $flat += 1;
+        }
+        if($flat < 2){
+            //微信登陆 
+            $this->check_login();
+            //分享
+            $data['title'] = "父亲节-为爸爸的超能力致敬！";
+            $data['link'] = C("domain.www.url")."/father/index";
+            $data['imgUrl'] = C("domain.statics.url").'/h5/images/father/share_img.png';
+            $data['desc'] = "";
+            
+            $data['signPackage'] = $this->share($this->app['app_id'],$this->app['app_secret']);
+            $this->load->view('father/index', $data);
+        }else{
+            $this->load->view('father/wgz', $data);
+        }
     }
+    
     
     public function message(){
         $data = $this->data;
