@@ -53,6 +53,14 @@ class Father extends MY_Controller{
         $token = $this->createNonceStr();
         $data['f_csrf'] = $token;
         $this->session->set_userdata('_f_csrf', $token);
+        
+        //分享
+        $data['title'] = "父亲节-为爸爸的超能力致敬！";
+        $data['link'] = C("domain.www.url")."/father/index";
+        $data['imgUrl'] = C("domain.statics.url").'/h5/images/father/share_img.png';
+        $data['desc'] = "";
+        
+        $data['signPackage'] = $this->share($this->app['app_id'],$this->app['app_secret']);
         $this->load->view('father/message', $data);
     }
     

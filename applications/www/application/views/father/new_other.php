@@ -71,6 +71,7 @@
 				    <?php endforeach;?>
                     <?php endif;?>
 				</div>
+				<a href="/father/message" class="btn-fix"></a>
 			</div>
 		</div>
 
