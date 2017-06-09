@@ -47,7 +47,7 @@ class Father extends MY_Controller{
     
     public function message(){
         $data = $this->data;
-        //微信登陆 $this->check_login();
+        $this->check_login();
         $user_info = $this->session->userdata('user_info');
         $data['r_status'] = 0;
         if($user_info){
