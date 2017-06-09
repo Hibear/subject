@@ -21,7 +21,7 @@
 
 </head>
 <body>
-</body>
+
     <div class="main">
         <textarea placeholder="请留言..." style="border: 1px solid #e5e5e5;height: 2.6rem;width: 100%;max-width: 250px;" id="saymsg"></textarea><br>
         <img id="code_img" style="height: 35px;width: 49%;" src="/father/code"><br>
@@ -61,4 +61,6 @@
     		})
         });
 	</script>
+	<?php $this->load->view('common/share_common.php')?>
+	</body>
 </html>

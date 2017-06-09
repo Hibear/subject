@@ -1,0 +1,60 @@
+.lists{
+	margin: 0 auto;
+	margin-bottom: 15px;
+    width: 82%;
+    height: 3.3rem;
+	background:url('../../images/father/xinfeng.png');
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+.list-info{
+	font-size:0.3rem;
+	width: 90%;
+    height: 85%;
+    padding-top: 5%;
+    padding-left: 5%;
+}
+.p-head img{
+	width: 0.6rem;
+    border-radius: 0.3rem;
+}
+.p-head{
+	float: left;
+    width: 0.4rem;
+}
+.p-name{
+	float: left;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    margin-left: 0.3rem;
+}
+.p-zan{
+	float: right;
+    height: 0.4rem;
+    line-height: 0.26rem;
+    margin-right: 0.4rem;
+}
+.p-zan img {
+	float: right;
+	width: 0.5rem;
+}
+.p-zan{
+	float: right;
+	margin-right: 0.1rem;
+}
+.p-zan span{
+	padding-right: 5px;
+}
+.p-msg{
+	clear: both;
+    padding-top: 0.01rem;
+    width: 90%;
+    margin-left: 0.4rem;
+}
+.p-msg p{
+	padding-bottom: 0.1rem;
+	height: 75%;
+	overflow: scroll;
+	    font-size: 0.2rem;
+}

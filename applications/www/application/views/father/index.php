@@ -159,26 +159,7 @@ function setElement(){var clientWidth=document.documentElement.clientWidth;scale
 	<script type="text/javascript" src="<?php echo get_css_js_url('father/jquery-2.1.1.min.js', 'h5')?>"></script>
 	<script type="text/javascript" src="<?php echo get_css_js_url('father/js.js', 'h5')?>"></script>
 	<script src="<?php echo get_css_js_url('dialog.js', 'common')?>"></script>
-	<script type="text/javascript">
-        $('.img_zan').on('click', function(){
-            var _obj = $(this);
-        	var id = _obj.attr('data');
-            $.get('/father/zan', {'p_id':id}, function(data){
-                if(data){
-                    if(data.code == 1){
-                    	_obj.attr('src', "<?php echo $domain['statics']['url']?>/h5/images/father/zaned.png");
-                        $('#zan_'+id).text( (parseInt($('#zan_'+id).text())+1) );
-                    }else{
-                    	alert(data.msg);
-                    }
-                }else{
-                    alert('网络异常');
-                }
-            });
-        });
-        
-        
-	</script>	
+		
     <?php $this->load->view('common/share_common.php')?>
 	</body>
 </html>
