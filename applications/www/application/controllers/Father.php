@@ -16,9 +16,38 @@ class Father extends MY_Controller{
     
     public function index(){
         $data = $this->data;
-        //微信登陆 
+        //判断是否已经关注了未来方舟，回复关键字进入的
+        $flat = 0;
+        $_openid = trim($this->input->get('openid'));
+        if(!$_openid){
+            $flat += 1;
+        }else{
+            $this->session->set_userdata('opneid', $_openid);
+        }
+        $s_openid = $this->session->userdata('opneid');
+        if(!$s_openid){
+            $flat += 1;
+        }
+        if($flat < 2){
+            //微信登陆 
+            $this->check_login();
+            //分享
+            $data['title'] = "父亲节-为爸爸的超能力致敬！";
+            $data['link'] = C("domain.www.url")."/father/index";
+            $data['imgUrl'] = C("domain.statics.url").'/h5/images/father/share_img.png';
+            $data['desc'] = "";
+            
+            $data['signPackage'] = $this->share($this->app['app_id'],$this->app['app_secret']);
+            $this->load->view('father/index', $data);
+        }else{
+            $this->load->view('father/wgz', $data);
+        }
+    }
+    
+    
+    public function message(){
+        $data = $this->data;
         $this->check_login();
-        
         $user_info = $this->session->userdata('user_info');
         $data['r_status'] = 0;
         if($user_info){
@@ -29,8 +58,29 @@ class Father extends MY_Controller{
         $token = $this->createNonceStr();
         $data['f_csrf'] = $token;
         $this->session->set_userdata('_f_csrf', $token);
+        
+        //分享
+        $data['title'] = "父亲节-为爸爸的超能力致敬！";
+        $data['link'] = C("domain.www.url")."/father/index";
+        $data['imgUrl'] = C("domain.statics.url").'/h5/images/father/share_img.png';
+        $data['desc'] = "";
+        
+        $data['signPackage'] = $this->share($this->app['app_id'],$this->app['app_secret']);
+        $this->load->view('father/message', $data);
+    }
+    
+    public function other(){
+        $data = $this->data;
+        //判断是否是查询的是自己的
+        $type = (int) $this->input->get('type');
+        $where['is_del'] = 0;
+        $user_info = $this->session->userdata('user_info');
+        if($type && $user_info){
+            $data['type'] = '1';
+            $where['openid'] = $user_info['openid'];
+        }
         //查询点赞数前十的数据
-        $list = $this->Msay_to_father->get_lists('id, openid, msg, zan_num', ['is_del' => 0], ['zan_num' => 'desc', 'create_time' => 'desc'], $limit = 4);
+        $list = $this->Msay_to_father->get_lists('id, openid, msg, zan_num', $where, ['zan_num' => 'desc', 'create_time' => 'desc'], $limit = 10);
         $data['list'] = $list;
         if($list){
             //提取所有openid
@@ -52,6 +102,8 @@ class Father extends MY_Controller{
             }
         }
         
+        //获取所有的记录数
+        $data['counts'] = (int) $this->Msay_to_father->count(['is_del' => 0]);
         
         //分享
         $data['title'] = "父亲节-为爸爸的超能力致敬！";
@@ -60,7 +112,7 @@ class Father extends MY_Controller{
         $data['desc'] = "";
         
         $data['signPackage'] = $this->share($this->app['app_id'],$this->app['app_secret']);
-        $this->load->view('father/index', $data);
+        $this->load->view('father/new_other', $data);
     }
     
     /**
@@ -207,5 +259,47 @@ class Father extends MY_Controller{
         $this->load->library('valicode');
         $this->valicode->outImg('f_yzm');
     }
+    
+    public function get_more(){
+        //用于向下加载更多
+        $pageconfig = C('page.page_lists');
+        $this->load->library('pagination');
+        $page = $this->input->get_post('p') ? : '2';
+        $type = (int) $this->input->get('type');
+        $size=10;
+        
+        $where['is_del'] = 0;
+        $user_info = $this->session->userdata('user_info');
+        if($type && $user_info){
+            $where['openid'] = $user_info['openid'];
+        }
+        //查询点赞数前十的数据
+        $list = $this->Msay_to_father->get_lists('id, openid, msg, zan_num', $where, ['zan_num' => 'desc', 'create_time' => 'desc'], $size, ($page-1)*$size);
+        $data['list'] = $list;
+        if($list){
+            //提取所有openid
+            $openids = array_column($list, 'openid');
+            //查询微信用户信息
+            $weixin = $this->Mgame_user->get_lists('openid, nickname, head_img', ['in' => ['openid' => $openids]]);
+            if($weixin){
+                foreach ($list as $k => $v){
+                    $data['list'][$k]['nickname'] = '';
+                    $data['list'][$k]['head_img'] = '';
+                    foreach ($weixin as $key => $val){
+                        if($v['openid'] == $val['openid']){
+                            $data['list'][$k]['nickname'] = $val['nickname'];
+                            $data['list'][$k]['head_img'] = $val['head_img'];
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if($data['list']){
+            $this->return_json(['list' => $data['list'], 'page' => $page+1]);
+        }
+        $this->return_json(['list' => null, 'page' => -1]);
+    }
+
     
 }
