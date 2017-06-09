@@ -119,7 +119,7 @@ img{display:block;width:100%}
 @-webkit-keyframes fade-in-big{0%{-webkit-transform:scale(0.8)}100%{-webkit-transform:scale(1)}}
 /*-----------------------------�ڰ���-------------------------------------*/
 .logo{position:absolute;width:1.03rem;left:.14rem;top:.18rem}
-.liwu{position:absolute;left:0;width:3.2rem;height:2.26rem;bottom:2.26rem;opacity:0}
+.liwu{position:absolute;left:0;width:3.2rem;height:2.26rem;bottom: 2.75rem;opacity:0}
 .text-end{position:absolute;left:.35rem;width:2.44rem;height:.33rem;bottom:1.25rem;opacity:0}
 .button{bottom:.36rem;opacity:0}
 

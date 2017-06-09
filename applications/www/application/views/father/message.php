@@ -21,7 +21,7 @@
 
 </head>
 <body>
-
+    <img style="width:100%" src="<?php echo $domain['statics']['url']?>/h5/images/father/bg_9.png" />
     <div class="main">
         <textarea placeholder="请留言..." style="border: 1px solid #e5e5e5;height: 2.6rem;width: 100%;max-width: 250px;" id="saymsg"></textarea><br>
         <img id="code_img" style="height: 35px;width: 49%;" src="/father/code"><br>

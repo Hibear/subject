@@ -6,7 +6,7 @@
 		<title>父爱如山，我的爸爸是超人</title>
 		<script type="text/javascript" charset="UTF-8" src="/static/target/js/rem.js"></script>
 		<link rel="stylesheet" charset="UTF-8" type="text/css" href="/static/target/css/base.css"  />
-		<link rel="stylesheet" charset="UTF-8" type="text/css" href="/static/target/css/style_other.css"  />
+		<link rel="stylesheet" charset="UTF-8" type="text/css" href="/static/target/css/style_other.css?v=2017060923"  />
 		<link rel="stylesheet" href="<?php echo get_css_js_url('father/list.css', 'h5')?>" />
 		<link rel="stylesheet" href="<?php echo get_css_js_url('dropload.css', 'common')?>" />
 
@@ -16,6 +16,10 @@
 	</head>
 
 	<body>
+	   <div id="logo">
+	       <div class="logo-left"><img src="<?php echo $domain['statics']['url']?>/h5/images/father/logo-left.png"></div>
+	       <div class="logo-right"><img src="<?php echo $domain['statics']['url']?>/h5/images/father/logo-right.png"></div>
+	   </div>
 		<!--首页-->
 		<style>
 		#targetCount{
@@ -74,6 +78,8 @@
 				<a href="/father/message" class="btn-fix"></a>
 			</div>
 		</div>
+		
+		
 
 		<script type="text/javascript">
 

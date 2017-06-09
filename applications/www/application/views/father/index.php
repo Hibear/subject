@@ -125,13 +125,14 @@ function setElement(){var clientWidth=document.documentElement.clientWidth;scale
 		<div class="swiper-slide">
 			<div class="page end">
 				<div class="bg no-full-bottom"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/new-8.png" /></div>
-				<div class="liwu"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/liwu.png" /></div>
+				<div class="liwu"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/liwu.png?v=2017" /></div>
+				<div class="liwu diycenter" style="display: none;bottom: 1.65rem;width: 100%;text-align:center;margin-left: 5%;z-index: 99;"><img style="width:90%" src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/rule.png?v=2017" /></div>
 				<div class="text-end"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/text-end.png" /></div>
 				<div class="button auto-x">
 					<div class="bg">
 					</div>
 					<a class="link" href="/father/message">为爸爸赢大礼</a>
-					<a class="gz" onclick="alert('规则')">规则</a>
+					<a class="gz" onclick="diycenter()">规则</a>
 				</div>
 			</div>
 		</div>
@@ -156,10 +157,14 @@ function setElement(){var clientWidth=document.documentElement.clientWidth;scale
 	</div>
 	
 	<!--音乐 end-->
+	<?php $this->load->view('common/share_common.php')?>
 	<script type="text/javascript" src="<?php echo get_css_js_url('father/jquery-2.1.1.min.js', 'h5')?>"></script>
 	<script type="text/javascript" src="<?php echo get_css_js_url('father/js.js', 'h5')?>"></script>
 	<script src="<?php echo get_css_js_url('dialog.js', 'common')?>"></script>
-		
-    <?php $this->load->view('common/share_common.php')?>
+	<script type="text/javascript">
+        function diycenter(){
+            $('.diycenter').show();
+        }
+	</script>
 	</body>
 </html>

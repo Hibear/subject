@@ -178,16 +178,18 @@ $(function() {
 				}
 			}
 		}},800);
-		//微信下音乐加载的hack
 		getMusic();
-//			if ( is_weixn() ){
-//				document.addEventListener("WeixinJSBridgeReady",function(){
-//					getMusic();
-//			    },false);
-//			}
-//			else{
+		//微信下音乐加载的hack
+//		if ( is_weixn() ){
+//			document.addEventListener("WeixinJSBridgeReady",function(){
 //				getMusic();
-//			}
+//				console.log('微信端')
+//		    },false);
+//		}
+//		else{
+//			getMusic();
+//		}
+
 	}
 	function enter(){
 		if ( load1 && load2 ){
@@ -228,6 +230,7 @@ $(function() {
 		bgm.src = "http://static.wesogou.com/h5/images/father/bgm.mp3?v=20170606";
 		bgm.loop = "loop";
 		bgm.play();
+
 		musicA = setInterval(function(){
 			if ( bgm.currentTime != 0 )
 			{

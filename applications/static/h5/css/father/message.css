@@ -5,18 +5,19 @@
 
 html{
 	height: 100%;
-    background: url(../../images/father/bg_9.png?v=2017);
+    /*background: url(../../images/father/bg_9.png?v=2017);
     background-repeat: no-repeat;
-    background-size: cover;
-	max-width:414px;
+    background-size: 100%;
+	max-width:100%;*/
 }
 body{
-	height:100%;
+	height: auto;
+    min-height: 100%;
 }
 
 .main{
 	position: absolute;
-	top: 33%;
+    top: 39%;
     width: 50%;
     left: 23%;
 }
@@ -31,7 +32,7 @@ body{
     height: 3rem;
     text-indent: -9999px;
     overflow: hidden;
-    bottom: 2.5rem;
+    bottom: -5px;
 }
 
 .btn{
@@ -39,6 +40,8 @@ body{
     bottom: 20%;
     left: 37%;
 }
+
+
 
 
 
