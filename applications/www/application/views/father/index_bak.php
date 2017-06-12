@@ -149,29 +149,22 @@ function setElement(){var clientWidth=document.documentElement.clientWidth;scale
 	<div id="music">
 		<div class="music play"></div>
 		<span>开启</span>
-		
 	</div>
-	
-	<!--  audio id="bgmusic" src="http://static.wesogou.com/h5/images/father/bgm.mp3?v=20170606" autoplay preload loop controls></audio--> 
 	
 	<div id="logo" style="display:none;">
 	   <div class="logo-left"><img src="<?php echo $domain['statics']['url']?>/h5/images/father/logo-left.png"></div>
 	   <div class="logo-right"><img src="<?php echo $domain['statics']['url']?>/h5/images/father/logo-right.png"></div>
 	</div>
 	
-	
-	
 	<!--音乐 end-->
-	
+	<?php $this->load->view('common/share_common.php')?>
 	<script type="text/javascript" src="<?php echo get_css_js_url('father/jquery-2.1.1.min.js', 'h5')?>"></script>
-	<script type="text/javascript" src="<?php echo get_css_js_url('father/test_js.js', 'h5')?>"></script>
+	<script type="text/javascript" src="<?php echo get_css_js_url('father/js.js', 'h5')?>"></script>
 	<script src="<?php echo get_css_js_url('dialog.js', 'common')?>"></script>
 	<script type="text/javascript">
         function diycenter(){
             $('.diycenter').show();
         }
-     
 	</script>
-	<?php $this->load->view('common/share_common_music.php')?>
 	</body>
 </html>

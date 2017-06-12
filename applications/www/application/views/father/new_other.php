@@ -101,7 +101,7 @@
 	                        html += '</div>';
 	                        html += '<div class="p-zan">';
 	                        html += '<span id="zan_1">'+data.list[i].zan_num+'</span>';
-	                        html += '<img class="img_zan" data="0" src="http://static.dev.wesogou.com/h5/images/father/no_zan.png">';
+	                        html += '<img class="img_zan" data="0" src="http://static.wesogou.com/h5/images/father/no_zan.png">';
 	                        html += '</div>';
 	                        html += '<div class="p-msg">';
 	                        html += '<p>'+data.list[i].msg+'</p>';

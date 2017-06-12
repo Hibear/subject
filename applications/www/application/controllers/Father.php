@@ -20,13 +20,13 @@ class Father extends MY_Controller{
         $flat = 0;
         $_openid = trim($this->input->get('openid'));
         if(!$_openid){
-            $flat += 1;
+            //$flat += 1;
         }else{
             $this->session->set_userdata('opneid', $_openid);
         }
         $s_openid = $this->session->userdata('opneid');
         if(!$s_openid){
-            $flat += 1;
+            //$flat += 1;
         }
         if($flat < 2){
             //微信登陆 
@@ -128,15 +128,20 @@ class Father extends MY_Controller{
         if(IS_POST){
             
             $f_yzm = trim($this->input->post('f_yzm'));
-            if(!f_yzm){
+            if(!$f_yzm){
                 $this->return_json(['code' => 0, 'msg' => '验证码不能为空']);
             }
             //判断验证码是否正确
-            if($f_yzm != $_SESSION['f_yzm']){
+            if( (isset($_SESSION['f_yzm']) && $f_yzm)  && ($f_yzm != $_SESSION['f_yzm'])){
                 $this->return_json(['code' => 0, 'msg' => '验证码错误']);
+            }else if(!isset($_SESSION['f_yzm'])){
+                $this->return_json(['code' => 0, 'msg' => '验证码过期']);
             }
-            
+            //释放验证码
+            unset($_SESSION['f_yzm']);
+
             $r_status = $this->Mgame_user->get_one('status', ['openid' => $user_info['openid']])['status'];
+            
             if(!$r_status){
                 //添加用户信息
                 $realname = trim($this->input->post('realname'));
