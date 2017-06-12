@@ -124,10 +124,9 @@ function setElement(){var clientWidth=document.documentElement.clientWidth;scale
 		<!--第八屏 start-->
 		<div class="swiper-slide">
 			<div class="page end">
-				<div class="bg no-full-bottom"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/new-8.png" /></div>
-				<div class="liwu"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/liwu.png?v=2017" /></div>
+				<div class="bg no-full-bottom"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/new_8.jpg" /></div>
 				<div class="liwu diycenter" style="display: none;bottom: 1.65rem;width: 100%;text-align:center;margin-left: 5%;z-index: 99;"><img style="width:90%" src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/rule.png?v=2017" /></div>
-				<div class="text-end"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/text-end.png" /></div>
+				<!--div class="text-end"><img src="" loadsrc="<?php echo $domain['statics']['url']?>/h5/images/father/text-end.png" /></div-->
 				<div class="button auto-x">
 					<div class="bg">
 					</div>
@@ -155,7 +154,7 @@ function setElement(){var clientWidth=document.documentElement.clientWidth;scale
 	<!--  audio id="bgmusic" src="http://static.wesogou.com/h5/images/father/bgm.mp3?v=20170606" autoplay preload loop controls></audio--> 
 	
 	<div id="logo" style="display:none;">
-	   <div class="logo-left"><img src="<?php echo $domain['statics']['url']?>/h5/images/father/logo-left.png"></div>
+	   <div class="logo-left"><img src="<?php echo $domain['statics']['url']?>/h5/images/father/logo_left1.png"></div>
 	   <div class="logo-right"><img src="<?php echo $domain['statics']['url']?>/h5/images/father/logo-right.png"></div>
 	</div>
 	

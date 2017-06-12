@@ -90,8 +90,10 @@
 
 
 .logo-left img{
-	height:100%;
-	margin-left: 0.3rem;
+	width: 80px;
+    height: 100%;
+    margin-left: 0.3rem;
+    margin-top: 10px;
 }
 
 .link{

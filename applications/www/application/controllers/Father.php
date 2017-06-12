@@ -30,7 +30,7 @@ class Father extends MY_Controller{
         }
         if($flat < 2){
             //微信登陆 
-            $this->check_login();
+            //$this->check_login();
             //分享
             $data['title'] = "父亲节-为爸爸的超能力致敬！";
             $data['link'] = C("domain.www.url")."/father/index";
@@ -47,7 +47,7 @@ class Father extends MY_Controller{
     
     public function message(){
         $data = $this->data;
-        $this->check_login();
+        //$this->check_login();
         $user_info = $this->session->userdata('user_info');
         $data['r_status'] = 0;
         if($user_info){

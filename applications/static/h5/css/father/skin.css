@@ -59,13 +59,13 @@ img{display:block;width:100%}
 @-webkit-keyframes bg{0%{-webkit-transform:scale(1)}100%{-webkit-transform:scale(1.1)}}
 .on>.bg{animation:bg 10s linear both;-webkit-animation:bg 10s linear both}
 /*-----------------------------�ڶ���-------------------------------------*/
-.text-2{position:absolute;width:1.17rem;height:1.45rem;left:1.06rem;top:0.36rem}
+.text-2{position:absolute;width:1.17rem;height:1.45rem;left:1.06rem;top:0.2rem}
 .on .text-2-1{animation:fade-in 1s linear both;-webkit-animation:fade-in 1s linear both}
 .on .text-2-2{animation:fade-in 1s linear both 1s;-webkit-animation:fade-in 1s linear both 1s}
 .on .text-2-3{animation:fade-in 1s linear both 2.5s;-webkit-animation:fade-in 1s linear both 2.5s}
 .on .text-2-4{animation:fade-in 1s linear both 4s;-webkit-animation:fade-in 1s linear both 4s}
 /*-----------------------------������-------------------------------------*/
-.text-3{position:absolute;width:1.09rem;height:1.3rem;left:1.7rem;top:0.66rem}
+.text-3{position:absolute;width:1.09rem;height:1.3rem;left:1.7rem;top:0.48rem}
 .on .text-3-1{animation:fade-in 1s linear both;-webkit-animation:fade-in 1s linear both}
 .on .text-3-2{animation:fade-in 1s linear both 0.7s;-webkit-animation:fade-in 1s linear both 0.7s}
 .on .text-3-3{animation:fade-in 1s linear both 2s;-webkit-animation:fade-in 1s linear both 2s}
@@ -88,7 +88,7 @@ img{display:block;width:100%}
 .on .text-4-4{animation:fade-in 1s linear both 5s;-webkit-animation:fade-in 1s linear both 5s}
 .on .text-4-5{animation:fade-in 1s linear both 6.5s;-webkit-animation:fade-in 1s linear both 6.5s}
 /*-----------------------------������-------------------------------------*/
-.text-5{position:absolute;width:1.3rem;height:1.09rem;left:1.3rem;top:0.65rem}
+.text-5{position:absolute;width:1.3rem;height:1.09rem;left:1.6rem;top:0.65rem}
 .on .text-5-1{animation:fade-in 1s linear both;-webkit-animation:fade-in 1s linear both}
 .on .text-5-2{animation:fade-in 1s linear both 1s;-webkit-animation:fade-in 1s linear both 1s}
 .on .text-5-3{animation:fade-in 1s linear both 2.5s;-webkit-animation:fade-in 1s linear both 2.5s}
@@ -102,7 +102,7 @@ img{display:block;width:100%}
 /*-----------------------------������-------------------------------------*/
 .text-7{position:absolute;width:1.29rem;height:1.3rem;left:1.35rem;top:.75rem}
 .text-8{position:absolute;width:.52rem;height:1.09rem;left:1.75rem;top:.8rem}
-.text-9{position:absolute;width:.81rem;height:1.84rem;left:1.43rem;top:0.66rem}
+.text-9{position:absolute;width:.81rem;height:1.84rem;left:1.6rem;top:0.66rem}
 .on .text-7-1{animation:fade-in 1s linear both;-webkit-animation:fade-in 1s linear both}
 .on .text-7-2{animation:fade-in 1s linear both 1s;-webkit-animation:fade-in 1s linear both 1s}
 .on .text-7-3{animation:fade-in 1s linear both 2.4s;-webkit-animation:fade-in 1s linear both 2.4s}
